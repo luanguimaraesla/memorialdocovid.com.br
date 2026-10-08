@@ -1,0 +1,66 @@
+{
+  "sintetico": true,
+  "aviso": "Declarações fictícias de exemplo; serão substituídas por citações verificadas.",
+  "declaracoes": [
+    {
+      "id": "exemplo-1",
+      "data": "2020-04-01",
+      "texto": "[Exemplo sintético 1] Texto a ser substituído por declaração verificada.",
+      "fontes": [
+        {
+          "nome": "Exemplo sintético, sem fonte real",
+          "url": "https://example.invalid/declaracao-1"
+        }
+      ],
+      "acessado_em": "2026-10-08"
+    },
+    {
+      "id": "exemplo-2",
+      "data": "2020-11-01",
+      "texto": "[Exemplo sintético 2] Texto a ser substituído por declaração verificada.",
+      "fontes": [
+        {
+          "nome": "Exemplo sintético, sem fonte real",
+          "url": "https://example.invalid/declaracao-2"
+        }
+      ],
+      "acessado_em": "2026-10-08"
+    },
+    {
+      "id": "exemplo-3",
+      "data": "2021-04-01",
+      "texto": "[Exemplo sintético 3] Texto a ser substituído por declaração verificada.",
+      "fontes": [
+        {
+          "nome": "Exemplo sintético, sem fonte real",
+          "url": "https://example.invalid/declaracao-3"
+        }
+      ],
+      "acessado_em": "2026-10-08"
+    },
+    {
+      "id": "exemplo-4",
+      "data": "2021-10-01",
+      "texto": "[Exemplo sintético 4] Texto a ser substituído por declaração verificada.",
+      "fontes": [
+        {
+          "nome": "Exemplo sintético, sem fonte real",
+          "url": "https://example.invalid/declaracao-4"
+        }
+      ],
+      "acessado_em": "2026-10-08"
+    },
+    {
+      "id": "exemplo-5",
+      "data": "2022-06-01",
+      "texto": "[Exemplo sintético 5] Texto a ser substituído por declaração verificada.",
+      "fontes": [
+        {
+          "nome": "Exemplo sintético, sem fonte real",
+          "url": "https://example.invalid/declaracao-5"
+        }
+      ],
+      "acessado_em": "2026-10-08"
+    }
+  ]
+}

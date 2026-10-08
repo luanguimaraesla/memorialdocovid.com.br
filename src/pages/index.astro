@@ -1,0 +1,19 @@
+---
+import Base from '../layouts/Base.astro';
+import Hero from '../components/Hero.astro';
+import Memorial from '../components/Memorial.astro';
+import Counter from '../components/Counter.astro';
+import Fontes from '../components/Fontes.astro';
+---
+
+<Base>
+  <Hero />
+  <Memorial />
+  <Fontes />
+  <Counter />
+
+  <script>
+    import { boot } from '../lib/render';
+    boot();
+  </script>
+</Base>

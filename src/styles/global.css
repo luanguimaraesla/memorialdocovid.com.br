@@ -1,0 +1,287 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --fundo: #0b0b0c;
+  --painel: rgba(20, 20, 22, 0.92);
+  --texto: #e8e4dc;
+  --texto-suave: #a9a39a;
+  --destaque: #c9a227;
+  --borda: rgba(232, 228, 220, 0.2);
+  --prosa: 42rem;
+  /* Must match columnWidth() in src/lib/layout.ts: 10 dots × 8 px pitch − 2 px gap. */
+  --coluna: 78px;
+  --margem-coluna: 6.5rem;
+}
+
+html {
+  scroll-behavior: auto;
+}
+
+body {
+  background: var(--fundo);
+  color: var(--texto);
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  font-size: 1.125rem;
+  line-height: 1.6;
+}
+
+h1,
+h2 {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-weight: 400;
+  line-height: 1.1;
+}
+
+a {
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 3px solid var(--destaque);
+  outline-offset: 3px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.section {
+  padding: 4rem 1.25rem;
+}
+
+.wrap {
+  max-width: var(--prosa);
+  margin: 0 auto;
+}
+
+.panel {
+  background: var(--painel);
+  border: 1px solid var(--borda);
+  border-radius: 6px;
+}
+
+/* ---- Hero ---- */
+.hero {
+  max-width: var(--prosa);
+  margin: 0 auto;
+  min-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+.hero__title {
+  font-size: clamp(2.5rem, 9vw, 4.5rem);
+}
+
+.hero__subtitle {
+  font-size: clamp(1.25rem, 3.5vw, 1.6rem);
+  line-height: 1.35;
+}
+
+.hero__intro {
+  color: var(--texto-suave);
+}
+
+.load-error {
+  padding: 1rem;
+  border: 1px solid var(--destaque);
+  border-radius: 6px;
+}
+
+/* ---- Memorial ---- */
+.memorial {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.memorial .wrap {
+  padding: 0 1.25rem 3rem;
+}
+
+.memorial h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.nota-dados {
+  display: grid;
+  gap: 0.75rem;
+  color: var(--texto-suave);
+  font-size: 1rem;
+}
+
+.nota-dados strong,
+.nota-dados time {
+  color: var(--texto);
+}
+
+.aviso-sintetico {
+  margin-top: 1.5rem;
+  padding: 0.75rem 1rem;
+  border: 2px dashed var(--destaque);
+  border-radius: 6px;
+}
+
+.memorial__track {
+  position: relative;
+}
+
+.memorial__canvas {
+  position: sticky;
+  top: 0;
+  display: block;
+  margin-left: var(--margem-coluna);
+  width: var(--coluna);
+  height: 100vh;
+}
+
+.memorial__marks {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.marco-mes {
+  position: absolute;
+  left: 0;
+  width: calc(var(--margem-coluna) - 0.75rem);
+  text-align: right;
+  font-size: 0.8rem;
+  line-height: 1;
+  color: var(--texto-suave);
+  border-top: 1px solid var(--borda);
+  padding-top: 0.25rem;
+}
+
+.declaracao {
+  position: absolute;
+  left: calc(var(--margem-coluna) + var(--coluna) + 1rem);
+  right: 1rem;
+  max-width: 26rem;
+  padding: 0.75rem 1rem;
+  background: var(--painel);
+  border: 1px solid var(--borda);
+  border-left: 3px solid var(--destaque);
+  border-radius: 4px;
+  font-size: 0.95rem;
+  pointer-events: auto;
+}
+
+.declaracao--sintetica {
+  border-style: dashed;
+}
+
+.declaracao__selo {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--destaque);
+}
+
+.declaracao__data {
+  display: block;
+  font-size: 0.85rem;
+  color: var(--texto-suave);
+}
+
+/* ---- Counter ---- */
+.reference-line {
+  position: fixed;
+  top: 33.333vh;
+  left: 0;
+  right: 0;
+  border-top: 1px dashed var(--borda);
+  pointer-events: none;
+}
+
+.counter {
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  padding: 0.75rem 1rem;
+  font-size: 0.95rem;
+  line-height: 1.35;
+}
+
+.counter__lives strong {
+  font-size: 1.5rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.counter__date,
+.counter__total {
+  color: var(--texto-suave);
+}
+
+.counter__controls {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.page-button {
+  font: inherit;
+  font-size: 0.85rem;
+  color: var(--texto);
+  background: transparent;
+  border: 1px solid var(--borda);
+  border-radius: 4px;
+  padding: 0.35rem 0.6rem;
+  cursor: pointer;
+}
+
+.page-button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* ---- Fontes ---- */
+.fontes {
+  border-top: 1px solid var(--borda);
+  font-size: 0.95rem;
+  color: var(--texto-suave);
+  padding-bottom: 12rem;
+}
+
+.fontes h2 {
+  color: var(--texto);
+  margin-bottom: 1rem;
+}
+
+.fontes__grupo {
+  margin-top: 1rem;
+}
+
+.fontes__lista {
+  margin: 0.5rem 0 0 1.25rem;
+}
+
+.fontes__license {
+  margin-top: 2rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}

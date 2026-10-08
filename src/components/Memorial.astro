@@ -1,0 +1,33 @@
+---
+---
+
+<section class="section memorial" aria-labelledby="memorial-titulo">
+  <div class="wrap">
+    <h2 id="memorial-titulo">Uma vida, um ponto</h2>
+    <div class="nota-dados">
+      <p>
+        Série nacional de <time data-dyn="inicio">…</time> a <time data-dyn="fim">…</time>, com
+        <strong data-dyn="total">…</strong> óbitos acumulados. Fonte:
+        <a data-dyn-link="fonte" target="_blank" rel="noopener noreferrer">…</a>,
+        acesso em <time data-dyn="acessado-em">…</time>.
+      </p>
+      <p>
+        A linha do tempo usa a <strong>data de notificação</strong> dos óbitos no painel, não a
+        data em que cada pessoa morreu.
+      </p>
+      <p>
+        O painel às vezes revisa o total acumulado para baixo. Para manter um ponto por vida,
+        cada acumulado anterior recebe o menor valor entre ele e os acumulados seguintes. Isso
+        desloca algumas posições diárias no histórico, mas preserva o total oficial mais recente.
+      </p>
+    </div>
+    <p class="aviso-sintetico" data-aviso-sintetico hidden>
+      <strong>Declarações sintéticas de exemplo.</strong> <span data-aviso-texto></span>
+    </p>
+  </div>
+
+  <div class="memorial__track" data-track>
+    <canvas class="memorial__canvas" data-canvas aria-hidden="true"></canvas>
+    <div class="memorial__marks" data-marks></div>
+  </div>
+</section>
