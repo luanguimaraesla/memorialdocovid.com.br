@@ -1,16 +1,45 @@
 ---
 ---
 
-<div class="reference-line" aria-hidden="true"></div>
+<div class="reference-line" data-reference-line aria-hidden="true"></div>
 
-<aside class="counter panel" aria-label="Contador de vidas">
-  <p class="counter__lives"><strong data-counter-lives>…</strong> vidas</p>
-  <p class="counter__date">até <span data-counter-date>…</span></p>
-  <p class="counter__total">de <span data-counter-total>…</span> vidas</p>
+<aside class="counter panel" data-counter data-idle aria-label="Contador de vidas">
+  <div class="counter__summary">
+    <p class="counter__lives"><strong data-counter-lives>…</strong> vidas</p>
+    <p class="counter__days"><span data-counter-days>…</span></p>
+    <p class="counter__total">de <span data-counter-total>…</span> vidas</p>
+  </div>
+  <div class="autoscroll-player" role="group" aria-label="Controles de rolagem automática">
+    <button
+      class="autoscroll-player__play"
+      id="btn-play"
+      type="button"
+      aria-label="rolar automaticamente"
+      aria-pressed="false"
+      disabled
+    >
+      <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true" focusable="false">
+        <path class="autoscroll-player__icon-play" d="M4.5 2.5v11L13 8z" />
+        <path class="autoscroll-player__icon-pause" d="M4 2.5h3v11H4zM9 2.5h3v11H9z" />
+      </svg>
+    </button>
+    <select class="autoscroll-player__speed" id="speed-select" aria-label="Velocidade da rolagem" disabled>
+      <option value="1" selected>1×</option>
+      <option value="2">2×</option>
+      <option value="3">3×</option>
+    </select>
+  </div>
   <div class="counter__controls">
-    <button class="page-button" id="btn-inicio" type="button" disabled>Ir ao início</button>
-    <button class="page-button" id="btn-fim" type="button" disabled>Ir ao fim</button>
+    <button class="page-button" id="btn-share" type="button" disabled>Compartilhar</button>
   </div>
 </aside>
 
 <p class="sr-only" data-announcer aria-live="polite"></p>
+<p class="share-status panel" data-share-status role="status" hidden></p>
+
+<dialog class="share-dialog" id="share-dialog" aria-labelledby="share-title">
+  <h2 id="share-title">Compartilhar</h2>
+  <label for="share-message">Copie a mensagem e o link para compartilhar:</label>
+  <textarea id="share-message" rows="5" readonly></textarea>
+  <button class="page-button" id="share-close" type="button">Fechar</button>
+</dialog>

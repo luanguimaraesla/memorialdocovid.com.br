@@ -1,5 +1,11 @@
-export const DOT_RADIUS_PX = 3;
+export const DOT_RADIUS_PX = 12;
 export const DOT_GAP_PX = 2;
 export const DOTS_PER_ROW = 10;
+export const LIVES_PER_SEPARATOR = 1000;
+export const SEPARATOR_ROWS = 3;
 export const MAX_COLUMN_HEIGHT_PX = 16_000_000;
 export const ANNOUNCE_INTERVAL_MS = 2000;
+export const SHARE_STATUS_DURATION_MS = 3000;
+export const WEEK_MARKERS_START = '2020-03-30';
+export const SPEED_BASE = 1920;
+export const SPEED_MULTIPLIERS = [1, 2, 3] as const;

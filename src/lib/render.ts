@@ -1,41 +1,49 @@
-import { ANNOUNCE_INTERVAL_MS, DOT_RADIUS_PX } from '../config';
+import { ANNOUNCE_INTERVAL_MS, SHARE_STATUS_DURATION_MS, DOT_RADIUS_PX, DOTS_PER_ROW, SPEED_BASE, SPEED_MULTIPLIERS } from '../config';
 import {
-  anchorY,
   columnHeight,
   columnWidth,
+  anchorY,
   dateAtIndex,
   dayIndexOf,
+  dayNumber,
   dotPosition,
   firstIndexOfDay,
   livesAtDepth,
-  monthMarkers,
+  weekMarkers,
+  thousandMarkers,
   visibleIndexRange,
 } from './layout';
-import type { MonthMarker } from './layout';
+import type { ThousandMarker, WeekMarker } from './layout';
 import { loadPageData } from './state';
-import type { Declaracao, Fonte, PageData } from './state';
+import type { Declaracao, PageData } from './state';
+import { createAutoscroll } from './autoscroll';
+import type { Autoscroll } from './autoscroll';
+import { shareDescription, shareLink, statementAnchor, statementUrl } from './sharing';
+import type { SharedLink } from './sharing';
 
-const DOT_COLOR = '#e8e4dc';
+const DOT_ROW_COLORS = ['#e8e4dc', '#cbc7bf'];
 
 interface Elements {
   track: HTMLElement;
   canvas: HTMLCanvasElement;
   marks: HTMLElement;
+  weeks: HTMLElement;
+  separators: HTMLElement;
+  counter: HTMLElement;
+  referenceLine: HTMLElement;
   lives: HTMLElement;
-  date: HTMLElement;
+  days: HTMLElement;
   total: HTMLElement;
   announcer: HTMLElement;
-  btnInicio: HTMLButtonElement;
-  btnFim: HTMLButtonElement;
-  inicio: HTMLTimeElement;
-  fim: HTMLTimeElement;
-  acessadoEm: HTMLTimeElement;
-  seriesTotal: HTMLElement;
-  sourceLink: HTMLAnchorElement;
+  btnShare: HTMLButtonElement;
+  shareStatus: HTMLElement;
+  shareDialog: HTMLDialogElement;
+  shareMessage: HTMLTextAreaElement;
+  shareClose: HTMLButtonElement;
+  btnStart: HTMLButtonElement;
+  btnPlay: HTMLButtonElement;
+  speedSelect: HTMLSelectElement;
   syntheticNotice: HTMLElement;
-  syntheticText: HTMLElement;
-  officialSources: HTMLElement;
-  statementSources: HTMLElement;
 }
 
 let data: PageData;
@@ -46,8 +54,15 @@ let ticking = false;
 let lastAnnounceAt = -Infinity;
 let pendingAnnounce: ReturnType<typeof setTimeout> | undefined;
 let announcement = '';
+let statementCards: { index: number; element: HTMLElement }[] = [];
+let activeCard: HTMLElement | undefined;
+let pinnedCard: { index: number; element: HTMLElement } | undefined;
+let autoscroll: Autoscroll;
+let speedMultiplier = 1;
+let shareStatusTimer: ReturnType<typeof setTimeout> | undefined;
 
 const fmtInt = (value: number): string => value.toLocaleString('pt-BR');
+const fmtDays = (value: number): string => `${fmtInt(value)} ${value === 1 ? 'dia' : 'dias'}`;
 
 function fmtDate(iso: string): string {
   const [year, month, day] = iso.split('-');
@@ -73,129 +88,159 @@ function dateElement(iso: string, className: string): HTMLTimeElement {
   return time;
 }
 
-function sourceLink(fonte: Fonte): HTMLAnchorElement {
-  const link = create('a', 'fonte__link', fonte.nome);
-  link.href = fonte.url;
-  link.target = '_blank';
-  link.rel = 'noopener noreferrer';
-  return link;
+function viewport(): { top: number; height: number } {
+  return {
+    top: window.visualViewport?.offsetTop ?? 0,
+    height: window.visualViewport?.height ?? window.innerHeight,
+  };
 }
 
-function setDate(time: HTMLTimeElement, iso: string): void {
-  time.textContent = fmtDate(iso);
-  time.dateTime = iso;
+function referenceDepth(): number {
+  const { top, height } = viewport();
+  return top + height / 2;
 }
-
-const reducedMotion = (): boolean => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 function populate(): void {
-  const { obitos, declaracoes, inicio, fim, total } = data;
-  setDate(ui.inicio, inicio);
-  setDate(ui.fim, fim);
-  setDate(ui.acessadoEm, obitos.acessado_em);
-  ui.seriesTotal.textContent = fmtInt(total);
-  ui.sourceLink.href = obitos.fontes[0].url;
-  ui.sourceLink.textContent = obitos.fontes[0].nome;
-  ui.total.textContent = fmtInt(total);
-
-  if (declaracoes.sintetico) {
-    ui.syntheticText.textContent = declaracoes.aviso ?? '';
-    ui.syntheticNotice.hidden = false;
-  }
-  mountSources();
+  ui.total.textContent = fmtInt(data.total);
+  ui.syntheticNotice.hidden = !data.declaracoes.sintetico;
 }
 
-function mountSources(): void {
-  const { obitos, declaracoes } = data;
-  const official = create('p', 'fontes__grupo');
-  official.append(create('strong', '', 'Óbitos'), ` · acesso em ${fmtDate(obitos.acessado_em)}`);
-  const list = create('ul', 'fontes__lista');
-  for (const fonte of obitos.fontes) {
-    const item = create('li', '');
-    item.append(sourceLink(fonte));
-    list.append(item);
-  }
-  ui.officialSources.replaceChildren(official, list);
-
-  const target = ui.statementSources;
-  if (declaracoes.sintetico) {
-    const accessDates = [...new Set(declaracoes.declaracoes.map((declaracao) => fmtDate(declaracao.acessado_em)))];
-    const notice = create('p', 'fontes__grupo');
-    notice.append(
-      create('strong', '', 'Declarações: exemplos sintéticos, sem fonte real.'),
-      ` ${declaracoes.aviso ?? ''} Datas de acesso fictícias: ${accessDates.join(', ')}.`,
-    );
-    target.replaceChildren(notice);
-    return;
-  }
-  const heading = create('p', 'fontes__grupo');
-  heading.append(create('strong', '', 'Declarações'));
-  const statements = create('ul', 'fontes__lista');
-  for (const declaracao of declaracoes.declaracoes) {
-    for (const fonte of declaracao.fontes) {
-      const item = create('li', '');
-      item.append(`${fmtDate(declaracao.data)}: `, sourceLink(fonte), ` · acesso em ${fmtDate(declaracao.acessado_em)}`);
-      statements.append(item);
-    }
-  }
-  target.replaceChildren(heading, statements);
-}
-
-function monthLabel(marker: MonthMarker): HTMLElement {
-  const label = create('p', 'marco-mes');
+function weekLabel(marker: WeekMarker): HTMLElement {
+  const label = create('p', 'marco-semana');
   label.style.top = `${marker.y}px`;
-  label.append(dateElement(marker.data, 'marco-mes__data'));
+  label.append(dateElement(marker.data, 'marco-semana__data'));
   return label;
 }
 
-function statementCard(declaracao: Declaracao, synthetic: boolean): HTMLElement {
+function thousandLabel(marker: ThousandMarker): HTMLElement {
+  const label = create('p', 'memorial__separator');
+  label.style.top = `${marker.y}px`;
+  label.setAttribute('data-lives', String(marker.lives));
+  label.append(
+    create('strong', 'memorial__separator-number', fmtInt(marker.lives)),
+    create('span', 'memorial__separator-caption', 'vidas'),
+  );
+  return label;
+}
+
+function statementCard(declaracao: Declaracao, synthetic: boolean): { index: number; element: HTMLElement } {
   const { dias } = data.obitos;
   const index = firstIndexOfDay(dias, dayIndexOf(dias, declaracao.data));
   const card = create('article', synthetic ? 'declaracao declaracao--sintetica' : 'declaracao');
   card.setAttribute('tabindex', '0');
-  card.style.top = `${anchorY(index, data.total)}px`;
-  if (synthetic) card.append(create('p', 'declaracao__selo', 'exemplo sintético'));
-  card.append(dateElement(declaracao.data, 'declaracao__data'), create('p', 'declaracao__texto', declaracao.texto));
-  if (!synthetic) {
-    const sources = create('p', 'declaracao__fontes');
-    for (const fonte of declaracao.fontes) sources.append(sourceLink(fonte), ' ');
-    card.append(sources);
+  card.id = statementAnchor(declaracao.id);
+  card.hidden = true;
+  card.setAttribute('data-tipo', declaracao.tipo ?? 'declaracao');
+  const header = create('header', 'declaracao__cabecalho');
+  if (synthetic) header.append(create('p', 'declaracao__selo', 'exemplo sintético'));
+  header.append(dateElement(declaracao.data, 'declaracao__data'));
+  if (declaracao.subtitulo) header.append(create('h3', 'declaracao__subtitulo', declaracao.subtitulo));
+  if (declaracao.autor) header.append(create('p', 'declaracao__autor', declaracao.autor));
+  if (declaracao.tipo === 'noticia') header.append(create('p', 'declaracao__selo', 'marco histórico'));
+  card.append(header, create(declaracao.tipo === 'noticia' ? 'p' : 'blockquote', 'declaracao__texto', declaracao.texto));
+  const references = create('a', 'declaracao__fontes', 'fontes e contexto');
+  references.href = `${import.meta.env.BASE_URL}referencias#declaracao-${encodeURIComponent(declaracao.id)}`;
+  const shareButton = create('button', 'page-button declaracao__compartilhar', 'Compartilhar');
+  shareButton.type = 'button';
+  shareButton.setAttribute('aria-label', 'Compartilhar este marco');
+  shareButton.addEventListener('click', () => {
+    const title = declaracao.subtitulo ?? 'Memorial do Covid';
+    void requestShare({
+      title,
+      text: shareDescription(title),
+      url: statementUrl(declaracao.id, siteBase()),
+    });
+  });
+  const actions = create('div', 'declaracao__acoes');
+  actions.append(references, shareButton);
+  card.append(actions);
+  return { index, element: card };
+}
+
+function markerNavigation(card: typeof statementCards[number], group: typeof statementCards): void {
+  const position = group.indexOf(card);
+  const navigation = create('nav', 'declaracao__nav');
+  navigation.setAttribute('aria-label', 'Marcos na mesma posição da coluna');
+  navigation.append(create('span', 'declaracao__nav-count', `${position + 1} de ${group.length} marcos neste ponto`));
+  for (const [label, offset] of [['Anterior', -1], ['Próximo', 1]] as const) {
+    const button = create('button', 'page-button', label);
+    button.type = 'button';
+    button.disabled = !group[position + offset];
+    button.setAttribute('aria-label', `${label} marco nesta posição`);
+    button.addEventListener('click', () => {
+      autoscroll.pause();
+      pinnedCard = group[position + offset];
+      pinnedCard.element.scrollTop = 0;
+      update();
+      pinnedCard.element.focus({ preventScroll: true });
+    });
+    navigation.append(button);
   }
-  return card;
+  card.element.append(navigation);
 }
 
 function buildMarks(): void {
-  const labels = monthMarkers(data.obitos.dias).map(monthLabel);
-  const cards = data.declaracoes.declaracoes.map((declaracao) => statementCard(declaracao, data.declaracoes.sintetico));
-  ui.marks.replaceChildren(...labels, ...cards);
+  ui.weeks.replaceChildren(...weekMarkers(data.obitos.dias).map(weekLabel));
+  ui.separators.replaceChildren(...thousandMarkers(data.total).map(thousandLabel));
+  statementCards = data.declaracoes.declaracoes
+    .map((declaracao) => statementCard(declaracao, data.declaracoes.sintetico))
+    .sort((a, b) => a.index - b.index);
+  activeCard = undefined;
+  pinnedCard = undefined;
+  for (const card of statementCards) {
+    const row = Math.floor(card.index / DOTS_PER_ROW);
+    const group = statementCards.filter((other) => Math.floor(other.index / DOTS_PER_ROW) === row);
+    if (group.length > 1) markerNavigation(card, group);
+  }
+  ui.marks.replaceChildren(...statementCards.map(({ element }) => element));
+}
+
+function updateStatement(lives: number, active: boolean): void {
+  const selected = active
+    ? statementCards.reduce<typeof pinnedCard>((latest, card) => card.index < lives ? card : latest, undefined)
+    : undefined;
+  if (!selected || (pinnedCard && Math.floor(pinnedCard.index / DOTS_PER_ROW) !== Math.floor(selected.index / DOTS_PER_ROW))) {
+    pinnedCard = undefined;
+  }
+  const current = (pinnedCard ?? selected)?.element;
+  if (current === activeCard) return;
+  if (activeCard) activeCard.hidden = true;
+  if (current) current.hidden = false;
+  activeCard = current;
 }
 
 function resizeCanvas(): void {
   const ratio = window.devicePixelRatio || 1;
   const width = columnWidth();
-  const viewport = window.innerHeight;
+  const visible = viewport();
+  ui.canvas.style.top = `${visible.top}px`;
   ui.canvas.style.width = `${width}px`;
-  ui.canvas.style.height = `${viewport}px`;
+  ui.canvas.style.height = `${visible.height}px`;
   ui.canvas.width = Math.round(width * ratio);
-  ui.canvas.height = Math.round(viewport * ratio);
+  ui.canvas.height = Math.round(visible.height * ratio);
+  ui.referenceLine.style.top = `${referenceDepth()}px`;
+  ui.counter.style.setProperty('--linha-y', `${referenceDepth()}px`);
   ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
 }
 
 // Draws only the dots behind the sticky canvas. `offset` is the canvas top inside the track.
 function draw(offset: number): void {
-  const viewport = window.innerHeight;
-  const { start, end } = visibleIndexRange(offset, viewport, data.total);
-  ctx.clearRect(0, 0, columnWidth(), viewport);
-  ctx.fillStyle = DOT_COLOR;
-  ctx.beginPath();
-  for (let index = start; index < end; index += 1) {
-    const { x, y } = dotPosition(index);
-    const cx = x + DOT_RADIUS_PX;
-    const cy = y + DOT_RADIUS_PX - offset;
-    ctx.moveTo(cx + DOT_RADIUS_PX, cy);
-    ctx.arc(cx, cy, DOT_RADIUS_PX, 0, 2 * Math.PI);
-  }
-  ctx.fill();
+  const visibleHeight = viewport().height;
+  const { start, end } = visibleIndexRange(offset, visibleHeight, data.total);
+  ctx.clearRect(0, 0, columnWidth(), visibleHeight);
+  DOT_ROW_COLORS.forEach((color, colorIndex) => {
+    ctx.fillStyle = color;
+    ctx.beginPath();
+    for (let index = start; index < end; index += 1) {
+      const { row, x, y } = dotPosition(index);
+      if (row % DOT_ROW_COLORS.length !== colorIndex) continue;
+      const cx = x + DOT_RADIUS_PX;
+      const cy = y + DOT_RADIUS_PX - offset;
+      ctx.moveTo(cx + DOT_RADIUS_PX, cy);
+      ctx.arc(cx, cy, DOT_RADIUS_PX, 0, 2 * Math.PI);
+    }
+    ctx.fill();
+  });
 }
 
 function flushAnnouncement(): void {
@@ -213,15 +258,33 @@ function announce(text: string): void {
   else pendingAnnounce = setTimeout(flushAnnouncement, wait);
 }
 
-// The counter reads the column at a reference line one third down the viewport.
+function fitStatement(trackTop: number): void {
+  if (!activeCard) return;
+  const visible = viewport();
+  const stickyTop = parseFloat(window.getComputedStyle(activeCard).top);
+  const cardTop = Math.max(ui.marks.getBoundingClientRect().top, stickyTop);
+  const viewportBottom = window.innerWidth <= 640
+    ? ui.counter.getBoundingClientRect().top
+    : visible.top + visible.height;
+  const bottom = Math.min(trackTop + height, viewportBottom);
+  activeCard.style.setProperty('--card-space', `${Math.max(0, bottom - cardTop - 16)}px`);
+}
+
+// The counter follows the middle of the visible viewport, including mobile browser chrome.
 function updateCounter(trackTop: number): void {
-  const lives = livesAtDepth(window.innerHeight / 3 - trackTop, data.total);
-  const date = lives > 0 ? fmtDate(dateAtIndex(data.obitos.dias, lives - 1)) : '—';
+  const depth = referenceDepth() - trackTop;
+  const active = depth >= 0 && depth <= height;
+  ui.counter.toggleAttribute('data-idle', !active);
+  ui.referenceLine.classList.toggle('reference-line--on', active);
+  const lives = livesAtDepth(depth, data.total);
+  updateStatement(lives, active);
+  const days = lives > 0 ? dayNumber(data.inicio, dateAtIndex(data.obitos.dias, lives - 1)) : 0;
   ui.lives.textContent = fmtInt(lives);
-  ui.date.textContent = date;
+  ui.days.textContent = fmtDays(days);
+  fitStatement(trackTop);
   announce(
     lives > 0
-      ? `${fmtInt(lives)} vidas até ${date}, de ${fmtInt(data.total)}.`
+      ? `${fmtInt(lives)} vidas em ${fmtDays(days)}, de ${fmtInt(data.total)}.`
       : `0 vidas, de ${fmtInt(data.total)}.`,
   );
 }
@@ -233,12 +296,86 @@ function update(): void {
   updateCounter(trackTop);
 }
 
-function scrollToDepth(depth: number): void {
+function siteBase(): URL {
+  return new URL(import.meta.env.BASE_URL, window.location.origin);
+}
+
+function hideShareStatus(): void {
+  clearTimeout(shareStatusTimer);
+  shareStatusTimer = undefined;
+  ui.shareStatus.hidden = true;
+  ui.shareStatus.textContent = '';
+}
+
+async function requestShare(link: SharedLink): Promise<void> {
+  autoscroll.pause();
+  hideShareStatus();
+  const result = await shareLink(link);
+  if (result === 'copied') {
+    hideShareStatus();
+    ui.shareStatus.textContent = 'Mensagem e link copiados.';
+    ui.shareStatus.hidden = false;
+    shareStatusTimer = setTimeout(hideShareStatus, SHARE_STATUS_DURATION_MS);
+  } else if (result === 'manual') {
+    ui.shareMessage.value = `${link.text}\n${link.url}`;
+    ui.shareDialog.showModal();
+    ui.shareMessage.focus();
+    ui.shareMessage.select();
+  }
+}
+
+function followAnchor(): void {
+  let anchor: string;
+  try {
+    anchor = decodeURIComponent(window.location.hash.slice(1));
+  } catch {
+    return;
+  }
+  if (!anchor) {
+    const id = document.querySelector('[data-initial-statement]')?.getAttribute('data-initial-statement');
+    if (id) anchor = statementAnchor(id);
+  }
+  const card = statementCards.find(({ element }) => element.id === anchor);
+  if (!card) return;
+  autoscroll.pause();
+  pinnedCard = card;
   const trackTop = ui.track.getBoundingClientRect().top + window.scrollY;
   window.scrollTo({
-    top: trackTop + depth - window.innerHeight / 3,
-    behavior: reducedMotion() ? 'auto' : 'smooth',
+    top: trackTop + anchorY(card.index, data.total) + DOT_RADIUS_PX - referenceDepth(),
+    behavior: 'instant',
   });
+  update();
+}
+
+function updatePlayback(playing: boolean): void {
+  ui.btnPlay.setAttribute('aria-pressed', String(playing));
+  ui.btnPlay.setAttribute('aria-label', playing ? 'pausar rolagem' : 'rolar automaticamente');
+}
+
+function wirePlayback(): void {
+  ui.speedSelect.addEventListener('change', () => {
+    const multiplier = Number(ui.speedSelect.value);
+    if (SPEED_MULTIPLIERS.some((speed) => speed === multiplier)) speedMultiplier = multiplier;
+  });
+
+  // Space pauses on keydown before the button click; preserve the intended toggle.
+  let playIntent: { wasPlaying: boolean; at: number } | undefined;
+  const captureIntent = (): void => {
+    playIntent = { wasPlaying: autoscroll.isPlaying(), at: performance.now() };
+  };
+  ui.btnPlay.addEventListener('pointerdown', captureIntent);
+  ui.btnPlay.addEventListener('keydown', (event) => {
+    if (!event.repeat) captureIntent();
+  });
+  ui.btnPlay.addEventListener('click', () => {
+    const wasPlaying = playIntent && performance.now() - playIntent.at < 1000
+      ? playIntent.wasPlaying
+      : autoscroll.isPlaying();
+    playIntent = undefined;
+    if (wasPlaying) autoscroll.pause();
+    else autoscroll.play();
+  });
+  ui.btnStart.addEventListener('click', () => autoscroll.play());
 }
 
 function wire(): void {
@@ -250,12 +387,19 @@ function wire(): void {
       ticking = false;
     });
   }, { passive: true });
-  window.addEventListener('resize', () => {
+  const resize = () => {
     resizeCanvas();
     update();
+  };
+  window.addEventListener('resize', resize);
+  window.visualViewport?.addEventListener('resize', resize);
+  window.visualViewport?.addEventListener('scroll', resize);
+  window.addEventListener('hashchange', followAnchor);
+  ui.btnShare.addEventListener('click', () => {
+    const title = 'Memorial do Covid';
+    void requestShare({ title, text: shareDescription(title), url: siteBase().href });
   });
-  ui.btnInicio.addEventListener('click', () => scrollToDepth(0));
-  ui.btnFim.addEventListener('click', () => scrollToDepth(height - 1));
+  ui.shareClose.addEventListener('click', () => ui.shareDialog.close());
 }
 
 function elements(): Elements {
@@ -263,21 +407,23 @@ function elements(): Elements {
     track: must('[data-track]'),
     canvas: must('[data-canvas]'),
     marks: must('[data-marks]'),
+    weeks: must('[data-weeks]'),
+    separators: must('[data-separators]'),
+    counter: must('[data-counter]'),
+    referenceLine: must('[data-reference-line]'),
     lives: must('[data-counter-lives]'),
-    date: must('[data-counter-date]'),
+    days: must('[data-counter-days]'),
     total: must('[data-counter-total]'),
     announcer: must('[data-announcer]'),
-    btnInicio: must('#btn-inicio'),
-    btnFim: must('#btn-fim'),
-    inicio: must('[data-dyn="inicio"]'),
-    fim: must('[data-dyn="fim"]'),
-    acessadoEm: must('[data-dyn="acessado-em"]'),
-    seriesTotal: must('[data-dyn="total"]'),
-    sourceLink: must('[data-dyn-link="fonte"]'),
+    btnShare: must('#btn-share'),
+    shareStatus: must('[data-share-status]'),
+    shareDialog: must('#share-dialog'),
+    shareMessage: must('#share-message'),
+    shareClose: must('#share-close'),
+    btnStart: must('#btn-start'),
+    btnPlay: must('#btn-play'),
+    speedSelect: must('#speed-select'),
     syntheticNotice: must('[data-aviso-sintetico]'),
-    syntheticText: must('[data-aviso-texto]'),
-    officialSources: must('[data-fontes-obitos]'),
-    statementSources: must('[data-fontes-declaracoes]'),
   };
 }
 
@@ -299,10 +445,17 @@ export async function boot(): Promise<void> {
     populate();
     buildMarks();
     resizeCanvas();
+    autoscroll = createAutoscroll({
+      getSpeed: () => SPEED_BASE * speedMultiplier,
+      onStateChange: updatePlayback,
+    });
+    wirePlayback();
     wire();
     update();
-    ui.btnInicio.disabled = false;
-    ui.btnFim.disabled = false;
+    followAnchor();
+    for (const control of [ui.btnShare, ui.btnStart, ui.btnPlay, ui.speedSelect]) {
+      control.disabled = false;
+    }
   } catch (error) {
     console.error('Falha ao carregar os dados:', error);
     errorEl.hidden = false;

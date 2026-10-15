@@ -1,0 +1,136 @@
+---
+import Base from '../layouts/Base.astro';
+import { DOT_RADIUS_PX, DOT_GAP_PX, DOTS_PER_ROW, LIVES_PER_SEPARATOR, SEPARATOR_ROWS } from '../config';
+---
+
+<Base
+  title="Referências e metodologia · Memorial do Covid"
+  description="As fontes dos dados, os marcos históricos e a metodologia do Memorial do Covid."
+>
+  <main class="ref-page">
+    <h1>Referências e metodologia</h1>
+    <a class="ref-back" href="/">← voltar para o memorial</a>
+
+    <p class="load-error" id="load-error" role="alert" hidden>
+      Não foi possível carregar os dados oficiais. Verifique sua conexão e recarregue a página.
+    </p>
+
+    <section class="ref">
+      <h2>A série nacional</h2>
+      <p>
+        Série nacional de <time data-dyn="inicio">…</time> a <time data-dyn="fim">…</time>, com
+        <strong data-dyn="total">…</strong> óbitos acumulados. Fonte:
+        <a data-dyn-link="fonte" target="_blank" rel="noopener noreferrer">…</a>,
+        acesso em <time data-dyn="acessado-em">…</time>.
+      </p>
+      <p>
+        A linha do tempo usa a <strong>data de notificação</strong> dos óbitos no painel, não a
+        data em que cada pessoa morreu.
+      </p>
+    </section>
+
+    <section class="ref">
+      <h2>As correções do histórico</h2>
+      <p>
+        O painel às vezes revisa o total acumulado para baixo. Para manter um ponto por vida,
+        cada acumulado anterior recebe o menor valor entre ele e os acumulados seguintes. Isso
+        desloca algumas posições diárias no histórico, mas preserva o total oficial mais recente.
+      </p>
+    </section>
+
+    <section class="ref">
+      <h2>Uma vida, um ponto</h2>
+      <p>
+        Cada ponto representa uma vida no total nacional. O raio é fixo em {DOT_RADIUS_PX} pixels
+        CSS, com {DOT_GAP_PX} pixels de espaço e {DOTS_PER_ROW} pontos por linha.
+        O contador acompanha o meio da tela e conta uma linha quando ela é alcançada.
+        O tempo aparece somente em dias: a primeira data da série é o dia 1. A contagem
+        usa a data de notificação da última vida alcançada, sem converter para meses ou anos.
+        A cada {LIVES_PER_SEPARATOR.toLocaleString('pt-BR')} vidas, um separador mostra o
+        total acumulado e ocupa o espaço de {SEPARATOR_ROWS} linhas. Esse intervalo não
+        representa vidas; as contagens de vidas e de dias permanecem iguais até os próximos pontos.
+        Os marcos semanais mostram as segundas-feiras a partir de 30/03/2020, na posição do
+        primeiro óbito de cada semana. Semanas sem novos óbitos não recebem marco. Os óbitos
+        anteriores continuam representados na coluna.
+      </p>
+    </section>
+
+    <section class="ref">
+      <h2>Fontes dos óbitos</h2>
+      <div data-fontes-obitos></div>
+    </section>
+
+    <section class="ref">
+      <h2>Marcos históricos e contexto</h2>
+      <p>
+        A seleção reúne 57 marcos: 42 notícias históricas e 15 episódios com citações.
+        Não é um catálogo exaustivo da pandemia. As notícias são resumos editoriais de fatos,
+        estudos e decisões, identificados como marcos históricos; não são palavras literais
+        das instituições. Suas datas correspondem ao acontecimento, à classificação ou à
+        divulgação do estudo, mesmo quando a fonte foi publicada depois. Ensaios de vacinas,
+        resultados, autorizações, entregas e aplicações são etapas diferentes.
+      </p>
+      <p>
+        As variantes têm classificações e riscos distintos. Maior transmissão ou escape da
+        imunidade não significam automaticamente maior letalidade. O contexto registra o que
+        era conhecido e as incertezas das avaliações. Acusações, posições do MPF e recomendações
+        da CPI não são apresentadas como condenações criminais.
+      </p>
+      <p>
+        Marcos que caem na mesma linha de pontos podem ser alternados por Anterior e Próximo.
+        Seus links abrem a entrada escolhida. Essa navegação não acrescenta vidas nem muda a
+        série. A posição indica uma relação cronológica, não mortes causadas pelo acontecimento.
+      </p>
+      <p>
+        As citações registram falas de Jair Bolsonaro, ministros de seu governo, parlamentares
+        e líderes religiosos com apoio documentado ao presidente. A data é a da declaração,
+        não a da publicação da reportagem. Os cargos e partidos no contexto são os da época.
+        A seleção inclui minimização da doença, oposição à prevenção e à vacinação, defesa de
+        tratamentos sem eficácia demonstrada e campanhas ligadas a supostas curas.
+        Os subtítulos são resumos editoriais; as palavras da fonte aparecem nas citações.
+        Citar uma fala não significa endossar seu conteúdo. Trechos do mesmo pronunciamento
+        aparecem juntos em um único marco. Checagens, explicações posteriores e mudanças de
+        posição ficam registradas no contexto. A atuação de um líder religioso não representa
+        as pessoas evangélicas em geral.
+      </p>
+      <div data-fontes-declaracoes></div>
+    </section>
+
+    <section class="ref">
+      <h2>Discurso e comportamento durante a pandemia</h2>
+      <p>
+        Nicolás Ajzenman, Tiago Cavalcanti e Daniel Da Mata estudaram o efeito das falas de
+        Bolsonaro usando dados eleitorais, gastos e localização de celulares. Encontraram
+        queda no distanciamento social em localidades mais favoráveis ao presidente após
+        declarações que minimizaram os riscos da covid e contrariaram recomendações científicas.
+      </p>
+      <p>
+        O estudo documenta mudanças de comportamento, não uma contagem de mortes causada por
+        cada frase. A posição de um marco na coluna indica sua data na série de notificações;
+        não atribui os óbitos daquela posição à declaração. O estudo trata das falas de Bolsonaro,
+        não mede o efeito individual dos demais autores citados neste memorial.
+      </p>
+      <p>
+        Fonte:
+        <a href="https://www.aeaweb.org/articles?id=10.1257%2Fpol.20210284" target="_blank" rel="noopener noreferrer">
+          More than Words: Leaders' Speech and Risky Behavior during a Pandemic</a
+        >, American Economic Journal: Economic Policy, 2023. DOI: 10.1257/pol.20210284.
+        Acesso em 09/10/2026.
+      </p>
+    </section>
+
+    <p class="ref__license">
+      Código livre sob AGPL-3.0 ·
+      <a
+        href="https://github.com/luanguimaraesla/memorialdocovid.com.br"
+        target="_blank"
+        rel="noopener noreferrer">código-fonte no GitHub</a
+      >
+    </p>
+  </main>
+
+  <script>
+    import { bootReferencias } from '../lib/referencias';
+    bootReferencias();
+  </script>
+</Base>

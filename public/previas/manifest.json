@@ -1,0 +1,355 @@
+{
+  "declaracoesSha256": "b729ef865fc36c1320233f4f85c6b5bfd7bb0c11c830c82097a580bc2be89dd9",
+  "paletteSha256": "c5a60b689f868bc235712b8d23f573221a3f373bc347ac7fc4ab1ef7b9873cfd",
+  "subtitleSha256": "d70b86c5b6014d522305519d6cc1fe26ad20bfa2ed1886c25be34f91b49999a1",
+  "images": [
+    {
+      "id": "memorial",
+      "file": "memorial.png",
+      "sha256": "bfe1a84bfd667cb10d02ae4027ec6dc1590e0952b76cb26e77b20d7399e79fdb",
+      "fontSize": 34
+    },
+    {
+      "id": "primeiro-obito-divulgado-2020-03-17",
+      "file": "primeiro-obito-divulgado-2020-03-17.png",
+      "sha256": "b41348315949fc2eb4f3ea1ef6547982120821ff663ba4631ed6092c715d90fa",
+      "fontSize": 34
+    },
+    {
+      "id": "malafaia-igrejas-2020-03-18",
+      "file": "malafaia-igrejas-2020-03-18.png",
+      "sha256": "dbe762c8df7a71a742034d867f086ef39bfbef3a17d697bd1c5994615b9f7caf",
+      "fontSize": 34
+    },
+    {
+      "id": "transmissao-comunitaria-2020-03-20",
+      "file": "transmissao-comunitaria-2020-03-20.png",
+      "sha256": "78fa19ba9b4d2ce3d20c859302db7f5efa634d4b9b9c2134991534fcf9024a52",
+      "fontSize": 34
+    },
+    {
+      "id": "pronunciamento-2020-03-24",
+      "file": "pronunciamento-2020-03-24.png",
+      "sha256": "619ddb04ccdffea5427e9eee250457c73c969ee516886533083990b4290b5497",
+      "fontSize": 29
+    },
+    {
+      "id": "sepultamentos-manaus-2020-04-21",
+      "file": "sepultamentos-manaus-2020-04-21.png",
+      "sha256": "2e4b6eedc73c3ad91c6aa72443b35d26e1adfedb196d6b4f752cfe3b3f9ac493",
+      "fontSize": 34
+    },
+    {
+      "id": "oxford-ensaio-humano-2020-04-23",
+      "file": "oxford-ensaio-humano-2020-04-23.png",
+      "sha256": "3a5157da8f11cdbb7c12a51ce40d99580748ab4e75c05581610fb28b5433197d",
+      "fontSize": 34
+    },
+    {
+      "id": "e-dai-2020-04-28",
+      "file": "e-dai-2020-04-28.png",
+      "sha256": "d043f43d6302914651650761a5de71ff8925dfef28a0ed41881f687a09d7c059",
+      "fontSize": 34
+    },
+    {
+      "id": "valdemiro-sementes-2020-05-05",
+      "file": "valdemiro-sementes-2020-05-05.png",
+      "sha256": "1148ce8b7aa0af5d9f934c850255e832fbcab272ff6599bc74885e7e6e32807f",
+      "fontSize": 34
+    },
+    {
+      "id": "dados-retirados-2020-06-06",
+      "file": "dados-retirados-2020-06-06.png",
+      "sha256": "e705787d6337f8135d248b210ab49960596a95cbf37a72fe634f3d5a086134ea",
+      "fontSize": 34
+    },
+    {
+      "id": "stf-restaura-dados-2020-06-08",
+      "file": "stf-restaura-dados-2020-06-08.png",
+      "sha256": "ec66e1a6e0d97e4e908e0fb113c2f815e619df516c2551d55a11156851c4ae1d",
+      "fontSize": 34
+    },
+    {
+      "id": "coronavac-fase-tres-2020-07-21",
+      "file": "coronavac-fase-tres-2020-07-21.png",
+      "sha256": "7302c873bad7597a35f05203548661e3bf0985f768420cdb2b2d06256e86f765",
+      "fontSize": 34
+    },
+    {
+      "id": "pfizer-primeira-oferta-2020-08-14",
+      "file": "pfizer-primeira-oferta-2020-08-14.png",
+      "sha256": "f6f6e4099858ea89d03e3343ffa268573862437f49fc2e282d4f974860988d7a",
+      "fontSize": 34
+    },
+    {
+      "id": "coronavac-2020-10-21",
+      "file": "coronavac-2020-10-21.png",
+      "sha256": "1d88130f518e9ee7297d9581a97ceac767407ce78d4beeec9ed64eff819616de",
+      "fontSize": 34
+    },
+    {
+      "id": "pazuello-obedece-2020-10-22",
+      "file": "pazuello-obedece-2020-10-22.png",
+      "sha256": "1e509567a46b011af0efd30db01275b301ca61861151afcaface41105fcb8bd1",
+      "fontSize": 34
+    },
+    {
+      "id": "pfizer-resultados-2020-11-09",
+      "file": "pfizer-resultados-2020-11-09.png",
+      "sha256": "8d67befe012fb8989aea9eb5c8bc0a76e5c417e1622f665b8b877aca1b35b645",
+      "fontSize": 34
+    },
+    {
+      "id": "maricas-2020-11-10",
+      "file": "maricas-2020-11-10.png",
+      "sha256": "443ecfc0eebc4b9b76748591aa293903cf9e9649bdf8072ac2d35b0a8b27e177",
+      "fontSize": 34
+    },
+    {
+      "id": "moderna-resultados-2020-11-16",
+      "file": "moderna-resultados-2020-11-16.png",
+      "sha256": "355756a6a6a38cf28405be60d1eeca3e3fe741432581cf4817101af4dc895345",
+      "fontSize": 34
+    },
+    {
+      "id": "moscou-vacinacao-2020-12-05",
+      "file": "moscou-vacinacao-2020-12-05.png",
+      "sha256": "27e0da1b07d878193eaa8098fee09a96c2fe1bd426f33148fab91fb01594d56a",
+      "fontSize": 34
+    },
+    {
+      "id": "reino-unido-vacinacao-2020-12-08",
+      "file": "reino-unido-vacinacao-2020-12-08.png",
+      "sha256": "e6543225b1c24e1d643d6b4b9f5447aa7c4d694d56a901bd7d1c783ade686de5",
+      "fontSize": 34
+    },
+    {
+      "id": "estados-unidos-vacinacao-2020-12-14",
+      "file": "estados-unidos-vacinacao-2020-12-14.png",
+      "sha256": "273ba1f286d1b00999c0867ac8af9e419ffd2b43acb5fa90399d67959a46eddc",
+      "fontSize": 34
+    },
+    {
+      "id": "canada-vacinacao-2020-12-14",
+      "file": "canada-vacinacao-2020-12-14.png",
+      "sha256": "9bdae2a3813e2996bfa85b99308681a82ddc7b3bf7d1cee275cd39c62605e12f",
+      "fontSize": 34
+    },
+    {
+      "id": "vacina-jacare-2020-12-17",
+      "file": "vacina-jacare-2020-12-17.png",
+      "sha256": "537ecf049b1f94cf1acd21d2984b89ecc5c7120621bff1cc4e181e1712223105",
+      "fontSize": 34
+    },
+    {
+      "id": "alpha-beta-2020-12-18",
+      "file": "alpha-beta-2020-12-18.png",
+      "sha256": "22f8f6a5bca84a00919a7b3f64e082bb1c6513f41771701bb2786bba734d0c63",
+      "fontSize": 34
+    },
+    {
+      "id": "mexico-chile-vacinacao-2020-12-24",
+      "file": "mexico-chile-vacinacao-2020-12-24.png",
+      "sha256": "d814cfdba0cde840e35d3ac22e2617a0316a81c53bd0d0158c2eb9c4a4086bc0",
+      "fontSize": 34
+    },
+    {
+      "id": "uniao-europeia-vacinacao-2020-12-27",
+      "file": "uniao-europeia-vacinacao-2020-12-27.png",
+      "sha256": "9e36fc84d3a568701b4220cd5dd4f7f28471d89ac1e222c6bc0100c258c72a07",
+      "fontSize": 34
+    },
+    {
+      "id": "oms-primeira-vacina-2020-12-31",
+      "file": "oms-primeira-vacina-2020-12-31.png",
+      "sha256": "63dc82f9184762130948ab659a09d62739bed65fecdfb86e7c0c2f55e2185ff7",
+      "fontSize": 34
+    },
+    {
+      "id": "gamma-2021-01-11",
+      "file": "gamma-2021-01-11.png",
+      "sha256": "f3f1fb771c2f340a08df694fb45827a63b0a920e61d828de3447fa8f9854f06c",
+      "fontSize": 34
+    },
+    {
+      "id": "oxigenio-manaus-2021-01-14",
+      "file": "oxigenio-manaus-2021-01-14.png",
+      "sha256": "e8b7cf0f3f7b5b28f65e47b7371b2db156859a177a79ced6cac39ade9a5cc45c",
+      "fontSize": 34
+    },
+    {
+      "id": "india-vacinacao-2021-01-16",
+      "file": "india-vacinacao-2021-01-16.png",
+      "sha256": "3d85bd81d3da63289ca438026b1a62c63f47fabd47f4ba53f77de3e119fe87ee",
+      "fontSize": 34
+    },
+    {
+      "id": "brasil-primeira-dose-2021-01-17",
+      "file": "brasil-primeira-dose-2021-01-17.png",
+      "sha256": "917cb2e2b1f6152adfeec696395f070f990ecca0de7256d4f982179482d7bcc0",
+      "fontSize": 34
+    },
+    {
+      "id": "campanha-nacional-2021-01-18",
+      "file": "campanha-nacional-2021-01-18.png",
+      "sha256": "74392c00c3a4ce9a24e912779a57bc4b2acd8651770774c8742b84780a5f7949",
+      "fontSize": 34
+    },
+    {
+      "id": "covax-ghana-entrega-2021-02-24",
+      "file": "covax-ghana-entrega-2021-02-24.png",
+      "sha256": "18b38333789f288b9e67fd7ff3710a1e95bf533d8449d3ade816629697557dff",
+      "fontSize": 34
+    },
+    {
+      "id": "ghana-costa-marfim-vacinacao-2021-03-01",
+      "file": "ghana-costa-marfim-vacinacao-2021-03-01.png",
+      "sha256": "ba59c27a75a69600d6681401d06bcc155593f0b8e1ab821fa634cfa51a2f8f29",
+      "fontSize": 34
+    },
+    {
+      "id": "mimimi-2021-03-04",
+      "file": "mimimi-2021-03-04.png",
+      "sha256": "700a05d8b971f8bc50a920af5b2385c23abd8dbaf050db78a3db048f6fcc8c79",
+      "fontSize": 34
+    },
+    {
+      "id": "eduardo-mascaras-2021-03-10",
+      "file": "eduardo-mascaras-2021-03-10.png",
+      "sha256": "eccc5c22643fa821558d70dccdfaeff4221a8dbb575b74407d1d23c5de8df5d0",
+      "fontSize": 34
+    },
+    {
+      "id": "colapso-utis-2021-03-16",
+      "file": "colapso-utis-2021-03-16.png",
+      "sha256": "dd54ea57e1979779ea96d73d06b56378249118e03d768719e1fc806f4bb26746",
+      "fontSize": 34
+    },
+    {
+      "id": "pfizer-primeiro-contrato-2021-03-19",
+      "file": "pfizer-primeiro-contrato-2021-03-19.png",
+      "sha256": "5634af0261da74f313f8517801490cf7e99fbe0d867e1cb9b1fe230142294f27",
+      "fontSize": 34
+    },
+    {
+      "id": "recorde-notificacoes-2021-04-08",
+      "file": "recorde-notificacoes-2021-04-08.png",
+      "sha256": "925c796d674bd99fbbd4a489867554a40f4026e7aedfd13ecc694b61bd1d04ac",
+      "fontSize": 34
+    },
+    {
+      "id": "pfizer-primeiro-lote-2021-04-29",
+      "file": "pfizer-primeiro-lote-2021-04-29.png",
+      "sha256": "6dab71744f43264e88379bcc937295016276076cf76c8bb694f8371a0f6f0ca0",
+      "fontSize": 34
+    },
+    {
+      "id": "jorginho-kit-covid-2021-05-04",
+      "file": "jorginho-kit-covid-2021-05-04.png",
+      "sha256": "a93610466c786c75cb1f77585c08f20f198baa514ae39d5b6f3d61cb5c877ef6",
+      "fontSize": 34
+    },
+    {
+      "id": "delta-preocupacao-2021-05-11",
+      "file": "delta-preocupacao-2021-05-11.png",
+      "sha256": "58279efa19affa41ba42940ad89967a09613cd14ef32d8c38a6e30afbe06e856",
+      "fontSize": 34
+    },
+    {
+      "id": "pfizer-cpi-2021-05-13",
+      "file": "pfizer-cpi-2021-05-13.png",
+      "sha256": "a99d2db5593ba745660cf766a7bc82ebd5ff543c4fb64271e5db43cc8135dcc3",
+      "fontSize": 34
+    },
+    {
+      "id": "mascaras-2021-06-10",
+      "file": "mascaras-2021-06-10.png",
+      "sha256": "e787354201747fdae7e7896fe65eec5267cc3096b9374abbe59d45e8a8addb7d",
+      "fontSize": 34
+    },
+    {
+      "id": "flavio-vacinacao-2021-06-18",
+      "file": "flavio-vacinacao-2021-06-18.png",
+      "sha256": "b2b0f65d1af2dcb4c1428354dda139dca75256d22e5cdf6d5c2dc0cf8609e76d",
+      "fontSize": 34
+    },
+    {
+      "id": "meio-milhao-2021-06-19",
+      "file": "meio-milhao-2021-06-19.png",
+      "sha256": "8dea12cacb7ca991eab7d00333493dac349f63f07db7b6b4468a12b7440c00a6",
+      "fontSize": 34
+    },
+    {
+      "id": "orfandade-estudo-2021-07-20",
+      "file": "orfandade-estudo-2021-07-20.png",
+      "sha256": "b71df5b574c98f311b7fd88b08748dfed2db1411bc1df585e0af685a3902731c",
+      "fontSize": 34
+    },
+    {
+      "id": "cpi-relatorio-2021-10-26",
+      "file": "cpi-relatorio-2021-10-26.png",
+      "sha256": "21d29be5fcb823ee659d7ebeed746308628b405347c0c4a294ad7722ccfec987",
+      "fontSize": 34
+    },
+    {
+      "id": "omicron-2021-11-26",
+      "file": "omicron-2021-11-26.png",
+      "sha256": "31791063a5a37c427cfd09b7536b55f8f45d78ec9fdd6c5930b5da3e69c9df1e",
+      "fontSize": 34
+    },
+    {
+      "id": "queiroga-liberdade-2021-12-07",
+      "file": "queiroga-liberdade-2021-12-07.png",
+      "sha256": "f071bef82709c90480fc9f2e1183c32c6368f5a14072652c5df17441fee544f9",
+      "fontSize": 34
+    },
+    {
+      "id": "anvisa-pfizer-infantil-2021-12-16",
+      "file": "anvisa-pfizer-infantil-2021-12-16.png",
+      "sha256": "2fd0a7520109db7b2c96b63c3ace3863be8e29ad5ebc6b87d78aa95357da1f73",
+      "fontSize": 34
+    },
+    {
+      "id": "vacinacao-infantil-2022-01-14",
+      "file": "vacinacao-infantil-2022-01-14.png",
+      "sha256": "b7a55955c863ea3a086fc3216871fb86c87ee129e2b07dac553d864866525699",
+      "fontSize": 34
+    },
+    {
+      "id": "magno-vacinacao-infantil-2022-02-01",
+      "file": "magno-vacinacao-infantil-2022-02-01.png",
+      "sha256": "91acc5e7871daf448a6ead7482053b6f496d4aa1df155ccc7cebe29010873887",
+      "fontSize": 34
+    },
+    {
+      "id": "fim-emergencia-nacional-2022-04-22",
+      "file": "fim-emergencia-nacional-2022-04-22.png",
+      "sha256": "f76c4a65f99700658d2658bde832953a83e7a9cc25e951583f71db8831a05099",
+      "fontSize": 34
+    },
+    {
+      "id": "reforco-bivalente-2023-02-27",
+      "file": "reforco-bivalente-2023-02-27.png",
+      "sha256": "991cb4df14586bb7b5f59408c1b7cf36b0a5129e2a6692b60d1f4ae9d539f54a",
+      "fontSize": 34
+    },
+    {
+      "id": "oms-fim-emergencia-2023-05-05",
+      "file": "oms-fim-emergencia-2023-05-05.png",
+      "sha256": "966b03e0fdfb426227a2580a9eecc01a83bd994855abc4be76f1eb2a92b1d964",
+      "fontSize": 34
+    },
+    {
+      "id": "jn1-2023-12-19",
+      "file": "jn1-2023-12-19.png",
+      "sha256": "0dd5d036cb3675c1f689e543ee9e63fe34a4d5e76dc9b174777b11cbb3ff9a80",
+      "fontSize": 34
+    },
+    {
+      "id": "nb181-2025-05-23",
+      "file": "nb181-2025-05-23.png",
+      "sha256": "910f840d341d7268b198e47ac718e463fccf87d88366845fb69d9b4b9cec6290",
+      "fontSize": 34
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+---
+import Base from '../../layouts/Base.astro';
+import MemorialPage from '../../components/MemorialPage.astro';
+import { shareDescription } from '../../lib/sharing';
+import type { Declaracao } from '../../lib/state';
+import statements from '../../../public/data/declaracoes.json';
+
+export function getStaticPaths() {
+  return statements.declaracoes.map((declaracao) => ({
+    params: { id: declaracao.id },
+    props: { declaracao },
+  }));
+}
+
+interface Props {
+  declaracao: Declaracao;
+}
+
+const { declaracao } = Astro.props;
+const title = declaracao.subtitulo ?? 'Memorial do Covid';
+---
+
+<Base
+  title={title}
+  description={shareDescription(title)}
+  image={`/previas/${declaracao.id}.png`}
+  imageAlt={declaracao.tipo === 'noticia' ? `Marco histórico: ${title}` : `Mensagem de ${declaracao.autor}: ${title}`}
+>
+  <MemorialPage statementId={declaracao.id} />
+</Base>

@@ -81,19 +81,58 @@ expectativas de `tests/delivery.mjs` com esses valores, não com os do JSON conv
 
 ## `declaracoes.json`
 
-Marcadores da linha do tempo com declarações e suas fontes.
+Marcadores da linha do tempo com citações, notícias históricas e suas fontes.
+O nome do arquivo é preservado para manter os links e o contrato de carregamento.
 
-- `sintetico`: `true` enquanto o arquivo tiver só exemplos.
+- `sintetico`: `false` para citações reais; `true` apenas para exemplos claramente rotulados.
 - `aviso`: texto obrigatório quando `sintetico` é `true`.
 - `declaracoes[].{id,data,texto,fontes,acessado_em}`: `id` único, `data` dentro da cobertura
   de `obitos.json`, `fontes[].{nome,url}` e data de acesso por entrada.
+- `declaracoes[].tipo`: `noticia` para um resumo editorial ou `declaracao` para uma citação.
+  Ausência do campo preserva o comportamento das citações anteriores. Outros valores são rejeitados.
+- `declaracoes[].subtitulo`, `autor` e `contexto`: obrigatórios para entradas reais.
+  Nas notícias, `autor` identifica a instituição ou o lugar relacionado, não a autoria de uma fala.
+  O subtítulo é um resumo editorial do episódio, não uma citação literal. No marco, a data
+  fica em destaque, seguida do subtítulo e do autor; a citação aparece abaixo. O contexto
+  completo fica em `/referencias` junto das fontes. A data e o subtítulo continuam visíveis
+  durante a rolagem interna de citações longas.
 
-**Hoje o arquivo é sintético.** As cinco entradas são textos de exemplo que começam com
-`[Exemplo sintético` e não reproduzem nem parafraseiam nenhuma fala real. As URLs
-`https://example.invalid/...` só preenchem o formato. A página mostra o aviso
-"Declarações sintéticas de exemplo", marca cada marcador como exemplo sintético e não
-transforma essas URLs em links.
+O arquivo reúne 57 marcos de 17/03/2020 a 23/05/2025: 42 notícias históricas e os 15 episódios
+com citações já documentados. Notícias usam parágrafos, nunca elementos de citação; fontes e
+qualificações ficam em `/referencias`. As novas fontes foram acessadas em 10/10/2026.
+A seleção cobre desenvolvimento e campanhas de vacinação, compras, crises assistenciais,
+transparência de dados, variantes e resposta posterior às emergências. Não é exaustiva. Preserva os sete
+marcos de Jair Bolsonaro e acrescenta falas de Eduardo Pazuello, Marcelo Queiroga, Jorginho
+Mello, Magno Malta, Flávio e Eduardo Bolsonaro, Silas Malafaia e Valdemiro Santiago.
+Os episódios com citações identificam as fontes do trecho, do contexto e de eventuais
+contrapontos, acessadas em 09/10/2026. Citações de um mesmo pronunciamento ficam no mesmo marco. Marcos na mesma linha de pontos
+podem ser alternados; os links selecionam a entrada exata, mesmo quando as datas coincidem. As quebras de parágrafo separam trechos
+diferentes.
 
-Para publicar declarações verificadas, troque `sintetico` para `false`, remova o prefixo de
-exemplo e informe a fala exata, a data e uma fonte verificável para cada entrada. Com
-`sintetico: false`, URLs `.invalid` são rejeitadas.
+O contexto registra os cargos e partidos da época: Jorginho Mello era senador pelo PL-SC;
+Magno Malta era ex-senador pelo PL-ES; Eduardo Bolsonaro era deputado pelo PSL-SP; e Flávio
+Bolsonaro era senador pelo Patriota-RJ na sessão citada. A proximidade dos líderes religiosos
+com Bolsonaro também tem fontes. O registro não generaliza sua atuação às pessoas evangélicas.
+Mudanças posteriores relevantes ficam explícitas, como a suspensão dos cultos de Malafaia,
+a vacinação de Flávio e as explicações de Pazuello e da assessoria de Mello.
+
+`data` é a data da declaração ou do acontecimento, não necessariamente a da reportagem.
+Para notícias, pode indicar a classificação de uma variante, a divulgação de um estudo ou
+uma decisão. A data anterior de surgimento ou coleta de amostra fica no contexto, quando relevante. A resposta ‘E daí?’
+ocorreu em 28/04/2020 e foi registrada pela Câmara no dia 29. A fala do ‘jacaré’ ocorreu em
+17/12/2020 e foi publicada pelo SBT no dia 18. A live de Eduardo Bolsonaro foi em 10/03/2021,
+noticiada no dia 11. O vídeo de Magno Malta é de 01/02/2022, anterior à checagem. O contexto
+explicita essas diferenças.
+
+A seleção registra as falas e seu contexto; não calcula óbitos atribuíveis a uma citação.
+A posição de um marco acompanha a série de notificações, não representa uma relação causal.
+O estudo sobre discursos e distanciamento social citado em `/referencias` analisa Bolsonaro
+e mede comportamento, não mortes por frase nem os efeitos individuais dos demais autores. A leitura das fontes é uma revisão editorial; a validação automática
+confere o formato, as datas e as URLs, mas não comprova sozinha a autenticidade de uma fala.
+
+Para adicionar uma citação, confira o trecho literal e a data na fonte, registre autor,
+subtítulo e contexto e não misture comentários editoriais com palavras entre aspas.
+O subtítulo deve resumir o episódio sem transformar uma hipótese, proposta ou relato em um
+fato comprovado. URLs `.invalid`
+são rejeitadas quando `sintetico` é `false`. Exemplos sintéticos continuam exigindo o prefixo
+`[Exemplo sintético` e nunca são apresentados como falas reais.

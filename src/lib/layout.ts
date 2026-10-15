@@ -1,4 +1,7 @@
-import { DOT_RADIUS_PX, DOT_GAP_PX, DOTS_PER_ROW, MAX_COLUMN_HEIGHT_PX } from '../config';
+import {
+  DOT_RADIUS_PX, DOT_GAP_PX, DOTS_PER_ROW, LIVES_PER_SEPARATOR, SEPARATOR_ROWS,
+  MAX_COLUMN_HEIGHT_PX, WEEK_MARKERS_START,
+} from '../config';
 
 export interface Dia {
   data: string;
@@ -17,12 +20,19 @@ export interface IndexRange {
   end: number;
 }
 
-export interface MonthMarker {
+export interface WeekMarker {
   data: string;
   index: number;
   y: number;
 }
 
+export interface ThousandMarker {
+  lives: number;
+  y: number;
+}
+
+const ROWS_PER_GROUP = LIVES_PER_SEPARATOR / DOTS_PER_ROW;
+const SLOTS_PER_GROUP = ROWS_PER_GROUP + SEPARATOR_ROWS;
 const clamp = (value: number, min: number, max: number): number => Math.max(min, Math.min(max, value));
 
 export function rowPitch(): number {
@@ -33,38 +43,62 @@ export function columnWidth(): number {
   return DOTS_PER_ROW * rowPitch() - DOT_GAP_PX;
 }
 
+export function separatorHeight(): number {
+  return SEPARATOR_ROWS * rowPitch();
+}
+
 // x and y are the top-left corner of the dot's square; its center is (x + r, y + r).
 export function dotPosition(index: number): DotPosition {
   const row = Math.floor(index / DOTS_PER_ROW);
   const col = index % DOTS_PER_ROW;
-  return { row, col, x: col * rowPitch(), y: row * rowPitch() };
+  const separators = Math.floor(index / LIVES_PER_SEPARATOR);
+  return { row, col, x: col * rowPitch(), y: row * rowPitch() + separators * separatorHeight() };
 }
 
 export function columnHeight(total: number): number {
-  const height = Math.ceil(total / DOTS_PER_ROW) * rowPitch();
+  const height = Math.ceil(total / DOTS_PER_ROW) * rowPitch()
+    + Math.floor(total / LIVES_PER_SEPARATOR) * separatorHeight();
   if (height > MAX_COLUMN_HEIGHT_PX) {
     throw new Error(`Coluna de ${height} px excede o limite de ${MAX_COLUMN_HEIGHT_PX} px`);
   }
   return height;
 }
 
+export function thousandMarkers(total: number): ThousandMarker[] {
+  return Array.from({ length: Math.floor(total / LIVES_PER_SEPARATOR) }, (_, group) => ({
+    lives: (group + 1) * LIVES_PER_SEPARATOR,
+    y: ((group + 1) * ROWS_PER_GROUP + group * SEPARATOR_ROWS) * rowPitch(),
+  }));
+}
+
+// Separator slots take up space without adding lives.
+function dotRowsBeforeSlot(slot: number): number {
+  const group = Math.floor(slot / SLOTS_PER_GROUP);
+  return group * ROWS_PER_GROUP + Math.min(slot % SLOTS_PER_GROUP, ROWS_PER_GROUP);
+}
+
 // Lives reached when a reference line sits `depth` pixels below the column top.
 // Touching a row counts the whole row.
 export function livesAtDepth(depth: number, total: number): number {
   if (depth < 0) return 0;
-  return clamp((Math.floor(depth / rowPitch()) + 1) * DOTS_PER_ROW, 0, total);
+  const reachedSlots = Math.floor(depth / rowPitch()) + 1;
+  return clamp(dotRowsBeforeSlot(reachedSlots) * DOTS_PER_ROW, 0, total);
 }
 
 // Dots whose rows intersect [top, top + height). The end index is exclusive.
 export function visibleIndexRange(top: number, height: number, total: number): IndexRange {
   const bottom = top + height;
   if (height <= 0 || bottom <= 0) return { start: 0, end: 0 };
-  const firstRow = Math.max(0, Math.floor(top / rowPitch()));
-  const lastRow = Math.ceil(bottom / rowPitch()) - 1;
+  const firstSlot = Math.max(0, Math.floor(top / rowPitch()));
+  const endSlot = Math.ceil(bottom / rowPitch());
   return {
-    start: clamp(firstRow * DOTS_PER_ROW, 0, total),
-    end: clamp((lastRow + 1) * DOTS_PER_ROW, 0, total),
+    start: clamp(dotRowsBeforeSlot(firstSlot) * DOTS_PER_ROW, 0, total),
+    end: clamp(dotRowsBeforeSlot(endSlot) * DOTS_PER_ROW, 0, total),
   };
+}
+
+export function dayNumber(start: string, date: string): number {
+  return (Date.parse(`${date}T00:00:00Z`) - Date.parse(`${start}T00:00:00Z`)) / 86_400_000 + 1;
 }
 
 export function firstIndexOfDay(dias: Dia[], k: number): number {
@@ -103,16 +137,24 @@ export function anchorY(index: number, total: number): number {
   return dotPosition(clamp(index, 0, Math.max(0, total - 1))).y;
 }
 
-// The first day with deaths in each month. Months without deaths get no marker.
-export function monthMarkers(dias: Dia[]): MonthMarker[] {
-  const markers: MonthMarker[] = [];
-  let lastMonth = '';
+function weekStart(iso: string): string {
+  const date = new Date(`${iso}T00:00:00Z`);
+  const daysSinceMonday = (date.getUTCDay() + 6) % 7;
+  date.setUTCDate(date.getUTCDate() - daysSinceMonday);
+  return date.toISOString().slice(0, 10);
+}
+
+// Monday labels anchor to each week's first death. Empty weeks get no marker.
+export function weekMarkers(dias: Dia[]): WeekMarker[] {
+  const markers: WeekMarker[] = [];
+  let lastWeek = '';
   dias.forEach((dia, k) => {
     const index = firstIndexOfDay(dias, k);
-    const month = dia.data.slice(0, 7);
-    if (dia.acumulado <= index || month === lastMonth) return;
-    lastMonth = month;
-    markers.push({ data: dia.data, index, y: dotPosition(index).y });
+    if (dia.acumulado <= index) return;
+    const week = weekStart(dia.data);
+    if (week < WEEK_MARKERS_START || week === lastWeek) return;
+    lastWeek = week;
+    markers.push({ data: week, index, y: dotPosition(index).y });
   });
   return markers;
 }

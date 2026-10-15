@@ -1,66 +1,990 @@
 {
-  "sintetico": true,
-  "aviso": "Declarações fictícias de exemplo; serão substituídas por citações verificadas.",
+  "sintetico": false,
   "declaracoes": [
     {
-      "id": "exemplo-1",
-      "data": "2020-04-01",
-      "texto": "[Exemplo sintético 1] Texto a ser substituído por declaração verificada.",
+      "id": "primeiro-obito-divulgado-2020-03-17",
+      "tipo": "noticia",
+      "data": "2020-03-17",
+      "subtitulo": "Brasil divulga a primeira confirmação de morte por Covid-19",
+      "autor": "Secretaria da Saúde de São Paulo",
+      "texto": "A confirmação de um óbito em São Paulo torna pública a primeira morte registrada na divulgação da pandemia no Brasil. A série de notificações usada neste memorial começa nessa data.",
+      "contexto": "O marco é a divulgação em 17/03/2020, não a data do falecimento. Mortes ocorridas antes foram reconhecidas posteriormente; portanto, esta entrada não afirma que a primeira pessoa morreu no dia 17. O memorial representa notificações, não datas individuais de morte.",
       "fontes": [
         {
-          "nome": "Exemplo sintético, sem fonte real",
-          "url": "https://example.invalid/declaracao-1"
+          "nome": "CNN Brasil — confirmação divulgada em 17/03/2020",
+          "url": "https://www.cnnbrasil.com.br/saude/confirmada-primeira-morte-por-novo-coronavirus-no-brasil/"
         }
       ],
-      "acessado_em": "2026-10-08"
+      "acessado_em": "2026-10-10"
     },
     {
-      "id": "exemplo-2",
-      "data": "2020-11-01",
-      "texto": "[Exemplo sintético 2] Texto a ser substituído por declaração verificada.",
+      "id": "malafaia-igrejas-2020-03-18",
+      "data": "2020-03-18",
+      "subtitulo": "Malafaia diz que só fechará igrejas por ordem judicial",
+      "autor": "Silas Malafaia",
+      "texto": "“Os senhores podem tratar de ir na Justiça pegar uma liminar, porque os senhores não têm poder de fechar a igreja”",
+      "contexto": "Pastor da Assembleia de Deus Vitória em Cristo e apoiador de Bolsonaro, Malafaia dirigiu a fala a governadores em vídeo publicado em 18 de março de 2020, contra decretos que restringiam aglomerações. A Gazeta do Povo registra as palavras e a data. Em 20 de março, ele anunciou a suspensão dos cultos devido às restrições de transporte, mantendo os templos abertos para atendimento; a CNN documenta essa mudança. Em outubro daquele ano, declarou publicamente ser apoiador de Bolsonaro, conforme Pleno.News. O registro trata da atuação desse líder, não das pessoas evangélicas em geral.",
       "fontes": [
         {
-          "nome": "Exemplo sintético, sem fonte real",
-          "url": "https://example.invalid/declaracao-2"
+          "nome": "Gazeta do Povo — recusa a fechar igrejas sem ordem judicial (18/03/2020)",
+          "url": "https://www.gazetadopovo.com.br/republica/breves/coronavirus-silas-malafaia-fecha-igrejas-ordem-judicial/"
+        },
+        {
+          "nome": "CNN Brasil — suspensão posterior dos cultos (20/03/2020)",
+          "url": "https://www.cnnbrasil.com.br/nacional/silas-malafaia-volta-atras-e-suspende-cultos-meio-a-pandemia-do-coronavirus/"
+        },
+        {
+          "nome": "Pleno.News — declaração pública de apoio a Bolsonaro (07/10/2020)",
+          "url": "https://pleno.news/brasil/politica-nacional/malafaia-sobre-kassio-nunes-decotelli-caiu-por-muito-menos.html"
         }
       ],
-      "acessado_em": "2026-10-08"
+      "acessado_em": "2026-10-09"
     },
     {
-      "id": "exemplo-3",
-      "data": "2021-04-01",
-      "texto": "[Exemplo sintético 3] Texto a ser substituído por declaração verificada.",
+      "id": "transmissao-comunitaria-2020-03-20",
+      "tipo": "noticia",
+      "data": "2020-03-20",
+      "subtitulo": "Saúde declara transmissão comunitária em todo o território nacional",
+      "autor": "Ministério da Saúde",
+      "texto": "A Portaria 454 declara o estado de transmissão comunitária da Covid-19 em todo o território nacional. A resposta à pandemia passa a exigir medidas coletivas, não apenas o acompanhamento de casos importados.",
+      "contexto": "A data é a da portaria e de sua publicação. A declaração nacional não significa que a transmissão começou simultaneamente em todos os municípios. A norma estabeleceu medidas de isolamento para pessoas com sintomas respiratórios e moradores do mesmo endereço.",
       "fontes": [
         {
-          "nome": "Exemplo sintético, sem fonte real",
-          "url": "https://example.invalid/declaracao-3"
+          "nome": "Ministério da Saúde — Portaria 454, de 20/03/2020",
+          "url": "https://bvsms.saude.gov.br/bvs/saudelegis/gm/2020/prt0454_20_03_2020.html"
         }
       ],
-      "acessado_em": "2026-10-08"
+      "acessado_em": "2026-10-10"
     },
     {
-      "id": "exemplo-4",
-      "data": "2021-10-01",
-      "texto": "[Exemplo sintético 4] Texto a ser substituído por declaração verificada.",
+      "id": "pronunciamento-2020-03-24",
+      "data": "2020-03-24",
+      "subtitulo": "Bolsonaro fala em ‘gripezinha’ e critica o confinamento em massa",
+      "autor": "Jair Bolsonaro",
+      "texto": "“Pelo meu histórico de atleta, caso fosse contaminado, não precisaria me preocupar. Nada sentiria. Ou seria, quando muito, acometido de uma ‘gripezinha’ ou ‘resfriadinho’ como bem disse aquele conhecido médico daquela conhecida televisão.”\n\n“Algumas poucas autoridades estaduais e municipais devem abandonar o conceito de 'terra arrasada', com proibição do transporte, fechamento do comércio e confinamento em massa.”",
+      "contexto": "Dois trechos do pronunciamento em rede nacional de 24 de março de 2020: o primeiro minimiza o risco pessoal da doença; o segundo critica medidas de redução do contato social. Poder360 e CNN registram as palavras citadas. A Agência Senado contextualiza o conflito entre esse discurso e as medidas de contenção. As duas falas ficam no mesmo marco por terem a mesma data.",
       "fontes": [
         {
-          "nome": "Exemplo sintético, sem fonte real",
-          "url": "https://example.invalid/declaracao-4"
+          "nome": "Poder360 — pronunciamento e trecho da ‘gripezinha’ (24/03/2020)",
+          "url": "https://www.poder360.com.br/governo/bolsonaro-critica-fechamento-de-escolas-e-pede-fim-de-confinamento-em-massa/"
+        },
+        {
+          "nome": "CNN Brasil — crítica ao confinamento em massa (24/03/2020)",
+          "url": "https://www.cnnbrasil.com.br/politica/em-rede-nacional-bolsonaro-critica-governadores-por-que-fechar-escolas/"
+        },
+        {
+          "nome": "Agência Senado — distanciamento social e falta de coordenação",
+          "url": "https://www12.senado.leg.br/noticias/infomaterias/2021/04/falta-de-normas-claras-e-de-acoes-coordenadas-para-distanciamento-social-prejudica-combate-a-covid"
         }
       ],
-      "acessado_em": "2026-10-08"
+      "acessado_em": "2026-10-09"
     },
     {
-      "id": "exemplo-5",
-      "data": "2022-06-01",
-      "texto": "[Exemplo sintético 5] Texto a ser substituído por declaração verificada.",
+      "id": "sepultamentos-manaus-2020-04-21",
+      "tipo": "noticia",
+      "data": "2020-04-21",
+      "subtitulo": "Manaus faz sepultamentos em valas coletivas",
+      "autor": "Manaus",
+      "texto": "Sepultamentos em trincheiras no Cemitério Parque Tarumã, documentados em 21 de abril, mostram a pressão sobre os serviços funerários de Manaus. Os enterros incluíam outras causas e casos suspeitos, não apenas mortes confirmadas por Covid-19.",
+      "contexto": "A data corresponde ao registro dos sepultamentos descrito na legenda da AFP, em reportagem publicada em 22/04. Não é apresentada como a data de abertura da primeira vala. Estatísticas de sepultamentos não equivalem aos óbitos confirmados por Covid-19. Nenhuma fotografia foi reproduzida.",
       "fontes": [
         {
-          "nome": "Exemplo sintético, sem fonte real",
-          "url": "https://example.invalid/declaracao-5"
+          "nome": "AFP/SWI — Manaus vive caos sanitário (22/04/2020)",
+          "url": "https://www.swissinfo.ch/por/manaus-vive-caos-sanit%C3%A1rio-por-casos-de-covid-19/45709966"
         }
       ],
-      "acessado_em": "2026-10-08"
+      "acessado_em": "2026-10-10"
+    },
+    {
+      "id": "oxford-ensaio-humano-2020-04-23",
+      "tipo": "noticia",
+      "data": "2020-04-23",
+      "subtitulo": "Oxford começa testes de sua vacina em humanos",
+      "autor": "Universidade de Oxford",
+      "texto": "Os primeiros voluntários recebem a candidata ChAdOx1 nCoV-19. Começa uma etapa de testes em humanos para avaliar segurança e resposta imune; ainda não é uma vacina liberada para a população.",
+      "contexto": "A data é a das primeiras aplicações no ensaio de Oxford. O desenvolvimento de vacinas já estava em andamento antes da cobertura deste memorial. Esta etapa experimental não equivale a autorização regulatória nem ao início de uma campanha pública.",
+      "fontes": [
+        {
+          "nome": "St Cross College/Oxford — início dos ensaios clínicos",
+          "url": "https://www.stx.ox.ac.uk/article/clinical-trials-begin-for-covid-19-vaccine-developed-by-team-led-by-andy-pollard"
+        }
+      ],
+      "acessado_em": "2026-10-10"
+    },
+    {
+      "id": "e-dai-2020-04-28",
+      "data": "2020-04-28",
+      "subtitulo": "Bolsonaro responde ‘E daí?’ ao ser questionado sobre as mortes",
+      "autor": "Jair Bolsonaro",
+      "texto": "“E daí? Lamento. Quer que eu faça o quê? Eu sou Messias, mas não faço milagre.”",
+      "contexto": "Resposta a uma pergunta sobre o total de mortes quando o Brasil ultrapassou o número oficial da China. A Agência Câmara publicou a reportagem no dia 29 e identifica a fala como ocorrida na terça-feira, dia 28. A mesma reportagem informa que, depois, na mesma entrevista, Bolsonaro afirmou solidariedade às famílias das vítimas.",
+      "fontes": [
+        {
+          "nome": "Agência Câmara — declaração sobre o número de mortos (29/04/2020)",
+          "url": "https://www.camara.leg.br/noticias/658183-oposicao-critica-fala-de-bolsonaro-sobre-numero-de-mortos-por-covid-19"
+        }
+      ],
+      "acessado_em": "2026-10-09"
+    },
+    {
+      "id": "valdemiro-sementes-2020-05-05",
+      "data": "2020-05-05",
+      "subtitulo": "Valdemiro pede contribuições por sementes e cita supostas curas da covid",
+      "autor": "Valdemiro Santiago",
+      "texto": "“Essa semente menorzinha que você vai plantar é a de R$ 100 e a maior não tem limite. Quanto mais se planta, mais se colhe”",
+      "contexto": "Líder da Igreja Mundial do Poder de Deus, identificado pelo BHAZ como aliado de Bolsonaro, Valdemiro anunciou uma campanha de sementes e contribuições em transmissão de 5 de maio de 2020. A reportagem registra o pedido de dinheiro e informa que, na transmissão, ele citou fiéis que teriam se curado da covid. Também explicou a arrecadação como resposta às perdas financeiras com as restrições de público nas igrejas. Em junho, o Ministério da Saúde desmentiu a alegação de que esse feijão curaria a doença, conforme reportagem do Brasil 247 baseada no UOL. A citação registra o pedido de contribuição; não comprova cura nem apresenta sementes como tratamento.",
+      "fontes": [
+        {
+          "nome": "BHAZ — transmissão de 05/05, sementes e relação com Bolsonaro (06/05/2020)",
+          "url": "https://bhaz.com.br/noticias/brasil/pastor-vende-sementes-100-reais/"
+        },
+        {
+          "nome": "Brasil 247 — Ministério da Saúde desmente suposta cura pelo feijão (12/06/2020)",
+          "url": "https://www.brasil247.com/brasil/ministerio-da-saude-diz-que-e-falso-que-feijao-de-valdemiro-cure-covid-19-bbbovqxp"
+        }
+      ],
+      "acessado_em": "2026-10-09"
+    },
+    {
+      "id": "dados-retirados-2020-06-06",
+      "tipo": "noticia",
+      "data": "2020-06-06",
+      "subtitulo": "Saúde retira o histórico e os totais do portal da pandemia",
+      "autor": "Ministério da Saúde",
+      "texto": "O portal deixa de exibir o histórico e os totais acumulados, mostrando apenas informações básicas das últimas 24 horas. A retirada prejudica o acompanhamento público da evolução da pandemia.",
+      "contexto": "A reportagem de 06/06 registra a substituição do portal após ele ficar fora do ar. A ausência dos totais na divulgação havia começado em 05/06. Retirada da publicação não comprova destruição dos registros originais. Uma decisão do STF em 08/06 determinou a divulgação integral.",
+      "fontes": [
+        {
+          "nome": "CNN Brasil — substituição do portal (06/06/2020)",
+          "url": "https://www.cnnbrasil.com.br/nacional/governo-substitui-portal-sobre-covid-19-por-site-com-informacoes-minimas/"
+        }
+      ],
+      "acessado_em": "2026-10-10"
+    },
+    {
+      "id": "stf-restaura-dados-2020-06-08",
+      "tipo": "noticia",
+      "data": "2020-06-08",
+      "subtitulo": "STF manda a Saúde restabelecer os dados completos da pandemia",
+      "autor": "Supremo Tribunal Federal",
+      "texto": "Alexandre de Moraes determina que o Ministério da Saúde mantenha a divulgação diária e integral dos dados epidemiológicos, inclusive no site. A decisão reage à redução das informações públicas.",
+      "contexto": "O marco é a decisão de 08/06, noticiada pelo STF em 09/06. A ordem inclui os dados acumulados e preserva o controle público sobre a crise. Não implica afirmar que arquivos originais haviam sido apagados.",
+      "fontes": [
+        {
+          "nome": "STF — determinação de divulgação integral",
+          "url": "https://noticias.stf.jus.br/postsnoticias/ministerio-da-saude-deve-restabelecer-divulgacao-integral-de-dados-sobre-covid-19/"
+        },
+        {
+          "nome": "CNN Brasil — decisão na noite de 08/06/2020",
+          "url": "https://www.cnnbrasil.com.br/saude/2020/06/08/moraes-do-stf-manda-saude-publicar-dados-integrais-da-covid-19/"
+        }
+      ],
+      "acessado_em": "2026-10-10"
+    },
+    {
+      "id": "coronavac-fase-tres-2020-07-21",
+      "tipo": "noticia",
+      "data": "2020-07-21",
+      "subtitulo": "Começam os testes de fase 3 da CoronaVac no Brasil",
+      "autor": "Instituto Butantan / Sinovac",
+      "texto": "Profissionais de saúde começam a participar dos testes da CoronaVac no Hospital das Clínicas da USP. A fase 3 busca medir eficácia e segurança em uma população maior, antes da autorização para uso público.",
+      "contexto": "A Secretaria de Saúde paulista registra 21/07 como a primeira aplicação no estudo brasileiro. A autorização para o ensaio, concedida pela Anvisa em 03/07, não era autorização de vacinação da população. O número de participantes e centros mudou durante a pesquisa; não se apresenta a previsão inicial como resultado final.",
+      "fontes": [
+        {
+          "nome": "Secretaria da Saúde de São Paulo — início no HC em 21/07",
+          "url": "https://www.saude.sp.gov.br/ses/perfil/cidadao/homepage/destaques/mais-cinco-centros-de-pesquisa-iniciam-testes-da-vacina-contra-coronavirus-em-voluntarios"
+        }
+      ],
+      "acessado_em": "2026-10-10"
+    },
+    {
+      "id": "pfizer-primeira-oferta-2020-08-14",
+      "tipo": "noticia",
+      "data": "2020-08-14",
+      "subtitulo": "Pfizer apresenta a primeira oferta de doses ao governo brasileiro",
+      "autor": "Pfizer / Ministério da Saúde",
+      "texto": "A Pfizer oferece contratos de 30 ou 70 milhões de doses, com 500 mil previstas para 2020. As ofertas de agosto não recebem resposta dentro de sua validade, segundo o depoimento da empresa à CPI. O primeiro contrato só seria assinado em março de 2021.",
+      "contexto": "O marco é a primeira oferta formal, de 14/08/2020, reconstruída no depoimento de Carlos Murillo em 13/05/2021. As ofertas de 18 e 26/08 passaram a prever 1,5 milhão de doses em 2020; não confundir com as 500 mil da primeira. A proposta de 26/08 tinha validade de 15 dias. Cronograma, condições contratuais e autorização regulatória importavam: oferta não significa doses imediatamente disponíveis. Não se estima um número de mortes causado por essa demora.",
+      "fontes": [
+        {
+          "nome": "Senado — depoimento de Carlos Murillo à CPI (13/05/2021)",
+          "url": "https://www12.senado.leg.br/noticias/materias/2021/05/13/representante-da-pfizer-confirma-governo-nao-respondeu-ofertas-feitas-em-agosto-de-2020"
+        }
+      ],
+      "acessado_em": "2026-10-10"
+    },
+    {
+      "id": "coronavac-2020-10-21",
+      "data": "2020-10-21",
+      "subtitulo": "Bolsonaro diz que o governo não comprará a CoronaVac",
+      "autor": "Jair Bolsonaro",
+      "texto": "“Tudo será esclarecido hoje. Tenha certeza, não compraremos vacina chinesa. Bom dia”",
+      "contexto": "Resposta no Facebook sobre a CoronaVac, da Sinovac com o Instituto Butantan, após o Ministério da Saúde anunciar a intenção de comprar 46 milhões de doses. A reportagem da Exame informa que a aquisição dependeria do registro na Anvisa; os imunizantes ainda estavam em testes. A recusa pública contrariou o anúncio da própria pasta.",
+      "fontes": [
+        {
+          "nome": "Exame — recusa à compra da CoronaVac (21/10/2020)",
+          "url": "https://exame.com/brasil/bolsonaro-diz-que-governo-nao-vai-mais-comprar-vacina-chinesa/"
+        },
+        {
+          "nome": "CNN Brasil — justificativa e cancelamento do protocolo (21/10/2020)",
+          "url": "https://www.cnnbrasil.com.br/saude/bolsonaro-rejeita-comprar-vacina-chinesa-sem-comprovacao-cientifica/"
+        }
+      ],
+      "acessado_em": "2026-10-09"
+    },
+    {
+      "id": "pazuello-obedece-2020-10-22",
+      "data": "2020-10-22",
+      "subtitulo": "Pazuello diz ‘um manda e o outro obedece’ após a crise da CoronaVac",
+      "autor": "Eduardo Pazuello",
+      "texto": "“É simples assim: um manda e o outro obedece. Mas a gente tem um carinho, entendeu?”",
+      "contexto": "Então ministro da Saúde, Pazuello apareceu ao lado de Bolsonaro após o presidente desautorizar a intenção de adquirir 46 milhões de doses da CoronaVac, anunciada pela pasta. O Dia, com conteúdo do Estadão, registra a fala no episódio de 22 de outubro de 2020. Havia uma carta de intenções, não um contrato definitivo de compra. Ao depor à CPI em 19 de maio de 2021, Pazuello chamou a frase de jargão e negou ter recebido ordem para desfazer acordos com o Butantan; Rádio Senado e CNN registram essa explicação. A frase, isolada, não comprova uma ordem específica nem quantifica o efeito do episódio sobre as mortes.",
+      "fontes": [
+        {
+          "nome": "O Dia / Estadão Conteúdo — vídeo de Pazuello com Bolsonaro (22/10/2020)",
+          "url": "https://odia.ig.com.br/brasil/2020/10/6013064-um-manda-o-outro-obedece-diz-pazuello-apos-critica-de-bolsonaro.html"
+        },
+        {
+          "nome": "Rádio Senado — explicação de Pazuello na CPI (19/05/2021)",
+          "url": "https://www12.senado.leg.br/radio/1/noticia/2021/05/19/pazuello-afirma-que-nao-houve-cancelamento-de-compra-da-coronavac"
+        },
+        {
+          "nome": "CNN Brasil — carta de intenções e negativa de ordem direta (19/05/2021)",
+          "url": "https://www.cnnbrasil.com.br/politica/pazuello-diz-que-bolsonaro-nunca-pediu-para-desfazer-contrato-com-o-butantan/"
+        }
+      ],
+      "acessado_em": "2026-10-09"
+    },
+    {
+      "id": "pfizer-resultados-2020-11-09",
+      "tipo": "noticia",
+      "data": "2020-11-09",
+      "subtitulo": "Pfizer e BioNTech anunciam resultados promissores da vacina",
+      "autor": "Pfizer / BioNTech",
+      "texto": "A primeira análise intermediária da fase 3 aponta eficácia superior a 90% contra Covid-19 nos participantes sem infecção prévia. O anúncio abre uma perspectiva concreta de vacinação, mas ainda não é aprovação para uso público.",
+      "contexto": "O percentual de 09/11 era preliminar e se referia às condições do ensaio, não a proteção absoluta nem a comparação direta com outras vacinas. A análise final anunciada em 18/11 apontou 95%. Autorização, produção e distribuição continuavam sendo etapas separadas.",
+      "fontes": [
+        {
+          "nome": "CNN Brasil — análise intermediária (09/11/2020)",
+          "url": "https://www.cnnbrasil.com.br/saude/pfizer-diz-que-vacina-contra-covid-19-tem-90-de-eficacia/"
+        },
+        {
+          "nome": "CNN Brasil — análise final (18/11/2020)",
+          "url": "https://www.cnnbrasil.com.br/saude/pfizer-resultado-final-da-ultima-fase-de-teste-da-vacina-aponta-eficacia-de-95/"
+        }
+      ],
+      "acessado_em": "2026-10-10"
+    },
+    {
+      "id": "maricas-2020-11-10",
+      "data": "2020-11-10",
+      "subtitulo": "Bolsonaro minimiza a pandemia e fala em ‘país de maricas’",
+      "autor": "Jair Bolsonaro",
+      "texto": "“Tudo agora é pandemia. Tem que acabar com esse negócio, pô. Lamento os mortos, lamento. Todos nós vamos morrer um dia. Não adianta fugir disso, fugir da realidade. Tem que deixar de ser um país de maricas, pô.”",
+      "contexto": "Em discurso sobre a retomada do turismo no Palácio do Planalto, Bolsonaro classificou a pandemia como superdimensionada e usou uma expressão pejorativa para tratar do temor da doença. A CNN registrou a fala em 10 de novembro de 2020, quando o país já havia registrado mais de 162 mil mortes.",
+      "fontes": [
+        {
+          "nome": "CNN Brasil — ‘A pandemia foi superdimensionada’ (10/11/2020)",
+          "url": "https://www.cnnbrasil.com.br/politica/a-pandemia-foi-superdimensionada-diz-bolsonaro/"
+        }
+      ],
+      "acessado_em": "2026-10-09"
+    },
+    {
+      "id": "moderna-resultados-2020-11-16",
+      "tipo": "noticia",
+      "data": "2020-11-16",
+      "subtitulo": "Moderna e NIH anunciam eficácia preliminar de 94,5%",
+      "autor": "Moderna / Institutos Nacionais de Saúde dos EUA",
+      "texto": "A análise intermediária da candidata mRNA-1273 aponta 94,5% de eficácia contra Covid-19 sintomática. Os 11 casos graves observados nessa análise ocorreram no grupo placebo.",
+      "contexto": "O comunicado do NIH foi publicado em 16/11/2020; a revisão dos dados ocorreu no dia anterior. Eram resultados intermediários, ainda sujeitos a avaliação regulatória. O relatório final trouxe 94,1%. Percentuais de estudos com métodos e populações diferentes não devem ser usados como uma classificação simples de qual vacina é melhor.",
+      "fontes": [
+        {
+          "nome": "NIH/IRP — resultados intermediários (16/11/2020)",
+          "url": "https://irp.nih.gov/news-and-events/in-the-news/promising-interim-results-from-clinical-trial-of-nih-moderna-covid-19"
+        }
+      ],
+      "acessado_em": "2026-10-10"
+    },
+    {
+      "id": "moscou-vacinacao-2020-12-05",
+      "tipo": "noticia",
+      "data": "2020-12-05",
+      "subtitulo": "Moscou começa a vacinação com a Sputnik V",
+      "autor": "Rússia",
+      "texto": "A campanha começa em 70 clínicas de Moscou, com prioridade para profissionais de saúde, professores e trabalhadores sociais. A Rússia inicia a vacinação em larga escala enquanto os estudos de fase 3 ainda estavam em andamento.",
+      "contexto": "O marco é a campanha em Moscou, não uma aplicação simultânea em toda a Rússia. A reportagem registra a preocupação científica com a liberação antes da conclusão dos testes. Isso não é apresentado como prova de que a vacina causava dano.",
+      "fontes": [
+        {
+          "nome": "Al Jazeera/Reuters — início em Moscou (05/12/2020)",
+          "url": "https://www.aljazeera.com/news/2020/12/5/moscow-starts-mass-covid-19-vaccination-with-its-sputnik-v-shot"
+        }
+      ],
+      "acessado_em": "2026-10-10"
+    },
+    {
+      "id": "reino-unido-vacinacao-2020-12-08",
+      "tipo": "noticia",
+      "data": "2020-12-08",
+      "subtitulo": "Reino Unido inicia a campanha com a vacina da Pfizer",
+      "autor": "Reino Unido",
+      "texto": "Margaret Keenan, de 90 anos, recebe a vacina Pfizer/BioNTech em Coventry. Começa a campanha britânica após a aprovação regulatória, com prioridade para pessoas idosas e profissionais de saúde.",
+      "contexto": "O registro oficial britânico relembra a aplicação em 08/12/2020. Este marco não afirma que foi a primeira vacinação contra Covid-19 com qualquer vacina no mundo: havia ensaios e programas anteriores em outros países. É o início da campanha britânica com Pfizer após autorização.",
+      "fontes": [
+        {
+          "nome": "Governo britânico — registro de 08/12/2020",
+          "url": "https://www.gov.uk/government/news/uk-marks-one-year-since-deploying-worlds-first-covid-19-vaccine"
+        }
+      ],
+      "acessado_em": "2026-10-10"
+    },
+    {
+      "id": "estados-unidos-vacinacao-2020-12-14",
+      "tipo": "noticia",
+      "data": "2020-12-14",
+      "subtitulo": "Estados Unidos começam a vacinação pública contra a Covid-19",
+      "autor": "Estados Unidos",
+      "texto": "O programa de vacinação começa com profissionais de saúde e moradores de instituições de longa permanência entre os grupos prioritários. A autorização emergencial abre caminho para as primeiras aplicações fora dos ensaios.",
+      "contexto": "A data é a do início do programa, confirmada pelo CDC/MMWR em análise publicada em fevereiro de 2021. As autorizações de Pfizer e Moderna ocorreram em datas distintas de dezembro; Moderna não foi aplicada como parte da campanha no primeiro dia. Não confundir participantes de ensaios anteriores com vacinação pública.",
+      "fontes": [
+        {
+          "nome": "CDC/MMWR — primeiro mês do programa iniciado em 14/12/2020",
+          "url": "https://www.cdc.gov/mmwr/volumes/70/wr/mm7005e1.htm"
+        }
+      ],
+      "acessado_em": "2026-10-10"
+    },
+    {
+      "id": "canada-vacinacao-2020-12-14",
+      "tipo": "noticia",
+      "data": "2020-12-14",
+      "subtitulo": "Canadá inicia sua campanha de vacinação",
+      "autor": "Canadá",
+      "texto": "A vacinação contra a Covid-19 começa no Canadá, poucos dias depois da autorização da Pfizer/BioNTech. O país entra na etapa de imunização pública enquanto o Brasil ainda aguarda as primeiras aplicações de sua campanha.",
+      "contexto": "A agência canadense registra 14/12/2020 como início da vacinação. A comparação entre datas não estima mortes evitáveis nem ignora diferenças de acesso, regulação e logística. Estados Unidos e Canadá têm marcos separados porque os dois programas começaram no mesmo dia.",
+      "fontes": [
+        {
+          "nome": "Agência de Saúde Pública do Canadá — início em 14/12/2020",
+          "url": "https://health-infobase.canada.ca/covid-19/vaccine-administration/"
+        }
+      ],
+      "acessado_em": "2026-10-10"
+    },
+    {
+      "id": "vacina-jacare-2020-12-17",
+      "data": "2020-12-17",
+      "subtitulo": "Bolsonaro fala em ‘virar um jacaré’ ao questionar a vacina da Pfizer",
+      "autor": "Jair Bolsonaro",
+      "texto": "“Lá no contrato da Pfizer, está bem claro: nós não nos responsabilizamos por qualquer efeito colateral. Se você virar um jacaré, é problema seu”",
+      "contexto": "Discurso na Bahia em 17 de dezembro de 2020, noticiado pelo SBT no dia 18. Bolsonaro questionou a segurança da vacina da Pfizer e reiterou que não se vacinaria por já ter tido covid. A reportagem informa que a vacina já era autorizada em outros países e que reinfecções estavam comprovadas. A referência a virar ‘jacaré’ não descreve um efeito real das vacinas.",
+      "fontes": [
+        {
+          "nome": "SBT News — declaração sobre a vacina da Pfizer (18/12/2020)",
+          "url": "https://sbtnews.sbt.com.br/noticia/governo/157028-se-virar-jacare-e-problema-seu-diz-bolsonaro-sobre-vacina-da-pfizer"
+        }
+      ],
+      "acessado_em": "2026-10-09"
+    },
+    {
+      "id": "alpha-beta-2020-12-18",
+      "tipo": "noticia",
+      "data": "2020-12-18",
+      "subtitulo": "Alpha e Beta entram na classificação de variantes de preocupação",
+      "autor": "Organização Mundial da Saúde",
+      "texto": "As linhagens B.1.1.7 e B.1.351, depois chamadas Alpha e Beta, são classificadas como variantes de preocupação. A evolução do vírus exige acompanhar mudanças na transmissão, na doença e na proteção oferecida pela imunidade.",
+      "contexto": "A data é a de classificação registrada pela OMS, não a do surgimento das variantes. Havia amostras anteriores: Alpha em setembro e Beta em maio de 2020. Os nomes gregos foram adotados em maio de 2021. Uma mutação nova não implica automaticamente maior letalidade.",
+      "fontes": [
+        {
+          "nome": "OMS — nomenclatura e datas de classificação das variantes (09/06/2021)",
+          "url": "https://www.who.int/docs/default-source/coronaviruse/risk-comms-updates/update60_nomenclature-variants.pdf"
+        }
+      ],
+      "acessado_em": "2026-10-10"
+    },
+    {
+      "id": "mexico-chile-vacinacao-2020-12-24",
+      "tipo": "noticia",
+      "data": "2020-12-24",
+      "subtitulo": "México e Chile dão os primeiros passos de suas campanhas",
+      "autor": "México / Chile",
+      "texto": "O México inicia a vacinação de profissionais de saúde. No Chile, chegam as primeiras doses da Pfizer/BioNTech para iniciar a imunização das equipes de terapia intensiva. A vacinação avança na América Latina.",
+      "contexto": "A fonte mexicana confirma aplicações em 24/12; a chilena documenta chegada das doses e início da operação nessa data. Não confundir desembarque com uma campanha já concluída nem apresentar os planos de entregas como doses aplicadas. Os grupos prioritários e o ritmo diferiam entre os países.",
+      "fontes": [
+        {
+          "nome": "Secretaría de Salud — México começa aplicações em 24/12/2020",
+          "url": "https://www.gob.mx/salud/prensa/266-arranca-vacunacion-contra-covid-19-en-mexico?idiom=es"
+        },
+        {
+          "nome": "Ministerio del Interior — primeiras doses chegam ao Chile (24/12/2020)",
+          "url": "https://interior.gob.cl/noticias/2020/12/24/llegan-primeras-vacunas-contra-el-covid19-al-pais/"
+        }
+      ],
+      "acessado_em": "2026-10-10"
+    },
+    {
+      "id": "uniao-europeia-vacinacao-2020-12-27",
+      "tipo": "noticia",
+      "data": "2020-12-27",
+      "subtitulo": "União Europeia inicia jornadas coordenadas de vacinação",
+      "autor": "União Europeia",
+      "texto": "Os dias europeus de vacinação, de 27 a 29 de dezembro, marcam a expansão das campanhas no bloco. A vacina Pfizer/BioNTech havia recebido autorização europeia em 21 de dezembro.",
+      "contexto": "O marco é o início coordenado das jornadas anunciadas pela Comissão Europeia, não a primeira aplicação de todos os países no mesmo instante. O cronograma de autorização e entrega foi comunicado em 21/12 e registrado posteriormente na linha do tempo oficial da resposta europeia.",
+      "fontes": [
+        {
+          "nome": "Comissão Europeia — autorização e jornadas de 27–29/12",
+          "url": "https://ec.europa.eu/commission/presscorner/api/files/document/print/en/ip_20_2466/IP_20_2466_EN.pdf"
+        },
+        {
+          "nome": "Comissão Europeia — cronologia da resposta sanitária",
+          "url": "https://health.ec.europa.eu/system/files/2022-04/covid-19_health-response_en.pdf"
+        }
+      ],
+      "acessado_em": "2026-10-10"
+    },
+    {
+      "id": "oms-primeira-vacina-2020-12-31",
+      "tipo": "noticia",
+      "data": "2020-12-31",
+      "subtitulo": "OMS valida sua primeira vacina contra a Covid-19 para uso emergencial",
+      "autor": "Organização Mundial da Saúde",
+      "texto": "A OMS inclui a vacina Pfizer/BioNTech em sua lista de uso emergencial. A avaliação facilita decisões regulatórias e compras internacionais, com um alerta para a necessidade de acesso equitativo.",
+      "contexto": "É a primeira listagem emergencial da OMS para uma vacina contra Covid-19, não a primeira autorização nacional no mundo. Países continuam responsáveis por suas decisões regulatórias. A entrada na lista não significa disponibilidade imediata de doses para todas as populações.",
+      "fontes": [
+        {
+          "nome": "OMS — primeira validação emergencial (31/12/2020)",
+          "url": "https://www.who.int/news/item/31-12-2020-who-issues-its-first-emergency-use-validation-for-a-covid-19-vaccine-and-emphasizes-need-for-equitable-global-access"
+        }
+      ],
+      "acessado_em": "2026-10-10"
+    },
+    {
+      "id": "gamma-2021-01-11",
+      "tipo": "noticia",
+      "data": "2021-01-11",
+      "subtitulo": "Variante Gamma, ligada ao Brasil, entra na lista de preocupação",
+      "autor": "Organização Mundial da Saúde",
+      "texto": "A linhagem P.1, depois chamada Gamma, passa a ser classificada como variante de preocupação. Sua identificação amplia o alerta sobre evolução do vírus e novas ondas de transmissão.",
+      "contexto": "A data corresponde à classificação da OMS. A tabela registra amostras brasileiras desde novembro de 2020; não se afirma que a variante surgiu em 11/01. O nome Gamma foi adotado depois, em maio. A coincidência com a crise de Manaus não permite atribuir todas as mortes à variante, isolando falhas assistenciais e outros fatores.",
+      "fontes": [
+        {
+          "nome": "OMS — nomenclatura e datas de classificação das variantes (09/06/2021)",
+          "url": "https://www.who.int/docs/default-source/coronaviruse/risk-comms-updates/update60_nomenclature-variants.pdf"
+        }
+      ],
+      "acessado_em": "2026-10-10"
+    },
+    {
+      "id": "oxigenio-manaus-2021-01-14",
+      "tipo": "noticia",
+      "data": "2021-01-14",
+      "subtitulo": "Manaus fica sem oxigênio e expõe falhas da resposta pública",
+      "autor": "Manaus / Ministério da Saúde e governos locais",
+      "texto": "Hospitais ficam sem oxigênio medicinal. Familiares buscam cilindros e pacientes precisam ser transferidos. A crise se torna objeto de investigações sobre a atuação da União, do estado e do município.",
+      "contexto": "O colapso ocorreu em 14/01/2021. Relatórios da Abin obtidos posteriormente apontam déficit anterior e conhecimento antecipado do risco. O MPF sustenta omissão dos entes públicos; essa posição não é apresentada como condenação criminal. A nota de 2026 alerta que ainda faltam dados e metodologia para determinar o número de falecidos e transferidos. Não se atribui um total específico de mortes à falta de oxigênio.",
+      "fontes": [
+        {
+          "nome": "MPF — memória da crise e apuração de omissão (2026)",
+          "url": "https://www.mpf.mp.br/o-mpf/unidades/pr-am/noticias/cinco-anos-da-crise-do-oxigenio-no-am-mpf-defende-memoria-de-vitimas-e-sustenta-omissao-de-entes-publicos"
+        },
+        {
+          "nome": "O Dia — relatos de desabastecimento (14/01/2021)",
+          "url": "https://odia.ig.com.br/brasil/2021/01/6064722-videos-denunciam-falta-de-oxigenio-em-hospitais-de-manaus.html"
+        }
+      ],
+      "acessado_em": "2026-10-10"
+    },
+    {
+      "id": "india-vacinacao-2021-01-16",
+      "tipo": "noticia",
+      "data": "2021-01-16",
+      "subtitulo": "Índia inicia sua campanha nacional de vacinação",
+      "autor": "Índia",
+      "texto": "A Índia começa a vacinação com Covishield e Covaxin. Profissionais de saúde e outros grupos prioritários entram primeiro em uma operação planejada para uma população de enorme escala.",
+      "contexto": "A OMS confirma o lançamento em 16/01/2021. A previsão de alcançar centenas de milhões de pessoas era uma meta, não cobertura já obtida. Não se equiparam as duas vacinas nem seus dados clínicos; o marco registra o início da campanha.",
+      "fontes": [
+        {
+          "nome": "OMS — campanha da Índia iniciada em 16/01/2021",
+          "url": "https://www.who.int/india/news-room/feature-stories/detail/india-rolls-out-the-world-s-largest-covid-19-vaccination-drive"
+        }
+      ],
+      "acessado_em": "2026-10-10"
+    },
+    {
+      "id": "brasil-primeira-dose-2021-01-17",
+      "tipo": "noticia",
+      "data": "2021-01-17",
+      "subtitulo": "Mônica Calazans recebe a primeira dose da campanha brasileira",
+      "autor": "Anvisa / São Paulo",
+      "texto": "A Anvisa autoriza o uso emergencial da CoronaVac e da vacina Oxford/AstraZeneca. No mesmo dia, a enfermeira Mônica Calazans recebe CoronaVac em São Paulo: começa a vacinação pública contra a Covid-19 no Brasil.",
+      "contexto": "A data distingue autorização e primeira aplicação pública, ambas em 17/01. Houve participantes vacinados em ensaios clínicos antes disso. A campanha nacional de distribuição aos estados teve início oficial em 18/01. A autorização era emergencial, temporária e excepcional, com acompanhamento regulatório.",
+      "fontes": [
+        {
+          "nome": "Anvisa — uso emergencial autorizado em 17/01/2021",
+          "url": "https://www.gov.br/anvisa/pt-br/assuntos/noticias-anvisa/2021/anvisa-aprova-por-unanimidade-uso-emergencial-das-vacinas"
+        },
+        {
+          "nome": "Prefeitura de São Paulo — relato de Mônica Calazans",
+          "url": "https://prefeitura.sp.gov.br/web/saude/w/noticias/307750"
+        }
+      ],
+      "acessado_em": "2026-10-10"
+    },
+    {
+      "id": "campanha-nacional-2021-01-18",
+      "tipo": "noticia",
+      "data": "2021-01-18",
+      "subtitulo": "Começa a campanha nacional com envio de vacinas aos estados",
+      "autor": "Ministério da Saúde / Programa Nacional de Imunizações",
+      "texto": "O início oficial da campanha nacional organiza a distribuição de doses aos estados e ao Distrito Federal. Com oferta inicial limitada, profissionais de saúde e grupos de maior risco são priorizados.",
+      "contexto": "O Ministério registra 18/01/2021 como início oficial da campanha. Isso não apaga as aplicações estaduais do dia anterior. Distribuição, recebimento pelos estados e aplicação nas pessoas são etapas distintas; não se conta dose enviada como dose aplicada.",
+      "fontes": [
+        {
+          "nome": "Ministério da Saúde — Boletim Epidemiológico Especial 73, campanha nacional",
+          "url": "https://www.gov.br/saude/pt-br/centrais-de-conteudo/publicacoes/boletins/epidemiologicos/covid-19/2021/boletim_epidemiologico_covid_73-4-final3ago.pdf"
+        }
+      ],
+      "acessado_em": "2026-10-10"
+    },
+    {
+      "id": "covax-ghana-entrega-2021-02-24",
+      "tipo": "noticia",
+      "data": "2021-02-24",
+      "subtitulo": "COVAX entrega vacinas a Gana e inicia sua distribuição global",
+      "autor": "COVAX / OMS / UNICEF",
+      "texto": "Gana recebe 600 mil doses da vacina Oxford/AstraZeneca fabricada na Índia. A entrega inaugura a distribuição internacional da COVAX e expõe o desafio de levar proteção também a países com menos recursos.",
+      "contexto": "O marco é a chegada da remessa em 24/02, não o início de sua aplicação. A distribuição pela COVAX envolvia acordos e calendários diferentes por país. A meta global de entregas não é apresentada como realização já concluída.",
+      "fontes": [
+        {
+          "nome": "OMS — primeiras doses COVAX chegam a Gana (24/02/2021)",
+          "url": "https://www.who.int/news/item/24-02-2021-covid-19-vaccine-doses-shipped-by-the-covax-facility-head-to-ghana-marking-beginning-of-global-rollout"
+        }
+      ],
+      "acessado_em": "2026-10-10"
+    },
+    {
+      "id": "ghana-costa-marfim-vacinacao-2021-03-01",
+      "tipo": "noticia",
+      "data": "2021-03-01",
+      "subtitulo": "Gana e Costa do Marfim iniciam campanhas com doses da COVAX",
+      "autor": "Gana / Costa do Marfim",
+      "texto": "Começam as primeiras campanhas africanas com doses fornecidas pela COVAX, inicialmente voltadas a profissionais de saúde. A vacinação avança, mas o acesso global ainda é desigual.",
+      "contexto": "A OMS registra o início das campanhas em 01/03/2021. O marco não afirma que foram os primeiros países africanos a usar qualquer vacina: é o início dessas campanhas com doses COVAX. Diferenciar essa data das entregas de 24 e 26/02 e da ampliação posterior dos públicos.",
+      "fontes": [
+        {
+          "nome": "OMS — primeiras aplicações COVAX na África (01/03/2021)",
+          "url": "https://www.who.int/news/item/01-03-2021-first-covid-19-covax-vaccine-doses-administered-in-africa"
+        }
+      ],
+      "acessado_em": "2026-10-10"
+    },
+    {
+      "id": "mimimi-2021-03-04",
+      "data": "2021-03-04",
+      "subtitulo": "Bolsonaro pede fim de ‘frescura’ e ‘mimimi’ ao criticar o lockdown",
+      "autor": "Jair Bolsonaro",
+      "texto": "“Chega de frescura e de mimimi. Vão ficar chorando até quando?”",
+      "contexto": "Na inauguração de um trecho da Ferrovia Norte-Sul em São Simão (GO), Bolsonaro criticou o lockdown adotado por governadores e prefeitos e pediu retorno ao trabalho. A reportagem registra a fala durante o agravamento da pandemia e recordes diários de notificações de mortes. O trecho foi conferido no texto do Correio Braziliense; a CNN também documenta o evento e as críticas às restrições.",
+      "fontes": [
+        {
+          "nome": "Correio Braziliense — ‘Chega de frescura, de mimimi’ (04/03/2021)",
+          "url": "https://www.correiobraziliense.com.br/politica/2021/03/4910166-bolsonaro-chega-de-frescura-de-mimimi--vao-ficar-chorando-ate-quando.html"
+        },
+        {
+          "nome": "CNN Brasil — críticas às medidas restritivas em São Simão (04/03/2021)",
+          "url": "https://www.cnnbrasil.com.br/politica/covid-19-bolsonaro-volta-a-criticar-medidas-restritivas-no-brasil/"
+        }
+      ],
+      "acessado_em": "2026-10-09"
+    },
+    {
+      "id": "eduardo-mascaras-2021-03-10",
+      "data": "2021-03-10",
+      "subtitulo": "Eduardo Bolsonaro diz ‘enfia no rabo’ ao rebater críticas sobre máscaras",
+      "autor": "Eduardo Bolsonaro",
+      "texto": "“Então onde há tecnologia, o mundo inteiro está proativamente se deslocando. Eu acho uma pena que essa imprensa mequetrefe que a gente tem aqui no Brasil fique dando conta de cobrir apenas a máscara. ‘Ah, a máscara, está sem máscara, está com máscara’. Enfia no rabo, gente, porra!”",
+      "contexto": "Então deputado federal pelo PSL-SP, Eduardo reagiu às críticas sobre a ausência de máscaras na comitiva brasileira que viajou a Israel. A live no Instagram ocorreu em 10 de março de 2021; a reportagem do Poder360 foi publicada no dia 11. O trecho mantém as palavras usadas contra a cobertura jornalística. Na mesma live, ele também elogiou o ritmo de vacinação no Brasil, conforme a reportagem. Não era filiado ao PL naquele momento.",
+      "fontes": [
+        {
+          "nome": "Poder360 — live de 10/03/2021 sobre críticas ao uso de máscaras (11/03/2021)",
+          "url": "https://www.poder360.com.br/brasil/eduardo-bolsonaro-sugere-que-as-pessoas-enfiem-a-mascara-no-rabo/"
+        }
+      ],
+      "acessado_em": "2026-10-09"
+    },
+    {
+      "id": "colapso-utis-2021-03-16",
+      "tipo": "noticia",
+      "data": "2021-03-16",
+      "subtitulo": "Fiocruz alerta para o colapso hospitalar em quase todo o Brasil",
+      "autor": "Fiocruz",
+      "texto": "O boletim aponta ocupação de UTI Covid-19 para adultos no SUS igual ou superior a 80% em 24 estados e no Distrito Federal. Os pesquisadores descrevem o cenário como o maior colapso sanitário e hospitalar da história do país.",
+      "contexto": "A data é a do boletim de 16/03, reproduzido pela Fiotec em 17/03. A avaliação de maior colapso é atribuída aos pesquisadores, não tratada como uma comparação histórica demonstrada por este memorial. A ocupação se refere aos leitos adultos SUS para Covid-19, não a todos os leitos brasileiros.",
+      "fontes": [
+        {
+          "nome": "Fiotec/Fiocruz — boletim de 16/03/2021",
+          "url": "https://www.fiotec.fiocruz.br/pt/noticias/outros/observatorio-covid-19-da-fiocruz-aponta-maior-colapso-sanitario-e-hospitalar-da-historia-do-brasil"
+        }
+      ],
+      "acessado_em": "2026-10-10"
+    },
+    {
+      "id": "pfizer-primeiro-contrato-2021-03-19",
+      "tipo": "noticia",
+      "data": "2021-03-19",
+      "subtitulo": "Saúde assina o primeiro contrato com a Pfizer após ofertas de 2020",
+      "autor": "Ministério da Saúde / Pfizer",
+      "texto": "O primeiro contrato prevê 100 milhões de doses. A assinatura ocorre em março de 2021, depois das ofertas apresentadas em agosto de 2020. As primeiras doses para a campanha chegariam apenas no fim de abril.",
+      "contexto": "A data do contrato é confirmada no depoimento da Pfizer à CPI em 13/05/2021. Compra, autorização e entrega são acontecimentos diferentes. Houve negociações sobre condições contratuais e responsabilidade jurídica. O intervalo documenta a demora, mas não produz por si só uma estimativa de mortes evitáveis.",
+      "fontes": [
+        {
+          "nome": "Senado — depoimento de Carlos Murillo à CPI (13/05/2021)",
+          "url": "https://www12.senado.leg.br/noticias/materias/2021/05/13/representante-da-pfizer-confirma-governo-nao-respondeu-ofertas-feitas-em-agosto-de-2020"
+        }
+      ],
+      "acessado_em": "2026-10-10"
+    },
+    {
+      "id": "recorde-notificacoes-2021-04-08",
+      "tipo": "noticia",
+      "data": "2021-04-08",
+      "subtitulo": "Conass registra 4.249 mortes notificadas em 24 horas",
+      "autor": "Conselho Nacional de Secretários de Saúde",
+      "texto": "O Brasil registra 4.249 notificações de mortes por Covid-19 em 24 horas, um recorde na divulgação daquele momento. Por trás dos números estão milhares de famílias atingidas pela pandemia.",
+      "contexto": "São notificações registradas no intervalo, não necessariamente mortes ocorridas naquele dia. A reportagem usa o levantamento Conass; o memorial conserva a série histórica nacional do Ministério da Saúde, com suas revisões. Não se substitui a série por números de manchetes.",
+      "fontes": [
+        {
+          "nome": "CNN Brasil/Conass — recorde divulgado em 08/04/2021",
+          "url": "https://www.cnnbrasil.com.br/saude/brasil-bate-recorde-e-registra-4249-mortes-por-covid-19-em-24h/"
+        }
+      ],
+      "acessado_em": "2026-10-10"
+    },
+    {
+      "id": "pfizer-primeiro-lote-2021-04-29",
+      "tipo": "noticia",
+      "data": "2021-04-29",
+      "subtitulo": "Primeiro lote da Pfizer para a campanha chega ao Brasil",
+      "autor": "Ministério da Saúde / Pfizer",
+      "texto": "O Brasil recebe o primeiro lote de 1 milhão de doses da Pfizer/BioNTech para a campanha pública. A chegada ocorre depois do contrato de março e das ofertas feitas ao governo em agosto de 2020.",
+      "contexto": "A fonte oficial paranaense registra a chegada ao Brasil em 29/04 e descreve a distribuição subsequente. Não é a primeira entrada de doses destinadas a ensaios clínicos nem significa aplicação de todo o lote no dia do desembarque. O cronograma não permite calcular mortes diretamente causadas pela demora.",
+      "fontes": [
+        {
+          "nome": "Governo do Paraná — primeiro lote recebido em 29/04/2021",
+          "url": "https://www.seti.pr.gov.br/Noticia/Vacinas-da-Pfizer-e-da-AstraZenecaFiocruz-chegam-ao-Estado-nesta-segunda"
+        }
+      ],
+      "acessado_em": "2026-10-10"
+    },
+    {
+      "id": "jorginho-kit-covid-2021-05-04",
+      "data": "2021-05-04",
+      "subtitulo": "Jorginho Mello diz que o ‘kit Covid’ evitou mortes e esvaziou hospitais",
+      "autor": "Jorginho Mello",
+      "texto": "“Lá no meu Estado, o Município de Rancho Queimado e Chapecó fizeram um tratamento inicial, um kit Covid. E o resultado foi extraordinariamente positivo. Eu queria perguntar a V. Exa. se o senhor ouviu falar sobre isso, se o senhor conhece, porque evitou mortes, limpou o hospital e foi um resultado extremamente surpreendente.”",
+      "contexto": "Então senador pelo PL-SC, Mello atribuiu ao chamado kit Covid resultados em Rancho Queimado e Chapecó, ao interpelar Luiz Henrique Mandetta na CPI em 4 de maio de 2021. As notas taquigráficas do Senado registram a fala e a resposta de Mandetta, que cobrou registro técnico e pesquisa para demonstrar os resultados. O Aos Fatos documentou a circulação dessas alegações e as checagens que refutaram o suposto fim de internações. À reportagem, a assessoria de Mello negou que ele defendesse tratamento precoce e disse que defendia a liberdade de prescrição médica. Relatos de melhora não demonstram a eficácia desses medicamentos contra a covid.",
+      "fontes": [
+        {
+          "nome": "Senado Federal — notas taquigráficas da CPI (04/05/2021)",
+          "url": "https://www25.senado.leg.br/web/atividade/notas-taquigraficas/-/notas/r/9972"
+        },
+        {
+          "nome": "Aos Fatos — alegações sobre tratamento precoce e resposta da assessoria",
+          "url": "https://www.aosfatos.org/noticias/falas-de-senadores-governistas-na-cpi-da-covid-19-alimentam-defesa-de-tratamentos-sem-eficacia-no-twitter/"
+        }
+      ],
+      "acessado_em": "2026-10-09"
+    },
+    {
+      "id": "delta-preocupacao-2021-05-11",
+      "tipo": "noticia",
+      "data": "2021-05-11",
+      "subtitulo": "Delta é classificada como variante de preocupação",
+      "autor": "Organização Mundial da Saúde",
+      "texto": "A linhagem B.1.617.2, depois chamada Delta, passa da categoria de interesse à de preocupação. A classificação amplia o alerta sobre transmissão e a necessidade de acompanhar a proteção contra novas variantes.",
+      "contexto": "A data é a de classificação VOC pela OMS, não a da descoberta nem da chegada ao Brasil. Há amostras documentadas desde outubro de 2020, na Índia. O nome Delta veio com a nomenclatura grega de maio de 2021. Classificação de preocupação não significa que toda pessoa terá doença grave nem que vacinas deixaram de proteger.",
+      "fontes": [
+        {
+          "nome": "OMS — nomenclatura e datas de classificação das variantes (09/06/2021)",
+          "url": "https://www.who.int/docs/default-source/coronaviruse/risk-comms-updates/update60_nomenclature-variants.pdf"
+        }
+      ],
+      "acessado_em": "2026-10-10"
+    },
+    {
+      "id": "pfizer-cpi-2021-05-13",
+      "tipo": "noticia",
+      "data": "2021-05-13",
+      "subtitulo": "Na CPI, Pfizer confirma falta de resposta às ofertas de 2020",
+      "autor": "CPI da Pandemia / Senado Federal",
+      "texto": "Carlos Murillo relata que o governo não aceitou nem rejeitou a proposta de agosto dentro de sua validade. Ofertas previam entregas ainda em 2020; o primeiro contrato brasileiro só foi assinado em março de 2021.",
+      "contexto": "O marco é o depoimento de 13/05/2021, não a data das ofertas. Murillo descreveu propostas em 14, 18 e 26/08/2020 e relatou falta de resposta no prazo. É testemunho registrado em sessão pública; o texto não transforma todos os contatos em e-mails ignorados nem presume condenação criminal. As doses previstas para 2020 eram uma parte das propostas, não 70 milhões imediatamente disponíveis.",
+      "fontes": [
+        {
+          "nome": "Senado — depoimento de Carlos Murillo à CPI (13/05/2021)",
+          "url": "https://www12.senado.leg.br/noticias/materias/2021/05/13/representante-da-pfizer-confirma-governo-nao-respondeu-ofertas-feitas-em-agosto-de-2020"
+        }
+      ],
+      "acessado_em": "2026-10-10"
+    },
+    {
+      "id": "mascaras-2021-06-10",
+      "data": "2021-06-10",
+      "subtitulo": "Bolsonaro propõe dispensar máscaras para vacinados e quem já teve covid",
+      "autor": "Jair Bolsonaro",
+      "texto": "“Acabei de conversar com um tal de Queiroga, não sei se vocês sabem quem é, o nosso ministro da Saúde. E ele vai ultimar um parecer visando a desobrigar o uso de máscara por parte daqueles que já estejam vacinados ou que já foram contaminados.”",
+      "contexto": "Em evento do Ministério do Turismo, anunciou um parecer para dispensar máscaras a vacinados e a pessoas que já tiveram covid. A Exame registra a citação e a defesa do uso de máscaras pelo ministro Marcelo Queiroga. A Agência Senado informa que Queiroga descreveu o pedido como um estudo. A declaração registra uma proposta de parecer, não sua adoção como regra.",
+      "fontes": [
+        {
+          "nome": "Exame — proposta de dispensar máscaras (10/06/2021)",
+          "url": "https://exame.com/brasil/bolsonaro-quer-desobrigar-uso-de-mascara-a-vacinados-e-quem-ja-teve-covid/"
+        },
+        {
+          "nome": "Agência Senado — reação à proposta e esclarecimento de Queiroga (10/06/2021)",
+          "url": "https://www12.senado.leg.br/noticias/materias/2021/06/10/senadores-repudiam-ideia-de-bolsonaro-de-desobrigar-mascaras-para-vacinados"
+        }
+      ],
+      "acessado_em": "2026-10-09"
+    },
+    {
+      "id": "flavio-vacinacao-2021-06-18",
+      "data": "2021-06-18",
+      "subtitulo": "Flávio Bolsonaro relata orientação para adiar a vacina após ter covid",
+      "autor": "Flávio Bolsonaro",
+      "texto": "“Eu tive uma segunda opinião médica agora, indiretamente, porque o meu médico, à época, assim que eu me recuperei, eu perguntei a ele se ele me orientaria a tomar a vacina, ele falou a mesma coisa: ‘Nesse momento, Flávio, não tome, porque pode ter diversos contratempos e nesse momento você está imunizado’.”",
+      "contexto": "Então senador pelo Patriota-RJ, Flávio relatou na CPI, em 18 de junho de 2021, uma orientação médica para adiar sua vacinação após ter tido covid. As palavras atribuídas ao médico são um relato de Flávio, não um depoimento daquele profissional. Na mesma sessão, Flávio disse que queria se vacinar quando chegasse sua vez. Ter tido a doença não substitui a vacinação, como explicam os especialistas ouvidos pela Veja. Em 22 de julho, ele recebeu a primeira dose e incentivou a vacinação e a segunda dose, conforme a CNN. O registro não afirma que ele jamais se vacinou ou recusou todas as vacinas; tampouco o apresenta como filiado ao PL nessa data.",
+      "fontes": [
+        {
+          "nome": "Senado Federal — relato e intenção de se vacinar na CPI (18/06/2021)",
+          "url": "https://www25.senado.leg.br/web/atividade/notas-taquigraficas/-/notas/r/10045"
+        },
+        {
+          "nome": "Veja — vacinação recomendada também após infecção",
+          "url": "https://veja.abril.com.br/saude/quem-teve-covid-19-precisa-ou-nao-tomar-a-vacina/"
+        },
+        {
+          "nome": "CNN Brasil — primeira dose e incentivo à vacinação (22/07/2021)",
+          "url": "https://www.cnnbrasil.com.br/politica/apos-se-vacinar-flavio-bolsonaro-diz-que-pai-sera-ultimo-brasileiro-vacinado/"
+        }
+      ],
+      "acessado_em": "2026-10-09"
+    },
+    {
+      "id": "meio-milhao-2021-06-19",
+      "tipo": "noticia",
+      "data": "2021-06-19",
+      "subtitulo": "Brasil ultrapassa meio milhão de mortes por Covid-19",
+      "autor": "Brasil",
+      "texto": "O país ultrapassa 500 mil mortes acumuladas na divulgação da pandemia. Famílias, profissionais de saúde e sobreviventes carregam perdas que nenhum número consegue resumir.",
+      "contexto": "O marco é a divulgação pública de 19/06/2021. Provedores e revisões podem apresentar valores históricos ligeiramente diferentes. O contador continua usando a série oficial adotada, não um total refeito a partir desta manchete. Não se atribui esse meio milhão a uma declaração individual.",
+      "fontes": [
+        {
+          "nome": "Senado — manifestação diante das 500 mil mortes (19/06/2021)",
+          "url": "https://www12.senado.leg.br/noticias/materias/2021/06/19/senadores-lamentam-500-mil-mortes-por-covid-19-cpi-divulga-nota"
+        }
+      ],
+      "acessado_em": "2026-10-10"
+    },
+    {
+      "id": "orfandade-estudo-2021-07-20",
+      "tipo": "noticia",
+      "data": "2021-07-20",
+      "subtitulo": "Estudo estima mais de 113 mil crianças brasileiras sem pai ou mãe",
+      "autor": "The Lancet / pesquisadores de orfandade",
+      "texto": "Uma estimativa aponta mais de 113 mil menores no Brasil que perderam mãe, pai ou ambos durante a pandemia, entre março de 2020 e abril de 2021. A catástrofe também muda a vida de quem fica.",
+      "contexto": "A data é a publicação online do estudo em 20/07/2021. A estimativa usa mortalidade associada à pandemia, incluindo efeitos diretos e indiretos, para 01/03/2020–30/04/2021. Não é um registro nominal; perder um dos pais não significa necessariamente perder ambos. O número não representa toda a pandemia nem mortes só por diagnóstico confirmado.",
+      "fontes": [
+        {
+          "nome": "The Lancet/PMC — estimativas globais de perda de cuidadores",
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8293949/"
+        }
+      ],
+      "acessado_em": "2026-10-10"
+    },
+    {
+      "id": "cpi-relatorio-2021-10-26",
+      "tipo": "noticia",
+      "data": "2021-10-26",
+      "subtitulo": "CPI aprova relatório com 80 pedidos de indiciamento",
+      "autor": "Senado Federal",
+      "texto": "Por sete votos a quatro, a CPI da Pandemia aprova o relatório final com 80 pedidos de indiciamento. O documento reúne acusações e recomendações para encaminhamento às instituições responsáveis.",
+      "contexto": "A data é a aprovação do relatório. São 80 pedidos na versão final, não os 81 de uma versão anterior. Pedido de indiciamento e acusação parlamentar não são condenação judicial. A fonte registra votos contrários e divergências; resultados jurídicos posteriores precisam ser consultados em seus próprios processos.",
+      "fontes": [
+        {
+          "nome": "Senado — aprovação do relatório final (26/10/2021)",
+          "url": "https://www12.senado.leg.br/noticias/materias/2021/10/26/apos-seis-meses-cpi-da-pandemia-e-encerrada-com-80-pedidos-de-indiciamento"
+        }
+      ],
+      "acessado_em": "2026-10-10"
+    },
+    {
+      "id": "omicron-2021-11-26",
+      "tipo": "noticia",
+      "data": "2021-11-26",
+      "subtitulo": "OMS classifica Ômicron como variante de preocupação",
+      "autor": "Organização Mundial da Saúde",
+      "texto": "A linhagem B.1.1.529 recebe o nome Ômicron e entra na categoria de preocupação. Muitas mutações e sinais preliminares de maior risco de reinfecção levam a um novo alerta internacional.",
+      "contexto": "A data é a classificação de 26/11/2021. Naquele momento, transmissibilidade e gravidade ainda estavam sendo estudadas: não se anuncia como fato que Ômicron era mais letal que Delta. A OMS esclareceu essas incertezas em 28/11. País da identificação não equivale necessariamente ao local de origem.",
+      "fontes": [
+        {
+          "nome": "OMS — classificação de Ômicron (26/11/2021)",
+          "url": "https://www.who.int/news/item/26-11-2021-classification-of-omicron-%28b.1.1.529%29-sars-cov-2-variant-of-concern"
+        },
+        {
+          "nome": "OMS — atualização e incertezas (28/11/2021)",
+          "url": "https://www.who.int/news-room/statements/28-11-2021-update-on-omicron"
+        }
+      ],
+      "acessado_em": "2026-10-10"
+    },
+    {
+      "id": "queiroga-liberdade-2021-12-07",
+      "data": "2021-12-07",
+      "subtitulo": "Queiroga invoca a liberdade para rejeitar a exigência de comprovante de vacina",
+      "autor": "Marcelo Queiroga",
+      "texto": "“Às vezes, é melhor perder a vida do que perder a liberdade”",
+      "contexto": "Então ministro da Saúde, Queiroga repetiu uma frase atribuída a Bolsonaro na coletiva de 7 de dezembro de 2021 sobre a entrada de viajantes no Brasil. O governo não acolheu a recomendação da Anvisa de exigir certificado de vacinação completa; anunciou quarentena de cinco dias e teste negativo para viajantes não vacinados. Metrópoles e CNN registram a decisão e a fala. Portanto, o episódio não significa ausência de todas as restrições de entrada, mas uma divergência sobre as exigências sanitárias.",
+      "fontes": [
+        {
+          "nome": "Metrópoles — declaração e recomendação da Anvisa (07/12/2021)",
+          "url": "https://www.metropoles.com/brasil/queiroga-melhor-perder-a-vida-do-que-a-liberdade"
+        },
+        {
+          "nome": "CNN Brasil — citação na análise da coletiva do dia 7 (08/12/2021)",
+          "url": "https://www.cnnbrasil.com.br/politica/molica-bolsonaro-deturpou-o-significado-do-passaporte-da-vacina/"
+        },
+        {
+          "nome": "CNN Brasil — quarentena e certificado de vacinação (07/12/2021)",
+          "url": "https://www.cnnbrasil.com.br/saude/nao-vacinados-precisarao-de-quarentena-para-entrar-no-brasil-diz-queiroga/"
+        }
+      ],
+      "acessado_em": "2026-10-09"
+    },
+    {
+      "id": "anvisa-pfizer-infantil-2021-12-16",
+      "tipo": "noticia",
+      "data": "2021-12-16",
+      "subtitulo": "Anvisa autoriza a vacina Pfizer para crianças de 5 a 11 anos",
+      "autor": "Anvisa",
+      "texto": "A análise técnica permite a vacinação de crianças de 5 a 11 anos com a formulação pediátrica da Pfizer. A aprovação abre caminho para protegê-las; a aplicação ainda depende do calendário e da logística da campanha.",
+      "contexto": "A data é a aprovação regulatória, não o início das aplicações. A formulação e a dose pediátricas são distintas das usadas em adultos. O comunicado registra avaliação de segurança e eficácia; decisões de indicação individual não são tratadas por este memorial.",
+      "fontes": [
+        {
+          "nome": "Anvisa — aprovação pediátrica (16/12/2021)",
+          "url": "https://www.gov.br/anvisa/pt-br/assuntos/noticias-anvisa/2021/anvisa-aprova-vacina-da-pfizer-contra-covid-para-criancas-de-5-a-11-anos"
+        }
+      ],
+      "acessado_em": "2026-10-10"
+    },
+    {
+      "id": "vacinacao-infantil-2022-01-14",
+      "tipo": "noticia",
+      "data": "2022-01-14",
+      "subtitulo": "Começa a vacinação pública de crianças de 5 a 11 anos",
+      "autor": "Brasil / São Paulo",
+      "texto": "Davi Seremramiwe Xavante, de oito anos, recebe a dose pediátrica em São Paulo. A vacinação dessa faixa etária começa depois da autorização da Anvisa em dezembro.",
+      "contexto": "O marco é a primeira aplicação pública divulgada dessa etapa, em 14/01/2022, não ensaios clínicos anteriores. O calendário e a distribuição variaram por estado. A reportagem da Alesp confirma a data e identifica a criança; nenhuma imagem dela foi reproduzida.",
+      "fontes": [
+        {
+          "nome": "Alesp — início da vacinação infantil (14/01/2022)",
+          "url": "https://www.al.sp.gov.br/noticia/?id=432604"
+        }
+      ],
+      "acessado_em": "2026-10-10"
+    },
+    {
+      "id": "magno-vacinacao-infantil-2022-02-01",
+      "data": "2022-02-01",
+      "subtitulo": "Magno Malta sugere leite materno no lugar da vacina infantil contra a covid",
+      "autor": "Magno Malta",
+      "texto": "“a vacina da criança já vem no peito da mãe”",
+      "contexto": "Então ex-senador pelo PL-ES e aliado de Bolsonaro, Malta publicou o vídeo em 1º de fevereiro de 2022, elogiando Rui Costa por ainda não ter vacinado as filhas e se posicionando contra a vacinação infantil contra a covid. O Projeto Comprova, publicado pelo SBT News, transcreve a frase e classifica o conteúdo como enganoso: o leite materno pode transmitir anticorpos, mas essa proteção é transitória e não substitui a vacinação. A checagem também ouviu a Anvisa e pediatras que rejeitaram, por falta de evidências, a sugestão de que as vacinas provocariam infertilidade. Rui Costa informou à checagem que as filhas seriam vacinadas. A data do marco é a do vídeo, não a da reportagem.",
+      "fontes": [
+        {
+          "nome": "Projeto Comprova / SBT News — checagem do vídeo de 01/02/2022",
+          "url": "https://sbtnews.sbt.com.br/noticia/category/201477-enganoso-leite-materno-nao-substitui-vacinacao-de-criancas-contra-a-covid-19-ao-contrario-do-que-sugere-ex-senador-magno-malta"
+        }
+      ],
+      "acessado_em": "2026-10-09"
+    },
+    {
+      "id": "fim-emergencia-nacional-2022-04-22",
+      "tipo": "noticia",
+      "data": "2022-04-22",
+      "subtitulo": "Saúde publica o encerramento da emergência nacional",
+      "autor": "Ministério da Saúde",
+      "texto": "A Portaria 913 determina o encerramento da emergência de saúde pública nacional por Covid-19, com vigência 30 dias depois. A medida administrativa não significa que o vírus desapareceu.",
+      "contexto": "O marco é a publicação da portaria em 22/04/2022, que entrou em vigor em 22/05. Distinguir a emergência brasileira da emergência internacional da OMS. Encerramento de um instrumento legal não elimina transmissão, sequelas ou mortes.",
+      "fontes": [
+        {
+          "nome": "Ministério da Saúde — Portaria 913, de 22/04/2022",
+          "url": "https://bvsms.saude.gov.br/bvs/saudelegis/gm/2022/prt0913_22_04_2022.html"
+        }
+      ],
+      "acessado_em": "2026-10-10"
+    },
+    {
+      "id": "reforco-bivalente-2023-02-27",
+      "tipo": "noticia",
+      "data": "2023-02-27",
+      "subtitulo": "Brasil inicia a etapa nacional de reforço com vacina bivalente",
+      "autor": "Ministério da Saúde / Programa Nacional de Imunizações",
+      "texto": "A campanha nacional de reforço bivalente começa pelos grupos prioritários. A formulação atualizada combina proteção dirigida à cepa original e a subvariantes da Ômicron.",
+      "contexto": "O marco é o início nacional programado para 27/02/2023. O boletim registra que algumas unidades federativas anteciparam aplicações após o envio das doses em janeiro; não se afirma que ninguém recebeu antes. Vacinação de reforço não equivale à primeira dose e o público elegível foi ampliado posteriormente.",
+      "fontes": [
+        {
+          "nome": "Ministério da Saúde — Boletim Epidemiológico 54(10), campanha bivalente",
+          "url": "https://www.gov.br/saude/pt-br/vacinacao/esavi/monitoramento-dos-eventos/2023/boletim-epidemiologico-10-vol-54-19-de-junho-2023"
+        }
+      ],
+      "acessado_em": "2026-10-10"
+    },
+    {
+      "id": "oms-fim-emergencia-2023-05-05",
+      "tipo": "noticia",
+      "data": "2023-05-05",
+      "subtitulo": "OMS encerra a emergência internacional, não a ameaça da Covid-19",
+      "autor": "Organização Mundial da Saúde",
+      "texto": "A OMS encerra a emergência de saúde pública de importância internacional. O anúncio também alerta: o vírus continua circulando, causando mortes e deixando sequelas.",
+      "contexto": "É o fim da classificação de emergência internacional em 05/05/2023, não uma declaração de que a pandemia ou a doença desapareceram. A OMS orienta a transição para acompanhamento e resposta de longo prazo. Por isso, o memorial continua representando os óbitos posteriores.",
+      "fontes": [
+        {
+          "nome": "OMS — pronunciamento de 05/05/2023",
+          "url": "https://www.who.int/news-room/speeches/item/who-director-general-s-opening-remarks-at-the-media-briefing---5-may-2023"
+        }
+      ],
+      "acessado_em": "2026-10-10"
+    },
+    {
+      "id": "jn1-2023-12-19",
+      "tipo": "noticia",
+      "data": "2023-12-19",
+      "subtitulo": "JN.1 cresce e passa a ser acompanhada como variante de interesse",
+      "autor": "Organização Mundial da Saúde",
+      "texto": "A OMS classifica JN.1 separadamente como variante de interesse, diante de sua rápida expansão. A avaliação inicial considera baixo o risco adicional global; variante nova não é sinônimo de maior letalidade.",
+      "contexto": "A data é a classificação e avaliação de risco em 19/12/2023. A OMS destaca dados ainda limitados e ausência de evidência de maior gravidade frente às variantes então circulantes. Baixo risco adicional não significa risco zero de Covid-19 para cada pessoa, sobretudo nos grupos vulneráveis.",
+      "fontes": [
+        {
+          "nome": "OMS — avaliação inicial de JN.1 (19/12/2023)",
+          "url": "https://www.who.int/docs/default-source/coronaviruse/18122023_jn.1_ire_clean.pdf"
+        }
+      ],
+      "acessado_em": "2026-10-10"
+    },
+    {
+      "id": "nb181-2025-05-23",
+      "tipo": "noticia",
+      "data": "2025-05-23",
+      "subtitulo": "NB.1.8.1 entra no monitoramento; OMS não vê maior gravidade",
+      "autor": "Organização Mundial da Saúde",
+      "texto": "A OMS passa a monitorar NB.1.8.1, que ganha espaço entre as variantes circulantes. A avaliação inicial aponta baixo risco adicional global e não identifica doença mais grave que a causada por outras variantes.",
+      "contexto": "A data é a classificação como variante sob monitoramento em 23/05/2025, não seu surgimento: há amostras desde janeiro. A avaliação depende dos dados disponíveis e pode mudar. A circulação persistente exige vigilância; não se rotula toda variante nova como muito perigosa ou mais letal.",
+      "fontes": [
+        {
+          "nome": "OMS — avaliação inicial de NB.1.8.1 (23/05/2025)",
+          "url": "https://cdn.who.int/media/docs/default-source/documents/epp/tracking-sars-cov-2/23052025_nb.1.8.1_ire.pdf?sfvrsn=7b14df58_5"
+        }
+      ],
+      "acessado_em": "2026-10-10"
     }
   ]
 }

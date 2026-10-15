@@ -1,0 +1,23 @@
+---
+import Hero from './Hero.astro';
+import Memorial from './Memorial.astro';
+import Counter from './Counter.astro';
+import Fontes from './Fontes.astro';
+
+interface Props {
+  statementId?: string;
+}
+
+const { statementId } = Astro.props;
+---
+
+{statementId && <span data-initial-statement={statementId} hidden></span>}
+<Hero />
+<Memorial />
+<Fontes />
+<Counter />
+
+<script>
+  import { boot } from '../lib/render';
+  boot();
+</script>

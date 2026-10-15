@@ -17,8 +17,12 @@ export interface Obitos extends ComFontes {
 
 export interface Declaracao extends ComFontes {
   id: string;
+  tipo?: 'declaracao' | 'noticia';
   data: string;
   texto: string;
+  subtitulo?: string;
+  autor?: string;
+  contexto?: string;
 }
 
 export interface Declaracoes {
@@ -101,7 +105,14 @@ function validateDeclaracoes(arquivo: Declaracoes, inicio: string, fim: string):
   for (const declaracao of arquivo.declaracoes) {
     if (!declaracao || !isText(declaracao.id) || ids.has(declaracao.id)) throw invalid('id');
     ids.add(declaracao.id);
+    if (declaracao.tipo !== undefined && declaracao.tipo !== 'declaracao' && declaracao.tipo !== 'noticia') {
+      throw invalid(`tipo de ${declaracao.id}`);
+    }
     if (!isText(declaracao.texto)) throw invalid(`texto de ${declaracao.id}`);
+    if (!arquivo.sintetico && !isText(declaracao.subtitulo)) throw invalid(`subtítulo de ${declaracao.id}`);
+    if (!arquivo.sintetico && (!isText(declaracao.autor) || !isText(declaracao.contexto))) {
+      throw invalid(`autor ou contexto de ${declaracao.id}`);
+    }
     if (!isIsoDate(declaracao.data) || declaracao.data < inicio || declaracao.data > fim) {
       throw invalid(`data de ${declaracao.id}`);
     }
