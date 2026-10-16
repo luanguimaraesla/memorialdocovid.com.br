@@ -207,6 +207,22 @@ qualquer entrega: confere os arquivos de `public/data/` contra a cobertura e o t
 nos CSVs oficiais. Se os dados oficiais não puderem ser obtidos ou validados, a entrega fica
 bloqueada. Não existe fonte alternativa nem série sintética de óbitos.
 
+## Publicação
+
+O site é publicado no GitHub Pages pelo workflow `.github/workflows/deploy.yml`, a cada push
+na `main` ou manualmente pela aba Actions. Antes de publicar `dist/`, o workflow roda os testes,
+a verificação de tipos, o build e o gate de entrega; se algo falhar, nada é publicado.
+
+Configuração única no repositório e no domínio:
+
+1. Em Settings → Pages, a fonte é **GitHub Actions** e o domínio personalizado é
+   `memorialdocovid.com.br`. Com publicação por Actions, um arquivo `CNAME` não é necessário.
+2. No DNS, o domínio aponta para o GitHub Pages com registros A `185.199.108.153`,
+   `185.199.109.153`, `185.199.110.153` e `185.199.111.153`, registros AAAA
+   `2606:50c0:8000::153` a `2606:50c0:8003::153` e `www` como CNAME para
+   `luanguimaraesla.github.io`.
+3. Depois que o GitHub emitir o certificado, ative **Enforce HTTPS** em Settings → Pages.
+
 ## Licença
 
 O código usa [AGPL-3.0](LICENSE). Você pode usar, estudar, modificar e redistribuir, inclusive
