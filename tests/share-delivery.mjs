@@ -66,6 +66,31 @@ for (const statement of declaracoes) {
   });
 }
 
+test('the favicon is a cross in the palette, as SVG, ICO and a home-screen PNG', async () => {
+  const css = (await read('src/styles/global.css')).toString();
+  const palette = css.match(/:root\s*\{[^}]+\}/)[0];
+  const [background, accent] = ['fundo', 'destaque'].map((name) => palette.match(new RegExp(`--${name}: (#[0-9a-f]{6})`))[1]);
+  const svg = (await read('public/favicon.svg')).toString();
+  assert.match(svg, new RegExp(`<rect width="32" height="32" fill="${background}"/>`));
+  assert.equal(svg.match(new RegExp(`fill="${accent}"`, 'g')).length, 2);
+  const ico = await read('public/favicon.ico');
+  assert.deepEqual([ico.readUInt16LE(0), ico.readUInt16LE(2), ico.readUInt16LE(4)], [0, 1, 3]);
+  for (const [index, size] of [16, 32, 48].entries()) {
+    const entry = 6 + 16 * index;
+    assert.deepEqual([ico[entry], ico[entry + 1]], [size, size]);
+    const image = ico.subarray(ico.readUInt32LE(entry + 12), ico.readUInt32LE(entry + 12) + ico.readUInt32LE(entry + 8));
+    assert.deepEqual([...image.subarray(0, 8)], [137, 80, 78, 71, 13, 10, 26, 10]);
+    assert.deepEqual([image.readUInt32BE(16), image.readUInt32BE(20)], [size, size]);
+  }
+  const touch = await read('public/apple-touch-icon.png');
+  assert.deepEqual([touch.readUInt32BE(16), touch.readUInt32BE(20)], [180, 180]);
+  const home = (await read('dist/index.html')).toString();
+  for (const file of ['favicon.ico', 'favicon.svg', 'apple-touch-icon.png']) {
+    assert.ok(home.includes(`href="/${file}"`), file);
+    assert.deepEqual(await read(`dist/${file}`), await read(`public/${file}`));
+  }
+});
+
 test('the main memorial retains its title and has a general sharing image', async () => {
   const html = (await read('dist/index.html')).toString();
   assert.equal(meta(html, 'og:title'), 'Memorial do Covid');

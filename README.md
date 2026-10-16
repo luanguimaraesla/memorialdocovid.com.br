@@ -59,6 +59,10 @@ passar na validação, a página mostra um erro e não desenha nada.
 Todas as páginas carregam a tag do Google Analytics `G-4SW9W1M6L0`, em `src/layouts/Base.astro`.
 É a única ferramenta de medição do site; os testes recusam outras tags.
 
+O favicon é uma cruz no dourado do destaque sobre o fundo preto, as duas cores lidas do `:root`
+de `global.css`. Para gerar de novo o SVG, o ICO (16, 32 e 48 px) e o ícone de 180 px para a tela
+inicial do celular, sem dependências: `node scripts/gerar-favicon.mjs`.
+
 `src/lib/layout.ts` concentra a geometria: cada ponto tem raio fixo de 12 px, com 2 px de
 espaço, em linhas de 10 (`src/config.ts`). A coluna centralizada tem 258 px de largura,
 deixando 31 px de margem em cada lado numa tela de 320 px, sem mudar o tamanho dos pontos
