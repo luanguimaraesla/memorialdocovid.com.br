@@ -1,5 +1,12 @@
+import { SECONDS_BETWEEN_MILESTONES } from '../config';
+import { pathDuration, positionAt } from './journey';
+import type { Waypoint } from './journey';
+
 interface AutoscrollOptions {
-  getSpeed: () => number;
+  // Plans the motion from the current position. Nothing to plan leaves the page still.
+  plan: (from: number) => Waypoint[] | undefined;
+  // Reports each waypoint reached after the starting one.
+  onWaypoint: (index: number) => void;
   onStateChange: (playing: boolean) => void;
 }
 
@@ -9,23 +16,27 @@ export interface Autoscroll {
   isPlaying(): boolean;
 }
 
-const TAKEOVER_UP_PX = 200;
-const PAUSE_KEYS = new Set([
-  ' ', 'Spacebar', 'ArrowUp', 'ArrowDown', 'PageUp', 'PageDown', 'Home', 'End',
-]);
+const MAX_FRAME_SECONDS = 0.1;
+const DRIFT_TOLERANCE_PX = 2;
+const EPSILON = 1e-9;
 
-// Playback starts only on request. Manual scroll input pauses it; taps do not.
 export function createAutoscroll(options: AutoscrollOptions): Autoscroll {
   let playing = false;
   let rafId = 0;
   let lastTime = 0;
-  let carry = 0;
-  let previousY = 0;
-  let upwardJump = false;
+  let path: Waypoint[] = [];
+  let elapsed = 0;
+  let reached = 0;
+  let expectedY = 0;
 
-  function atBottom(): boolean {
-    const max = document.documentElement.scrollHeight - window.innerHeight;
-    return window.scrollY >= max - 1;
+  function plan(): boolean {
+    const planned = options.plan(window.scrollY);
+    if (!planned || planned.length < 2) return false;
+    path = planned;
+    elapsed = 0;
+    reached = 0;
+    expectedY = window.scrollY;
+    return true;
   }
 
   function pause(): void {
@@ -37,57 +48,32 @@ export function createAutoscroll(options: AutoscrollOptions): Autoscroll {
 
   function frame(now: number): void {
     if (!playing) return;
-    // Mobile browser chrome can shift the page once; only sustained upward jumps
-    // indicate a takeover, since this engine always moves downward.
-    const drop = previousY - window.scrollY;
-    if (drop > TAKEOVER_UP_PX) {
-      if (upwardJump) {
-        pause();
-        return;
-      }
-      upwardJump = true;
-      previousY = window.scrollY;
-    } else {
-      upwardJump = false;
-    }
-
-    const seconds = Math.min((now - lastTime) / 1000, 0.1);
+    const seconds = Math.min((now - lastTime) / 1000, MAX_FRAME_SECONDS);
     lastTime = now;
-    carry += options.getSpeed() * seconds;
-    const step = Math.floor(carry);
-    if (step > 0) {
-      carry -= step;
-      window.scrollBy(0, step);
-      previousY = window.scrollY;
-      if (atBottom()) {
-        pause();
-        return;
-      }
+    // Someone else moved the page: follow a new plan from where it is now.
+    if (Math.abs(window.scrollY - expectedY) > DRIFT_TOLERANCE_PX && !plan()) {
+      pause();
+      return;
+    }
+    elapsed += seconds;
+    window.scrollTo({ top: positionAt(path, elapsed), behavior: 'instant' });
+    expectedY = window.scrollY;
+    const passed = Math.min(path.length - 1, Math.floor(elapsed / SECONDS_BETWEEN_MILESTONES + EPSILON));
+    while (reached < passed) options.onWaypoint(++reached);
+    if (elapsed + EPSILON >= pathDuration(path)) {
+      pause();
+      return;
     }
     rafId = requestAnimationFrame(frame);
   }
 
   function play(): void {
-    if (playing || atBottom()) return;
+    if (playing || !plan()) return;
     playing = true;
-    carry = 0;
-    previousY = window.scrollY;
-    upwardJump = false;
     lastTime = performance.now();
     rafId = requestAnimationFrame(frame);
     options.onStateChange(true);
   }
-
-  window.addEventListener('wheel', pause, { passive: true });
-  window.addEventListener('touchmove', pause, { passive: true });
-  window.addEventListener('keydown', (event) => {
-    if (PAUSE_KEYS.has(event.key)) pause();
-  }, { passive: true });
-  window.addEventListener('pointerdown', (event) => {
-    if (event.pointerType === 'mouse' && (event.button === 1 || event.clientX > window.innerWidth - 24)) {
-      pause();
-    }
-  }, { passive: true });
 
   return { play, pause, isPlaying: () => playing };
 }

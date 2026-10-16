@@ -1,6 +1,8 @@
 ---
 import Base from '../layouts/Base.astro';
+import statements from '../../public/data/declaracoes.json';
 import { DOT_RADIUS_PX, DOT_GAP_PX, DOTS_PER_ROW, LIVES_PER_SEPARATOR, SEPARATOR_ROWS } from '../config';
+const quotations = statements.declaracoes.filter((entry) => entry.tipo !== 'noticia').length;
 ---
 
 <Base
@@ -50,8 +52,12 @@ import { DOT_RADIUS_PX, DOT_GAP_PX, DOTS_PER_ROW, LIVES_PER_SEPARATOR, SEPARATOR
         total acumulado e ocupa o espaço de {SEPARATOR_ROWS} linhas. Esse intervalo não
         representa vidas; as contagens de vidas e de dias permanecem iguais até os próximos pontos.
         Os marcos semanais mostram as segundas-feiras a partir de 30/03/2020, na posição do
-        primeiro óbito de cada semana. Semanas sem novos óbitos não recebem marco. Os óbitos
-        anteriores continuam representados na coluna.
+        primeiro óbito de cada semana. Semanas sem novos óbitos, ou próximas demais da anterior,
+        não recebem marco. Os óbitos anteriores continuam representados na coluna. Cada notícia
+        fica na linha de pontos da sua data, com um marcador das vidas contadas até aquele ponto;
+        quando um separador de milhar está muito próximo, o marcador ocupa o lugar dele.
+        A rolagem automática leva 1,6 s entre marcos, então a velocidade acompanha as vidas
+        perdidas em cada intervalo.
       </p>
     </section>
 
@@ -60,10 +66,31 @@ import { DOT_RADIUS_PX, DOT_GAP_PX, DOTS_PER_ROW, LIVES_PER_SEPARATOR, SEPARATOR
       <div data-fontes-obitos></div>
     </section>
 
+    <section class="ref" id="acervo">
+      <h2>O acervo</h2>
+      <p>
+        O memorial reúne {statements.acervo.documentos} capturas de reportagens e publicações,
+        exibidas junto dos marcos abaixo. O clique em uma captura abre o arquivo completo.
+        A música que acompanha a visita também pode ser ouvida à parte:
+        <a href="/musica/pandemia.mp3">ouvir a música</a>.
+      </p>
+      <p>
+        Os resumos das notícias são textos editoriais, não transcrições de falas. A data de cada
+        marco é a do acontecimento; quando a reportagem saiu em outro dia, a data de publicação
+        aparece junto da fonte. Nos cards, os recortes destacam títulos e subtítulos, sem menus
+        nem anúncios. No modo guiado, a rolagem para em cada marco e aguarda Continuar; o botão
+        Sem pausas mostra apenas os cabeçalhos. Contexto e fontes ficam em Leia mais.
+      </p>
+      <p>
+        As capturas e a música têm direitos próprios. Os créditos das reportagens ficam junto
+        das fontes; a licença AGPL-3.0 do código não substitui os direitos desses materiais.
+      </p>
+    </section>
+
     <section class="ref">
       <h2>Marcos históricos e contexto</h2>
       <p>
-        A seleção reúne 57 marcos: 42 notícias históricas e 15 episódios com citações.
+        A seleção reúne {statements.declaracoes.length} marcos: {statements.declaracoes.length - quotations} notícias históricas e {quotations} episódios com citações.
         Não é um catálogo exaustivo da pandemia. As notícias são resumos editoriais de fatos,
         estudos e decisões, identificados como marcos históricos; não são palavras literais
         das instituições. Suas datas correspondem ao acontecimento, à classificação ou à
@@ -77,8 +104,8 @@ import { DOT_RADIUS_PX, DOT_GAP_PX, DOTS_PER_ROW, LIVES_PER_SEPARATOR, SEPARATOR
         da CPI não são apresentadas como condenações criminais.
       </p>
       <p>
-        Marcos que caem na mesma linha de pontos podem ser alternados por Anterior e Próximo.
-        Seus links abrem a entrada escolhida. Essa navegação não acrescenta vidas nem muda a
+        Marcos que correspondem à mesma linha de pontos dividem a mesma posição e aparecem um
+        de cada vez. Seus links abrem a entrada escolhida, sem acrescentar vidas nem mudar a
         série. A posição indica uma relação cronológica, não mortes causadas pelo acontecimento.
       </p>
       <p>

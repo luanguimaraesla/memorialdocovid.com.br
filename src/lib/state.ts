@@ -15,6 +15,23 @@ export interface Obitos extends ComFontes {
   dias: Dia[];
 }
 
+export interface DocumentoAcervo {
+  arquivo: string;
+  legenda: string;
+  largura: number;
+  altura: number;
+  sha256: string;
+}
+
+export interface RegistroAcervo {
+  manchete: string;
+  veiculo: string;
+  url: string;
+  publicado_em?: string;
+  fonte_primaria?: string;
+  documentos: DocumentoAcervo[];
+}
+
 export interface Declaracao extends ComFontes {
   id: string;
   tipo?: 'declaracao' | 'noticia';
@@ -23,6 +40,7 @@ export interface Declaracao extends ComFontes {
   subtitulo?: string;
   autor?: string;
   contexto?: string;
+  acervo?: RegistroAcervo;
 }
 
 export interface Declaracoes {
@@ -95,6 +113,19 @@ function validateObitos(obitos: Obitos): void {
   if (previous!.acumulado <= 0) throw invalid('total final');
 }
 
+function validArchive(record: RegistroAcervo): boolean {
+  return Boolean(record && isText(record.manchete) && isText(record.veiculo)
+    && isHttpUrl(record.url)
+    && (record.publicado_em === undefined || isIsoDate(record.publicado_em))
+    && (record.fonte_primaria === undefined || isHttpUrl(record.fonte_primaria))
+    && Array.isArray(record.documentos) && record.documentos.every((document) => (
+      document && /^acervo-covid\/\d{4}\/\d{2}_\d{4}\/[a-zA-Z0-9_]+\.png$/.test(document.arquivo)
+      && isText(document.legenda) && /^[a-f0-9]{64}$/.test(document.sha256)
+      && Number.isSafeInteger(document.largura) && document.largura > 0
+      && Number.isSafeInteger(document.altura) && document.altura > 0
+    )));
+}
+
 function validateDeclaracoes(arquivo: Declaracoes, inicio: string, fim: string): void {
   const invalid = (reason: string) => new Error(`declaracoes.json inválido: ${reason}`);
   if (!arquivo || typeof arquivo.sintetico !== 'boolean') throw invalid('sintetico');
@@ -110,13 +141,18 @@ function validateDeclaracoes(arquivo: Declaracoes, inicio: string, fim: string):
     }
     if (!isText(declaracao.texto)) throw invalid(`texto de ${declaracao.id}`);
     if (!arquivo.sintetico && !isText(declaracao.subtitulo)) throw invalid(`subtítulo de ${declaracao.id}`);
-    if (!arquivo.sintetico && (!isText(declaracao.autor) || !isText(declaracao.contexto))) {
+    // News may stand without context; quotations always carry it.
+    const needsContext = declaracao.tipo !== 'noticia' || declaracao.contexto !== undefined;
+    if (!arquivo.sintetico && (!isText(declaracao.autor) || (needsContext && !isText(declaracao.contexto)))) {
       throw invalid(`autor ou contexto de ${declaracao.id}`);
     }
     if (!isIsoDate(declaracao.data) || declaracao.data < inicio || declaracao.data > fim) {
       throw invalid(`data de ${declaracao.id}`);
     }
     if (!hasSources(declaracao)) throw invalid(`fontes de ${declaracao.id}`);
+    if (declaracao.acervo !== undefined && !validArchive(declaracao.acervo)) {
+      throw invalid(`acervo de ${declaracao.id}`);
+    }
     if (arquivo.sintetico && !declaracao.texto.startsWith(SYNTHETIC_PREFIX)) {
       throw invalid(`${declaracao.id} sem o prefixo sintético`);
     }

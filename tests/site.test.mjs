@@ -19,17 +19,27 @@ const layoutUrl = moduleUrl((await read('src/lib/layout.ts')).replaceAll("'../co
 const layout = await import(layoutUrl);
 const stateUrl = moduleUrl((await read('src/lib/state.ts')).replaceAll('import.meta.env.BASE_URL', "'/'"));
 const { loadPageData } = await import(stateUrl);
-const autoscrollUrl = moduleUrl(await read('src/lib/autoscroll.ts'));
+const journeyUrl = moduleUrl((await read('src/lib/journey.ts')).replaceAll("'../config'", JSON.stringify(configUrl)));
+const autoscrollUrl = moduleUrl((await read('src/lib/autoscroll.ts'))
+  .replaceAll("'../config'", JSON.stringify(configUrl))
+  .replaceAll("'./journey'", JSON.stringify(journeyUrl)));
 const sharingUrl = moduleUrl(await read('src/lib/sharing.ts'));
+const cropsUrl = moduleUrl(await read('src/lib/headline-crops.ts'));
+const archiveUrl = moduleUrl((await read('src/lib/archive.ts')).replaceAll('import.meta.env.BASE_URL', "'/'").replaceAll("'./headline-crops'", JSON.stringify(cropsUrl)));
+const audioUrl = moduleUrl(await read('src/lib/audio.ts'));
 const renderSource = (await read('src/lib/render.ts'))
   .replaceAll("'../config'", JSON.stringify(configUrl))
   .replaceAll("'./layout'", JSON.stringify(layoutUrl))
   .replaceAll("'./state'", JSON.stringify(stateUrl))
   .replaceAll("'./autoscroll'", JSON.stringify(autoscrollUrl))
   .replaceAll("'./sharing'", JSON.stringify(sharingUrl))
+  .replaceAll("'./archive'", JSON.stringify(archiveUrl))
+  .replaceAll("'./audio'", JSON.stringify(audioUrl))
+  .replaceAll("'./journey'", JSON.stringify(journeyUrl))
   .replaceAll('import.meta.env.BASE_URL', "'/'");
 const referencesSource = (await read('src/lib/referencias.ts'))
-  .replaceAll("'./state'", JSON.stringify(stateUrl));
+  .replaceAll("'./state'", JSON.stringify(stateUrl))
+  .replaceAll("'./archive'", JSON.stringify(archiveUrl));
 const { bootReferencias } = await import(moduleUrl(referencesSource));
 
 // render.ts keeps module state, so every boot gets a fresh module instance.
@@ -439,20 +449,168 @@ test('missing files and broken JSON reject instead of falling back', async (cont
   await assert.rejects(loadPageData('/'), SyntaxError);
 });
 
+test('news may omit context while quotations still require it', async (context) => {
+  const news = sourcedFixture();
+  Object.assign(news.declaracoes[0], { tipo: 'noticia', contexto: undefined });
+  mockData(context, obitosFixture(), news);
+  assert.equal((await loadPageData('/')).declaracoes.declaracoes[0].contexto, undefined);
+  for (const [tipo, contexto] of [[undefined, undefined], ['declaracao', undefined], ['noticia', ' ']]) {
+    const entries = sourcedFixture();
+    Object.assign(entries.declaracoes[0], { tipo, contexto });
+    mockData(context, obitosFixture(), entries);
+    await assert.rejects(loadPageData('/'), /autor ou contexto de real-1/);
+  }
+});
+
+function archiveFixture() {
+  return {
+    manchete: 'Manchete de teste <sem HTML>', veiculo: 'Veículo de teste',
+    url: 'https://fonte.test/noticia', publicado_em: '2020-03-19',
+    fonte_primaria: 'https://fonte.test/video',
+    documentos: [{
+      arquivo: 'acervo-covid/2020/03_2020/20032020_gripezinha.png',
+      legenda: 'Captura <original>', largura: 600, altura: 300, sha256: 'a'.repeat(64),
+    }],
+  };
+}
+
+test('archive metadata rejects unsafe files, bad dimensions, dates and source URLs', async (context) => {
+  for (const mutate of [
+    (record) => { record.documentos[0].arquivo = '../secret.png'; },
+    (record) => { record.documentos[0].arquivo = 'https://other.test/image.png'; },
+    (record) => { record.documentos[0].largura = 0; },
+    (record) => { record.documentos[0].altura = 1.5; },
+    (record) => { record.documentos[0].sha256 = 'bad'; },
+    (record) => { record.documentos = null; },
+    (record) => { record.publicado_em = '2020-02-30'; },
+    (record) => { record.fonte_primaria = 'javascript:alert(1)'; },
+    (record) => { record.url = 'javascript:alert(1)'; },
+    (record) => { record.manchete = ''; },
+    (record) => { record.veiculo = undefined; },
+  ]) {
+    const entries = sourcedFixture();
+    entries.declaracoes[0].acervo = archiveFixture();
+    mutate(entries.declaracoes[0].acervo);
+    mockData(context, obitosFixture(), entries);
+    await assert.rejects(loadPageData('/'), /acervo de real-1/);
+  }
+});
+
+test('archive documents render with original dimensions, source metadata and safe captions', async (context) => {
+  const entries = sourcedFixture();
+  entries.declaracoes[0].acervo = archiveFixture();
+  mockData(context, obitosFixture(), entries);
+  const page = installPage(context);
+  await (await freshRender()).boot();
+  const card = page.$('[data-marks]').children[0];
+  const image = [...card.descendants()].find(({ tagName }) => tagName === 'img');
+  assert.equal(image.src, '/acervo-covid/2020/03_2020/20032020_gripezinha.png');
+  assert.equal(image.alt, 'Captura do acervo: Captura <original>');
+  assert.equal(image.loading, 'lazy');
+  assert.equal(image.width, 600);
+  assert.equal(image.height, 300);
+  const sources = [...card.descendants()].find(({ className }) => className === 'acervo__fontes');
+  assert.equal(sources.text, 'Veículo de teste — Manchete de teste <sem HTML>. Reportagem publicada em 19/03/2020. Fonte primária');
+  assert.deepEqual([...sources.descendants()].map(({ href }) => href), ['https://fonte.test/noticia', 'https://fonte.test/video']);
+  assert.doesNotMatch(card.text, /COV-|Checagem|Trecho|planilha/);
+  const references = installPage(context, true);
+  await bootReferencias();
+  const [entry] = references.$('[data-fontes-declaracoes]').children;
+  const listed = [...entry.descendants()].find(({ className }) => className === 'acervo__fontes');
+  assert.equal(listed.text, 'Veículo de teste — Manchete de teste <sem HTML>. Reportagem publicada em 19/03/2020. Fonte primária');
+  assert.ok(![...entry.descendants()].some(({ tagName }) => tagName === 'details'));
+});
+
+test('headline images appear outside Leia mais while metadata stays collapsed', async context => {
+  const entries = sourcedFixture();
+  entries.declaracoes[0].acervo = archiveFixture();
+  mockData(context, obitosFixture(), entries);
+  const page = installPage(context);
+  await (await freshRender()).boot();
+  const card = page.$('[data-marks]').children[0];
+  const images = card.children.find(element => element.className === 'declaracao__headlines');
+  const more = card.children.find(element => element.tagName === 'details');
+  assert.ok([...images.descendants()].some(element => element.tagName === 'img'));
+  assert.ok(![...more.descendants()].some(element => element.tagName === 'img'));
+  assert.equal(more.children[0].textContent, 'Leia mais');
+  assert.ok(!more.open);
+  assert.equal(card.children[0].tagName, 'header');
+  const buttons = [...card.descendants()].filter(node => node.tagName === 'button');
+  assert.deepEqual(buttons.map(button => [button.className, button.attributes['aria-label']]),
+    [['declaracao__compartilhar', 'Compartilhar: Resumo editorial de teste']]);
+  assert.ok([...card.children[0].descendants()].includes(buttons[0]));
+});
+
+test('consecutive sourced events only float in the optional continuous mode', async context => {
+  const entries = sourcedFixture();
+  entries.declaracoes.push({...entries.declaracoes[0],id:'real-2'});
+  mockData(context, obitosFixture(), entries);
+  const page = installPage(context);
+  page.$('[data-track]').top = 90;
+  const playback = installPlaybackFrames(context,page);
+  await (await freshRender()).boot();
+  assert.equal(page.$('[data-marks]').hidden,false);
+  page.$('#btn-mode').listeners.click();
+  assert.equal(page.$('[data-marks]').hidden,true);
+  page.$('#btn-play').listeners.click();
+  for(let index=0;index<10;index++) playback.frame();
+  assert.equal(page.$('[data-floating]').hidden,false);
+  const floating = page.$('[data-floating]').children[0];
+  assert.ok(floating.className.includes('compacta'));
+  assert.ok(![...floating.descendants()].some(node => node.tagName==='img'));
+  for(let index=0;index<10;index++) playback.frame();
+  assert.equal(page.$('#btn-play').getAttribute('aria-pressed'),'true');
+  assert.ok(window.scrollY>0);
+});
+
+test('a page click pauses scrolling while transport controls remain independent', async (context) => {
+  mockData(context);
+  const page = installPage(context);
+  page.$('[data-track]').top = 3300;
+  const playback = installPlaybackFrames(context, page);
+  await (await freshRender()).boot();
+  page.$('#btn-start').listeners.click();
+  page.listeners.click({ target: { closest: () => ({}) } });
+  assert.equal(page.$('#btn-play').getAttribute('aria-pressed'), 'true');
+  playback.frame();
+  page.listeners.click({ target: { closest: () => null } });
+  assert.equal(page.$('#btn-play').getAttribute('aria-pressed'), 'false');
+  const position = window.scrollY;
+  playback.frame();
+  assert.equal(playback.frames.size, 0);
+  assert.equal(window.scrollY, position);
+  page.$('#btn-play').listeners.click();
+  playback.frame();
+  assert.ok(window.scrollY > position);
+});
+
 // ---- Static content ----
+
+test('the closing carries the exact message and the official total', async () => {
+  const closing = await read('src/components/Closing.astro');
+  assert.match(closing, /<h2 class="encerramento__titulo" id="encerramento-titulo">Nunca esqueceremos\.<\/h2>/);
+  assert.ok(closing.includes('<span>Essa família não pode voltar ao poder!</span>'));
+  assert.ok(closing.includes('<span>A ignorância não pode vencer.</span>'));
+  assert.match(closing, /obitos\.dias\[obitos\.dias\.length - 1\]\.acumulado/);
+  const page = await read('src/components/MemorialPage.astro');
+  assert.ok(page.indexOf('<Memorial />') < page.indexOf('<Closing />') && page.indexOf('<Closing />') < page.indexOf('<Fontes />'));
+});
 
 test('the hero shows the exact title and subtitle', async () => {
   const hero = await read('src/components/Hero.astro');
-  assert.match(hero, /<h1 class="hero__title">Memorial do Covid<\/h1>/);
-  assert.ok(hero.includes(`<p class="hero__subtitle">${SUBTITLE}</p>`));
+  assert.match(hero, /<h1 class="hero__title">Memorial <span>do Covid<\/span><\/h1>/);
+  assert.ok(!hero.includes(SUBTITLE));
+  const narrative = await read('src/components/Narrative.astro');
+  assert.ok(narrative.includes(`<p class="hero__subtitle">${SUBTITLE}</p>`));
+  assert.ok(narrative.indexOf('A dimensão da tragédia brasileira') < narrative.indexOf(SUBTITLE));
   const base = await read('src/layouts/Base.astro');
   assert.match(base, /title = 'Memorial do Covid'/);
 });
 
 test('every element render.ts needs exists in the page components', async () => {
   const page = (await Promise.all([
-    'src/components/Hero.astro', 'src/components/Memorial.astro',
-    'src/components/Counter.astro', 'src/components/Fontes.astro',
+    'src/components/Hero.astro', 'src/components/Narrative.astro', 'src/components/Memorial.astro',
+    'src/components/Counter.astro', 'src/components/Fontes.astro', 'src/components/Closing.astro',
   ].map(read))).join('\n');
   for (const selector of renderSelectors()) {
     const attribute = selector.startsWith('#') ? `id="${selector.slice(1)}"` : selector.slice(1, -1);
@@ -470,7 +628,7 @@ test('the counter shows only days, with the singular on the first day', async (c
   assert.doesNotMatch(counter, /até|data-counter-date/);
   const obitos = obitosFixture();
   obitos.dias.forEach((dia, index) => { dia.acumulado = [10, 20, 20, 30][index]; });
-  mockData(context, obitos);
+  mockData(context, obitos, { sintetico: false, declaracoes: [] });
   const { $, listeners } = installPage(context);
   $('[data-track]').top = 450;
   const { boot } = await freshRender();
@@ -494,16 +652,18 @@ test('the page is accessible in pt-BR and carries no analytics', async () => {
   assert.match(memorial, /<canvas[^>]*aria-hidden="true"/);
   assert.match(counter, /data-announcer aria-live="polite"/);
   assert.match(hero, /id="load-error" role="alert" hidden/);
-  assert.match(counter, /id="btn-share" type="button" disabled/);
+  assert.match(counter, /id="btn-share" type="button"[^>]*disabled/);
+  assert.doesNotMatch(counter, /data-counter-total/);
   assert.doesNotMatch(counter, /btn-inicio|btn-fim|Ir ao início|Ir ao fim/);
   assert.match(counter, /data-share-status role="status" hidden/);
   assert.match(counter, /<dialog[^>]*aria-labelledby="share-title"/);
-  assert.match(hero, /id="btn-start" type="button" disabled/);
+  assert.match(hero, /id="btn-start" type="button"[^>]*disabled/);
   assert.match(counter, /aria-label="Controles de rolagem automática"/);
   assert.match(counter, /id="btn-play"[\s\S]*?aria-pressed="false"[\s\S]*?disabled/);
-  assert.match(counter, /id="speed-select" aria-label="Velocidade da rolagem" disabled/);
+  assert.match(counter, /id="btn-mode"[^>]*aria-pressed="false"/);
+  assert.doesNotMatch(counter, /<select/);
   assert.match(renderSource, /ANNOUNCE_INTERVAL_MS/);
-  assert.match(renderSource, /setAttribute\('tabindex', '0'\)/);
+  assert.match(renderSource, /setAttribute\('tabindex', '-1'\)/);
   assert.match(css, /@media \(prefers-reduced-motion: reduce\)/);
   for (const source of [base, memorial, counter, hero, renderSource]) {
     assert.doesNotMatch(source, /G-6MF2B6H28V|gtag|googletagmanager/);
@@ -543,16 +703,16 @@ test('the centered column and sticky markers retain the palette and mobile safe 
   assert.match(css, /\.memorial__separator\s*\{[^}]*height: var\(--separador-altura\)/);
   assert.match(css, /\.memorial__separator-number\s*\{[^}]*font-size: 2rem/);
   assert.match(css, /\.memorial__canvas\s*\{[^}]*margin-inline: auto/);
-  assert.match(css, /\.declaracao\s*\{[^}]*position: sticky/);
+  assert.match(css, /\.declaracao\s*\{[^}]*position: absolute/);
+  assert.doesNotMatch(css, /overflow-y: auto/);
   assert.match(css, /\.declaracao\[hidden\]\s*\{\s*display: none/);
   assert.match(css, /\.declaracao__texto\s*\{[^}]*white-space: pre-line/);
-  assert.match(css, /\.declaracao__cabecalho\s*\{[^}]*position: sticky/);
-  assert.match(css, /\.declaracao__data,\s*\.ref-declaracao__data\s*\{[^}]*font-size: 1\.35rem/);
-  assert.match(css, /\.declaracao__data,\s*\.ref-declaracao__data\s*\{[^}]*font-weight: 700/);
+  assert.match(css, /\.declaracao__data\s*\{[^}]*font-size: 0\.8rem/);
+  assert.match(css, /\.ref-declaracao__data\s*\{[^}]*font-size: 1\.35rem/);
   assert.match(css, /\.ref-declaracao blockquote\s*\{[^}]*white-space: pre-line/);
-  assert.match(css, /@media \(max-width: 640px\)/);
+  assert.match(css, /@media \(max-width: 900px\)/);
   assert.match(css, /\.marco-semana\s*\{[^}]*white-space: nowrap/);
-  assert.match(css, /@media \(max-width: 640px\)\s*\{\s*\.marco-semana\s*\{[^}]*width: max-content/);
+  assert.match(css, /@media \(max-width: 900px\)\s*\{\s*\.marco-semana\s*\{[^}]*width: max-content/);
   assert.match(css, /\.marco-semana\s*\{[^}]*background: var\(--destaque\);[^}]*color: var\(--fundo\);[^}]*font-weight: 700/);
   assert.match(css, /safe-area-inset-bottom/);
   assert.match(base, /viewport-fit=cover/);
@@ -561,18 +721,14 @@ test('the centered column and sticky markers retain the palette and mobile safe 
   })) assert.ok(css.includes(`--${name}: ${value}`));
 });
 
-test('the automatic scroller uses the former 4x as its new 1x base', async () => {
-  assert.equal(config.SPEED_BASE, 1920);
-  assert.deepEqual(config.SPEED_MULTIPLIERS.map((speed) => config.SPEED_BASE * speed), [1920, 3840, 5760]);
-  assert.deepEqual(config.SPEED_MULTIPLIERS, [1, 2, 3]);
+test('the controls split Continuar, Compartilhar and Sem pausas without a speed label', async () => {
+  assert.equal(config.SECONDS_BETWEEN_MILESTONES,1.6);
+  assert.equal(config.SPEED_BASE,undefined);
   const counter = await read('src/components/Counter.astro');
-  const options = [...counter.matchAll(/<option value="([^"]+)"( selected)?>([^<]+)<\/option>/g)]
-    .map(([, value, selected, label]) => ({ value: Number(value), selected: Boolean(selected), label }));
-  assert.deepEqual(options, [
-    { value: 1, selected: true, label: '1×' },
-    { value: 2, selected: false, label: '2×' },
-    { value: 3, selected: false, label: '3×' },
-  ]);
+  const css = await read('src/styles/global.css');
+  assert.doesNotMatch(counter,/<select|<option|data-speed|Lento/);
+  assert.match(counter,/id="btn-play"[\s\S]*id="btn-share"[\s\S]*id="btn-mode"[\s\S]*Sem pausas/);
+  assert.match(css,/\.playback__controls\s*\{[^}]*grid-template-columns: repeat\(3, minmax\(0, 1fr\)\)/);
 });
 
 // ---- Boot with a minimal DOM ----
@@ -597,6 +753,7 @@ class FakeElement {
     this.disabled = false;
     this.listeners = {};
     this.top = 0;
+    this.offsetHeight = 400;
   }
   setAttribute(name, value) { this.attributes[name] = String(value); }
   getAttribute(name) { return this.attributes[name] ?? null; }
@@ -611,9 +768,15 @@ class FakeElement {
   prepend(...nodes) { this.children.unshift(...nodes); }
   scrollIntoView() { this.scrolled = true; }
   append(...nodes) { this.children.push(...nodes); }
-  replaceChildren(...nodes) { this.children = [...nodes]; }
+  replaceChildren(...nodes) {
+    this.children = [...nodes];
+    if (this.track) for (const node of nodes) node.track = this.track;
+  }
   addEventListener(type, listener) { this.listeners[type] = listener; }
-  getBoundingClientRect() { return { top: this.top }; }
+  getBoundingClientRect() {
+    return {top: this.track ? this.track.top + parseFloat(this.style.top ?? '0') : this.top};
+  }
+  querySelector(selector) { return [...this.descendants()].find(node => node.tagName === selector) ?? null; }
   *descendants() {
     for (const child of this.children) {
       if (typeof child === 'string') continue;
@@ -650,11 +813,23 @@ function installPage(context, references = false) {
   elements['#load-error'].hidden = true;
   if (!references) {
     elements['[data-aviso-sintetico]'].hidden = true;
-    for (const selector of ['#btn-share', '#btn-start', '#btn-play', '#speed-select']) {
-      elements[selector].disabled = true;
-    }
+    for (const selector of ['#btn-start', '#btn-play', '#btn-share', '#btn-mode']) elements[selector].disabled = true;
     elements['#btn-play'].setAttribute('aria-pressed', 'false');
-    elements['#speed-select'].value = '1';
+    elements['[data-marks]'].track = elements['[data-track]'];
+    // The introductions always sit above the column, like the real narrative.
+    for (const [selector,id,title,top] of [
+      ['[data-intro-first]','dimensao-da-tragedia','A dimensão da tragédia brasileira',-2200],
+      ['[data-intro-second]','memoria-e-responsabilidade','Memória e responsabilidade',-1100],
+    ]) {
+      elements[selector].id = id;
+      elements[selector].track = elements['[data-track]'];
+      elements[selector].style.top = String(top);
+      elements[selector].append(Object.assign(new FakeElement('h2'), { textContent: title }));
+    }
+    // The closing follows the column, far below every test fixture.
+    elements['[data-closing]'].track = elements['[data-track]'];
+    elements['[data-closing]'].style.top = '5000000';
+    elements['[data-closing]'].id = 'encerramento';
     elements['[data-counter]'].setAttribute('data-idle', '');
   }
 
@@ -662,11 +837,19 @@ function installPage(context, references = false) {
   const scrolls = [];
   globalThis.document = {
     querySelector: (selector) => elements[selector] ?? null,
+    querySelectorAll: (selector) => Object.values(elements).flatMap(element => [element,...element.descendants()])
+      .filter(node => selector.startsWith('[') && Object.hasOwn(node.attributes,selector.slice(1,-1))),
     createElement: (tag) => new FakeElement(tag),
-    documentElement: { scrollHeight: 5000 },
+    documentElement: { scrollHeight: 10_000_000 },
     getElementById: (id) => Object.values(elements)
       .flatMap((element) => [element, ...element.descendants()])
       .find((element) => element.id === id),
+  };
+  const move = top => {
+    const delta = top - window.scrollY;
+    window.scrollY = top;
+    if(elements['[data-track]']) elements['[data-track]'].top -= delta;
+    if(elements['[data-canvas]']) elements['[data-canvas]'].top = Math.max(0,elements['[data-track]'].top);
   };
   globalThis.window = {
     location: { hash: '', origin: 'https://memorial.test' },
@@ -677,7 +860,7 @@ function installPage(context, references = false) {
     addEventListener: (type, listener) => { listeners[type] = listener; },
     matchMedia: () => ({ matches: true }),
     getComputedStyle: () => ({ top: '72px' }),
-    scrollTo: (options) => scrolls.push(options),
+    scrollTo: options => { scrolls.push(options); move(options.top); },
   };
   globalThis.requestAnimationFrame = (callback) => callback();
   globalThis.cancelAnimationFrame = () => {};
@@ -689,7 +872,7 @@ function installPage(context, references = false) {
   });
   context.mock.method(console, 'error', () => {});
   const $ = (selector) => elements[selector];
-  return { $, listeners, scrolls };
+  return { $, listeners, scrolls, move };
 }
 
 function installPlaybackFrames(context, page) {
@@ -703,14 +886,11 @@ function installPlaybackFrames(context, page) {
     return sequence;
   });
   context.mock.method(globalThis, 'cancelAnimationFrame', (id) => frames.delete(id));
-  window.scrollBy = (_x, amount) => {
+  window.scrollTo = ({ top }) => {
     const max = document.documentElement.scrollHeight - window.innerHeight;
-    const next = Math.min(max, window.scrollY + amount);
-    const step = next - window.scrollY;
-    window.scrollY = next;
-    page.$('[data-track]').top -= step;
-    page.$('[data-canvas]').top = Math.max(0, page.$('[data-track]').top);
-    steps.push(step);
+    const next = Math.max(0, Math.min(max, top));
+    steps.push(next - window.scrollY);
+    page.move(next);
     page.listeners.scroll();
   };
   return {
@@ -749,14 +929,13 @@ test('a successful boot draws visible dots and activates the counter at mid-view
   await boot();
 
   assert.equal($('#load-error').hidden, true);
-  assert.equal($('#btn-share').disabled, false);
+  assert.equal($('#btn-mode').disabled, false);
   assert.equal($('[data-track]').style.height, '26px');
   assert.equal(arcs($('[data-canvas]')).length, 7);
   assert.ok(arcs($('[data-canvas]')).every((call) => call[3] === 12));
   assert.equal($('[data-counter-lives]').textContent, '7');
   assert.equal($('[data-counter-days]').textContent, '4 dias');
-  assert.equal($('[data-counter-total]').textContent, '7');
-  assert.equal($('[data-announcer]').textContent, '7 vidas em 4 dias, de 7.');
+  assert.equal($('[data-announcer]').textContent, '7 vidas perdidas. 4 dias desde o primeiro registro.');
 
   assert.equal($('[data-counter]').attributes['data-idle'], undefined);
   assert.equal($('[data-reference-line]').style.top, '450px');
@@ -770,88 +949,71 @@ test('a successful boot draws visible dots and activates the counter at mid-view
   assert.equal($('[data-counter-days]').textContent, '0 dias');
   assert.equal($('[data-counter]').attributes['data-idle'], '');
   assert.equal($('[data-reference-line]').classList.contains('reference-line--on'), false);
-  assert.equal($('[data-announcer]').textContent, '7 vidas em 4 dias, de 7.');
+  assert.equal($('[data-announcer]').textContent, '7 vidas perdidas. 4 dias desde o primeiro registro.');
   context.mock.timers.tick(config.ANNOUNCE_INTERVAL_MS - 1);
-  assert.equal($('[data-announcer]').textContent, '7 vidas em 4 dias, de 7.');
+  assert.equal($('[data-announcer]').textContent, '7 vidas perdidas. 4 dias desde o primeiro registro.');
   context.mock.timers.tick(1);
-  assert.equal($('[data-announcer]').textContent, '0 vidas, de 7.');
+  assert.equal($('[data-announcer]').textContent, '0 vidas perdidas. 0 dias desde o primeiro registro.');
 
   assert.deepEqual(scrolls, []);
 });
 
-test('playback starts on request, updates its button and reads the selected speed every frame', async (context) => {
-  context.mock.timers.enable({ apis: ['setTimeout', 'Date'] });
-  const obitos = obitosFixture();
-  obitos.dias.at(-1).acumulado = 1000;
-  mockData(context, obitos);
-  const page = installPage(context);
-  const { $, listeners } = page;
-  $('[data-track]').top = 450;
-  const { frame, frames, steps } = installPlaybackFrames(context, page);
-  const { boot } = await freshRender();
-  await boot();
-
-  for (const selector of ['#btn-start', '#btn-play', '#speed-select']) assert.equal($(selector).disabled, false);
-  assert.equal($('#btn-play').attributes['aria-pressed'], 'false');
-  assert.equal(frames.size, 0);
+test('each leg reaches the next milestone exactly 1.6 seconds after it starts', async context => {
+  mockData(context,obitosFixture(),sourcedFixture());
+  const page=installPage(context);
+  const {$}=page;
+  $('[data-track]').top=3300;
+  const {frame,frames,steps}=installPlaybackFrames(context,page);
+  await (await freshRender()).boot();
+  for(const selector of ['#btn-start','#btn-play','#btn-share','#btn-mode']) assert.equal($(selector).disabled,false);
+  assert.equal(frames.size,0);
   $('#btn-start').listeners.click();
-  assert.equal($('#btn-play').attributes['aria-pressed'], 'true');
-  assert.equal($('#btn-play').attributes['aria-label'], 'pausar rolagem');
-  frame();
-  frame();
-  assert.equal($('[data-counter-lives]').textContent, '80');
-  $('#speed-select').value = '2';
-  $('#speed-select').listeners.change();
-  frame();
-  $('#speed-select').value = '3';
-  $('#speed-select').listeners.change();
-  frame();
-  $('#speed-select').value = '99';
-  $('#speed-select').listeners.change();
-  frame();
-  assert.deepEqual(steps, [192, 192, 384, 576, 576]);
-  listeners.wheel();
-  assert.equal($('#btn-play').attributes['aria-pressed'], 'false');
-  assert.equal($('#btn-play').attributes['aria-label'], 'rolar automaticamente');
-  frame();
-  assert.equal(steps.length, 5);
+  for(const milestone of [1010,2110,3210]) {
+    for(let index=0;index<15;index++) frame();
+    assert.equal($('#btn-play').getAttribute('aria-pressed'),'true');
+    assert.ok(window.scrollY<milestone);
+    frame();
+    assert.equal(window.scrollY,milestone);
+    assert.equal($('#btn-play').getAttribute('aria-pressed'),'false');
+    assert.equal($('[data-play-label]').textContent,'Continuar');
+    frame();
+    assert.equal(window.scrollY,milestone);
+    $('#btn-play').listeners.click();
+  }
+  assert.ok(steps.every(step=>step>=0));
 });
 
-test('Space on the play button pauses once instead of restarting through its click', async (context) => {
-  context.mock.timers.enable({ apis: ['setTimeout', 'Date'] });
+test('keyboard activation toggles playback once without a global keydown pause', async (context) => {
   mockData(context);
   const page = installPage(context);
   const { $, listeners } = page;
+  $('[data-track]').top = 3300;
   const { frames } = installPlaybackFrames(context, page);
-  const { boot } = await freshRender();
-  await boot();
+  await (await freshRender()).boot();
   const play = $('#btn-play');
+  assert.equal(play.listeners.keydown, undefined);
+  assert.equal(listeners.keydown, undefined);
   play.listeners.click();
   assert.equal(play.attributes['aria-pressed'], 'true');
-  play.listeners.keydown({ key: ' ', repeat: false });
-  listeners.keydown({ key: ' ' });
   play.listeners.click();
   assert.equal(play.attributes['aria-pressed'], 'false');
   assert.equal(frames.size, 0);
-  play.listeners.keydown({ key: ' ', repeat: false });
-  listeners.keydown({ key: ' ' });
   play.listeners.click();
   assert.equal(play.attributes['aria-pressed'], 'true');
 });
 
-test('touch taps toggle playback without the global pointer handler pre-empting them', async (context) => {
-  context.mock.timers.enable({ apis: ['setTimeout', 'Date'] });
+test('touch activation of a transport control is exempt from the page-click pause', async (context) => {
   mockData(context);
   const page = installPage(context);
   const { $, listeners } = page;
+  $('[data-track]').top = 3300;
   installPlaybackFrames(context, page);
-  const { boot } = await freshRender();
-  await boot();
+  await (await freshRender()).boot();
   const play = $('#btn-play');
+  assert.equal(listeners.pointerdown, undefined);
   for (const expected of ['true', 'false']) {
-    play.listeners.pointerdown();
-    listeners.pointerdown({ pointerType: 'touch', button: 0, clientX: window.innerWidth - 1 });
     play.listeners.click();
+    listeners.click({ target: { closest: () => play } });
     assert.equal(play.attributes['aria-pressed'], expected);
   }
 });
@@ -865,30 +1027,37 @@ function mockNavigator(context, value) {
   });
 }
 
-test('sharing pauses playback and provides the memorial or the card-specific URL', async (context) => {
-  context.mock.timers.enable({ apis: ['setTimeout', 'Date'] });
+test('the share button beside Continuar shares the memorial or the current milestone', async (context) => {
   mockData(context, obitosFixture(), sourcedFixture());
   const shared = [];
   mockNavigator(context, { share: async (link) => { shared.push(link); } });
   const page = installPage(context);
   const { $ } = page;
-  const { frames } = installPlaybackFrames(context, page);
-  const { boot } = await freshRender();
-  await boot();
+  $('[data-track]').top = 3300;
+  const { frame, frames } = installPlaybackFrames(context, page);
+  await (await freshRender()).boot();
+  const share = async () => { $('#btn-share').listeners.click(); await new Promise(setImmediate); return shared.at(-1); };
+  assert.deepEqual(await share(), {
+    title: 'Memorial do Covid',
+    text: 'Nunca esqueceremos nossas perdas, nem os responsáveis! Você se lembra lembra? Memorial do Covid',
+    url: 'https://memorial.test/',
+  });
+
   $('#btn-start').listeners.click();
-  $('#btn-share').listeners.click();
-  await new Promise(setImmediate);
+  assert.equal((await share()).url, 'https://memorial.test/');
   assert.equal($('#btn-play').attributes['aria-pressed'], 'false');
   assert.equal(frames.size, 0);
-  assert.equal(shared[0].url, 'https://memorial.test/');
 
-  const [card] = $('[data-marks]').children;
-  const button = [...card.descendants()].find((node) => node.tagName === 'button');
-  assert.equal(button.textContent, 'Compartilhar');
-  assert.equal(card.id, 'declaracao-real-1');
-  button.listeners.click();
-  await new Promise(setImmediate);
-  assert.deepEqual(shared[1], {
+  for (const expected of ['#dimensao-da-tragedia', '#memoria-e-responsabilidade']) {
+    $('#btn-play').listeners.click();
+    for (let index = 0; index < 16; index++) frame();
+    assert.equal((await share()).url, `https://memorial.test/${expected}`);
+  }
+  assert.equal(shared.at(-1).title, 'Memória e responsabilidade');
+  $('#btn-play').listeners.click();
+  for (let index = 0; index < 16; index++) frame();
+  assert.equal($('#btn-share').attributes['aria-label'], 'Compartilhar: Resumo editorial de teste');
+  assert.deepEqual(await share(), {
     title: 'Resumo editorial de teste',
     text: 'Nunca esqueceremos nossas perdas, nem os responsáveis! Você se lembra lembra? Resumo editorial de teste',
     url: 'https://memorial.test/marcos/real-1/#declaracao-real-1',
@@ -905,7 +1074,7 @@ test('clipboard fallback reports success and manual fallback shows a selectable 
   await boot();
   $('#btn-share').listeners.click();
   await new Promise(setImmediate);
-  assert.match(copied, /Você se lembra lembra\? Memorial do Covid\nhttps:\/\/memorial.test\/$/);
+  assert.match(copied, /Você se lembra lembra\? Memorial do Covid\nhttps:\/\/memorial.test\/marcos\/teste-1\/#declaracao-teste-1$/);
   assert.equal($('[data-share-status]').hidden, false);
   assert.equal($('[data-share-status]').textContent, 'Mensagem e link copiados.');
   browser.clipboard.writeText = async () => { throw new Error('denied'); };
@@ -950,8 +1119,7 @@ test('copying another marker resets the confirmation timeout', async (context) =
   $('#btn-share').listeners.click();
   await new Promise(setImmediate);
   context.mock.timers.tick(2000);
-  const [card] = $('[data-marks]').children;
-  [...card.descendants()].find((node) => node.tagName === 'button').listeners.click();
+  $('#btn-share').listeners.click();
   await new Promise(setImmediate);
   const status = $('[data-share-status]');
   context.mock.timers.tick(1000);
@@ -1004,14 +1172,14 @@ test('shared anchors open at the correct dot row after separators and support ha
   window.location.hash = '#declaracao-teste-2';
   const { boot } = await freshRender();
   await boot();
-  assert.deepEqual(scrolls, [{ top: 3240, behavior: 'instant' }]);
+  assert.deepEqual(scrolls, [{ top: 3588, behavior: 'instant' }]);
   assert.equal($('[data-counter-lives]').textContent, '1.010');
-  assert.deepEqual($('[data-marks]').children.map((card) => card.hidden), [true, false]);
+  assert.deepEqual($('[data-marks]').children.map((card) => card.hidden), [false, false]);
   window.location.hash = '#declaracao-teste-1';
   listeners.hashchange();
-  assert.equal(scrolls.at(-1).top, 562);
-  assert.equal($('[data-counter-lives]').textContent, '10');
-  assert.deepEqual($('[data-marks]').children.map((card) => card.hidden), [false, true]);
+  assert.equal(scrolls.at(-1).top, 910);
+  assert.equal($('[data-counter-lives]').textContent, '140');
+  assert.deepEqual($('[data-marks]').children.map((card) => card.hidden), [false, false]);
   for (const hash of ['#unknown', '#%bad%escape']) {
     window.location.hash = hash;
     listeners.hashchange();
@@ -1031,7 +1199,7 @@ test('a static milestone route opens at its marker even when the fragment is omi
   document.querySelector = (selector) => selector === '[data-initial-statement]' ? marker : query(selector);
   const { boot } = await freshRender();
   await boot();
-  assert.deepEqual(scrolls, [{ top: 3240, behavior: 'instant' }]);
+  assert.deepEqual(scrolls, [{ top: 3588, behavior: 'instant' }]);
 });
 
 test('viewport adjustments and resize events do not stop automatic playback', async (context) => {
@@ -1039,6 +1207,7 @@ test('viewport adjustments and resize events do not stop automatic playback', as
   mockData(context);
   const page = installPage(context);
   const { $, listeners } = page;
+  $('[data-track]').top = 3300;
   const viewportListeners = {};
   window.visualViewport = { height: 600, offsetTop: 0, addEventListener: (type, listener) => { viewportListeners[type] = listener; } };
   const { frame } = installPlaybackFrames(context, page);
@@ -1060,7 +1229,7 @@ test('white and light gray rows keep their colors through partial and backwards 
   context.mock.timers.enable({ apis: ['setTimeout', 'Date'] });
   const obitos = obitosFixture();
   obitos.dias.at(-1).acumulado = 26;
-  mockData(context, obitos);
+  mockData(context, obitos, { sintetico: false, declaracoes: [] });
   const { $, listeners } = installPage(context);
   window.innerHeight = 78;
   const { boot } = await freshRender();
@@ -1085,46 +1254,77 @@ test('white and light gray rows keep their colors through partial and backwards 
   }
 });
 
-test('separator labels, counter dates and cards respect the empty three-row space', async (context) => {
-  context.mock.timers.enable({ apis: ['setTimeout', 'Date'] });
-  const obitos = obitosFixture();
-  obitos.dias.forEach((dia, index) => { dia.acumulado = [990, 1000, 1990, 2010][index]; });
-  const statements = syntheticFixture();
-  statements.declaracoes[1].data = '2020-03-19';
-  mockData(context, obitos, statements);
-  const { $, listeners } = installPage(context);
-  const { boot } = await freshRender();
-  await boot();
-  const labels = $('[data-separators]').children;
-  assert.deepEqual(labels.map((label) => label.attributes['data-lives']), ['1000', '2000']);
-  assert.deepEqual(labels.map((label) => label.style.top), ['2600px', '5278px']);
-  assert.deepEqual(labels.map((label) => label.text), ['1.000vidas', '2.000vidas']);
-  assert.ok(labels.every((label) => label.children[0].tagName === 'strong'));
-  assert.equal($('[data-track]').style.height, '5382px');
-
-  for (const [depth, lives, days, activeCards] of [
-    [2574, '1.000', '2 dias', [false, true]],
-    [2600, '1.000', '2 dias', [false, true]],
-    [2639, '1.000', '2 dias', [false, true]],
-    [2677.9, '1.000', '2 dias', [false, true]],
-    [2678, '1.010', '3 dias', [true, false]],
-    [5278, '2.000', '4 dias', [true, false]],
-    [5356, '2.010', '4 dias', [true, false]],
-    [2639, '1.000', '2 dias', [false, true]],
+test('separator labels and counter dates preserve the empty three-row space', async context => {
+  const obitos=obitosFixture();
+  obitos.dias.forEach((dia,index)=>{dia.acumulado=[990,1000,1990,2010][index];});
+  mockData(context,obitos,{ sintetico: false, declaracoes: [] });
+  const {$,listeners}=installPage(context);
+  await (await freshRender()).boot();
+  const labels=$('[data-separators]').children;
+  assert.deepEqual(labels.map(label=>label.attributes['data-lives']),['1000','2000']);
+  assert.deepEqual(labels.map(label=>label.style.top),['2600px','5278px']);
+  assert.deepEqual(labels.map(label=>label.text),['1.000vidas','2.000vidas']);
+  assert.equal($('[data-track]').style.height,'5382px');
+  for(const [depth,lives,days] of [
+    [2574,'1.000','2 dias'],[2600,'1.000','2 dias'],[2677.9,'1.000','2 dias'],
+    [2678,'1.010','3 dias'],[5278,'2.000','4 dias'],[5356,'2.010','4 dias'],
   ]) {
-    $('[data-track]').top = 450 - depth;
+    $('[data-track]').top=450-depth;
     listeners.scroll();
-    assert.equal($('[data-counter-lives]').textContent, lives);
-    assert.equal($('[data-counter-days]').textContent, days);
-    assert.deepEqual($('[data-marks]').children.map((card) => card.hidden), activeCards);
+    assert.equal($('[data-counter-lives]').textContent,lives);
+    assert.equal($('[data-counter-days]').textContent,days);
   }
+});
+
+test('a lives marker sits one row below its card and takes a nearby thousand separator slot', async context => {
+  // Fake cards are 400 px tall. At row 50 no separator is nearby, so the marker starts in the
+  // first row gap at least 24 px below the card. At row 80 the 1.000 slot (y 2600) lies just
+  // past that gap. At row 86 the slot starts under the card, so the marker grows to a row gap.
+  // At row 87 the slot ends 16 px below the card, so the marker starts right after it.
+  // The marker counts the dots above it, so a marker in the 1.000 slot reads 1.000.
+  for (const [first,cardTop,top,height,skipped,count] of [
+    [500,'1300px','1741px','78px',false,'670'],
+    [800,'2080px','2600px','78px',true,'1.000'],
+    [860,'2236px','2660px','95px',true,'1.000'],
+    [870,'2262px','2677px','78px',true,'1.000'],
+  ]) {
+    const obitos=obitosFixture();
+    obitos.dias.forEach((dia,index)=>{dia.acumulado=[first,1000,1000,2010][index];});
+    mockData(context,obitos,sourcedFixture());
+    const {$}=installPage(context);
+    await (await freshRender()).boot();
+    const [marker]=$('[data-news-markers]').children;
+    assert.equal(marker.text,`${count}vidas`);
+    assert.equal($('[data-marks]').children[0].style.top,cardTop);
+    assert.deepEqual([marker.style.top,marker.style.height],[top,height]);
+    assert.equal(marker.classes.has('memorial__separator--oculto'),false);
+    const separators=$('[data-separators]').children;
+    assert.deepEqual(separators.map(label=>label.attributes['data-lives']),['1000','2000']);
+    assert.deepEqual(separators.map(label=>label.classes.has('memorial__separator--oculto')),[skipped,false]);
+  }
+});
+
+test('continuous mode hides the lives markers and restores every thousand separator', async context => {
+  const obitos=obitosFixture();
+  obitos.dias.forEach((dia,index)=>{dia.acumulado=[860,1000,1000,2010][index];});
+  mockData(context,obitos,sourcedFixture());
+  const {$}=installPage(context);
+  await (await freshRender()).boot();
+  const separators=$('[data-separators]').children;
+  assert.deepEqual(separators.map(label=>label.classes.has('memorial__separator--oculto')),[true,false]);
+  $('#btn-mode').listeners.click();
+  assert.equal($('[data-news-markers]').hidden,true);
+  assert.deepEqual(separators.map(label=>label.classes.has('memorial__separator--oculto')),[false,false]);
+  $('#btn-mode').listeners.click();
+  assert.equal($('[data-news-markers]').hidden,false);
+  assert.deepEqual(separators.map(label=>label.classes.has('memorial__separator--oculto')),[true,false]);
 });
 
 test('the canvas leaves separators blank and preserves the colors of surrounding rows', async (context) => {
   context.mock.timers.enable({ apis: ['setTimeout', 'Date'] });
   const obitos = obitosFixture();
   obitos.dias.at(-1).acumulado = 1010;
-  mockData(context, obitos);
+  mockData(context, obitos, { sintetico: false, declaracoes: [] });
   const { $, listeners } = installPage(context);
   window.innerHeight = 78;
   const { boot } = await freshRender();
@@ -1149,25 +1349,23 @@ test('the canvas leaves separators blank and preserves the colors of surrounding
   }
 });
 
-test('cards fit above the mobile share bar at the first and last anchors', async (context) => {
-  const obitos = obitosFixture();
-  obitos.dias.at(-1).acumulado = 2001;
-  mockData(context, obitos);
-  const { $, listeners } = installPage(context);
-  window.innerWidth = 320;
-  window.innerHeight = 740;
-  $('[data-counter]').top = 612;
-  $('[data-track]').top = 358;
-  $('[data-marks]').top = 358 - window.innerHeight / 2;
-  const { boot } = await freshRender();
-  await boot();
-  const cards = $('[data-marks]').children;
-  assert.equal(cards.find((card) => !card.hidden).style['--card-space'], '524px');
-  assert.match(await read('src/styles/global.css'), /\.memorial__marks\s*\{[^}]*top: -50svh/);
-  const height = parseInt($('[data-track]').style.height);
-  $('[data-track]').top = 371 - height;
-  listeners.scroll();
-  assert.equal(cards.find((card) => !card.hidden).style['--card-space'], '283px');
+test('mobile cards use the page scroll, share from the controls and collapse supplementary text', async context => {
+  mockData(context,obitosFixture(),sourcedFixture());
+  const {$}=installPage(context);
+  window.innerWidth=320; window.innerHeight=740;
+  await (await freshRender()).boot();
+  const card=$('[data-marks]').children[0];
+  const header=card.children[0];
+  const buttons=[...card.descendants()].filter(node=>node.tagName==='button');
+  assert.deepEqual(buttons.map(button=>button.className),['declaracao__compartilhar']);
+  assert.equal(header.children[0].children[1],buttons[0]);
+  assert.equal($('#btn-share').disabled,false);
+  const more=card.children.find(node=>node.tagName==='details');
+  assert.ok(!more.open);
+  assert.match(more.text,/Contexto de teste/);
+  const css=await read('src/styles/global.css');
+  assert.doesNotMatch(css,/overflow-y:\s*auto|--card-space/);
+  assert.match(css,/\.declaracao\s*\{[^}]*position: absolute/);
 });
 
 test('the memorial renders weekly dates starting on March 30', async (context) => {
@@ -1178,7 +1376,7 @@ test('the memorial renders weekly dates starting on March 30', async (context) =
     { data: '2020-04-06', acumulado: 150 },
     { data: '2020-04-13', acumulado: 250 },
   );
-  mockData(context, obitos);
+  mockData(context, obitos, { sintetico: false, declaracoes: [] });
   const { $ } = installPage(context);
   const { boot } = await freshRender();
   await boot();
@@ -1192,6 +1390,28 @@ test('the memorial renders weekly dates starting on March 30', async (context) =
   ]);
 });
 
+test('weekly dates hidden behind a news card or its lives marker return in continuous mode', async context => {
+  const obitos = obitosFixture();
+  obitos.dias.push(
+    { data: '2020-03-23', acumulado: 15 },
+    { data: '2020-03-30', acumulado: 100 },
+    { data: '2020-04-06', acumulado: 150 },
+    { data: '2020-04-13', acumulado: 250 },
+    { data: '2020-04-20', acumulado: 400 },
+  );
+  mockData(context, obitos, sourcedFixture());
+  const { $, listeners } = installPage(context);
+  await (await freshRender()).boot();
+  const labels = $('[data-weeks]').children;
+  for (const label of labels) label.offsetHeight = 30;
+  listeners.resize();
+  assert.deepEqual(labels.map(label => label.style.top), ['26px', '260px', '390px', '650px']);
+  const hidden = () => labels.map(label => label.classes.has('marco-semana--oculto'));
+  assert.deepEqual(hidden(), [true, true, true, false]);
+  $('#btn-mode').listeners.click();
+  assert.deepEqual(hidden(), [false, false, false, false]);
+});
+
 test('synthetic statements are labeled and never become source links', async (context) => {
   mockData(context);
   const { $ } = installPage(context);
@@ -1202,7 +1422,7 @@ test('synthetic statements are labeled and never become source links', async (co
   const cards = $('[data-marks]').children.filter((node) => node.tagName === 'article');
   assert.equal(cards.length, 2);
   for (const card of cards) {
-    assert.equal(card.attributes.tabindex, '0');
+    assert.equal(card.attributes.tabindex, '-1');
     const [header] = card.children;
     assert.equal(header.tagName, 'header');
     assert.equal(header.children[0].className, 'declaracao__selo');
@@ -1226,16 +1446,18 @@ test('sourced statements link to their references without the synthetic label', 
   const [card] = $('[data-marks]').children.filter((node) => node.tagName === 'article');
   assert.doesNotMatch(card.text, /exemplo sintético/);
   assert.match(card.text, /Autor de teste/);
-  assert.doesNotMatch(card.text, /Contexto de teste/);
+  assert.ok(!card.children.find(node => node.tagName === 'details').open);
+  assert.match(card.text, /Contexto de teste/);
   const [header] = card.children;
   assert.equal(header.tagName, 'header');
-  assert.equal(header.children[0].tagName, 'time');
-  assert.equal(header.children[0].dateTime, '2020-03-18');
-  assert.equal(header.children[0].textContent, '18/03/2020');
+  const [date] = header.children[0].children;
+  assert.equal(date.tagName, 'time');
+  assert.equal(date.dateTime, '2020-03-18');
+  assert.equal(date.textContent, '18/03/2020');
   assert.equal(header.children[1].tagName, 'h3');
   assert.equal(header.children[1].textContent, 'Resumo editorial de teste');
   assert.equal(card.children.find((node) => node.tagName === 'blockquote').textContent, 'Texto de teste com fonte.');
-  assert.equal(card.style.top, undefined);
+  assert.equal(card.style.top, '0px');
   const links = [...card.descendants()].filter((node) => node.tagName === 'a');
   assert.deepEqual(links.map((link) => link.href), ['/referencias#declaracao-real-1']);
 });
@@ -1261,21 +1483,22 @@ test('real statements retain each author, quote and reference when the active ca
   await boot();
 
   const cards = $('[data-marks]').children;
-  assert.deepEqual(cards.map((card) => card.hidden), [false, true]);
+  assert.deepEqual(cards.map((card) => card.hidden), [false, false]);
   for (const [index, card] of cards.entries()) {
     const [header] = card.children;
     assert.equal(header.children[1].textContent, `Resumo ${index + 1}`);
     assert.equal(header.children[2].textContent, `Autor ${index + 1}`);
     assert.equal(card.children.find((node) => node.tagName === 'blockquote').textContent, `Citação ${index + 1}`);
     assert.equal([...card.descendants()].find((node) => node.tagName === 'a').href, `/referencias#declaracao-autor-${index + 1}`);
-    assert.doesNotMatch(card.text, /Contexto/);
+    assert.match(card.text, /Contexto/);
+    assert.ok(!card.children.find(node => node.tagName === 'details').open);
   }
   $('[data-track]').top = 398;
   listeners.scroll();
-  assert.deepEqual(cards.map((card) => card.hidden), [true, false]);
+  assert.deepEqual(cards.map((card) => card.hidden), [false, false]);
   $('[data-track]').top = 450;
   listeners.scroll();
-  assert.deepEqual(cards.map((card) => card.hidden), [false, true]);
+  assert.deepEqual(cards.map((card) => card.hidden), [false, false]);
 
   const references = installPage(context, true);
   await bootReferencias();
@@ -1305,7 +1528,7 @@ test('historical news renders as editorial text rather than a literal quotation'
   assert.equal(card.children[1].tagName, 'p');
   assert.equal(card.children[1].textContent, entries.declaracoes[0].texto);
   assert.ok([...card.descendants()].every((node) => node.tagName !== 'blockquote' && node.tagName !== 'img'));
-  assert.match(card.children[0].text, /marco histórico/);
+  assert.match(card.children.find(node => node.tagName === 'details').text, /não uma citação literal/);
   const refs = installPage(context, true);
   await bootReferencias();
   const [reference] = refs.$('[data-fontes-declaracoes]').children;
@@ -1315,50 +1538,114 @@ test('historical news renders as editorial text rather than a literal quotation'
   assert.match(reference.text, /não uma citação literal/);
 });
 
-test('all markers sharing a dot row remain individually reachable and shareable', async (context) => {
-  context.mock.timers.enable({ apis: ['setTimeout', 'Date'] });
-  const entries = sourcedFixture();
-  const first = entries.declaracoes[0];
-  entries.declaracoes = [
-    { ...first, id: 'first', data: '2020-03-17' },
-    { ...first, id: 'second', tipo: 'noticia', data: '2020-03-18' },
-    { ...first, id: 'third', tipo: 'noticia', data: '2020-03-18' },
-    { ...first, id: 'later', tipo: 'noticia', data: '2020-03-20' },
-  ];
-  const deaths = obitosFixture();
-  deaths.dias.forEach((dia, index) => { dia.acumulado = [1, 7, 10, 20][index]; });
-  mockData(context, deaths, entries);
-  const shared = [];
-  mockNavigator(context, { share: async (link) => { shared.push(link); } });
-  const { $, listeners } = installPage(context);
-  $('[data-track]').top = 450;
-  const { boot } = await freshRender();
-  await boot();
-  const cards = $('[data-marks]').children;
-  const visible = () => cards.filter((card) => !card.hidden).map((card) => card.id);
-  const nav = (card, text) => [...card.descendants()].find((node) => node.tagName === 'button' && node.textContent === text);
-  assert.deepEqual(visible(), ['declaracao-third']);
-  nav(cards[2], 'Anterior').listeners.click();
-  assert.deepEqual(visible(), ['declaracao-second']);
-  assert.equal(cards[1].focused, true);
-  nav(cards[1], 'Anterior').listeners.click();
-  assert.deepEqual(visible(), ['declaracao-first']);
-  assert.equal(nav(cards[0], 'Anterior').disabled, true);
-  nav(cards[0], 'Próximo').listeners.click();
-  assert.deepEqual(visible(), ['declaracao-second']);
-  [...cards[1].descendants()].find((node) => node.textContent === 'Compartilhar').listeners.click();
+test('each card has its own small share button, also on the floating header', async context => {
+  const entries=sourcedFixture();
+  entries.declaracoes=[{...entries.declaracoes[0],id:'first',subtitulo:'Primeiro'},{...entries.declaracoes[0],id:'second',subtitulo:'Segundo'}];
+  mockData(context,obitosFixture(),entries);
+  const shared=[];
+  mockNavigator(context,{share:async link=>{shared.push(link);}});
+  const page=installPage(context);
+  page.$('[data-track]').top=90;
+  installPlaybackFrames(context,page);
+  await (await freshRender()).boot();
+  const share=card=>[...card.descendants()].find(node=>node.className==='declaracao__compartilhar');
+  share(page.$('[data-marks]').children[1]).listeners.click();
   await new Promise(setImmediate);
-  assert.equal(shared[0].url, 'https://memorial.test/marcos/second/#declaracao-second');
-  window.location.hash = '#declaracao-first';
+  assert.deepEqual(shared[0],{
+    title:'Segundo',
+    text:'Nunca esqueceremos nossas perdas, nem os responsáveis! Você se lembra lembra? Segundo',
+    url:'https://memorial.test/marcos/second/#declaracao-second',
+  });
+  page.$('#btn-mode').listeners.click();
+  share(page.$('[data-floating]').children[0]).listeners.click();
+  await new Promise(setImmediate);
+  assert.equal(shared[1].url,'https://memorial.test/marcos/first/#declaracao-first');
+});
+
+test('the journey ends on the closing message, which hides the controls and shares the memorial', async context => {
+  mockData(context,obitosFixture(),sourcedFixture());
+  const shared=[];
+  mockNavigator(context,{share:async link=>{shared.push(link);}});
+  const page=installPage(context);
+  const {$}=page;
+  $('[data-track]').top=1000;
+  $('[data-closing]').style.top='3000';
+  const {frame}=installPlaybackFrames(context,page);
+  await (await freshRender()).boot();
+  $('#btn-start').listeners.click();
+  for(let index=0;index<16;index++) frame();
+  assert.equal(window.scrollY,910);
+  assert.equal($('[data-playback]').hidden,false);
+  $('#btn-play').listeners.click();
+  for(let index=0;index<16;index++) frame();
+  assert.equal(window.scrollY,4000);
+  assert.equal($('#btn-play').getAttribute('aria-pressed'),'false');
+  frame();
+  assert.equal($('[data-playback]').hidden,true);
+  $('[data-share-closing]').listeners.click();
+  await new Promise(setImmediate);
+  assert.deepEqual(shared.at(-1),{
+    title:'Memorial do Covid',
+    text:'Nunca esqueceremos nossas perdas, nem os responsáveis! Você se lembra lembra? Memorial do Covid',
+    url:'https://memorial.test/',
+  });
+});
+
+test('continuous mode rests on the closing message instead of the page bottom', async context => {
+  mockData(context,obitosFixture(),sourcedFixture());
+  const page=installPage(context);
+  const {$}=page;
+  $('[data-track]').top=1000;
+  $('[data-closing]').style.top='3000';
+  const {frame}=installPlaybackFrames(context,page);
+  await (await freshRender()).boot();
+  $('#btn-mode').listeners.click();
+  $('#btn-play').listeners.click();
+  for(let index=0;index<200 && $('#btn-play').getAttribute('aria-pressed')==='true';index++) frame();
+  assert.equal(window.scrollY,4000);
+});
+
+test('weekly dates closer than four rows are skipped instead of overlapping', async context => {
+  const obitos=obitosFixture();
+  obitos.dias.push(
+    {data:'2020-03-23',acumulado:15},{data:'2020-03-30',acumulado:30},{data:'2020-04-06',acumulado:40},
+    {data:'2020-04-13',acumulado:130},{data:'2020-04-20',acumulado:200},
+  );
+  mockData(context,obitos,{sintetico:false,declaracoes:[]});
+  const {$}=installPage(context);
+  await (await freshRender()).boot();
+  assert.deepEqual($('[data-weeks]').children.map(label=>label.text),['30/03/2020','20/04/2020']);
+});
+
+test('same-row markers keep their dot row and Continuar steps through them in place', async context => {
+  const entries=sourcedFixture();
+  const first=entries.declaracoes[0];
+  entries.declaracoes=[{...first,id:'first'},{...first,id:'second'},{...first,id:'third'}];
+  mockData(context,obitosFixture(),entries);
+  const shared=[];
+  mockNavigator(context,{share:async link=>{shared.push(link);}});
+  const page=installPage(context);
+  const {$,listeners}=page;
+  $('[data-track]').top=1000;
+  installPlaybackFrames(context,page);
+  await (await freshRender()).boot();
+  const cards=$('[data-marks]').children;
+  const shown=()=>cards.map(card=>!card.classes.has('declaracao--oculta'));
+  assert.deepEqual(cards.map(card=>card.style.top),['0px','0px','0px']);
+  assert.deepEqual(shown(),[true,false,false]);
+  window.location.hash='#declaracao-second';
   listeners.hashchange();
-  assert.deepEqual(visible(), ['declaracao-first']);
-  assert.equal($('#btn-play').attributes['aria-pressed'], 'false');
-  $('[data-track]').top = 424;
-  listeners.scroll();
-  assert.deepEqual(visible(), ['declaracao-later']);
-  $('[data-track]').top = 450;
-  listeners.scroll();
-  assert.deepEqual(visible(), ['declaracao-third'], 'leaving the group releases the pinned selection');
+  assert.equal(window.scrollY,910);
+  assert.deepEqual(shown(),[false,true,false]);
+  $('#btn-play').listeners.click();
+  assert.equal(window.scrollY,910);
+  assert.equal($('#btn-play').getAttribute('aria-pressed'),'false');
+  assert.deepEqual(shown(),[false,false,true]);
+  $('#btn-share').listeners.click();
+  await new Promise(setImmediate);
+  assert.equal(shared[0].url,'https://memorial.test/marcos/third/#declaracao-third');
+  $('#btn-play').listeners.click();
+  assert.equal($('#btn-play').getAttribute('aria-pressed'),'true');
 });
 
 test('milestone subtitles are separate headings and never interpreted as HTML', async (context) => {
@@ -1377,35 +1664,34 @@ test('milestone subtitles are separate headings and never interpreted as HTML', 
   assert.ok(nodes.every((node) => !['script', 'img'].includes(node.tagName)));
 });
 
-test('only the latest reached statement floats, including when scrolling backwards', async (context) => {
-  const obitos = obitosFixture();
-  obitos.dias.forEach((dia, index) => { dia.acumulado = [10, 20, 20, 30][index]; });
-  const statements = syntheticFixture();
-  statements.declaracoes.reverse();
-  mockData(context, obitos, statements);
-  const { $, listeners } = installPage(context);
-  $('[data-track]').top = 450;
-  const { boot } = await freshRender();
-  await boot();
-
-  const cards = $('[data-marks]').children;
-  assert.match(cards[0].text, /Exemplo sintético 1/);
-  assert.deepEqual(cards.map((card) => card.hidden), [false, true]);
-  $('[data-track]').top = 398;
+test('continuous mode floats only the latest header and supports backwards scrolling', async context => {
+  const entries=sourcedFixture();
+  entries.declaracoes=[{...entries.declaracoes[0],id:'first',data:'2020-03-17'},{...entries.declaracoes[0],id:'second',data:'2020-03-20'}];
+  const obitos=obitosFixture();
+  obitos.dias.forEach((dia,index)=>{dia.acumulado=[10,20,20,30][index];});
+  mockData(context,obitos,entries);
+  const {$,listeners}=installPage(context);
+  $('[data-track]').top=90;
+  await (await freshRender()).boot();
+  $('#btn-mode').listeners.click();
+  const floatingDate=()=>[...$('[data-floating]').descendants()].find(node=>node.tagName==='time')?.dateTime;
+  assert.equal(floatingDate(),'2020-03-17');
+  const second=parseInt($('[data-marks]').children[1].style.top);
+  $('[data-track]').top=90-second;
   listeners.scroll();
-  assert.deepEqual(cards.map((card) => card.hidden), [true, false]);
-  $('[data-track]').top = 424;
+  assert.equal(floatingDate(),'2020-03-20');
+  $('[data-track]').top=90;
   listeners.scroll();
-  assert.deepEqual(cards.map((card) => card.hidden), [false, true]);
-  $('[data-track]').top = 1000;
+  assert.equal(floatingDate(),'2020-03-17');
+  $('[data-track]').top=1000;
   listeners.scroll();
-  assert.ok(cards.every((card) => card.hidden));
+  assert.equal($('[data-floating]').hidden,true);
 });
 
 test('mobile viewport resizing keeps the canvas and counter on the visible midpoint', async (context) => {
   const obitos = obitosFixture();
   obitos.dias.forEach((dia, index) => { dia.acumulado = [10, 20, 20, 300][index]; });
-  mockData(context, obitos);
+  mockData(context, obitos, { sintetico: false, declaracoes: [] });
   const { $, scrolls } = installPage(context);
   const viewportListeners = {};
   window.visualViewport = {
@@ -1423,7 +1709,6 @@ test('mobile viewport resizing keeps the canvas and counter on the visible midpo
   assert.ok(arcs($('[data-canvas]')).every((call) => call[3] === 12));
   assert.equal($('[data-canvas]').style.top, '20px');
   assert.equal($('[data-reference-line]').style.top, '320px');
-  assert.equal($('[data-counter]').style['--linha-y'], '320px');
   assert.equal($('[data-counter-lives]').textContent, '20');
   assert.equal($('[data-counter]').attributes['data-idle'], undefined);
 
@@ -1539,14 +1824,14 @@ test('missing, invalid, or oversized data shows the error and draws nothing', as
       await boot();
 
       assert.equal($('#load-error').hidden, false);
-      for (const selector of ['#btn-share', '#btn-start', '#btn-play', '#speed-select']) {
+      for (const selector of ['#btn-start', '#btn-play', '#btn-mode']) {
         assert.equal($(selector).disabled, true, selector);
       }
       assert.equal(listeners.wheel, undefined);
       assert.equal($('[data-canvas]').calls.length, 0);
       assert.equal($('[data-track]').style.height, undefined);
       assert.deepEqual($('[data-marks]').children, []);
-      for (const selector of ['[data-counter-lives]', '[data-counter-total]']) {
+      for (const selector of ['[data-counter-lives]', '[data-counter-days]']) {
         assert.equal($(selector).textContent, '…', selector);
       }
       assert.equal($('[data-announcer]').textContent, '…');

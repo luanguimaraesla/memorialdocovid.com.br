@@ -3,30 +3,35 @@ import { readFile } from 'node:fs/promises';
 import test from 'node:test';
 import ts from 'typescript';
 
-const source = await readFile(new URL('../src/lib/autoscroll.ts', import.meta.url), 'utf8');
-const { outputText } = ts.transpileModule(source, {
-  compilerOptions: { target: ts.ScriptTarget.ES2022, module: ts.ModuleKind.ES2022 },
-});
-const { createAutoscroll } = await import(`data:text/javascript;base64,${Buffer.from(outputText).toString('base64')}`);
+const read = path => readFile(new URL(`../${path}`, import.meta.url), 'utf8');
+function moduleUrl(source) {
+  const { outputText } = ts.transpileModule(source, {
+    compilerOptions: { target: ts.ScriptTarget.ES2022, module: ts.ModuleKind.ES2022 },
+  });
+  return `data:text/javascript;base64,${Buffer.from(outputText).toString('base64')}`;
+}
+const configUrl = moduleUrl(await read('src/config.ts'));
+const journeyUrl = moduleUrl((await read('src/lib/journey.ts')).replaceAll("'../config'", JSON.stringify(configUrl)));
+const journey = await import(journeyUrl);
+const { createAutoscroll } = await import(moduleUrl((await read('src/lib/autoscroll.ts'))
+  .replaceAll("'../config'", JSON.stringify(configUrl))
+  .replaceAll("'./journey'", JSON.stringify(journeyUrl))));
 
-function installScroller(context, { speed = 1920, top = 0, max = 10_000 } = {}) {
+const nextMilestone = from => journey.guidedPath(from, from + 1600);
+
+function installScroller(context, { top = 0, max = 10_000, plan = nextMilestone } = {}) {
   const listeners = {};
   const states = [];
-  const steps = [];
+  const waypoints = [];
+  const plans = [];
   const frames = new Map();
   let time = 0;
   let sequence = 0;
-  globalThis.document = { documentElement: { scrollHeight: max + 800 } };
   globalThis.window = {
     scrollY: top,
     innerHeight: 800,
-    innerWidth: 1200,
-    matchMedia: () => ({ matches: true }),
     addEventListener: (type, listener) => { listeners[type] = listener; },
-    scrollBy: (_x, amount) => {
-      window.scrollY = Math.min(max, window.scrollY + amount);
-      steps.push(amount);
-    },
+    scrollTo: ({ top: y }) => { window.scrollY = Math.max(0, Math.min(max, y)); },
   };
   globalThis.requestAnimationFrame = (callback) => {
     frames.set(++sequence, callback);
@@ -35,165 +40,123 @@ function installScroller(context, { speed = 1920, top = 0, max = 10_000 } = {}) 
   globalThis.cancelAnimationFrame = (id) => frames.delete(id);
   context.mock.method(performance, 'now', () => time);
   context.after(() => {
-    delete globalThis.document;
     delete globalThis.window;
     delete globalThis.requestAnimationFrame;
     delete globalThis.cancelAnimationFrame;
   });
   const scroller = createAutoscroll({
-    getSpeed: () => speed,
+    plan: from => { plans.push(from); return from < max ? plan(from) : undefined; },
+    onWaypoint: index => waypoints.push([index, window.scrollY, Math.round(time)]),
     onStateChange: (playing) => states.push(playing),
   });
   return {
-    scroller, listeners, frames, states, steps,
-    setSpeed: (value) => { speed = value; },
+    scroller, listeners, frames, states, waypoints, plans,
     frame(milliseconds = 100) {
       time += milliseconds;
       const callbacks = [...frames.values()];
       frames.clear();
       callbacks.forEach((callback) => callback(time));
     },
+    frames16() { for (let index = 0; index < 16; index++) this.frame(); },
   };
 }
 
-test('autoscroll stays paused until explicitly started, including with reduced motion', (context) => {
+test('autoscroll stays paused until explicitly started', (context) => {
   const { scroller, frames, states, frame } = installScroller(context);
   frame();
   assert.equal(scroller.isPlaying(), false);
   assert.equal(frames.size, 0);
   assert.deepEqual(states, []);
   assert.equal(window.scrollY, 0);
-  scroller.play();
-  frame();
-  assert.equal(window.scrollY, 192);
 });
 
-test('autoscroll advances 1920 pixels over one second', (context) => {
-  const { scroller, frame, states } = installScroller(context);
+test('a guided leg reaches its milestone exactly 1.6 seconds after it starts', (context) => {
+  const { scroller, frame, states, waypoints } = installScroller(context, { top: 400 });
   scroller.play();
   scroller.play();
-  for (let i = 0; i < 10; i++) frame();
-  assert.equal(window.scrollY, 1920);
-  assert.deepEqual(states, [true]);
+  for (let index = 0; index < 15; index++) frame();
+  assert.equal(scroller.isPlaying(), true);
+  assert.ok(window.scrollY > 400 && window.scrollY < 2000);
+  frame();
+  assert.equal(window.scrollY, 2000);
+  assert.deepEqual(waypoints, [[1, 2000, 1600]]);
+  assert.equal(scroller.isPlaying(), false);
+  assert.deepEqual(states, [true, false]);
 });
 
-test('speed changes apply on the next frame without restarting playback', (context) => {
-  const { scroller, setSpeed, frame, steps, states } = installScroller(context);
+test('continuous paths report every milestone at 1.6-second intervals and stop at the end', (context) => {
+  const plan = from => journey.continuousPath([from, 1000, 1000, 5000]);
+  const { scroller, frame, waypoints, states } = installScroller(context, { plan });
   scroller.play();
+  for (let index = 0; index < 47; index++) frame();
+  assert.equal(scroller.isPlaying(), true);
   frame();
-  setSpeed(3840);
-  frame();
-  setSpeed(5760);
-  frame();
-  assert.deepEqual(steps, [192, 384, 576]);
-  assert.deepEqual(states, [true]);
-});
-
-test('subpixel movement accumulates instead of stalling at low speeds', (context) => {
-  const { scroller, frame } = installScroller(context, { speed: 0.25 });
-  scroller.play();
-  for (let i = 0; i < 50; i++) frame();
-  assert.equal(window.scrollY, 1);
+  assert.deepEqual(waypoints, [[1, 1000, 1600], [2, 1000, 3200], [3, 5000, 4800]]);
+  assert.deepEqual(states, [true, false]);
 });
 
 test('a delayed animation frame is capped at 100 milliseconds', (context) => {
   const { scroller, frame } = installScroller(context);
   scroller.play();
   frame(10_000);
-  assert.equal(window.scrollY, 192);
+  assert.equal(window.scrollY, journey.positionAt(nextMilestone(0), 0.1));
 });
 
-test('pausing cancels the loop and resuming resets its time baseline', (context) => {
-  const { scroller, frame, frames, states } = installScroller(context);
+test('pausing freezes the page and resuming plans again from where it stopped', (context) => {
+  const { scroller, frame, frames, states, plans, waypoints } = installScroller(context);
   scroller.play();
-  frame();
+  for (let index = 0; index < 5; index++) frame();
   scroller.pause();
   scroller.pause();
   assert.equal(frames.size, 0);
+  const position = window.scrollY;
   frame(10_000);
-  assert.equal(window.scrollY, 192);
+  assert.equal(window.scrollY, position);
+  scroller.play();
+  for (let index = 0; index < 16; index++) frame();
+  assert.deepEqual(plans, [0, position]);
+  assert.equal(window.scrollY, position + 1600);
+  assert.deepEqual(waypoints.map(([index]) => index), [1]);
+  assert.deepEqual(states, [true, false, true, false]);
+});
+
+test('manual scrolling during playback continues from the new position without pausing', (context) => {
+  const { scroller, frame, plans, states } = installScroller(context, { top: 3000 });
   scroller.play();
   frame();
-  assert.equal(window.scrollY, 384);
-  assert.deepEqual(states, [true, false, true]);
-});
-
-test('wheel and touch pan pause playback, but taps and unrelated keys do not', (context) => {
-  const { scroller, listeners, frames } = installScroller(context);
-  scroller.play();
-  assert.equal(listeners.touchstart, undefined);
-  listeners.pointerdown({ pointerType: 'touch', button: 0, clientX: 1199 });
-  listeners.pointerdown({ pointerType: 'pen', button: 0, clientX: 1199 });
-  listeners.pointerdown({ pointerType: 'mouse', button: 0, clientX: 300 });
-  listeners.keydown({ key: 'Tab' });
-  assert.equal(scroller.isPlaying(), true);
-  listeners.wheel();
-  assert.equal(scroller.isPlaying(), false);
-  assert.equal(frames.size, 0);
-  scroller.play();
-  listeners.touchmove();
-  assert.equal(scroller.isPlaying(), false);
-});
-
-test('scroll navigation keys pause playback', (context) => {
-  const { scroller, listeners } = installScroller(context);
-  for (const key of [' ', 'Spacebar', 'ArrowUp', 'ArrowDown', 'PageUp', 'PageDown', 'Home', 'End']) {
-    scroller.play();
-    listeners.keydown({ key });
-    assert.equal(scroller.isPlaying(), false, key);
-  }
-});
-
-test('mouse scrollbar grabs and middle clicks pause playback', (context) => {
-  const { scroller, listeners } = installScroller(context);
-  scroller.play();
-  listeners.pointerdown({ pointerType: 'mouse', button: 0, clientX: 1190 });
-  assert.equal(scroller.isPlaying(), false);
-  scroller.play();
-  listeners.pointerdown({ pointerType: 'mouse', button: 1, clientX: 300 });
-  assert.equal(scroller.isPlaying(), false);
-});
-
-test('one upward jump or small viewport adjustments do not pause playback', (context) => {
-  const { scroller, frame } = installScroller(context, { top: 3000 });
-  scroller.play();
-  window.scrollY -= 400;
-  frame();
-  assert.equal(scroller.isPlaying(), true);
-  for (let i = 0; i < 5; i++) {
-    window.scrollY -= 50;
+  for (const jump of [-400, 900]) {
+    window.scrollY += jump;
+    const moved = window.scrollY;
     frame();
+    assert.equal(plans.at(-1), moved);
     assert.equal(scroller.isPlaying(), true);
   }
+  assert.deepEqual(states, [true]);
 });
 
-test('two consecutive large upward jumps pause playback', (context) => {
-  const { scroller, frame, states, frames } = installScroller(context, { top: 3000 });
+test('manual input does not install any automatic pause handlers', (context) => {
+  const { scroller, listeners, frame } = installScroller(context);
   scroller.play();
-  window.scrollY -= 400;
+  for (const type of ['wheel', 'touchstart', 'touchmove', 'keydown', 'pointerdown']) {
+    assert.equal(listeners[type], undefined, type);
+  }
   frame();
-  window.scrollY -= 400;
-  frame();
-  assert.equal(scroller.isPlaying(), false);
-  assert.deepEqual(states, [true, false]);
-  assert.equal(frames.size, 0);
+  assert.equal(scroller.isPlaying(), true);
 });
 
-test('the scroller stops at the bottom and does not restart there', (context) => {
+test('a leg past the page bottom stops there and does not restart', (context) => {
   const { scroller, frame, states, frames } = installScroller(context, { top: 9950 });
   scroller.play();
-  frame();
-  frame();
+  for (let index = 0; index < 16; index++) frame();
   assert.equal(window.scrollY, 10_000);
   assert.equal(scroller.isPlaying(), false);
   assert.equal(frames.size, 0);
-  assert.deepEqual(states, [true, false]);
   scroller.play();
   assert.equal(frames.size, 0);
   assert.deepEqual(states, [true, false]);
 });
 
-test('starting at the bottom leaves the scroller paused', (context) => {
+test('nothing left to plan leaves the scroller paused', (context) => {
   const { scroller, states, frames } = installScroller(context, { top: 10_000 });
   scroller.play();
   assert.equal(scroller.isPlaying(), false);

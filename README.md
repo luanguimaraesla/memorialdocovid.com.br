@@ -17,11 +17,23 @@ morreu. Quando o painel revisa o acumulado para baixo, cada acumulado anterior r
 valor entre ele e os seguintes. Isso preserva o total oficial e desloca algumas posições
 diárias. A página `/referencias` reúne essa metodologia, a cobertura e as fontes.
 
-Os marcos trazem **57 episódios documentados**, de 17/03/2020 a 23/05/2025: **42 notícias
-históricas e 15 episódios com citações**. A cronologia inclui pesquisas e autorizações de
-vacinas, campanhas em outros países e no Brasil, falta de resposta às ofertas de doses,
-crise do oxigênio, colapso hospitalar, variantes e encerramento das emergências. Notícias são
-resumos editoriais, não citações literais. A seleção é ampla, não exaustiva.
+Os marcos trazem **107 episódios documentados**, de 17/03/2020 a 05/05/2023: **92 notícias
+históricas e 15 episódios com citações**. O foco é a resposta brasileira à pandemia:
+prevenção, vacinação, compras de doses, crise do oxigênio, colapso hospitalar e CPI.
+As campanhas país a país e boa parte dos marcos internacionais saíram da seleção.
+O encerramento da emergência da OMS permanece como contexto. Notícias são resumos editoriais,
+não citações literais. A seleção é ampla, não exaustiva.
+
+Os **79 acontecimentos e as 55 capturas** do acervo estão integrados. Onze episódios já
+existentes receberam as capturas e as fontes do acervo, sem duplicar suas entradas nem alterar
+as citações. As manchetes aparecem diretamente nos cards; o contexto e as fontes ficam em
+**Leia mais** e em `/referencias`. As capturas ficam em `public/acervo-covid/`, sem
+alterações. A data do fato continua separada da publicação.
+
+O site publica só informações públicas do acervo: manchete, veículo, links, data de
+publicação e capturas. A planilha de trabalho é interna, com observações de edição e status
+de checagem, e não entra no repositório nem em `public/`. O contexto exibido nas notícias é
+escrito para o público em `PUBLIC_CONTEXT`, no importador.
 
 As falas preservadas são de Jair Bolsonaro,
 Eduardo Pazuello, Marcelo Queiroga, Jorginho Mello, Magno Malta, Flávio e Eduardo Bolsonaro,
@@ -36,7 +48,7 @@ número de mortes a cada frase. `/referencias` também cita um estudo sobre as f
 Bolsonaro e o distanciamento social, sem estender seus resultados às demais pessoas.
 
 O contrato dos arquivos, a origem exata e o procedimento para regenerar os dados ficam em
-[`public/data/README.md`](public/data/README.md).
+[`docs/dados.md`](docs/dados.md).
 
 ## Arquitetura
 
@@ -48,38 +60,98 @@ passar na validação, a página mostra um erro e não desenha nada.
 espaço, em linhas de 10 (`src/config.ts`). A coluna centralizada tem 258 px de largura,
 deixando 31 px de margem em cada lado numa tela de 320 px, sem mudar o tamanho dos pontos
 entre telas. As linhas alternam branco e cinza claro, mantendo suas cores durante a rolagem.
-A cada 1.000 vidas, um separador mostra o total acumulado em destaque e ocupa o espaço de
-três linhas (78 px). Esse espaço não representa vidas: as contagens de vidas e dias permanecem
-estáveis até a próxima linha de pontos. Com os 716 separadores, a coluna tem 1.919.086 px de
-altura, abaixo do limite de 16.000.000 px dos navegadores. `src/lib/render.ts` desenha só os pontos
-visíveis e marca as semanas às segundas-feiras, a partir de 30/03/2020. Cada marco fica na
-posição do primeiro óbito da semana; semanas sem novos óbitos não recebem marco. Os óbitos
-anteriores continuam na coluna. Um marco por vez flutua sobre a coluna. Quando vários
-caem na mesma linha, Anterior e Próximo permitem ler cada um; os links abrem a entrada
-escolhida. A navegação não altera a contagem de vidas. No celular, o contador vira uma barra inferior
-com espaço para a área segura e acompanha o meio do viewport visível. O tempo aparece
-somente em dias, desde 17/03/2020 (dia 1), pela data de notificação da última vida alcançada.
-As datas completas continuam nos marcos e nas referências.
+A cada 1.000 vidas, um separador ocupa três linhas (78 px), sem acrescentar vidas.
+A coluna mede 1.919.086 px, abaixo do limite de 16.000.000 px dos navegadores, sem
+espaços extras: cada card fica na linha de pontos da sua data. O canvas desenha apenas
+as linhas visíveis. Os marcos semanais continuam nas segundas-feiras
+a partir de 30/03/2020, na posição do primeiro óbito da semana.
 
-`src/lib/referencias.ts` carrega a cobertura, as fontes e o contexto das declarações em
-`/referencias`, sem depender do canvas ou do contador.
+A barra inferior mostra duas informações separadas: vidas perdidas e tempo de pandemia.
+Os dias são contados desde 17/03/2020 (dia 1), pela data de notificação da última vida
+alcançada no meio do viewport. O canvas fica oculto para leitores de tela; o contador
+tem anúncios educados, limitados a uma atualização a cada dois segundos.
+As fontes e o contexto completos continuam disponíveis em `/referencias`.
 
-O canvas é decorativo e fica oculto para leitores de tela. O contador tem uma região
-`aria-live` educada, atualizada no máximo a cada 2 segundos. Os controles funcionam pelo
-teclado, e a rolagem automática só começa por ação explícita. Os marcadores semanais usam
-fundo amarelo/dourado, texto escuro e negrito.
+A abertura apresenta o percurso. Depois de um trecho sem notícias, o primeiro marco
+explica a dimensão da tragédia e o significado de cada ponto. O segundo trata de memória
+e responsabilidade. Só depois começam as notícias em ordem cronológica.
 
-A rolagem automática segue o rolador do umpixel: começa apenas pelo botão "Começar a
-rolagem" ou pelo controle de reprodução, com velocidades de 1×, 2× e 3×. A base é 1.920 px por
-segundo, quatro vezes a velocidade original; 2× e 3× correspondem a 3.840 e 5.760 px/s.
-O motor em `src/lib/autoscroll.ts` pausa ao rolar com mouse, deslizar a tela, usar
-teclas de navegação ou arrastar a barra de rolagem, e para no fim da página. Compartilhar
-também pausa a reprodução. O controle fica junto ao contador, na lateral no computador e
-na barra inferior no celular.
+No modo guiado, os cards ficam em posições fixas no documento e sobem com a página.
+A rolagem para em cada marco e espera pelo botão **Continuar**, sem prazo de leitura.
+Gestos manuais e cliques também pausam. Não há scroll interno: a imagem aparece diretamente
+ou, quando ela não existe, aparece a descrição. Contexto, resumo e fontes ficam em **Leia mais**.
+Quando dois cards cairiam um sobre o outro, só o marco atual aparece; marcos na mesma
+linha de pontos trocam no lugar ao tocar em **Continuar**. Embaixo de cada notícia, um
+marcador no estilo dos separadores mostra quantas vidas a coluna já contou naquele ponto, ao
+menos uma linha de pontos abaixo do card e alinhado às linhas. Como nos separadores, o número
+conta os pontos acima dele, então os números sempre crescem de cima para baixo. Se um separador de milhar estiver
+a até 160 px desse marcador, o marcador ocupa o espaço reservado ao separador, que é omitido;
+assim nenhum espaço de separador fica vazio. As datas semanais que ficariam atrás de um card
+ou do seu marcador também são omitidas, assim como as que ficariam a menos de quatro linhas
+da data anterior, comuns nas semanas com poucas mortes.
+
+O percurso termina no encerramento, depois da coluna: o total oficial de vidas perdidas, a
+mensagem "Nunca esqueceremos. Essa família não pode voltar ao poder! A ignorância não pode
+vencer." e um botão para compartilhar o memorial. Ali a barra de controles some.
+
+A barra flutuante divide a largura entre **Continuar**, **Compartilhar** e **Sem pausas**.
+Compartilhar envia o marco atual ou, antes do primeiro marco, o memorial. Cada notícia também
+tem um botão pequeno de compartilhar ao lado da data, inclusive no cabeçalho flutuante.
+
+O botão **Sem pausas** ativa o modo contínuo. Nesse modo, apenas o cabeçalho da notícia
+flutua até o próximo marco. **Leia mais** volta ao card fixo, abre o conteúdo e pausa
+para leitura. O visitante pode alternar entre os dois modos a qualquer momento.
+
+Cada marco chega exatamente 1,6 s depois do anterior (`SECONDS_BETWEEN_MILESTONES`),
+incluindo a abertura, as duas introduções e o encerramento. A distância entre publicações é a da coluna:
+as vidas perdidas entre as duas datas. Por isso a velocidade é calculada trecho a trecho:
+distância dividida por 1,6 s. No modo guiado, cada trecho parte na velocidade média,
+chega a 4/3 dela em um terço do caminho e desacelera até parar no marco. No modo contínuo,
+a velocidade em cada marco é a média harmônica dos trechos vizinhos, o que mantém a rolagem
+sempre para a frente e sem ultrapassar marcos. `src/lib/journey.ts` faz esses cálculos.
+
+Nas 107 publicações, a distância vai de 0 px (8 trechos na mesma linha de pontos) a
+121.420 px, com mediana de 7.735 px. A velocidade média vai de 0 a 75.888 px/s, com
+mediana de 4.835 px/s. O trecho mais longo, de 23/03/2021 a 08/04/2021, atravessa cerca
+de 47 mil vidas e chega a 101.183 px/s. Como os trechos seguem a série, 51 deles são mais
+curtos que o anterior: a velocidade sobe nos períodos com mais mortes, não de forma constante.
+Para reproduzir a tabela completa, com distância, velocidade e aceleração por trecho:
+
+```sh
+npm run medir:percurso
+```
+
+Os recortes em `src/lib/headline-crops.ts` priorizam manchetes e subtítulos, sem menus,
+anúncios ou fotografias intermediárias. O limite de altura redimensiona a prévia sem
+cortar seu texto. Os cards imitam recortes de jornal: papel com granulação, corte de
+tesoura irregular, linha de data e a captura impressa em tons de cinza sobre o papel. As capturas completas permanecem intactas e acessíveis pelo clique
+na imagem; a página de referências mostra os originais.
+
+A música, “Pandemia” (14 min 48 s, em `public/musica/pandemia.mp3`), começa com o gesto de
+iniciar o percurso, nunca antes.
+O botão circular no alto silencia ou restaura o som sem reiniciar nem pausar a faixa.
+Pausar a rolagem não pausa a música. Sem JavaScript, os controles nativos permanecem
+disponíveis; falhas mostram uma mensagem de recuperação e um link para o áudio original.
+
+Para importar novamente, coloque a planilha em `acervo-interno/timeline-covid.xlsx`, pasta
+ignorada pelo Git, ou passe outro caminho. O importador usa só a biblioteca padrão do Python 3:
+
+```sh
+python3 scripts/importar-acervo.py [caminho/da/planilha.xlsx]
+node scripts/gerar-previas.mjs
+npm run build
+node --test tests/delivery.mjs tests/acervo-delivery.mjs tests/share-delivery.mjs
+```
+
+O importador relaciona todas as capturas aos acontecimentos e falha se sobrar algum arquivo.
+Os testes de entrega conferem cobertura, dimensões, hashes e publicação dos originais, e
+falham se a planilha ou algum campo interno chegar ao site.
 
 ## Compartilhamento
 
-O contador compartilha o memorial; cada marco tem seu próprio botão. O navegador abre
+O botão Compartilhar, ao lado de Continuar, envia o marco atual: uma das mensagens de
+abertura ou a notícia em destaque. Antes do primeiro marco, envia o memorial. O ícone ao lado
+da data de cada notícia envia aquela notícia. O navegador abre
 o compartilhamento nativo quando disponível. Caso contrário, copia a mensagem e o link;
 se a cópia estiver bloqueada, mostra um diálogo com o texto selecionável. O aviso de cópia
 some após três segundos e renova o prazo a cada confirmação.
@@ -137,5 +209,6 @@ bloqueada. Não existe fonte alternativa nem série sintética de óbitos.
 
 ## Licença
 
-[AGPL-3.0](LICENSE). Você pode usar, estudar, modificar e redistribuir, inclusive em serviços
-de rede, desde que mantenha a mesma licença e disponibilize o código-fonte.
+O código usa [AGPL-3.0](LICENSE). Você pode usar, estudar, modificar e redistribuir, inclusive
+em serviços de rede, desde que mantenha a mesma licença e disponibilize o código-fonte.
+As capturas de notícias e a música têm direitos próprios; a licença do código não os substitui.

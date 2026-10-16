@@ -1,6 +1,8 @@
 ---
 import Hero from './Hero.astro';
+import Narrative from './Narrative.astro';
 import Memorial from './Memorial.astro';
+import Closing from './Closing.astro';
 import Counter from './Counter.astro';
 import Fontes from './Fontes.astro';
 
@@ -13,7 +15,9 @@ const { statementId } = Astro.props;
 
 {statementId && <span data-initial-statement={statementId} hidden></span>}
 <Hero />
+<Narrative />
 <Memorial />
+<Closing />
 <Fontes />
 <Counter />
 

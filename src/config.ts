@@ -7,5 +7,4 @@ export const MAX_COLUMN_HEIGHT_PX = 16_000_000;
 export const ANNOUNCE_INTERVAL_MS = 2000;
 export const SHARE_STATUS_DURATION_MS = 3000;
 export const WEEK_MARKERS_START = '2020-03-30';
-export const SPEED_BASE = 1920;
-export const SPEED_MULTIPLIERS = [1, 2, 3] as const;
+export const SECONDS_BETWEEN_MILESTONES = 1.6;

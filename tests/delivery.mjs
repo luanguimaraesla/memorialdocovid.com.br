@@ -136,57 +136,40 @@ const VERIFIED_NEWS = [
   ['primeiro-obito-divulgado-2020-03-17', '2020-03-17'],
   ['transmissao-comunitaria-2020-03-20', '2020-03-20'],
   ['sepultamentos-manaus-2020-04-21', '2020-04-21'],
-  ['oxford-ensaio-humano-2020-04-23', '2020-04-23'],
   ['dados-retirados-2020-06-06', '2020-06-06'],
   ['stf-restaura-dados-2020-06-08', '2020-06-08'],
   ['coronavac-fase-tres-2020-07-21', '2020-07-21'],
   ['pfizer-primeira-oferta-2020-08-14', '2020-08-14'],
-  ['pfizer-resultados-2020-11-09', '2020-11-09'],
-  ['moderna-resultados-2020-11-16', '2020-11-16'],
-  ['moscou-vacinacao-2020-12-05', '2020-12-05'],
-  ['reino-unido-vacinacao-2020-12-08', '2020-12-08'],
-  ['estados-unidos-vacinacao-2020-12-14', '2020-12-14'],
-  ['canada-vacinacao-2020-12-14', '2020-12-14'],
-  ['alpha-beta-2020-12-18', '2020-12-18'],
-  ['mexico-chile-vacinacao-2020-12-24', '2020-12-24'],
-  ['uniao-europeia-vacinacao-2020-12-27', '2020-12-27'],
-  ['oms-primeira-vacina-2020-12-31', '2020-12-31'],
   ['gamma-2021-01-11', '2021-01-11'],
   ['oxigenio-manaus-2021-01-14', '2021-01-14'],
-  ['india-vacinacao-2021-01-16', '2021-01-16'],
   ['brasil-primeira-dose-2021-01-17', '2021-01-17'],
   ['campanha-nacional-2021-01-18', '2021-01-18'],
-  ['covax-ghana-entrega-2021-02-24', '2021-02-24'],
-  ['ghana-costa-marfim-vacinacao-2021-03-01', '2021-03-01'],
   ['colapso-utis-2021-03-16', '2021-03-16'],
   ['pfizer-primeiro-contrato-2021-03-19', '2021-03-19'],
   ['recorde-notificacoes-2021-04-08', '2021-04-08'],
   ['pfizer-primeiro-lote-2021-04-29', '2021-04-29'],
-  ['delta-preocupacao-2021-05-11', '2021-05-11'],
   ['pfizer-cpi-2021-05-13', '2021-05-13'],
   ['meio-milhao-2021-06-19', '2021-06-19'],
   ['orfandade-estudo-2021-07-20', '2021-07-20'],
   ['cpi-relatorio-2021-10-26', '2021-10-26'],
-  ['omicron-2021-11-26', '2021-11-26'],
   ['anvisa-pfizer-infantil-2021-12-16', '2021-12-16'],
   ['vacinacao-infantil-2022-01-14', '2022-01-14'],
   ['fim-emergencia-nacional-2022-04-22', '2022-04-22'],
   ['reforco-bivalente-2023-02-27', '2023-02-27'],
   ['oms-fim-emergencia-2023-05-05', '2023-05-05'],
-  ['jn1-2023-12-19', '2023-12-19'],
-  ['nb181-2025-05-23', '2025-05-23'],
 ];
 
 test('the fifteen original quotation records remain intact', () => {
-  const digest = createHash('sha256').update(JSON.stringify(quotations)).digest('hex');
+  const originals = quotations.map(({ acervo, ...record }) => record);
+  const digest = createHash('sha256').update(JSON.stringify(originals)).digest('hex');
   assert.equal(digest, 'f41882c6aadc546e19c5d8e2fdaae12c93d576b9989596b8d380d5be5ca89e1c');
 });
 
 test('the historical panorama retains independently checked event dates and editorial context', () => {
-  const news = declaracoes.declaracoes.filter(({ tipo }) => tipo === 'noticia');
+  const news = declaracoes.declaracoes.filter(({ tipo, id }) => tipo === 'noticia' && !id.startsWith('acervo-'));
   assert.deepEqual(news.map(({ id, data }) => [id, data]), VERIFIED_NEWS);
-  assert.equal(declaracoes.declaracoes.length, 57);
-  assert.equal(new Set(declaracoes.declaracoes.map(({ id }) => id)).size, 57);
+  assert.equal(declaracoes.declaracoes.length, 107);
+  assert.equal(new Set(declaracoes.declaracoes.map(({ id }) => id)).size, 107);
   for (const entry of news) {
     assert.equal(entry.acessado_em, '2026-10-10');
     for (const key of ['subtitulo', 'autor', 'texto', 'contexto']) assert.ok(entry[key].trim(), entry.id);
@@ -198,13 +181,11 @@ test('the historical panorama retains independently checked event dates and edit
   }
 });
 
-test('variant headlines and summaries retain the distinction between evolution and severity', () => {
+test('Brazilian variant records preserve preliminary findings and scientific qualifications', () => {
   const entry = (id) => declaracoes.declaracoes.find((entry) => entry.id === id);
-  for (const id of ['jn1-2023-12-19', 'nb181-2025-05-23']) {
-    assert.match(entry(id).texto, /baixo.*risco|risco.*baixo/);
-    assert.match(entry(id).contexto, /dados|avaliação/);
-  }
-  assert.match(entry('omicron-2021-11-26').contexto, /ainda estavam sendo estudadas/);
+  assert.match(entry('acervo-cov-0068').texto, /preliminar/);
+  assert.match(entry('acervo-cov-0055').contexto, /não comprova transmissão comunitária/);
+  assert.match(entry('acervo-cov-0072').contexto, /sobrecarga hospitalar/);
   assert.match(entry('oms-fim-emergencia-2023-05-05').texto, /continua circulando/);
   assert.match(entry('fim-emergencia-nacional-2022-04-22').contexto, /22\/05/);
 });

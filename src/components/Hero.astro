@@ -1,17 +1,27 @@
 ---
+import Music from './Music.astro';
 ---
 
-<header class="section hero">
-  <h1 class="hero__title">Memorial do Covid</h1>
-  <p class="hero__subtitle">Não esqueceremos o papel da família bolsonaro e a negligência negacionista que ampliou inúmeras vezes a magnitude dessa catástrofe no Brasil</p>
-  <p class="hero__intro">
-    Cada ponto representa uma vida. Desça a página para percorrer o memorial.
-  </p>
-
-  <button class="page-button hero__start" id="btn-start" type="button" disabled>
-    Começar a rolagem
-  </button>
-
+<header class="hero">
+  <div class="hero__layout">
+    <div class="hero__heading">
+      <h1 class="hero__title">Memorial <span>do Covid</span></h1>
+    </div>
+    <div class="hero__content">
+      <p class="hero__description">As notícias, as perdas e a memória da pandemia no Brasil.</p>
+      <p class="hero__guide">O percurso começa devagar e para em cada marco. Continue no seu tempo.</p>
+      <Music />
+    </div>
+    <div class="hero__actions">
+      <button class="page-button hero__start" id="btn-start" type="button" data-scroll-control disabled>
+        Começar o percurso
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false">
+          <path d="M12 4v16m-6-6 6 6 6-6" />
+        </svg>
+      </button>
+      <p class="hero__hint">A música acompanha a visita. Você pode silenciá-la no alto da tela.</p>
+    </div>
+  </div>
   <p class="load-error" id="load-error" role="alert" hidden>
     Não foi possível carregar os dados oficiais. O memorial fica indisponível até que eles
     possam ser carregados. Verifique sua conexão e recarregue a página.

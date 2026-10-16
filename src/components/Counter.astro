@@ -3,36 +3,42 @@
 
 <div class="reference-line" data-reference-line aria-hidden="true"></div>
 
-<aside class="counter panel" data-counter data-idle aria-label="Contador de vidas">
+<aside class="counter" data-counter data-idle aria-label="Vidas perdidas e tempo de pandemia">
   <div class="counter__summary">
-    <p class="counter__lives"><strong data-counter-lives>…</strong> vidas</p>
-    <p class="counter__days"><span data-counter-days>…</span></p>
-    <p class="counter__total">de <span data-counter-total>…</span> vidas</p>
+    <div>
+      <p class="counter__label">Vidas perdidas</p>
+      <strong class="counter__lives" data-counter-lives>…</strong>
+    </div>
+    <div>
+      <p class="counter__label">Tempo de pandemia</p>
+      <strong class="counter__days" data-counter-days>…</strong>
+    </div>
   </div>
-  <div class="autoscroll-player" role="group" aria-label="Controles de rolagem automática">
-    <button
-      class="autoscroll-player__play"
-      id="btn-play"
-      type="button"
-      aria-label="rolar automaticamente"
-      aria-pressed="false"
-      disabled
-    >
+</aside>
+
+<div class="playback" data-scroll-control data-playback hidden>
+  <div class="playback__controls" role="group" aria-label="Controles de rolagem automática">
+    <button class="playback__button playback__play" id="btn-play" type="button" aria-label="Continuar o percurso" aria-pressed="false" disabled>
       <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true" focusable="false">
         <path class="autoscroll-player__icon-play" d="M4.5 2.5v11L13 8z" />
         <path class="autoscroll-player__icon-pause" d="M4 2.5h3v11H4zM9 2.5h3v11H9z" />
       </svg>
+      <span data-play-label>Continuar</span>
     </button>
-    <select class="autoscroll-player__speed" id="speed-select" aria-label="Velocidade da rolagem" disabled>
-      <option value="1" selected>1×</option>
-      <option value="2">2×</option>
-      <option value="3">3×</option>
-    </select>
+    <button class="playback__button" id="btn-share" type="button" aria-label="Compartilhar o memorial" disabled>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false">
+        <path d="M12 15V3M7.5 7.5 12 3l4.5 4.5M5 12v8h14v-8" />
+      </svg>
+      Compartilhar
+    </button>
+    <button class="playback__button playback__mode" id="btn-mode" type="button" aria-label="Ativar modo contínuo, sem pausas nos marcos" aria-pressed="false" disabled>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false">
+        <path d="M12 12c-3-5-8-5-8 0s5 5 8 0 8-5 8 0-5 5-8 0Z" />
+      </svg>
+      Sem pausas
+    </button>
   </div>
-  <div class="counter__controls">
-    <button class="page-button" id="btn-share" type="button" disabled>Compartilhar</button>
-  </div>
-</aside>
+</div>
 
 <p class="sr-only" data-announcer aria-live="polite"></p>
 <p class="share-status panel" data-share-status role="status" hidden></p>

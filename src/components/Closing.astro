@@ -1,0 +1,18 @@
+---
+import obitos from '../../public/data/obitos.json';
+
+const total = obitos.dias[obitos.dias.length - 1].acumulado;
+---
+
+<section class="encerramento" id="encerramento" data-closing aria-labelledby="encerramento-titulo">
+  <p class="encerramento__total">
+    <strong>{total.toLocaleString('pt-BR')}</strong>
+    vidas perdidas
+  </p>
+  <h2 class="encerramento__titulo" id="encerramento-titulo">Nunca esqueceremos.</h2>
+  <p class="encerramento__mensagem">
+    <span>Essa família não pode voltar ao poder!</span>
+    <span>A ignorância não pode vencer.</span>
+  </p>
+  <button class="page-button encerramento__compartilhar" type="button" data-share-closing>Compartilhar o memorial</button>
+</section>

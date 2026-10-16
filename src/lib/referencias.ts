@@ -1,4 +1,5 @@
 import { loadPageData } from './state';
+import { archiveContent, archiveSources } from './archive';
 import type { Declaracoes, Fonte, Obitos } from './state';
 
 function fmtDate(iso: string): string {
@@ -52,6 +53,7 @@ function mountStatements(arquivo: Declaracoes): void {
     entry.append(create(declaracao.tipo === 'noticia' ? 'p' : 'blockquote', declaracao.texto));
     if (declaracao.tipo === 'noticia') entry.append(create('p', 'Resumo editorial de um marco histórico, não uma citação literal.'));
     if (declaracao.contexto) entry.append(create('p', declaracao.contexto));
+    if (declaracao.acervo) entry.append(archiveContent(declaracao.acervo), archiveSources(declaracao.acervo, declaracao.fontes));
     if (arquivo.sintetico) {
       entry.append(create('p', `Exemplo sintético, sem fonte real. Data de acesso fictícia: ${fmtDate(declaracao.acessado_em)}.`));
     } else {

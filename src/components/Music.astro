@@ -1,0 +1,30 @@
+---
+const song = `${import.meta.env.BASE_URL}musica/pandemia.mp3`;
+---
+
+<div class="sound-control" data-scroll-control>
+  <button class="audio-toggle" type="button" data-audio-toggle aria-label="Ouvir música" aria-controls="memorial-audio" aria-pressed="false" data-silent disabled>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false">
+      <path d="M11 4 6 8H3v8h3l5 4zM15 8a6 6 0 0 1 0 8M18 5a10 10 0 0 1 0 14" />
+      <path class="audio-toggle__slash" d="m3 3 18 18" />
+    </svg>
+  </button>
+</div>
+<audio
+  id="memorial-audio"
+  controls
+  preload="none"
+  aria-label="Música do memorial"
+  src={song}
+>
+  <a href={song}>Abrir o arquivo de áudio</a>
+</audio>
+<p class="music__error" data-audio-status role="status" hidden>
+  <span data-audio-message>Não foi possível tocar a música.</span>
+  <a href={song}>Abrir o áudio original</a>
+</p>
+
+<script>
+  import { bootAudio } from '../lib/audio';
+  bootAudio();
+</script>

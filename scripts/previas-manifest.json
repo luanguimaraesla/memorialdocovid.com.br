@@ -1,0 +1,655 @@
+{
+  "declaracoesSha256": "6511afb32cd6b3a8dcdcc99958eb479cbd35fbfecc2566d9719d4bbe3feda539",
+  "paletteSha256": "c5a60b689f868bc235712b8d23f573221a3f373bc347ac7fc4ab1ef7b9873cfd",
+  "subtitleSha256": "d70b86c5b6014d522305519d6cc1fe26ad20bfa2ed1886c25be34f91b49999a1",
+  "images": [
+    {
+      "id": "memorial",
+      "file": "memorial.png",
+      "sha256": "bfe1a84bfd667cb10d02ae4027ec6dc1590e0952b76cb26e77b20d7399e79fdb",
+      "fontSize": 34
+    },
+    {
+      "id": "primeiro-obito-divulgado-2020-03-17",
+      "file": "primeiro-obito-divulgado-2020-03-17.png",
+      "sha256": "b41348315949fc2eb4f3ea1ef6547982120821ff663ba4631ed6092c715d90fa",
+      "fontSize": 34
+    },
+    {
+      "id": "malafaia-igrejas-2020-03-18",
+      "file": "malafaia-igrejas-2020-03-18.png",
+      "sha256": "dbe762c8df7a71a742034d867f086ef39bfbef3a17d697bd1c5994615b9f7caf",
+      "fontSize": 34
+    },
+    {
+      "id": "transmissao-comunitaria-2020-03-20",
+      "file": "transmissao-comunitaria-2020-03-20.png",
+      "sha256": "78fa19ba9b4d2ce3d20c859302db7f5efa634d4b9b9c2134991534fcf9024a52",
+      "fontSize": 34
+    },
+    {
+      "id": "acervo-cov-0001",
+      "file": "acervo-cov-0001.png",
+      "sha256": "a55ddc68487583bbc1ef4a68eec7b39121e2e813d8ec46f9fb22889718a82e66",
+      "fontSize": 34
+    },
+    {
+      "id": "pronunciamento-2020-03-24",
+      "file": "pronunciamento-2020-03-24.png",
+      "sha256": "619ddb04ccdffea5427e9eee250457c73c969ee516886533083990b4290b5497",
+      "fontSize": 29
+    },
+    {
+      "id": "acervo-cov-0003",
+      "file": "acervo-cov-0003.png",
+      "sha256": "9504e03bc1f9e078e60a6884d5e169a65142cd2f52e522431473c01861c3f311",
+      "fontSize": 34
+    },
+    {
+      "id": "sepultamentos-manaus-2020-04-21",
+      "file": "sepultamentos-manaus-2020-04-21.png",
+      "sha256": "2e4b6eedc73c3ad91c6aa72443b35d26e1adfedb196d6b4f752cfe3b3f9ac493",
+      "fontSize": 34
+    },
+    {
+      "id": "e-dai-2020-04-28",
+      "file": "e-dai-2020-04-28.png",
+      "sha256": "d043f43d6302914651650761a5de71ff8925dfef28a0ed41881f687a09d7c059",
+      "fontSize": 34
+    },
+    {
+      "id": "valdemiro-sementes-2020-05-05",
+      "file": "valdemiro-sementes-2020-05-05.png",
+      "sha256": "1148ce8b7aa0af5d9f934c850255e832fbcab272ff6599bc74885e7e6e32807f",
+      "fontSize": 34
+    },
+    {
+      "id": "acervo-cov-0005",
+      "file": "acervo-cov-0005.png",
+      "sha256": "ec5fbcd66778824a98ae73988ad2b749d0f9bf1b036459dfd7e448c2a6c3e58f",
+      "fontSize": 34
+    },
+    {
+      "id": "acervo-cov-0006",
+      "file": "acervo-cov-0006.png",
+      "sha256": "d36411e163deafb3b95369fdf0327590596c8ea2a3ef6f6ee24282888f67ab09",
+      "fontSize": 34
+    },
+    {
+      "id": "acervo-cov-0007",
+      "file": "acervo-cov-0007.png",
+      "sha256": "e3461b018d278b89aad64fb63d0b2ba34262c374672d8b3e9adb098ef8305c6a",
+      "fontSize": 34
+    },
+    {
+      "id": "acervo-cov-0008",
+      "file": "acervo-cov-0008.png",
+      "sha256": "4fd3d8937ab3c9cd12c31119626cafac0bac58692aa1e954cd141e3f56113511",
+      "fontSize": 34
+    },
+    {
+      "id": "acervo-cov-0009",
+      "file": "acervo-cov-0009.png",
+      "sha256": "6bbb86aee3db7044524b6f928f4d86a6d936d55baaebdb4efaca9865545298fe",
+      "fontSize": 34
+    },
+    {
+      "id": "acervo-cov-0010",
+      "file": "acervo-cov-0010.png",
+      "sha256": "5b412a14d5b693826d840ac7b92d1c9439e878d6be42546e781f11e47c199b29",
+      "fontSize": 34
+    },
+    {
+      "id": "dados-retirados-2020-06-06",
+      "file": "dados-retirados-2020-06-06.png",
+      "sha256": "e705787d6337f8135d248b210ab49960596a95cbf37a72fe634f3d5a086134ea",
+      "fontSize": 34
+    },
+    {
+      "id": "acervo-cov-0011",
+      "file": "acervo-cov-0011.png",
+      "sha256": "34384754b3fd562e514b3052f765c08e21fab8fd71fa88bf2f3e6e406bba02b7",
+      "fontSize": 34
+    },
+    {
+      "id": "stf-restaura-dados-2020-06-08",
+      "file": "stf-restaura-dados-2020-06-08.png",
+      "sha256": "ec66e1a6e0d97e4e908e0fb113c2f815e619df516c2551d55a11156851c4ae1d",
+      "fontSize": 34
+    },
+    {
+      "id": "acervo-cov-0012",
+      "file": "acervo-cov-0012.png",
+      "sha256": "374cd3512097a4e17e2daa1271b6a38a4df59f9d0d202ec68971d289dcde8eff",
+      "fontSize": 34
+    },
+    {
+      "id": "acervo-cov-0013",
+      "file": "acervo-cov-0013.png",
+      "sha256": "63225f1d2aea94f2da104789446c70b2db53733e3f1b51fcefaaef8577d2bb0e",
+      "fontSize": 34
+    },
+    {
+      "id": "acervo-cov-0014",
+      "file": "acervo-cov-0014.png",
+      "sha256": "0a06b5aed2b2b4ed2d73cbc5388121b15cdf6093f00038bb7b2c70824b115914",
+      "fontSize": 34
+    },
+    {
+      "id": "acervo-cov-0015",
+      "file": "acervo-cov-0015.png",
+      "sha256": "b9432a8beea5e14ffb5fac50350665d61fa0cce9d06e87ece6e1d3174b6c3a87",
+      "fontSize": 34
+    },
+    {
+      "id": "acervo-cov-0016",
+      "file": "acervo-cov-0016.png",
+      "sha256": "c3fb3f78be1ea2d426d2d6be19784aeeba5d9435c2becd52c5f927fdda6004c6",
+      "fontSize": 34
+    },
+    {
+      "id": "acervo-cov-0017",
+      "file": "acervo-cov-0017.png",
+      "sha256": "8f2ecbf7de86699bbcc52d09819d7fd25732e468b7f0ee588f330ee40d9a0a0c",
+      "fontSize": 34
+    },
+    {
+      "id": "coronavac-fase-tres-2020-07-21",
+      "file": "coronavac-fase-tres-2020-07-21.png",
+      "sha256": "7302c873bad7597a35f05203548661e3bf0985f768420cdb2b2d06256e86f765",
+      "fontSize": 34
+    },
+    {
+      "id": "acervo-cov-0018",
+      "file": "acervo-cov-0018.png",
+      "sha256": "12c1dd6a0389b0e686e95598ff228dea2054da834fd8039862a4066295763f71",
+      "fontSize": 34
+    },
+    {
+      "id": "acervo-cov-0019",
+      "file": "acervo-cov-0019.png",
+      "sha256": "2e4935a7a7df621a9d8b4436c2151d2b0dff2974db85c0c1d537907f6bcd1e5c",
+      "fontSize": 34
+    },
+    {
+      "id": "acervo-cov-0034",
+      "file": "acervo-cov-0034.png",
+      "sha256": "57fe3ba36efa44de2c36e51d8222cf7299b49f4147e725eff263adccb5dee6bc",
+      "fontSize": 34
+    },
+    {
+      "id": "acervo-cov-0020",
+      "file": "acervo-cov-0020.png",
+      "sha256": "b7752972a0b9bfaa5fc7a4a95d7ef2b5ddd8911e963f55c831b0c38ed0d37d0b",
+      "fontSize": 34
+    },
+    {
+      "id": "acervo-cov-0021",
+      "file": "acervo-cov-0021.png",
+      "sha256": "6cd6a5d7424b67c3078cf6417f2d08574bfb568b0acfe07fea9d5d0bc848b0ae",
+      "fontSize": 34
+    },
+    {
+      "id": "pfizer-primeira-oferta-2020-08-14",
+      "file": "pfizer-primeira-oferta-2020-08-14.png",
+      "sha256": "f6f6e4099858ea89d03e3343ffa268573862437f49fc2e282d4f974860988d7a",
+      "fontSize": 34
+    },
+    {
+      "id": "acervo-cov-0022",
+      "file": "acervo-cov-0022.png",
+      "sha256": "df637d71bd8893806d6f1459d54597c1a4d9a1558da5b278a7a227c7ab8b837e",
+      "fontSize": 34
+    },
+    {
+      "id": "acervo-cov-0023",
+      "file": "acervo-cov-0023.png",
+      "sha256": "e7abada1c8902241e96687628e375946929440ee070f81a5bb4887bff889c380",
+      "fontSize": 34
+    },
+    {
+      "id": "acervo-cov-0024",
+      "file": "acervo-cov-0024.png",
+      "sha256": "9a463840c7c61c129bd49861879c23b35b961e8782961cb6c919e2322841371d",
+      "fontSize": 34
+    },
+    {
+      "id": "coronavac-2020-10-21",
+      "file": "coronavac-2020-10-21.png",
+      "sha256": "1d88130f518e9ee7297d9581a97ceac767407ce78d4beeec9ed64eff819616de",
+      "fontSize": 34
+    },
+    {
+      "id": "pazuello-obedece-2020-10-22",
+      "file": "pazuello-obedece-2020-10-22.png",
+      "sha256": "1e509567a46b011af0efd30db01275b301ca61861151afcaface41105fcb8bd1",
+      "fontSize": 34
+    },
+    {
+      "id": "acervo-cov-0026",
+      "file": "acervo-cov-0026.png",
+      "sha256": "c58897f6b97178a86b88c26565fc63ce74df7d1beb108a2a117853f6ef32fda2",
+      "fontSize": 34
+    },
+    {
+      "id": "maricas-2020-11-10",
+      "file": "maricas-2020-11-10.png",
+      "sha256": "443ecfc0eebc4b9b76748591aa293903cf9e9649bdf8072ac2d35b0a8b27e177",
+      "fontSize": 34
+    },
+    {
+      "id": "acervo-cov-0028",
+      "file": "acervo-cov-0028.png",
+      "sha256": "3b5cfe6ebcc77628ac48208f99d1907f40d9d537365df02bd7365a0f9c11f68f",
+      "fontSize": 34
+    },
+    {
+      "id": "acervo-cov-0029",
+      "file": "acervo-cov-0029.png",
+      "sha256": "ec2672533968c91217f1c2de0feb14706846331f4ac562da39a8d192b18cc98f",
+      "fontSize": 34
+    },
+    {
+      "id": "acervo-cov-0030",
+      "file": "acervo-cov-0030.png",
+      "sha256": "8c9a332274d86a546007ab2ffc3d6a1e605e021d67471b3139da14aa0c700dc4",
+      "fontSize": 34
+    },
+    {
+      "id": "acervo-cov-0031",
+      "file": "acervo-cov-0031.png",
+      "sha256": "3d7ea26cac5720a98a8c38d09a833546e653045a3a9860eaabfa9d5733d38638",
+      "fontSize": 34
+    },
+    {
+      "id": "vacina-jacare-2020-12-17",
+      "file": "vacina-jacare-2020-12-17.png",
+      "sha256": "537ecf049b1f94cf1acd21d2984b89ecc5c7120621bff1cc4e181e1712223105",
+      "fontSize": 34
+    },
+    {
+      "id": "acervo-cov-0033",
+      "file": "acervo-cov-0033.png",
+      "sha256": "d1d065600a606894c3f6e980b17b59d488984163e5ae37f46c52d0832320e2ce",
+      "fontSize": 34
+    },
+    {
+      "id": "acervo-cov-0035",
+      "file": "acervo-cov-0035.png",
+      "sha256": "e6b0b30b9035b3b03b8b522475f6d24cabea7beea6335f6b60016891d725f63f",
+      "fontSize": 34
+    },
+    {
+      "id": "acervo-cov-0036",
+      "file": "acervo-cov-0036.png",
+      "sha256": "a6c8528313dbe227b8cd1d7fa7abf041e2169b6eb44107b29d3409ed41cec076",
+      "fontSize": 34
+    },
+    {
+      "id": "gamma-2021-01-11",
+      "file": "gamma-2021-01-11.png",
+      "sha256": "f3f1fb771c2f340a08df694fb45827a63b0a920e61d828de3447fa8f9854f06c",
+      "fontSize": 34
+    },
+    {
+      "id": "acervo-cov-0037",
+      "file": "acervo-cov-0037.png",
+      "sha256": "c90e077eb3774d7db3afe17b2b4374da49b7505e36d56b8f007e25719fc4c97a",
+      "fontSize": 34
+    },
+    {
+      "id": "oxigenio-manaus-2021-01-14",
+      "file": "oxigenio-manaus-2021-01-14.png",
+      "sha256": "e8b7cf0f3f7b5b28f65e47b7371b2db156859a177a79ced6cac39ade9a5cc45c",
+      "fontSize": 34
+    },
+    {
+      "id": "acervo-cov-0038",
+      "file": "acervo-cov-0038.png",
+      "sha256": "6811231575b410ef394ec38827b4a76176870a93ff43ddc0e97a1ea73f343cd5",
+      "fontSize": 34
+    },
+    {
+      "id": "brasil-primeira-dose-2021-01-17",
+      "file": "brasil-primeira-dose-2021-01-17.png",
+      "sha256": "917cb2e2b1f6152adfeec696395f070f990ecca0de7256d4f982179482d7bcc0",
+      "fontSize": 34
+    },
+    {
+      "id": "campanha-nacional-2021-01-18",
+      "file": "campanha-nacional-2021-01-18.png",
+      "sha256": "74392c00c3a4ce9a24e912779a57bc4b2acd8651770774c8742b84780a5f7949",
+      "fontSize": 34
+    },
+    {
+      "id": "acervo-cov-0039",
+      "file": "acervo-cov-0039.png",
+      "sha256": "4c9343d0badf635e711005bbba6b8a53e7cedaa1526c6ca0b429dfbf34c9df34",
+      "fontSize": 34
+    },
+    {
+      "id": "acervo-cov-0040",
+      "file": "acervo-cov-0040.png",
+      "sha256": "b1d4b6c8bb45cc96a9ec2bb7d06e29da07bba5ec37c25e132df6270396f1dc45",
+      "fontSize": 34
+    },
+    {
+      "id": "acervo-cov-0041",
+      "file": "acervo-cov-0041.png",
+      "sha256": "6bfdb213465765cbc8e8e5585f0c329ec157d21f5497ccf6e9227cd01b15798d",
+      "fontSize": 34
+    },
+    {
+      "id": "acervo-cov-0042",
+      "file": "acervo-cov-0042.png",
+      "sha256": "58aa86e172afd531e20c7debbfd91bd9946126a329a965c213340d3fa406f787",
+      "fontSize": 34
+    },
+    {
+      "id": "mimimi-2021-03-04",
+      "file": "mimimi-2021-03-04.png",
+      "sha256": "700a05d8b971f8bc50a920af5b2385c23abd8dbaf050db78a3db048f6fcc8c79",
+      "fontSize": 34
+    },
+    {
+      "id": "eduardo-mascaras-2021-03-10",
+      "file": "eduardo-mascaras-2021-03-10.png",
+      "sha256": "eccc5c22643fa821558d70dccdfaeff4221a8dbb575b74407d1d23c5de8df5d0",
+      "fontSize": 34
+    },
+    {
+      "id": "acervo-cov-0044",
+      "file": "acervo-cov-0044.png",
+      "sha256": "8578e6ea9185c15370b28d04dc139d46effebf84f23343223090b4fa74bd7c12",
+      "fontSize": 34
+    },
+    {
+      "id": "acervo-cov-0045",
+      "file": "acervo-cov-0045.png",
+      "sha256": "f997b2cb3e116238e318281efb57fe263387e83ee2ac5a79544c7133b54e47c2",
+      "fontSize": 34
+    },
+    {
+      "id": "colapso-utis-2021-03-16",
+      "file": "colapso-utis-2021-03-16.png",
+      "sha256": "dd54ea57e1979779ea96d73d06b56378249118e03d768719e1fc806f4bb26746",
+      "fontSize": 34
+    },
+    {
+      "id": "pfizer-primeiro-contrato-2021-03-19",
+      "file": "pfizer-primeiro-contrato-2021-03-19.png",
+      "sha256": "5634af0261da74f313f8517801490cf7e99fbe0d867e1cb9b1fe230142294f27",
+      "fontSize": 34
+    },
+    {
+      "id": "acervo-cov-0047",
+      "file": "acervo-cov-0047.png",
+      "sha256": "f545ff57d1d23e3ca2b38e0d28da9c51156a60a1561a02ae8ee96ef4f0abc549",
+      "fontSize": 34
+    },
+    {
+      "id": "recorde-notificacoes-2021-04-08",
+      "file": "recorde-notificacoes-2021-04-08.png",
+      "sha256": "925c796d674bd99fbbd4a489867554a40f4026e7aedfd13ecc694b61bd1d04ac",
+      "fontSize": 34
+    },
+    {
+      "id": "acervo-cov-0048",
+      "file": "acervo-cov-0048.png",
+      "sha256": "f653962de24079fc1359d79079a66dd7d6d7b3fb69dc295b3419a886f1ce59d5",
+      "fontSize": 34
+    },
+    {
+      "id": "acervo-cov-0049",
+      "file": "acervo-cov-0049.png",
+      "sha256": "1faa1eec52c1475e4546c162f6ef8d8cfc01e057744c2c32ab7fe2cb48a14009",
+      "fontSize": 34
+    },
+    {
+      "id": "pfizer-primeiro-lote-2021-04-29",
+      "file": "pfizer-primeiro-lote-2021-04-29.png",
+      "sha256": "6dab71744f43264e88379bcc937295016276076cf76c8bb694f8371a0f6f0ca0",
+      "fontSize": 34
+    },
+    {
+      "id": "acervo-cov-0050",
+      "file": "acervo-cov-0050.png",
+      "sha256": "58a23c6911bbdfcda2409271a5b5de4ba5d0db8cd7cb9e871b0050b12933eac0",
+      "fontSize": 34
+    },
+    {
+      "id": "jorginho-kit-covid-2021-05-04",
+      "file": "jorginho-kit-covid-2021-05-04.png",
+      "sha256": "a93610466c786c75cb1f77585c08f20f198baa514ae39d5b6f3d61cb5c877ef6",
+      "fontSize": 34
+    },
+    {
+      "id": "acervo-cov-0052",
+      "file": "acervo-cov-0052.png",
+      "sha256": "799280567de5fb2846da66364004f868b41ad527b3a5f997a1e75531f70727b1",
+      "fontSize": 34
+    },
+    {
+      "id": "pfizer-cpi-2021-05-13",
+      "file": "pfizer-cpi-2021-05-13.png",
+      "sha256": "a99d2db5593ba745660cf766a7bc82ebd5ff543c4fb64271e5db43cc8135dcc3",
+      "fontSize": 34
+    },
+    {
+      "id": "acervo-cov-0054",
+      "file": "acervo-cov-0054.png",
+      "sha256": "29f3d7fefe8f6ae034b629007de270978b062d5488ebe9f10b56c12b86c8ee73",
+      "fontSize": 34
+    },
+    {
+      "id": "acervo-cov-0055",
+      "file": "acervo-cov-0055.png",
+      "sha256": "6afd0375057c18cb6449c7b296e22df26fb4dc9e4b1e841afca6339fb4e426a1",
+      "fontSize": 34
+    },
+    {
+      "id": "mascaras-2021-06-10",
+      "file": "mascaras-2021-06-10.png",
+      "sha256": "e787354201747fdae7e7896fe65eec5267cc3096b9374abbe59d45e8a8addb7d",
+      "fontSize": 34
+    },
+    {
+      "id": "acervo-cov-0056",
+      "file": "acervo-cov-0056.png",
+      "sha256": "94f6082ef1fdf766e14d14246f6f17bb70e86b6af688c560ebd489c4a70a5b47",
+      "fontSize": 34
+    },
+    {
+      "id": "flavio-vacinacao-2021-06-18",
+      "file": "flavio-vacinacao-2021-06-18.png",
+      "sha256": "b2b0f65d1af2dcb4c1428354dda139dca75256d22e5cdf6d5c2dc0cf8609e76d",
+      "fontSize": 34
+    },
+    {
+      "id": "meio-milhao-2021-06-19",
+      "file": "meio-milhao-2021-06-19.png",
+      "sha256": "8dea12cacb7ca991eab7d00333493dac349f63f07db7b6b4468a12b7440c00a6",
+      "fontSize": 34
+    },
+    {
+      "id": "acervo-cov-0058",
+      "file": "acervo-cov-0058.png",
+      "sha256": "91b65f215bd609faa0a0e5349f30d84e50f3245e3a1b2125a5c1ac568caf5a37",
+      "fontSize": 34
+    },
+    {
+      "id": "acervo-cov-0059",
+      "file": "acervo-cov-0059.png",
+      "sha256": "5d35de8cef1461edf6d4d0ddb1c5adbcc80fe68a9877052e6e2c5202234365f0",
+      "fontSize": 34
+    },
+    {
+      "id": "acervo-cov-0060",
+      "file": "acervo-cov-0060.png",
+      "sha256": "2d2169b61e695e13c035fa169a95c7a818beedfe5ccbf89f858ba0ef8a259f1e",
+      "fontSize": 34
+    },
+    {
+      "id": "orfandade-estudo-2021-07-20",
+      "file": "orfandade-estudo-2021-07-20.png",
+      "sha256": "b71df5b574c98f311b7fd88b08748dfed2db1411bc1df585e0af685a3902731c",
+      "fontSize": 34
+    },
+    {
+      "id": "acervo-cov-0061",
+      "file": "acervo-cov-0061.png",
+      "sha256": "fc5b0eeb30233c58b909512e378e54893633465e3cd9f30a08849d3e76e2cced",
+      "fontSize": 34
+    },
+    {
+      "id": "acervo-cov-0062",
+      "file": "acervo-cov-0062.png",
+      "sha256": "6b57b16f35ab6743b37fffb53a7799881c734ad20958263e719b6de1e899c85e",
+      "fontSize": 34
+    },
+    {
+      "id": "acervo-cov-0063",
+      "file": "acervo-cov-0063.png",
+      "sha256": "91d6b10c3a4aaada660ae9aef7a4942d84e7b7d3bfc4cd9a6243b01b6c43f10f",
+      "fontSize": 34
+    },
+    {
+      "id": "acervo-cov-0064",
+      "file": "acervo-cov-0064.png",
+      "sha256": "83c02f4f68d0ff23d435c7ea90c578414ca8d7e902a02040eb50d270c72d5ca3",
+      "fontSize": 34
+    },
+    {
+      "id": "acervo-cov-0065",
+      "file": "acervo-cov-0065.png",
+      "sha256": "b098373cf3f02e38895b7e468f694475f78eb9eb311c82566d1bb75875c07178",
+      "fontSize": 34
+    },
+    {
+      "id": "acervo-cov-0066",
+      "file": "acervo-cov-0066.png",
+      "sha256": "d0fac747e2003779e73281acbdd7835d57b62d8aa30c17f623c33f27dc01bea8",
+      "fontSize": 34
+    },
+    {
+      "id": "cpi-relatorio-2021-10-26",
+      "file": "cpi-relatorio-2021-10-26.png",
+      "sha256": "21d29be5fcb823ee659d7ebeed746308628b405347c0c4a294ad7722ccfec987",
+      "fontSize": 34
+    },
+    {
+      "id": "acervo-cov-0068",
+      "file": "acervo-cov-0068.png",
+      "sha256": "d86eaebadf2b8f1af476f21a728048df9a04dc860aab6d5fead507fc40f0f3e1",
+      "fontSize": 34
+    },
+    {
+      "id": "queiroga-liberdade-2021-12-07",
+      "file": "queiroga-liberdade-2021-12-07.png",
+      "sha256": "f071bef82709c90480fc9f2e1183c32c6368f5a14072652c5df17441fee544f9",
+      "fontSize": 34
+    },
+    {
+      "id": "acervo-cov-0069",
+      "file": "acervo-cov-0069.png",
+      "sha256": "04a76d95b512d249fbc954562d27affe5292833c5bfdd9d415a96e0d89e7b670",
+      "fontSize": 34
+    },
+    {
+      "id": "anvisa-pfizer-infantil-2021-12-16",
+      "file": "anvisa-pfizer-infantil-2021-12-16.png",
+      "sha256": "2fd0a7520109db7b2c96b63c3ace3863be8e29ad5ebc6b87d78aa95357da1f73",
+      "fontSize": 34
+    },
+    {
+      "id": "acervo-cov-0070",
+      "file": "acervo-cov-0070.png",
+      "sha256": "6823370079710435ee6ea25fa12fd980ace9faf96654f3126ab73257477d6cb4",
+      "fontSize": 34
+    },
+    {
+      "id": "acervo-cov-0071",
+      "file": "acervo-cov-0071.png",
+      "sha256": "00c61b4ebf79b83625cf6cb011a872cae20a3c0a4ad7220e92495831be0e2854",
+      "fontSize": 34
+    },
+    {
+      "id": "acervo-cov-0072",
+      "file": "acervo-cov-0072.png",
+      "sha256": "591e79e4d2cd4e7b00f6fd1401c20b9fbdd5ff72358623be4b5d7fbb5cc5fd9a",
+      "fontSize": 34
+    },
+    {
+      "id": "vacinacao-infantil-2022-01-14",
+      "file": "vacinacao-infantil-2022-01-14.png",
+      "sha256": "b7a55955c863ea3a086fc3216871fb86c87ee129e2b07dac553d864866525699",
+      "fontSize": 34
+    },
+    {
+      "id": "magno-vacinacao-infantil-2022-02-01",
+      "file": "magno-vacinacao-infantil-2022-02-01.png",
+      "sha256": "91acc5e7871daf448a6ead7482053b6f496d4aa1df155ccc7cebe29010873887",
+      "fontSize": 34
+    },
+    {
+      "id": "acervo-cov-0073",
+      "file": "acervo-cov-0073.png",
+      "sha256": "acb8615012af5d47ba1ce4dc62a67fd597517338cb2854ba9b1798153e9ad45a",
+      "fontSize": 34
+    },
+    {
+      "id": "acervo-cov-0074",
+      "file": "acervo-cov-0074.png",
+      "sha256": "43f89c06e998a48068546ce73d3f9830a03b1ed342be439c36d9f4548f74b0e6",
+      "fontSize": 34
+    },
+    {
+      "id": "fim-emergencia-nacional-2022-04-22",
+      "file": "fim-emergencia-nacional-2022-04-22.png",
+      "sha256": "f76c4a65f99700658d2658bde832953a83e7a9cc25e951583f71db8831a05099",
+      "fontSize": 34
+    },
+    {
+      "id": "acervo-cov-0075",
+      "file": "acervo-cov-0075.png",
+      "sha256": "491bd31840bc774f4c529990901298d23b3e02de381a5f5805ba773598d71055",
+      "fontSize": 34
+    },
+    {
+      "id": "acervo-cov-0076",
+      "file": "acervo-cov-0076.png",
+      "sha256": "cd10637b3447d11a2f10fe78f38bec1e11dd9b42856f98abfc0bf6b6f1373c2f",
+      "fontSize": 34
+    },
+    {
+      "id": "acervo-cov-0077",
+      "file": "acervo-cov-0077.png",
+      "sha256": "d2ec465b7f7e66db422335baeeea8f2e061f28059d09db1a62ed435d41993429",
+      "fontSize": 34
+    },
+    {
+      "id": "acervo-cov-0078",
+      "file": "acervo-cov-0078.png",
+      "sha256": "582f402e68f3a007d2d55c7025a07c01af6884c1e586253501d991aff78cf6c5",
+      "fontSize": 34
+    },
+    {
+      "id": "acervo-cov-0079",
+      "file": "acervo-cov-0079.png",
+      "sha256": "e4a192364aaf8347e5cf85439c61b34f2a6a0e4ca7ed407fc95a8748ef7fc0f6",
+      "fontSize": 34
+    },
+    {
+      "id": "reforco-bivalente-2023-02-27",
+      "file": "reforco-bivalente-2023-02-27.png",
+      "sha256": "991cb4df14586bb7b5f59408c1b7cf36b0a5129e2a6692b60d1f4ae9d539f54a",
+      "fontSize": 34
+    },
+    {
+      "id": "oms-fim-emergencia-2023-05-05",
+      "file": "oms-fim-emergencia-2023-05-05.png",
+      "sha256": "966b03e0fdfb426227a2580a9eecc01a83bd994855abc4be76f1eb2a92b1d964",
+      "fontSize": 34
+    }
+  ]
+}

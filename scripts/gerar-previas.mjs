@@ -7,12 +7,14 @@ import { setTimeout as delay } from 'node:timers/promises';
 
 const root = new URL('../', import.meta.url);
 const output = new URL('public/previas/', root);
+// Build metadata stays out of public/: only the images are published.
+const manifest = new URL('scripts/previas-manifest.json', root);
 const dataBytes = await readFile(new URL('public/data/declaracoes.json', root));
 const statements = JSON.parse(dataBytes).declaracoes;
-const hero = await readFile(new URL('src/components/Hero.astro', root), 'utf8');
+const narrative = await readFile(new URL('src/components/Narrative.astro', root), 'utf8');
 const css = await readFile(new URL('src/styles/global.css', root), 'utf8');
 const palette = css.match(/:root\s*\{[^}]+\}/)?.[0];
-const subtitle = hero.match(/<p class="hero__subtitle">([^<]+)<\/p>/)?.[1];
+const subtitle = narrative.match(/<p class="hero__subtitle">([^<]+)<\/p>/)?.[1];
 if (!palette || !subtitle) throw new Error('Paleta ou subtítulo do memorial ausente');
 
 const hash = (value) => createHash('sha256').update(value).digest('hex');
@@ -159,7 +161,7 @@ try {
     images.push({ id: card.id, file, sha256: hash(bytes), fontSize: metrics.fontSize });
     console.log(`${file}: 1200×630, texto ${metrics.fontSize}px`);
   }
-  await writeFile(new URL('manifest.json', output), JSON.stringify({
+  await writeFile(manifest, JSON.stringify({
     declaracoesSha256: hash(dataBytes), paletteSha256: hash(palette), subtitleSha256: hash(subtitle), images,
   }, null, 2) + '\n');
 } finally {

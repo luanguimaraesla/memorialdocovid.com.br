@@ -1,5 +1,9 @@
 {
   "sintetico": false,
+  "acervo": {
+    "eventos": 79,
+    "documentos": 55
+  },
   "declaracoes": [
     {
       "id": "primeiro-obito-divulgado-2020-03-17",
@@ -57,6 +61,38 @@
       "acessado_em": "2026-10-10"
     },
     {
+      "id": "acervo-cov-0001",
+      "tipo": "noticia",
+      "data": "2020-03-20",
+      "subtitulo": "Coletiva sobre Covid-19",
+      "autor": "Gazeta do Povo",
+      "texto": "Bolsonaro minimiza o risco ao comentar seu próprio estado de saúde após a facada.",
+      "contexto": "A fala se refere ao próprio presidente.",
+      "fontes": [
+        {
+          "nome": "Gazeta do Povo — Bolsonaro volta a minimizar Covid-19: “não é uma gripezinha que vai me derrubar”",
+          "url": "https://www.gazetadopovo.com.br/republica/breves/bolsonaro-volta-a-minimizar-covid-19-nao-e-uma-gripezinha-que-vai-me-derrubar/"
+        }
+      ],
+      "acessado_em": "2026-10-09",
+      "acervo": {
+        "manchete": "Bolsonaro volta a minimizar Covid-19: “não é uma gripezinha que vai me derrubar”",
+        "veiculo": "Gazeta do Povo",
+        "url": "https://www.gazetadopovo.com.br/republica/breves/bolsonaro-volta-a-minimizar-covid-19-nao-e-uma-gripezinha-que-vai-me-derrubar/",
+        "publicado_em": "2020-03-20",
+        "fonte_primaria": "https://www.youtube.com/watch?v=352RoCLIy1Q",
+        "documentos": [
+          {
+            "arquivo": "acervo-covid/2020/03_2020/20032020_gripezinha.png",
+            "legenda": "Bolsonaro volta a minimizar Covid-19: “não é uma gripezinha que vai me derrubar”",
+            "largura": 660,
+            "altura": 408,
+            "sha256": "abaa33f6613392d4712ab46f130440bfaf099ada5417e838bda4884eff06a172"
+          }
+        ]
+      }
+    },
+    {
       "id": "pronunciamento-2020-03-24",
       "data": "2020-03-24",
       "subtitulo": "Bolsonaro fala em ‘gripezinha’ e critica o confinamento em massa",
@@ -77,7 +113,61 @@
           "url": "https://www12.senado.leg.br/noticias/infomaterias/2021/04/falta-de-normas-claras-e-de-acoes-coordenadas-para-distanciamento-social-prejudica-combate-a-covid"
         }
       ],
-      "acessado_em": "2026-10-09"
+      "acessado_em": "2026-10-09",
+      "acervo": {
+        "manchete": "Cúpula do Congresso e governadores reagem a pronunciamento de Bolsonaro",
+        "veiculo": "Gazeta do Povo",
+        "url": "https://www.gazetadopovo.com.br/republica/pronunciamento-jair-bolsonaro-24-marco-reacoes/",
+        "publicado_em": "2020-03-25",
+        "fonte_primaria": "https://www.youtube.com/watch?v=yHAvI8CrdiU",
+        "documentos": [
+          {
+            "arquivo": "acervo-covid/2020/03_2020/24032020_davialcolumbre.png",
+            "legenda": "Publicação de Davi Alcolumbre sobre a nota do Senado em 24/03/2020",
+            "largura": 650,
+            "altura": 534,
+            "sha256": "307d4498e38041e9292b2d657ba11df91d8adc1867724a3d67b1564f9b24f6fa"
+          },
+          {
+            "arquivo": "acervo-covid/2020/03_2020/24032020_fhc.png",
+            "legenda": "Publicação de Fernando Henrique Cardoso em reação ao pronunciamento de 24/03/2020",
+            "largura": 650,
+            "altura": 532,
+            "sha256": "035d59ae1a954048f5e41cde20e5589c6fcff8d44d321ca3f1779b0677e64adb"
+          }
+        ]
+      }
+    },
+    {
+      "id": "acervo-cov-0003",
+      "tipo": "noticia",
+      "data": "2020-04-20",
+      "subtitulo": "Resposta sobre mortes: não sou coveiro",
+      "autor": "Gazeta do Povo",
+      "texto": "Na portaria do Alvorada, responde a jornalista que perguntava sobre mortes por coronavírus dizendo que não era coveiro.",
+      "fontes": [
+        {
+          "nome": "Gazeta do Povo — “Não sou coveiro”, diz Bolsonaro sobre número de mortes por coronavírus",
+          "url": "https://www.gazetadopovo.com.br/republica/breves/bolsonaro-coveiro-numero-de-mortes-por-coronavirus/"
+        }
+      ],
+      "acessado_em": "2026-10-09",
+      "acervo": {
+        "manchete": "“Não sou coveiro”, diz Bolsonaro sobre número de mortes por coronavírus",
+        "veiculo": "Gazeta do Povo",
+        "url": "https://www.gazetadopovo.com.br/republica/breves/bolsonaro-coveiro-numero-de-mortes-por-coronavirus/",
+        "publicado_em": "2020-04-20",
+        "fonte_primaria": "https://www.youtube.com/watch?v=aIpUbYjjdn0",
+        "documentos": [
+          {
+            "arquivo": "acervo-covid/2020/04_2020/20042020_naosoucoveiro.png",
+            "legenda": "“Não sou coveiro”, diz Bolsonaro sobre número de mortes por coronavírus",
+            "largura": 936,
+            "altura": 330,
+            "sha256": "60666c20833030c25d93e1772f4338af50812af53ed3517ed7e93e501691a5ed"
+          }
+        ]
+      }
     },
     {
       "id": "sepultamentos-manaus-2020-04-21",
@@ -96,22 +186,6 @@
       "acessado_em": "2026-10-10"
     },
     {
-      "id": "oxford-ensaio-humano-2020-04-23",
-      "tipo": "noticia",
-      "data": "2020-04-23",
-      "subtitulo": "Oxford começa testes de sua vacina em humanos",
-      "autor": "Universidade de Oxford",
-      "texto": "Os primeiros voluntários recebem a candidata ChAdOx1 nCoV-19. Começa uma etapa de testes em humanos para avaliar segurança e resposta imune; ainda não é uma vacina liberada para a população.",
-      "contexto": "A data é a das primeiras aplicações no ensaio de Oxford. O desenvolvimento de vacinas já estava em andamento antes da cobertura deste memorial. Esta etapa experimental não equivale a autorização regulatória nem ao início de uma campanha pública.",
-      "fontes": [
-        {
-          "nome": "St Cross College/Oxford — início dos ensaios clínicos",
-          "url": "https://www.stx.ox.ac.uk/article/clinical-trials-begin-for-covid-19-vaccine-developed-by-team-led-by-andy-pollard"
-        }
-      ],
-      "acessado_em": "2026-10-10"
-    },
-    {
       "id": "e-dai-2020-04-28",
       "data": "2020-04-28",
       "subtitulo": "Bolsonaro responde ‘E daí?’ ao ser questionado sobre as mortes",
@@ -124,7 +198,23 @@
           "url": "https://www.camara.leg.br/noticias/658183-oposicao-critica-fala-de-bolsonaro-sobre-numero-de-mortos-por-covid-19"
         }
       ],
-      "acessado_em": "2026-10-09"
+      "acessado_em": "2026-10-09",
+      "acervo": {
+        "manchete": "“E daí? Lamento”, diz Bolsonaro sobre recorde de mortes pela Covid-19",
+        "veiculo": "Gazeta do Povo",
+        "url": "https://www.gazetadopovo.com.br/republica/breves/bolsonaro-recorde-de-mortes-covid-19/",
+        "publicado_em": "2020-04-28",
+        "fonte_primaria": "https://www.youtube.com/watch?v=KGACSgIToUk",
+        "documentos": [
+          {
+            "arquivo": "acervo-covid/2020/04_2020/28042020_edai_lamento.png",
+            "legenda": "“E daí? Lamento”, diz Bolsonaro sobre recorde de mortes pela Covid-19",
+            "largura": 948,
+            "altura": 416,
+            "sha256": "1a331fc3878fa39e5f2a36b755671c2a571ca1b79d9f07435208c4e475e26f24"
+          }
+        ]
+      }
     },
     {
       "id": "valdemiro-sementes-2020-05-05",
@@ -146,6 +236,195 @@
       "acessado_em": "2026-10-09"
     },
     {
+      "id": "acervo-cov-0005",
+      "tipo": "noticia",
+      "data": "2020-05-07",
+      "subtitulo": "Anúncio de churrasco durante isolamento",
+      "autor": "Gazeta do Povo / Estadão Conteúdo",
+      "texto": "Anuncia que pretende reunir cerca de 30 convidados para um churrasco no Alvorada, contrariando recomendações de isolamento.",
+      "contexto": "O registro é do anúncio do churrasco, não de sua realização.",
+      "fontes": [
+        {
+          "nome": "Gazeta do Povo / Estadão Conteúdo — Com lockdown em estados, Bolsonaro fala em fazer churrasco e visitar a mãe",
+          "url": "https://www.gazetadopovo.com.br/republica/breves/com-lockdown-em-estados-bolsonaro-fala-em-fazer-churrasco-e-visitar-a-mae/"
+        }
+      ],
+      "acessado_em": "2026-10-09",
+      "acervo": {
+        "manchete": "Com lockdown em estados, Bolsonaro fala em fazer churrasco e visitar a mãe",
+        "veiculo": "Gazeta do Povo / Estadão Conteúdo",
+        "url": "https://www.gazetadopovo.com.br/republica/breves/com-lockdown-em-estados-bolsonaro-fala-em-fazer-churrasco-e-visitar-a-mae/",
+        "publicado_em": "2020-05-07",
+        "documentos": [
+          {
+            "arquivo": "acervo-covid/2020/05_2020/07052020_churrasco.png",
+            "legenda": "Com lockdown em estados, Bolsonaro fala em fazer churrasco e visitar a mãe",
+            "largura": 932,
+            "altura": 406,
+            "sha256": "99f7443cdb7f21b8dd92a469e04d263a1290bf91fc6ad2a544c9798dbd2a05b1"
+          }
+        ]
+      }
+    },
+    {
+      "id": "acervo-cov-0006",
+      "tipo": "noticia",
+      "data": "2020-05-09",
+      "subtitulo": "Passeio de jet ski e declaração sobre neurose",
+      "autor": "Veja / Robson Bonin",
+      "texto": "Passeia no Lago Paranoá e afirma que o país vive uma neurose; naquele dia, o Brasil ultrapassa 10 mil mortes registradas.",
+      "contexto": "Coluna Radar, que reúne fatos relatados e comentários de opinião do autor.",
+      "fontes": [
+        {
+          "nome": "Veja / Robson Bonin — E daí? Bolsonaro passeia de jet ski e diz que país vive ‘neurose’",
+          "url": "https://veja.abril.com.br/coluna/radar/e-dai-bolsonaro-passeia-de-jet-ski-e-diz-que-pais-vive-neurose/"
+        }
+      ],
+      "acessado_em": "2026-10-09",
+      "acervo": {
+        "manchete": "E daí? Bolsonaro passeia de jet ski e diz que país vive ‘neurose’",
+        "veiculo": "Veja / Robson Bonin",
+        "url": "https://veja.abril.com.br/coluna/radar/e-dai-bolsonaro-passeia-de-jet-ski-e-diz-que-pais-vive-neurose/",
+        "publicado_em": "2020-05-09",
+        "fonte_primaria": "https://www.youtube.com/watch?v=AcLmjvl45nI",
+        "documentos": [
+          {
+            "arquivo": "acervo-covid/2020/05_2020/09052020_jetski.png",
+            "legenda": "E daí? Bolsonaro passeia de jet ski e diz que país vive ‘neurose’",
+            "largura": 942,
+            "altura": 434,
+            "sha256": "9ed04c1187a1d8fbc51d66b79ec25c8f91f0a5f4c3fe5a391dc1e5e575e961c9"
+          }
+        ]
+      }
+    },
+    {
+      "id": "acervo-cov-0007",
+      "tipo": "noticia",
+      "data": "2020-05-15",
+      "subtitulo": "Pedido de demissão de Nelson Teich",
+      "autor": "Gazeta do Povo / Fernanda Trisotto",
+      "texto": "O segundo ministro da Saúde durante a pandemia pede demissão menos de um mês após assumir, em contexto de divergências sobre cloroquina e isolamento.",
+      "contexto": "Teich pediu demissão; seu antecessor, Luiz Henrique Mandetta, havia sido demitido pelo presidente.",
+      "fontes": [
+        {
+          "nome": "Gazeta do Povo / Fernanda Trisotto — Nelson Teich pede demissão do Ministério da Saúde",
+          "url": "https://www.gazetadopovo.com.br/republica/teich-demissao-ministerio-saude/"
+        }
+      ],
+      "acessado_em": "2026-10-09",
+      "acervo": {
+        "manchete": "Nelson Teich pede demissão do Ministério da Saúde",
+        "veiculo": "Gazeta do Povo / Fernanda Trisotto",
+        "url": "https://www.gazetadopovo.com.br/republica/teich-demissao-ministerio-saude/",
+        "publicado_em": "2020-05-15",
+        "fonte_primaria": "https://www.youtube.com/watch?v=2CdmWX3P7hE",
+        "documentos": [
+          {
+            "arquivo": "acervo-covid/2020/05_2020/15052020_demissao_teich.png",
+            "legenda": "Nelson Teich pede demissão do Ministério da Saúde",
+            "largura": 986,
+            "altura": 746,
+            "sha256": "0c1408b7a21abc7ffe9307f56a1ced65f27be5e8f17f6d562918a6a504a7e77c"
+          }
+        ]
+      }
+    },
+    {
+      "id": "acervo-cov-0008",
+      "tipo": "noticia",
+      "data": "2020-05-19",
+      "subtitulo": "Fala sobre cloroquina e tubaína",
+      "autor": "Veja / Redação",
+      "texto": "Em live, associa cloroquina à direita e tubaína à esquerda ao anunciar que o ministro interino ampliaria o protocolo.",
+      "contexto": "A Gazeta do Povo também registrou a fala em reportagem de 20/05/2020.",
+      "fontes": [
+        {
+          "nome": "Veja / Redação — Bolsonaro: ‘Quem é de direita toma cloroquina, quem é esquerda, tubaína’",
+          "url": "https://veja.abril.com.br/politica/bolsonaro-quem-e-de-direita-toma-cloroquina-quem-e-esquerda-tubaina/"
+        }
+      ],
+      "acessado_em": "2026-10-09",
+      "acervo": {
+        "manchete": "Bolsonaro: ‘Quem é de direita toma cloroquina, quem é esquerda, tubaína’",
+        "veiculo": "Veja / Redação",
+        "url": "https://veja.abril.com.br/politica/bolsonaro-quem-e-de-direita-toma-cloroquina-quem-e-esquerda-tubaina/",
+        "publicado_em": "2020-05-19",
+        "fonte_primaria": "https://www.youtube.com/watch?v=UrD5nNfVNDE",
+        "documentos": [
+          {
+            "arquivo": "acervo-covid/2020/05_2020/19052020_cloroquina_tubaiba.png",
+            "legenda": "Bolsonaro: ‘Quem é de direita toma cloroquina, quem é esquerda, tubaína’",
+            "largura": 974,
+            "altura": 636,
+            "sha256": "276f0e7e15f80535a154867f54470b84f8ca28d57df4417e28a6f5d711fcbd78"
+          }
+        ]
+      }
+    },
+    {
+      "id": "acervo-cov-0009",
+      "tipo": "noticia",
+      "data": "2020-05-20",
+      "subtitulo": "Ampliação da orientação de uso da cloroquina",
+      "autor": "Gazeta do Povo",
+      "texto": "Ministério da Saúde amplia a orientação para pacientes em estágios iniciais, com prescrição médica e consentimento; o documento reconhece ausência de benefício inequívoco comprovado.",
+      "contexto": "O protocolo é de 20/05/2020. O recorde de 1.179 óbitos registrados e a fala sobre tubaína, citados na reportagem, são de 19/05/2020.",
+      "fontes": [
+        {
+          "nome": "Gazeta do Povo — Brasil tem recorde de mortes e novo protocolo para uso da cloroquina",
+          "url": "https://wwws.gazetadopovo.com.br/republica/coronavirus-recorde-mortes-cloroquina/"
+        }
+      ],
+      "acessado_em": "2026-10-09",
+      "acervo": {
+        "manchete": "Brasil tem recorde de mortes e novo protocolo para uso da cloroquina",
+        "veiculo": "Gazeta do Povo",
+        "url": "https://wwws.gazetadopovo.com.br/republica/coronavirus-recorde-mortes-cloroquina/",
+        "publicado_em": "2020-05-20",
+        "documentos": [
+          {
+            "arquivo": "acervo-covid/2020/05_2020/20052020_cloroquina.png",
+            "legenda": "Brasil tem recorde de mortes e novo protocolo para uso da cloroquina",
+            "largura": 988,
+            "altura": 746,
+            "sha256": "01ed9ef5058e35f1f6cbb1042a8c1cd105b4f96bfe8d8585b9c102d59d604ad9"
+          }
+        ]
+      }
+    },
+    {
+      "id": "acervo-cov-0010",
+      "tipo": "noticia",
+      "data": "2020-05-21",
+      "subtitulo": "Brasil ultrapassa 20 mil mortes registradas",
+      "autor": "Exame / Clara Cerioni",
+      "texto": "Balanço do Ministério da Saúde registra 20.047 mortes acumuladas, 310.087 casos e 1.188 novos óbitos registrados em 24 horas.",
+      "contexto": "Os novos óbitos do balanço diário são registros daquele dia, não mortes que ocorreram todas nele.",
+      "fontes": [
+        {
+          "nome": "Exame / Clara Cerioni — Covid-19: Brasil tem recorde de 1.188 mortes em 24h e total vai a 20 mil",
+          "url": "https://exame.com/brasil/casos-de-coronavirus-numero-de-mortes-21-de-maio/"
+        }
+      ],
+      "acessado_em": "2026-10-09",
+      "acervo": {
+        "manchete": "Covid-19: Brasil tem recorde de 1.188 mortes em 24h e total vai a 20 mil",
+        "veiculo": "Exame / Clara Cerioni",
+        "url": "https://exame.com/brasil/casos-de-coronavirus-numero-de-mortes-21-de-maio/",
+        "publicado_em": "2020-05-21",
+        "documentos": [
+          {
+            "arquivo": "acervo-covid/2020/05_2020/21052020_20mil_mortes.png",
+            "legenda": "Covid-19: Brasil tem recorde de 1.188 mortes em 24h e total vai a 20 mil",
+            "largura": 988,
+            "altura": 952,
+            "sha256": "85d6183abebee47dfc7987f1feeb178862de3b63ba78873683f2e2fcb2bf42db"
+          }
+        ]
+      }
+    },
+    {
       "id": "dados-retirados-2020-06-06",
       "tipo": "noticia",
       "data": "2020-06-06",
@@ -160,6 +439,37 @@
         }
       ],
       "acessado_em": "2026-10-10"
+    },
+    {
+      "id": "acervo-cov-0011",
+      "tipo": "noticia",
+      "data": "2020-06-06",
+      "subtitulo": "Reações à restrição dos dados da pandemia",
+      "autor": "Gazeta do Povo / Catarina Scortecci / informações de Estadão Conteúdo",
+      "texto": "Autoridades e instituições criticam a redução da publicidade dos dados e cobram a retomada das informações completas.",
+      "contexto": "As reações são de 06/06/2020, anteriores à decisão judicial sobre os dados.",
+      "fontes": [
+        {
+          "nome": "Gazeta do Povo / Catarina Scortecci / informações de Estadão Conteúdo — Políticos e autoridades reagem com críticas à falta de transparência de dados da Covid-19",
+          "url": "https://www.gazetadopovo.com.br/republica/politicos-e-autoridades-reagem-com-criticas-a-falta-de-transparencia-de-dados-da-covid-19/"
+        }
+      ],
+      "acessado_em": "2026-10-09",
+      "acervo": {
+        "manchete": "Políticos e autoridades reagem com críticas à falta de transparência de dados da Covid-19",
+        "veiculo": "Gazeta do Povo / Catarina Scortecci / informações de Estadão Conteúdo",
+        "url": "https://www.gazetadopovo.com.br/republica/politicos-e-autoridades-reagem-com-criticas-a-falta-de-transparencia-de-dados-da-covid-19/",
+        "publicado_em": "2020-06-06",
+        "documentos": [
+          {
+            "arquivo": "acervo-covid/2020/06_2020/06062020_transparencia.png",
+            "legenda": "Políticos e autoridades reagem com críticas à falta de transparência de dados da Covid-19",
+            "largura": 884,
+            "altura": 468,
+            "sha256": "9c1d0a609b7a2af69e4cb98c1f43a5a89fdf94a00ef7a6ab82d566bef6ec3a71"
+          }
+        ]
+      }
     },
     {
       "id": "stf-restaura-dados-2020-06-08",
@@ -182,6 +492,195 @@
       "acessado_em": "2026-10-10"
     },
     {
+      "id": "acervo-cov-0012",
+      "tipo": "noticia",
+      "data": "2020-06-11",
+      "subtitulo": "Sugestão de entrada e filmagem em hospitais",
+      "autor": "CNN Brasil / Guilherme Venaglia",
+      "texto": "Durante live, sugere que populares encontrem uma forma de entrar e filmar hospitais para verificar ocupação de leitos e gastos.",
+      "fontes": [
+        {
+          "nome": "CNN Brasil / Guilherme Venaglia — Bolsonaro sugere entrada em hospitais para fiscalizar gastos com a Covid-19",
+          "url": "https://www.cnnbrasil.com.br/politica/bolsonaro-sugere-entrada-em-hospitais-para-fiscalizar-gastos-com-a-covid-19/"
+        }
+      ],
+      "acessado_em": "2026-10-09",
+      "acervo": {
+        "manchete": "Bolsonaro sugere entrada em hospitais para fiscalizar gastos com a Covid-19",
+        "veiculo": "CNN Brasil / Guilherme Venaglia",
+        "url": "https://www.cnnbrasil.com.br/politica/bolsonaro-sugere-entrada-em-hospitais-para-fiscalizar-gastos-com-a-covid-19/",
+        "publicado_em": "2020-06-11",
+        "fonte_primaria": "https://www.youtube.com/watch?v=98C0RwIq-Rg",
+        "documentos": [
+          {
+            "arquivo": "acervo-covid/2020/06_2020/11062020_fiscalizacao_hospitais.png",
+            "legenda": "Bolsonaro sugere entrada em hospitais para fiscalizar gastos com a Covid-19",
+            "largura": 888,
+            "altura": 654,
+            "sha256": "43be5b4897a7d0080f0f3a8e88b1902d724aba92cdffa1d792428698daa084f5"
+          }
+        ]
+      }
+    },
+    {
+      "id": "acervo-cov-0013",
+      "tipo": "noticia",
+      "data": "2020-06-19",
+      "subtitulo": "Brasil ultrapassa um milhão de casos confirmados",
+      "autor": "Gazeta do Povo",
+      "texto": "Dados do Ministério da Saúde registram 1.032.913 casos acumulados; a reportagem discute subnotificação e limitações de testagem.",
+      "contexto": "Casos confirmados não são o total de infecções. As cifras são o balanço divulgado na época, não o total revisado depois.",
+      "fontes": [
+        {
+          "nome": "Gazeta do Povo — Covid-19: Brasil ultrapassa 1 milhão de casos. Número real pode ser pior",
+          "url": "https://www.gazetadopovo.com.br/republica/covid-brasil-1-milhao-de-casos-numero-real/"
+        }
+      ],
+      "acessado_em": "2026-10-09",
+      "acervo": {
+        "manchete": "Covid-19: Brasil ultrapassa 1 milhão de casos. Número real pode ser pior",
+        "veiculo": "Gazeta do Povo",
+        "url": "https://www.gazetadopovo.com.br/republica/covid-brasil-1-milhao-de-casos-numero-real/",
+        "publicado_em": "2020-06-19",
+        "fonte_primaria": "https://www.youtube.com/watch?v=F2pH1XFYzRU",
+        "documentos": [
+          {
+            "arquivo": "acervo-covid/2020/06_2020/19062020_1milhao_casos.png",
+            "legenda": "Covid-19: Brasil ultrapassa 1 milhão de casos. Número real pode ser pior",
+            "largura": 740,
+            "altura": 844,
+            "sha256": "774cf7aa3b1b07e1c3f9ff6c0c33ae003c99d4d3ed900e8c7a50bb74297845b2"
+          }
+        ]
+      }
+    },
+    {
+      "id": "acervo-cov-0014",
+      "tipo": "noticia",
+      "data": "2020-06-22",
+      "subtitulo": "Apelo pela reabertura do comércio",
+      "autor": "Folha de S.Paulo",
+      "texto": "Em entrevista ao AgroMais, pede reabertura do comércio a governadores e prefeitos e sugere que houve exagero no enfrentamento da pandemia.",
+      "contexto": "A fala também pede uma reabertura com responsabilidade. O país já havia passado de 50 mil mortes, e os balanços de diferentes fontes divergiam.",
+      "fontes": [
+        {
+          "nome": "Folha de S.Paulo — Bolsonaro faz apelo por reabertura e fala em 'exagero' no enfrentamento da pandemia",
+          "url": "https://www1.folha.uol.com.br/equilibrioesaude/2020/06/bolsonaro-faz-apelo-por-reabertura-e-fala-em-exagero-no-enfrentamento-da-pandemia.shtml"
+        }
+      ],
+      "acessado_em": "2026-10-09",
+      "acervo": {
+        "manchete": "Bolsonaro faz apelo por reabertura e fala em 'exagero' no enfrentamento da pandemia",
+        "veiculo": "Folha de S.Paulo",
+        "url": "https://www1.folha.uol.com.br/equilibrioesaude/2020/06/bolsonaro-faz-apelo-por-reabertura-e-fala-em-exagero-no-enfrentamento-da-pandemia.shtml",
+        "publicado_em": "2020-06-22",
+        "fonte_primaria": "https://www.youtube.com/watch?v=v7AYVZ6AFeU",
+        "documentos": [
+          {
+            "arquivo": "acervo-covid/2020/06_2020/22062020_reabertura.png",
+            "legenda": "Bolsonaro faz apelo por reabertura e fala em 'exagero' no enfrentamento da pandemia",
+            "largura": 736,
+            "altura": 908,
+            "sha256": "3fa8b230552a169c182af0e1b9a1978aeb43ace8d25df0ed3dae7b8e2a0ad85e"
+          }
+        ]
+      }
+    },
+    {
+      "id": "acervo-cov-0015",
+      "tipo": "noticia",
+      "data": "2020-07-03",
+      "subtitulo": "Sanção com vetos à lei de máscaras",
+      "autor": "Gazeta do Povo",
+      "texto": "Lei publicada no DOU estabelece uso de máscaras em locais públicos, mas o presidente veta dispositivos sobre locais fechados de reunião de pessoas e distribuição gratuita.",
+      "contexto": "A data é a da publicação no Diário Oficial da União. Os vetos não revogaram regras estaduais ou municipais. Segundo o Senado, o veto foi derrubado em 19/08/2020.",
+      "fontes": [
+        {
+          "nome": "Gazeta do Povo — Bolsonaro sanciona lei que obriga uso de máscaras, mas impõe vetos",
+          "url": "https://www.gazetadopovo.com.br/republica/breves/bolsonaro-lei-obriga-uso-de-mascaras/"
+        }
+      ],
+      "acessado_em": "2026-10-09",
+      "acervo": {
+        "manchete": "Bolsonaro sanciona lei que obriga uso de máscaras, mas impõe vetos",
+        "veiculo": "Gazeta do Povo",
+        "url": "https://www.gazetadopovo.com.br/republica/breves/bolsonaro-lei-obriga-uso-de-mascaras/",
+        "publicado_em": "2020-07-03",
+        "documentos": [
+          {
+            "arquivo": "acervo-covid/2020/07_2020/03072020_veto_mascaras.png",
+            "legenda": "Bolsonaro sanciona lei que obriga uso de máscaras, mas impõe vetos",
+            "largura": 708,
+            "altura": 478,
+            "sha256": "f4cae203d1a1a9eade49866ae564e771305c3622ef2f811a17108ea70262f82a"
+          }
+        ]
+      }
+    },
+    {
+      "id": "acervo-cov-0016",
+      "tipo": "noticia",
+      "data": "2020-07-07",
+      "subtitulo": "Vídeo tomando hidroxicloroquina",
+      "autor": "Gazeta do Povo / Cristina Seciuk",
+      "texto": "Publica vídeo tomando o que afirma ser sua terceira dose de hidroxicloroquina e atribui sua melhora ao tratamento.",
+      "contexto": "A melhora relatada pelo presidente não comprova a eficácia do medicamento. A reportagem descreve hidroxicloroquina, embora a manchete fale em cloroquina.",
+      "fontes": [
+        {
+          "nome": "Gazeta do Povo / Cristina Seciuk — Diagnosticado com Covid-19, Bolsonaro publica vídeo tomando cloroquina",
+          "url": "https://www.gazetadopovo.com.br/republica/breves/diagnosticado-com-covid-19-bolsonaro-publica-video-tomando-cloroquina/"
+        }
+      ],
+      "acessado_em": "2026-10-09",
+      "acervo": {
+        "manchete": "Diagnosticado com Covid-19, Bolsonaro publica vídeo tomando cloroquina",
+        "veiculo": "Gazeta do Povo / Cristina Seciuk",
+        "url": "https://www.gazetadopovo.com.br/republica/breves/diagnosticado-com-covid-19-bolsonaro-publica-video-tomando-cloroquina/",
+        "publicado_em": "2020-07-07",
+        "fonte_primaria": "https://www.youtube.com/watch?v=LRKdQnMb5J0",
+        "documentos": [
+          {
+            "arquivo": "acervo-covid/2020/07_2020/07072020_bolsonaro_cloroquina.png",
+            "legenda": "Diagnosticado com Covid-19, Bolsonaro publica vídeo tomando cloroquina",
+            "largura": 698,
+            "altura": 482,
+            "sha256": "65d88e1e0db77120c283a951827a4c50782829fadc4bb171a5815d92077d3de2"
+          }
+        ]
+      }
+    },
+    {
+      "id": "acervo-cov-0017",
+      "tipo": "noticia",
+      "data": "2020-07-08",
+      "subtitulo": "Vetos à lei de proteção a indígenas",
+      "autor": "Gazeta do Povo",
+      "texto": "Sanciona com vetos lei de proteção durante a pandemia. Os vetos incluem garantias de água potável, materiais de higiene, leitos e facilitação do auxílio emergencial.",
+      "contexto": "A data é a da publicação no Diário Oficial da União. A justificativa citada para os vetos foi a falta de demonstração do impacto orçamentário e financeiro; os vetos ainda seriam examinados pelo Congresso.",
+      "fontes": [
+        {
+          "nome": "Gazeta do Povo — Bolsonaro veta trechos de lei com medidas para proteger indígenas na pandemia",
+          "url": "https://www.gazetadopovo.com.br/republica/breves/bolsonaro-veta-trechos-de-lei-indigenas-pandemia/"
+        }
+      ],
+      "acessado_em": "2026-10-09",
+      "acervo": {
+        "manchete": "Bolsonaro veta trechos de lei com medidas para proteger indígenas na pandemia",
+        "veiculo": "Gazeta do Povo",
+        "url": "https://www.gazetadopovo.com.br/republica/breves/bolsonaro-veta-trechos-de-lei-indigenas-pandemia/",
+        "publicado_em": "2020-07-08",
+        "documentos": [
+          {
+            "arquivo": "acervo-covid/2020/07_2020/08072020_veto_indigenas.png",
+            "legenda": "Bolsonaro veta trechos de lei com medidas para proteger indígenas na pandemia",
+            "largura": 708,
+            "altura": 454,
+            "sha256": "b216325f011edb5bfe4a186d0a7b4978ac0e74af3b5bd8a06f743a27ee044717"
+          }
+        ]
+      }
+    },
+    {
       "id": "coronavac-fase-tres-2020-07-21",
       "tipo": "noticia",
       "data": "2020-07-21",
@@ -196,6 +695,163 @@
         }
       ],
       "acessado_em": "2026-10-10"
+    },
+    {
+      "id": "acervo-cov-0018",
+      "tipo": "noticia",
+      "data": "2020-07-29",
+      "subtitulo": "Brasil ultrapassa 90 mil mortes registradas",
+      "autor": "Gazeta do Povo / Cristina Seciuk",
+      "texto": "Balanço do Ministério da Saúde registra 90.134 mortes e 2.552.265 casos acumulados, com 1.595 novos óbitos e 69.074 casos registrados em 24 horas.",
+      "contexto": "Os óbitos do balanço são registros daquele dia, não mortes que ocorreram todas nele.",
+      "fontes": [
+        {
+          "nome": "Gazeta do Povo / Cristina Seciuk — Brasil ultrapassa 2,5 milhões de casos e 90 mil mortes por coronavírus",
+          "url": "https://www.gazetadopovo.com.br/republica/breves/atualiza-coronavirus-brasil-2907/"
+        }
+      ],
+      "acessado_em": "2026-10-09",
+      "acervo": {
+        "manchete": "Brasil ultrapassa 2,5 milhões de casos e 90 mil mortes por coronavírus",
+        "veiculo": "Gazeta do Povo / Cristina Seciuk",
+        "url": "https://www.gazetadopovo.com.br/republica/breves/atualiza-coronavirus-brasil-2907/",
+        "publicado_em": "2020-07-29",
+        "documentos": [
+          {
+            "arquivo": "acervo-covid/2020/07_2020/29072020_90mil_mortes.png",
+            "legenda": "Brasil ultrapassa 2,5 milhões de casos e 90 mil mortes por coronavírus",
+            "largura": 674,
+            "altura": 534,
+            "sha256": "d4869138e14cd73bb1fc8bb42eb8752b73c82140fe011d5ab92dea3807406f15"
+          }
+        ]
+      }
+    },
+    {
+      "id": "acervo-cov-0019",
+      "tipo": "noticia",
+      "data": "2020-08-06",
+      "subtitulo": "Fala sobre tocar a vida perto de 100 mil mortes",
+      "autor": "Folha de S.Paulo / Daniel Carvalho",
+      "texto": "Em live com Eduardo Pazuello, lamenta as mortes, comenta a aproximação de 100 mil óbitos e diz que é preciso tocar a vida e buscar uma forma de se safar do problema.",
+      "contexto": "A fala inclui um lamento pelas mortes e ocorreu antes de o balanço oficial passar de 100 mil.",
+      "fontes": [
+        {
+          "nome": "Folha de S.Paulo / Daniel Carvalho — Vamos tocar a vida, diz Bolsonaro sobre iminência de 100 mil mortes por Covid-19",
+          "url": "https://www1.folha.uol.com.br/equilibrioesaude/2020/08/vamos-tocar-a-vida-diz-bolsonaro-sobre-iminencia-de-100-mil-mortes-por-covid-19.shtml"
+        }
+      ],
+      "acessado_em": "2026-10-09",
+      "acervo": {
+        "manchete": "Vamos tocar a vida, diz Bolsonaro sobre iminência de 100 mil mortes por Covid-19",
+        "veiculo": "Folha de S.Paulo / Daniel Carvalho",
+        "url": "https://www1.folha.uol.com.br/equilibrioesaude/2020/08/vamos-tocar-a-vida-diz-bolsonaro-sobre-iminencia-de-100-mil-mortes-por-covid-19.shtml",
+        "publicado_em": "2020-08-06",
+        "fonte_primaria": "https://www.youtube.com/watch?v=Y-nyxW-5mGY",
+        "documentos": [
+          {
+            "arquivo": "acervo-covid/2020/08_2020/06082020_tocar_a_vida.png",
+            "legenda": "Vamos tocar a vida, diz Bolsonaro sobre iminência de 100 mil mortes por Covid-19",
+            "largura": 738,
+            "altura": 790,
+            "sha256": "b404216aa43c6920a4bf62607a79f5263883dd72d001bff6c9fa1b51baea6dbd"
+          }
+        ]
+      }
+    },
+    {
+      "id": "acervo-cov-0034",
+      "tipo": "noticia",
+      "data": "2020-08-06",
+      "subtitulo": "Bolsonaro faz piada sobre aplicação retal de ozônio",
+      "autor": "UOL",
+      "texto": "Bolsonaro faz piada de cunho homofóbico sobre a proposta de Itajaí. No encontro, Giovani Cherini apresenta projeto de ozonioterapia para pacientes com Covid.",
+      "contexto": "A fonte registra a piada de Bolsonaro e a apresentação do projeto por Cherini; não mostra o presidente defendendo o tratamento.",
+      "fontes": [
+        {
+          "nome": "UOL — Bolsonaro faz piada com aplicação retal de ozônio",
+          "url": "https://noticias.uol.com.br/politica/ultimas-noticias/2020/08/06/bolsonaro-piada-aplicacao-retal-de-ozonio.htm"
+        }
+      ],
+      "acessado_em": "2026-10-09",
+      "acervo": {
+        "manchete": "Bolsonaro faz piada com aplicação retal de ozônio",
+        "veiculo": "UOL",
+        "url": "https://noticias.uol.com.br/politica/ultimas-noticias/2020/08/06/bolsonaro-piada-aplicacao-retal-de-ozonio.htm",
+        "publicado_em": "2020-08-06",
+        "documentos": [
+          {
+            "arquivo": "acervo-covid/2020/08_2020/06082020_ozonio.png",
+            "legenda": "Bolsonaro faz piada com aplicação retal de ozônio",
+            "largura": 734,
+            "altura": 1214,
+            "sha256": "f79b38fa086fd4db8c5bd713e85f79404d1e524ded8ed54f0f86eaf424b0521a"
+          }
+        ]
+      }
+    },
+    {
+      "id": "acervo-cov-0020",
+      "tipo": "noticia",
+      "data": "2020-08-08",
+      "subtitulo": "Brasil ultrapassa 100 mil mortes registradas",
+      "autor": "Gazeta do Povo / Giorgio Dal Molin",
+      "texto": "Balanço do Ministério da Saúde registra 100.477 óbitos e 3.012.412 casos acumulados de Covid-19. A reportagem discute subnotificação e homenagens às vítimas.",
+      "contexto": "Cifras do balanço do Ministério da Saúde na época, distintas de estimativas e de revisões posteriores. A data do registro não é a data em que as mortes ocorreram.",
+      "fontes": [
+        {
+          "nome": "Gazeta do Povo / Giorgio Dal Molin — Brasil atinge 100 mil mortes por Covid cinco meses após primeiro óbito",
+          "url": "https://www.gazetadopovo.com.br/republica/100-mil-mortes-covid-brasil/"
+        }
+      ],
+      "acessado_em": "2026-10-09",
+      "acervo": {
+        "manchete": "Brasil atinge 100 mil mortes por Covid cinco meses após primeiro óbito",
+        "veiculo": "Gazeta do Povo / Giorgio Dal Molin",
+        "url": "https://www.gazetadopovo.com.br/republica/100-mil-mortes-covid-brasil/",
+        "publicado_em": "2020-08-08",
+        "fonte_primaria": "https://www.youtube.com/watch?v=fxC2mc8r2vU",
+        "documentos": [
+          {
+            "arquivo": "acervo-covid/2020/08_2020/08082020_100mil_mortes.png",
+            "legenda": "Brasil atinge 100 mil mortes por Covid cinco meses após primeiro óbito",
+            "largura": 736,
+            "altura": 842,
+            "sha256": "9ee725c999cef1c507fcfd79172b805e33f25fb4f2e97b11c5a101a56d8b0d4b"
+          }
+        ]
+      }
+    },
+    {
+      "id": "acervo-cov-0021",
+      "tipo": "noticia",
+      "data": "2020-08-13",
+      "subtitulo": "Defesa de hidroxicloroquina em Belém",
+      "autor": "Gazeta do Povo / Estadão Conteúdo",
+      "texto": "Em evento em Belém, afirma que mortes poderiam ter sido evitadas com hidroxicloroquina e apresenta sua própria recuperação como argumento em favor do medicamento.",
+      "contexto": "A reportagem ressalta que não há comprovação de eficácia. A recuperação individual do presidente não demonstra benefício do tratamento.",
+      "fontes": [
+        {
+          "nome": "Gazeta do Povo / Estadão Conteúdo — Bolsonaro diz que uso da cloroquina poderia reduzir número de mortes",
+          "url": "https://www.gazetadopovo.com.br/republica/breves/bolsonaro-uso-cloroquina-numeros-de-mortes/"
+        }
+      ],
+      "acessado_em": "2026-10-09",
+      "acervo": {
+        "manchete": "Bolsonaro diz que uso da cloroquina poderia reduzir número de mortes",
+        "veiculo": "Gazeta do Povo / Estadão Conteúdo",
+        "url": "https://www.gazetadopovo.com.br/republica/breves/bolsonaro-uso-cloroquina-numeros-de-mortes/",
+        "publicado_em": "2020-08-13",
+        "documentos": [
+          {
+            "arquivo": "acervo-covid/2020/08_2020/13082020_cloroquina.png",
+            "legenda": "Bolsonaro diz que uso da cloroquina poderia reduzir número de mortes",
+            "largura": 726,
+            "altura": 844,
+            "sha256": "361e9951517cabf0564daaf8c985a5369a3fd0a162d7ec6ff7467b64013e12bc"
+          }
+        ]
+      }
     },
     {
       "id": "pfizer-primeira-oferta-2020-08-14",
@@ -214,6 +870,101 @@
       "acessado_em": "2026-10-10"
     },
     {
+      "id": "acervo-cov-0022",
+      "tipo": "noticia",
+      "data": "2020-08-24",
+      "subtitulo": "Evento Brasil vencendo a Covid-19",
+      "autor": "Gazeta do Povo / Kelli Kadanus",
+      "texto": "Em evento no Planalto com médicos favoráveis ao tratamento precoce, volta a afirmar que maior uso de cloroquina ou hidroxicloroquina poderia ter reduzido mortes.",
+      "contexto": "Segundo a reportagem, o presidente reconheceu que não havia comprovação científica. A afirmação é política, não uma conclusão científica.",
+      "fontes": [
+        {
+          "nome": "Gazeta do Povo / Kelli Kadanus — Bolsonaro diz que país poderia ter menos mortes com uso mais amplo da cloroquina",
+          "url": "https://www.gazetadopovo.com.br/republica/bolsonaro-cloroquina-palacio-planalto-coronavirus/"
+        }
+      ],
+      "acessado_em": "2026-10-09",
+      "acervo": {
+        "manchete": "Bolsonaro diz que país poderia ter menos mortes com uso mais amplo da cloroquina",
+        "veiculo": "Gazeta do Povo / Kelli Kadanus",
+        "url": "https://www.gazetadopovo.com.br/republica/bolsonaro-cloroquina-palacio-planalto-coronavirus/",
+        "publicado_em": "2020-08-24",
+        "fonte_primaria": "https://www.youtube.com/watch?v=-uTnvvl72Ys",
+        "documentos": [
+          {
+            "arquivo": "acervo-covid/2020/08_2020/24082020_cloroquina2.png",
+            "legenda": "Bolsonaro diz que país poderia ter menos mortes com uso mais amplo da cloroquina",
+            "largura": 736,
+            "altura": 838,
+            "sha256": "3893c10688c62c7a5da3b46f505468e79f32a0c48d7ef3129a3abda7163c3196"
+          }
+        ]
+      }
+    },
+    {
+      "id": "acervo-cov-0023",
+      "tipo": "noticia",
+      "data": "2020-08-31",
+      "subtitulo": "Fala contra obrigatoriedade da vacinação",
+      "autor": "Reuters / UOL / Pedro Fonseca",
+      "texto": "Na entrada do Alvorada, responde a apoiadora dizendo que ninguém pode obrigar outra pessoa a tomar vacina. A notícia também contextualiza investimentos federais na vacina Oxford/AstraZeneca.",
+      "contexto": "A fala trata da obrigatoriedade da vacinação, não da suspensão da compra de vacinas.",
+      "fontes": [
+        {
+          "nome": "Reuters / UOL / Pedro Fonseca — Ninguém pode obrigar ninguém a tomar vacina, diz Bolsonaro",
+          "url": "https://economia.uol.com.br/noticias/reuters/2020/08/31/ninguem-pode-obrigar-ninguem-a-tomar-vacina-diz-bolsonaro.htm"
+        }
+      ],
+      "acessado_em": "2026-10-09",
+      "acervo": {
+        "manchete": "Ninguém pode obrigar ninguém a tomar vacina, diz Bolsonaro",
+        "veiculo": "Reuters / UOL / Pedro Fonseca",
+        "url": "https://economia.uol.com.br/noticias/reuters/2020/08/31/ninguem-pode-obrigar-ninguem-a-tomar-vacina-diz-bolsonaro.htm",
+        "publicado_em": "2020-08-31",
+        "documentos": [
+          {
+            "arquivo": "acervo-covid/2020/08_2020/31082020_vacina.png",
+            "legenda": "Ninguém pode obrigar ninguém a tomar vacina, diz Bolsonaro",
+            "largura": 748,
+            "altura": 584,
+            "sha256": "0422b6adc6572042b4290067f1a02cb96ae9f968760115b0fb007aaf1b2808e8"
+          }
+        ]
+      }
+    },
+    {
+      "id": "acervo-cov-0024",
+      "tipo": "noticia",
+      "data": "2020-09-22",
+      "subtitulo": "Discurso na Assembleia Geral da ONU",
+      "autor": "Gazeta do Povo / Rodolfo Costa",
+      "texto": "Em discurso gravado exibido na ONU, defende ações de seu governo contra a Covid-19 e acusa a imprensa de politizar o vírus e provocar pânico.",
+      "contexto": "A data é a da exibição do discurso, não a da gravação. A manchete destaca o meio ambiente, mas o texto também cobre a pandemia. As afirmações são do presidente.",
+      "fontes": [
+        {
+          "nome": "Gazeta do Povo / Rodolfo Costa — Bolsonaro diz na ONU que Brasil sofre “difamação” por causa da Amazônia e Pantanal",
+          "url": "https://www.gazetadopovo.com.br/republica/bolsonaro-na-onu-assembleia-geral-2020/"
+        }
+      ],
+      "acessado_em": "2026-10-09",
+      "acervo": {
+        "manchete": "Bolsonaro diz na ONU que Brasil sofre “difamação” por causa da Amazônia e Pantanal",
+        "veiculo": "Gazeta do Povo / Rodolfo Costa",
+        "url": "https://www.gazetadopovo.com.br/republica/bolsonaro-na-onu-assembleia-geral-2020/",
+        "publicado_em": "2020-09-22",
+        "fonte_primaria": "https://www.youtube.com/watch?v=T80LGv1icjc",
+        "documentos": [
+          {
+            "arquivo": "acervo-covid/2020/09_2020/22092020_onu.png",
+            "legenda": "Bolsonaro diz na ONU que Brasil sofre “difamação” por causa da Amazônia e Pantanal",
+            "largura": 740,
+            "altura": 910,
+            "sha256": "82af7b0cb0e94937f37c81d7484c60440fdc63548fe1162194258b8de129c8b1"
+          }
+        ]
+      }
+    },
+    {
       "id": "coronavac-2020-10-21",
       "data": "2020-10-21",
       "subtitulo": "Bolsonaro diz que o governo não comprará a CoronaVac",
@@ -230,7 +981,22 @@
           "url": "https://www.cnnbrasil.com.br/saude/bolsonaro-rejeita-comprar-vacina-chinesa-sem-comprovacao-cientifica/"
         }
       ],
-      "acessado_em": "2026-10-09"
+      "acessado_em": "2026-10-09",
+      "acervo": {
+        "manchete": "Bolsonaro veta vacina chinesa um dia após anúncio da Saúde. Entenda o caso",
+        "veiculo": "Gazeta do Povo / Fernanda Trisotto",
+        "url": "https://www.gazetadopovo.com.br/republica/vacina-chinesa-veto-bolsonaro-entenda/",
+        "publicado_em": "2020-10-21",
+        "documentos": [
+          {
+            "arquivo": "acervo-covid/2020/10_2020/21102020_coronavac.png",
+            "legenda": "Bolsonaro veta vacina chinesa um dia após anúncio da Saúde. Entenda o caso",
+            "largura": 740,
+            "altura": 830,
+            "sha256": "9cffe3e86f1d512bad361ceb17fd6fcdf857c964977abb1d6b99eca8cfd12f9d"
+          }
+        ]
+      }
     },
     {
       "id": "pazuello-obedece-2020-10-22",
@@ -256,24 +1022,36 @@
       "acessado_em": "2026-10-09"
     },
     {
-      "id": "pfizer-resultados-2020-11-09",
+      "id": "acervo-cov-0026",
       "tipo": "noticia",
-      "data": "2020-11-09",
-      "subtitulo": "Pfizer e BioNTech anunciam resultados promissores da vacina",
-      "autor": "Pfizer / BioNTech",
-      "texto": "A primeira análise intermediária da fase 3 aponta eficácia superior a 90% contra Covid-19 nos participantes sem infecção prévia. O anúncio abre uma perspectiva concreta de vacinação, mas ainda não é aprovação para uso público.",
-      "contexto": "O percentual de 09/11 era preliminar e se referia às condições do ensaio, não a proteção absoluta nem a comparação direta com outras vacinas. A análise final anunciada em 18/11 apontou 95%. Autorização, produção e distribuição continuavam sendo etapas separadas.",
+      "data": "2020-10-26",
+      "subtitulo": "Fala contra decisão judicial sobre vacinação",
+      "autor": "Gazeta do Povo",
+      "texto": "Ao conversar com apoiadores no Alvorada, afirma que um juiz não pode decidir se uma pessoa deve ou não tomar vacina e que a questão seria de saúde.",
+      "contexto": "É a opinião do presidente naquele momento, não uma descrição da competência dos tribunais.",
       "fontes": [
         {
-          "nome": "CNN Brasil — análise intermediária (09/11/2020)",
-          "url": "https://www.cnnbrasil.com.br/saude/pfizer-diz-que-vacina-contra-covid-19-tem-90-de-eficacia/"
-        },
-        {
-          "nome": "CNN Brasil — análise final (18/11/2020)",
-          "url": "https://www.cnnbrasil.com.br/saude/pfizer-resultado-final-da-ultima-fase-de-teste-da-vacina-aponta-eficacia-de-95/"
+          "nome": "Gazeta do Povo — Bolsonaro diz que juiz não pode decidir sobre obrigatoriedade da vacina",
+          "url": "https://www.gazetadopovo.com.br/republica/breves/bolsonaro-juiz-obrigatoriedade-vacina/"
         }
       ],
-      "acessado_em": "2026-10-10"
+      "acessado_em": "2026-10-09",
+      "acervo": {
+        "manchete": "Bolsonaro diz que juiz não pode decidir sobre obrigatoriedade da vacina",
+        "veiculo": "Gazeta do Povo",
+        "url": "https://www.gazetadopovo.com.br/republica/breves/bolsonaro-juiz-obrigatoriedade-vacina/",
+        "publicado_em": "2020-10-26",
+        "fonte_primaria": "https://www.youtube.com/watch?v=z9iMeZk1jo4",
+        "documentos": [
+          {
+            "arquivo": "acervo-covid/2020/10_2020/26102926_obrigatoriedade_vacina.png",
+            "legenda": "Bolsonaro diz que juiz não pode decidir sobre obrigatoriedade da vacina",
+            "largura": 728,
+            "altura": 468,
+            "sha256": "dd5ae9d9c868bf8180617b0438510a99cdc42d05315afa763a19f91e02efe01b"
+          }
+        ]
+      }
     },
     {
       "id": "maricas-2020-11-10",
@@ -288,87 +1066,146 @@
           "url": "https://www.cnnbrasil.com.br/politica/a-pandemia-foi-superdimensionada-diz-bolsonaro/"
         }
       ],
-      "acessado_em": "2026-10-09"
+      "acessado_em": "2026-10-09",
+      "acervo": {
+        "manchete": "“Tem que deixar de ser um país de maricas”, diz Bolsonaro sobre Covid-19",
+        "veiculo": "Gazeta do Povo / Estadão Conteúdo",
+        "url": "https://www.gazetadopovo.com.br/republica/breves/bolsonaro-covid-19-criticas/",
+        "publicado_em": "2020-11-10",
+        "fonte_primaria": "https://www.youtube.com/watch?v=GncySPjGDG4",
+        "documentos": [
+          {
+            "arquivo": "acervo-covid/2020/11_2020/10112020_maricas.png",
+            "legenda": "“Tem que deixar de ser um país de maricas”, diz Bolsonaro sobre Covid-19",
+            "largura": 744,
+            "altura": 838,
+            "sha256": "4e297aa0185701b9c34172bf5b604c0adae11aa8003365840304c2e898668a36"
+          }
+        ]
+      }
     },
     {
-      "id": "moderna-resultados-2020-11-16",
+      "id": "acervo-cov-0028",
       "tipo": "noticia",
-      "data": "2020-11-16",
-      "subtitulo": "Moderna e NIH anunciam eficácia preliminar de 94,5%",
-      "autor": "Moderna / Institutos Nacionais de Saúde dos EUA",
-      "texto": "A análise intermediária da candidata mRNA-1273 aponta 94,5% de eficácia contra Covid-19 sintomática. Os 11 casos graves observados nessa análise ocorreram no grupo placebo.",
-      "contexto": "O comunicado do NIH foi publicado em 16/11/2020; a revisão dos dados ocorreu no dia anterior. Eram resultados intermediários, ainda sujeitos a avaliação regulatória. O relatório final trouxe 94,1%. Percentuais de estudos com métodos e populações diferentes não devem ser usados como uma classificação simples de qual vacina é melhor.",
+      "data": "2020-11-24",
+      "subtitulo": "Brasil ultrapassa 170 mil mortes registradas",
+      "autor": "CNN Brasil / Anna Satie",
+      "texto": "Notícia registra 170.115 óbitos acumulados e 6.118.708 casos, além de aumento da estimativa de transmissão para 1,3 segundo relatório do Imperial College.",
+      "contexto": "Os novos registros não são mortes que ocorreram todas no dia. A taxa de transmissão é uma estimativa daquele relatório, e outros balanços podem trazer números diferentes.",
       "fontes": [
         {
-          "nome": "NIH/IRP — resultados intermediários (16/11/2020)",
-          "url": "https://irp.nih.gov/news-and-events/in-the-news/promising-interim-results-from-clinical-trial-of-nih-moderna-covid-19"
+          "nome": "CNN Brasil / Anna Satie — Com maior taxa de transmissão desde maio, Covid-19 supera 170 mil mortes no país",
+          "url": "https://www.cnnbrasil.com.br/saude/covid-19-no-brasil-24-11-2020/"
         }
       ],
-      "acessado_em": "2026-10-10"
+      "acessado_em": "2026-10-09",
+      "acervo": {
+        "manchete": "Com maior taxa de transmissão desde maio, Covid-19 supera 170 mil mortes no país",
+        "veiculo": "CNN Brasil / Anna Satie",
+        "url": "https://www.cnnbrasil.com.br/saude/covid-19-no-brasil-24-11-2020/",
+        "publicado_em": "2020-11-24",
+        "documentos": [
+          {
+            "arquivo": "acervo-covid/2020/11_2020/24112020_170mil_mortes.png",
+            "legenda": "Com maior taxa de transmissão desde maio, Covid-19 supera 170 mil mortes no país",
+            "largura": 730,
+            "altura": 1092,
+            "sha256": "bbc532d91e033e3004e7fe62375a90444892ed8c98ade1c4f7a177584bce6434"
+          }
+        ]
+      }
     },
     {
-      "id": "moscou-vacinacao-2020-12-05",
+      "id": "acervo-cov-0029",
       "tipo": "noticia",
-      "data": "2020-12-05",
-      "subtitulo": "Moscou começa a vacinação com a Sputnik V",
-      "autor": "Rússia",
-      "texto": "A campanha começa em 70 clínicas de Moscou, com prioridade para profissionais de saúde, professores e trabalhadores sociais. A Rússia inicia a vacinação em larga escala enquanto os estudos de fase 3 ainda estavam em andamento.",
-      "contexto": "O marco é a campanha em Moscou, não uma aplicação simultânea em toda a Rússia. A reportagem registra a preocupação científica com a liberação antes da conclusão dos testes. Isso não é apresentado como prova de que a vacina causava dano.",
+      "data": "2020-11-26",
+      "subtitulo": "Bolsonaro afirma que não tomará vacina",
+      "autor": "Reuters / UOL",
+      "texto": "Em transmissão nas redes sociais, afirma que não tomará vacina e que considera essa escolha um direito seu, além de voltar a criticar Doria e a obrigatoriedade.",
       "fontes": [
         {
-          "nome": "Al Jazeera/Reuters — início em Moscou (05/12/2020)",
-          "url": "https://www.aljazeera.com/news/2020/12/5/moscow-starts-mass-covid-19-vaccination-with-its-sputnik-v-shot"
+          "nome": "Reuters / UOL — Eu não vou tomar, é um direito meu, diz Bolsonaro sobre vacina contra Covid-19",
+          "url": "https://economia.uol.com.br/noticias/reuters/2020/11/26/eu-nao-vou-tomar-e-um-direito-meu-diz-bolsonaro-sobre-vacina-contra-covid-19.amp.htm"
         }
       ],
-      "acessado_em": "2026-10-10"
+      "acessado_em": "2026-10-09",
+      "acervo": {
+        "manchete": "Eu não vou tomar, é um direito meu, diz Bolsonaro sobre vacina contra Covid-19",
+        "veiculo": "Reuters / UOL",
+        "url": "https://economia.uol.com.br/noticias/reuters/2020/11/26/eu-nao-vou-tomar-e-um-direito-meu-diz-bolsonaro-sobre-vacina-contra-covid-19.amp.htm",
+        "publicado_em": "2020-11-26",
+        "documentos": [
+          {
+            "arquivo": "acervo-covid/2020/11_2020/26112020_nao_vou_tomar_vacina.png",
+            "legenda": "Eu não vou tomar, é um direito meu, diz Bolsonaro sobre vacina contra Covid-19",
+            "largura": 740,
+            "altura": 968,
+            "sha256": "55ca40142794fac20ec75bd63dbf28b3fe47d035ea8b9b9255362184a1cf99ce"
+          }
+        ]
+      }
     },
     {
-      "id": "reino-unido-vacinacao-2020-12-08",
+      "id": "acervo-cov-0030",
       "tipo": "noticia",
-      "data": "2020-12-08",
-      "subtitulo": "Reino Unido inicia a campanha com a vacina da Pfizer",
-      "autor": "Reino Unido",
-      "texto": "Margaret Keenan, de 90 anos, recebe a vacina Pfizer/BioNTech em Coventry. Começa a campanha britânica após a aprovação regulatória, com prioridade para pessoas idosas e profissionais de saúde.",
-      "contexto": "O registro oficial britânico relembra a aplicação em 08/12/2020. Este marco não afirma que foi a primeira vacinação contra Covid-19 com qualquer vacina no mundo: havia ensaios e programas anteriores em outros países. É o início da campanha britânica com Pfizer após autorização.",
+      "data": "2020-11-27",
+      "subtitulo": "Live: negativa sobre gripezinha",
+      "autor": "Gazeta do Povo / Estadão Conteúdo",
+      "texto": "Nega ter usado o termo para a Covid-19; a matéria aponta registros anteriores em março.",
+      "contexto": "As falas de março de 2020 sobre a ‘gripezinha’ também estão neste memorial.",
       "fontes": [
         {
-          "nome": "Governo britânico — registro de 08/12/2020",
-          "url": "https://www.gov.uk/government/news/uk-marks-one-year-since-deploying-worlds-first-covid-19-vaccine"
+          "nome": "Gazeta do Povo / Estadão Conteúdo — Bolsonaro nega ter chamado Covid-19 de “gripezinha”",
+          "url": "https://www.gazetadopovo.com.br/republica/breves/bolsonaro-nega-ter-chamado-covid-19-de-gripezinha/"
         }
       ],
-      "acessado_em": "2026-10-10"
+      "acessado_em": "2026-10-09",
+      "acervo": {
+        "manchete": "Bolsonaro nega ter chamado Covid-19 de “gripezinha”",
+        "veiculo": "Gazeta do Povo / Estadão Conteúdo",
+        "url": "https://www.gazetadopovo.com.br/republica/breves/bolsonaro-nega-ter-chamado-covid-19-de-gripezinha/",
+        "publicado_em": "2020-11-27",
+        "documentos": [
+          {
+            "arquivo": "acervo-covid/2020/11_2020/27112020_negacao_gripezinha.png",
+            "legenda": "Bolsonaro nega ter chamado Covid-19 de “gripezinha”",
+            "largura": 740,
+            "altura": 758,
+            "sha256": "7c52957f8f83108d8925a1efea4251d28a9ff315dfcfd81e19213a356da5390a"
+          }
+        ]
+      }
     },
     {
-      "id": "estados-unidos-vacinacao-2020-12-14",
+      "id": "acervo-cov-0031",
       "tipo": "noticia",
-      "data": "2020-12-14",
-      "subtitulo": "Estados Unidos começam a vacinação pública contra a Covid-19",
-      "autor": "Estados Unidos",
-      "texto": "O programa de vacinação começa com profissionais de saúde e moradores de instituições de longa permanência entre os grupos prioritários. A autorização emergencial abre caminho para as primeiras aplicações fora dos ensaios.",
-      "contexto": "A data é a do início do programa, confirmada pelo CDC/MMWR em análise publicada em fevereiro de 2021. As autorizações de Pfizer e Moderna ocorreram em datas distintas de dezembro; Moderna não foi aplicada como parte da campanha no primeiro dia. Não confundir participantes de ensaios anteriores com vacinação pública.",
+      "data": "2020-12-15",
+      "subtitulo": "Entrevista: não tomará vacina",
+      "autor": "Gazeta do Povo",
+      "texto": "Em entrevista a Datena, da Band, Bolsonaro reafirma que não tomará vacina contra Covid-19 e apresenta a decisão como pessoal.",
+      "contexto": "Declaração de dezembro, distinta da transmissão de 26/11/2020.",
       "fontes": [
         {
-          "nome": "CDC/MMWR — primeiro mês do programa iniciado em 14/12/2020",
-          "url": "https://www.cdc.gov/mmwr/volumes/70/wr/mm7005e1.htm"
+          "nome": "Gazeta do Povo — Bolsonaro diz que não tomará vacina contra a Covid-19: “problema é meu”",
+          "url": "https://www.gazetadopovo.com.br/republica/breves/bolsonaro-vacina-covid-19-entrevista/"
         }
       ],
-      "acessado_em": "2026-10-10"
-    },
-    {
-      "id": "canada-vacinacao-2020-12-14",
-      "tipo": "noticia",
-      "data": "2020-12-14",
-      "subtitulo": "Canadá inicia sua campanha de vacinação",
-      "autor": "Canadá",
-      "texto": "A vacinação contra a Covid-19 começa no Canadá, poucos dias depois da autorização da Pfizer/BioNTech. O país entra na etapa de imunização pública enquanto o Brasil ainda aguarda as primeiras aplicações de sua campanha.",
-      "contexto": "A agência canadense registra 14/12/2020 como início da vacinação. A comparação entre datas não estima mortes evitáveis nem ignora diferenças de acesso, regulação e logística. Estados Unidos e Canadá têm marcos separados porque os dois programas começaram no mesmo dia.",
-      "fontes": [
-        {
-          "nome": "Agência de Saúde Pública do Canadá — início em 14/12/2020",
-          "url": "https://health-infobase.canada.ca/covid-19/vaccine-administration/"
-        }
-      ],
-      "acessado_em": "2026-10-10"
+      "acessado_em": "2026-10-09",
+      "acervo": {
+        "manchete": "Bolsonaro diz que não tomará vacina contra a Covid-19: “problema é meu”",
+        "veiculo": "Gazeta do Povo",
+        "url": "https://www.gazetadopovo.com.br/republica/breves/bolsonaro-vacina-covid-19-entrevista/",
+        "publicado_em": "2020-12-15",
+        "documentos": [
+          {
+            "arquivo": "acervo-covid/2020/12_2020/15122020_nao_vou_tomar_vacina.png",
+            "legenda": "Bolsonaro diz que não tomará vacina contra a Covid-19: “problema é meu”",
+            "largura": 734,
+            "altura": 402,
+            "sha256": "658542b452918da4871229801f1efb1f4745c7a95e25f7c7e10d67bf2790d750"
+          }
+        ]
+      }
     },
     {
       "id": "vacina-jacare-2020-12-17",
@@ -383,79 +1220,101 @@
           "url": "https://sbtnews.sbt.com.br/noticia/governo/157028-se-virar-jacare-e-problema-seu-diz-bolsonaro-sobre-vacina-da-pfizer"
         }
       ],
-      "acessado_em": "2026-10-09"
+      "acessado_em": "2026-10-09",
+      "acervo": {
+        "manchete": "\"Se virar jacaré, é problema seu\", diz Bolsonaro sobre vacina da Pfizer",
+        "veiculo": "SBT News",
+        "url": "https://sbtnews.sbt.com.br/noticia/governo/157028-se-virar-jacare-e-problema-seu-diz-bolsonaro-sobre-vacina-da-pfizer",
+        "publicado_em": "2020-12-18",
+        "fonte_primaria": "https://www.youtube.com/watch?v=lBCXkVOEH-8",
+        "documentos": [
+          {
+            "arquivo": "acervo-covid/2020/12_2020/18122020_jacare.png",
+            "legenda": "\"Se virar jacaré, é problema seu\", diz Bolsonaro sobre vacina da Pfizer",
+            "largura": 726,
+            "altura": 408,
+            "sha256": "9a9d4673045a3e4b04dd792193d2eee941d0f00c9297baf2338f7794aa7df397"
+          }
+        ]
+      }
     },
     {
-      "id": "alpha-beta-2020-12-18",
+      "id": "acervo-cov-0033",
       "tipo": "noticia",
-      "data": "2020-12-18",
-      "subtitulo": "Alpha e Beta entram na classificação de variantes de preocupação",
-      "autor": "Organização Mundial da Saúde",
-      "texto": "As linhagens B.1.1.7 e B.1.351, depois chamadas Alpha e Beta, são classificadas como variantes de preocupação. A evolução do vírus exige acompanhar mudanças na transmissão, na doença e na proteção oferecida pela imunidade.",
-      "contexto": "A data é a de classificação registrada pela OMS, não a do surgimento das variantes. Havia amostras anteriores: Alpha em setembro e Beta em maio de 2020. Os nomes gregos foram adotados em maio de 2021. Uma mutação nova não implica automaticamente maior letalidade.",
+      "data": "2020-12-19",
+      "subtitulo": "Fala sobre fim da pandemia e pressa por vacina",
+      "autor": "Gazeta do Povo / Estadão Conteúdo",
+      "texto": "Em entrevista ao filho Eduardo exibida em 19/12, afirma que a pandemia estaria chegando ao fim e que a pressa pela vacina não se justificaria.",
+      "contexto": "A data é a da exibição, segundo a reportagem. São afirmações do presidente, não uma avaliação epidemiológica.",
       "fontes": [
         {
-          "nome": "OMS — nomenclatura e datas de classificação das variantes (09/06/2021)",
-          "url": "https://www.who.int/docs/default-source/coronaviruse/risk-comms-updates/update60_nomenclature-variants.pdf"
+          "nome": "Gazeta do Povo / Estadão Conteúdo — Pandemia está no fim e pressa da vacina não se justifica, diz Bolsonaro em entrevista a filho",
+          "url": "https://www.gazetadopovo.com.br/republica/bolsonaro-vacina-pressa-pandemia/"
         }
       ],
-      "acessado_em": "2026-10-10"
+      "acessado_em": "2026-10-09",
+      "acervo": {
+        "manchete": "Pandemia está no fim e pressa da vacina não se justifica, diz Bolsonaro em entrevista a filho",
+        "veiculo": "Gazeta do Povo / Estadão Conteúdo",
+        "url": "https://www.gazetadopovo.com.br/republica/bolsonaro-vacina-pressa-pandemia/",
+        "publicado_em": "2020-12-19",
+        "fonte_primaria": "https://www.youtube.com/watch?v=GV8nycu0Wbk",
+        "documentos": []
+      }
     },
     {
-      "id": "mexico-chile-vacinacao-2020-12-24",
+      "id": "acervo-cov-0035",
       "tipo": "noticia",
-      "data": "2020-12-24",
-      "subtitulo": "México e Chile dão os primeiros passos de suas campanhas",
-      "autor": "México / Chile",
-      "texto": "O México inicia a vacinação de profissionais de saúde. No Chile, chegam as primeiras doses da Pfizer/BioNTech para iniciar a imunização das equipes de terapia intensiva. A vacinação avança na América Latina.",
-      "contexto": "A fonte mexicana confirma aplicações em 24/12; a chilena documenta chegada das doses e início da operação nessa data. Não confundir desembarque com uma campanha já concluída nem apresentar os planos de entregas como doses aplicadas. Os grupos prioritários e o ritmo diferiam entre os países.",
+      "data": "2021-01-06",
+      "subtitulo": "Bolsonaro anuncia suspensão da compra de seringas",
+      "autor": "CNN / Murillo Ferrari",
+      "texto": "Jair Bolsonaro afirmou no Facebook que a compra de seringas foi suspensa devido à alta dos preços, que os municípios tinham estoques suficientes para iniciar e citou 44 países que já haviam iniciado a vacinação com 10 mil doses da Pfizer.",
+      "contexto": "A reportagem reproduz o texto publicado no Facebook.",
       "fontes": [
         {
-          "nome": "Secretaría de Salud — México começa aplicações em 24/12/2020",
-          "url": "https://www.gob.mx/salud/prensa/266-arranca-vacunacion-contra-covid-19-en-mexico?idiom=es"
-        },
-        {
-          "nome": "Ministerio del Interior — primeiras doses chegam ao Chile (24/12/2020)",
-          "url": "https://interior.gob.cl/noticias/2020/12/24/llegan-primeras-vacunas-contra-el-covid19-al-pais/"
+          "nome": "CNN / Murillo Ferrari — Bolsonaro diz que compra de seringas está suspensa por aumento de preços",
+          "url": "https://www.cnnbrasil.com.br/saude/bolsonaro-diz-que-compra-de-seringas-esta-suspensa-por-aumento-de-precos/"
         }
       ],
-      "acessado_em": "2026-10-10"
+      "acessado_em": "2026-10-09",
+      "acervo": {
+        "manchete": "Bolsonaro diz que compra de seringas está suspensa por aumento de preços",
+        "veiculo": "CNN / Murillo Ferrari",
+        "url": "https://www.cnnbrasil.com.br/saude/bolsonaro-diz-que-compra-de-seringas-esta-suspensa-por-aumento-de-precos/",
+        "publicado_em": "2021-01-06",
+        "documentos": []
+      }
     },
     {
-      "id": "uniao-europeia-vacinacao-2020-12-27",
+      "id": "acervo-cov-0036",
       "tipo": "noticia",
-      "data": "2020-12-27",
-      "subtitulo": "União Europeia inicia jornadas coordenadas de vacinação",
-      "autor": "União Europeia",
-      "texto": "Os dias europeus de vacinação, de 27 a 29 de dezembro, marcam a expansão das campanhas no bloco. A vacina Pfizer/BioNTech havia recebido autorização europeia em 21 de dezembro.",
-      "contexto": "O marco é o início coordenado das jornadas anunciadas pela Comissão Europeia, não a primeira aplicação de todos os países no mesmo instante. O cronograma de autorização e entrega foi comunicado em 21/12 e registrado posteriormente na linha do tempo oficial da resposta europeia.",
+      "data": "2021-01-07",
+      "subtitulo": "Brasil ultrapassa 200 mil mortes",
+      "autor": "Gazeta do Povo",
+      "texto": "O balanço nacional ultrapassa 200 mil mortes registradas por Covid-19.",
+      "contexto": "São óbitos acumulados registrados, não mortes ocorridas somente nesse dia.",
       "fontes": [
         {
-          "nome": "Comissão Europeia — autorização e jornadas de 27–29/12",
-          "url": "https://ec.europa.eu/commission/presscorner/api/files/document/print/en/ip_20_2466/IP_20_2466_EN.pdf"
-        },
-        {
-          "nome": "Comissão Europeia — cronologia da resposta sanitária",
-          "url": "https://health.ec.europa.eu/system/files/2022-04/covid-19_health-response_en.pdf"
+          "nome": "Gazeta do Povo — Covid-19: Brasil ultrapassa 200 mil mortes nesta quinta-feira (7)",
+          "url": "https://www.gazetadopovo.com.br/republica/covid-19-brasil-ultrapassa-200-mil-mortes/"
         }
       ],
-      "acessado_em": "2026-10-10"
-    },
-    {
-      "id": "oms-primeira-vacina-2020-12-31",
-      "tipo": "noticia",
-      "data": "2020-12-31",
-      "subtitulo": "OMS valida sua primeira vacina contra a Covid-19 para uso emergencial",
-      "autor": "Organização Mundial da Saúde",
-      "texto": "A OMS inclui a vacina Pfizer/BioNTech em sua lista de uso emergencial. A avaliação facilita decisões regulatórias e compras internacionais, com um alerta para a necessidade de acesso equitativo.",
-      "contexto": "É a primeira listagem emergencial da OMS para uma vacina contra Covid-19, não a primeira autorização nacional no mundo. Países continuam responsáveis por suas decisões regulatórias. A entrada na lista não significa disponibilidade imediata de doses para todas as populações.",
-      "fontes": [
-        {
-          "nome": "OMS — primeira validação emergencial (31/12/2020)",
-          "url": "https://www.who.int/news/item/31-12-2020-who-issues-its-first-emergency-use-validation-for-a-covid-19-vaccine-and-emphasizes-need-for-equitable-global-access"
-        }
-      ],
-      "acessado_em": "2026-10-10"
+      "acessado_em": "2026-10-09",
+      "acervo": {
+        "manchete": "Covid-19: Brasil ultrapassa 200 mil mortes nesta quinta-feira (7)",
+        "veiculo": "Gazeta do Povo",
+        "url": "https://www.gazetadopovo.com.br/republica/covid-19-brasil-ultrapassa-200-mil-mortes/",
+        "publicado_em": "2021-01-07",
+        "documentos": [
+          {
+            "arquivo": "acervo-covid/2021/01_2021/07012021_200mil_mortes.png",
+            "legenda": "Covid-19: Brasil ultrapassa 200 mil mortes nesta quinta-feira (7)",
+            "largura": 736,
+            "altura": 334,
+            "sha256": "0e0d8fa01e44dc1b443819affa5b964b5808d658c442c58c3fc9fe53c5abfc70"
+          }
+        ]
+      }
     },
     {
       "id": "gamma-2021-01-11",
@@ -472,6 +1331,41 @@
         }
       ],
       "acessado_em": "2026-10-10"
+    },
+    {
+      "id": "acervo-cov-0037",
+      "tipo": "noticia",
+      "data": "2021-01-13",
+      "subtitulo": "Human Rights Watch critica a resposta de Bolsonaro à pandemia",
+      "autor": "DW",
+      "texto": "A 31ª edição do Relatório da ONG avaliou a situação de direitos humanos em mais de 100 países  e reservou um capítulo ao Brasil e ao governo Bolsonaro, apontando que ele minimizou a covid-19, ignorou medidas de proteção e disseminou informações equivocadas sobre a pandemia.",
+      "contexto": "O capítulo sobre o Brasil está na página 58 do relatório.",
+      "fontes": [
+        {
+          "nome": "DW — Bolsonaro sabota combate à covid-19, diz relatório",
+          "url": "https://www.dw.com/pt-br/bolsonaro-sabota-combate-%C3%A0-covid-19-diz-relat%C3%B3rio/a-56213559"
+        },
+        {
+          "nome": "Human Rights Watch — World Report 2021 (Brasil, p. 58)",
+          "url": "https://www.hrw.org/sites/default/files/media_2021/01/2021_hrw_world_report.pdf"
+        }
+      ],
+      "acessado_em": "2026-10-09",
+      "acervo": {
+        "manchete": "Bolsonaro sabota combate à covid-19, diz relatório",
+        "veiculo": "DW",
+        "url": "https://www.dw.com/pt-br/bolsonaro-sabota-combate-%C3%A0-covid-19-diz-relat%C3%B3rio/a-56213559",
+        "publicado_em": "2021-01-13",
+        "documentos": [
+          {
+            "arquivo": "acervo-covid/2021/01_2021/13012021_human_rights.png",
+            "legenda": "Bolsonaro sabota combate à covid-19, diz relatório",
+            "largura": 736,
+            "altura": 758,
+            "sha256": "8b2801444d517149006561cf2458d2eb07b42ed3f371ba595b36fcced5ebcce9"
+          }
+        ]
+      }
     },
     {
       "id": "oxigenio-manaus-2021-01-14",
@@ -494,20 +1388,36 @@
       "acessado_em": "2026-10-10"
     },
     {
-      "id": "india-vacinacao-2021-01-16",
+      "id": "acervo-cov-0038",
       "tipo": "noticia",
-      "data": "2021-01-16",
-      "subtitulo": "Índia inicia sua campanha nacional de vacinação",
-      "autor": "Índia",
-      "texto": "A Índia começa a vacinação com Covishield e Covaxin. Profissionais de saúde e outros grupos prioritários entram primeiro em uma operação planejada para uma população de enorme escala.",
-      "contexto": "A OMS confirma o lançamento em 16/01/2021. A previsão de alcançar centenas de milhões de pessoas era uma meta, não cobertura já obtida. Não se equiparam as duas vacinas nem seus dados clínicos; o marco registra o início da campanha.",
+      "data": "2021-01-15",
+      "subtitulo": "Bolsonaro diz que o governo fez sua parte durante o colapso no Amazonas",
+      "autor": "UOL / Hanrrikson de Andrade",
+      "texto": "Em meio à crise de falta de leitos de UTI e oxigênio no Amazonas, Jair Bolsonaro afirmou que o Governo Federal havia feito sua parte, disse que as Forças Armadas à disposição e voltou a defender o “tratamento precoce”.",
+      "contexto": "A reportagem traz uma retrospectiva dos fatos e o vídeo de uma transmissão com o ministro da Saúde da época.",
       "fontes": [
         {
-          "nome": "OMS — campanha da Índia iniciada em 16/01/2021",
-          "url": "https://www.who.int/india/news-room/feature-stories/detail/india-rolls-out-the-world-s-largest-covid-19-vaccination-drive"
+          "nome": "UOL / Hanrrikson de Andrade — Fizemos nossa parte', diz Bolsonaro sobre covid no AM; estado vive colapso",
+          "url": "https://noticias.uol.com.br/saude/ultimas-noticias/redacao/2021/01/15/fizemos-nossa-parte-diz-bolsonaro-sobre-covid-no-am-estado-vive-colapso.htm?cmpid=copiaecola"
         }
       ],
-      "acessado_em": "2026-10-10"
+      "acessado_em": "2026-10-09",
+      "acervo": {
+        "manchete": "Fizemos nossa parte', diz Bolsonaro sobre covid no AM; estado vive colapso",
+        "veiculo": "UOL / Hanrrikson de Andrade",
+        "url": "https://noticias.uol.com.br/saude/ultimas-noticias/redacao/2021/01/15/fizemos-nossa-parte-diz-bolsonaro-sobre-covid-no-am-estado-vive-colapso.htm?cmpid=copiaecola",
+        "publicado_em": "2021-01-15",
+        "fonte_primaria": "https://www.youtube.com/watch?v=14y765qT3GY",
+        "documentos": [
+          {
+            "arquivo": "acervo-covid/2021/01_2021/15012021_colapso_amazonas.png",
+            "legenda": "Fizemos nossa parte', diz Bolsonaro sobre covid no AM; estado vive colapso",
+            "largura": 732,
+            "altura": 660,
+            "sha256": "616ff973139ad1d35ade999ded6891dcad848a8ee31ca9cdb56f416af5411b29"
+          }
+        ]
+      }
     },
     {
       "id": "brasil-primeira-dose-2021-01-17",
@@ -546,36 +1456,115 @@
       "acessado_em": "2026-10-10"
     },
     {
-      "id": "covax-ghana-entrega-2021-02-24",
+      "id": "acervo-cov-0039",
       "tipo": "noticia",
-      "data": "2021-02-24",
-      "subtitulo": "COVAX entrega vacinas a Gana e inicia sua distribuição global",
-      "autor": "COVAX / OMS / UNICEF",
-      "texto": "Gana recebe 600 mil doses da vacina Oxford/AstraZeneca fabricada na Índia. A entrega inaugura a distribuição internacional da COVAX e expõe o desafio de levar proteção também a países com menos recursos.",
-      "contexto": "O marco é a chegada da remessa em 24/02, não o início de sua aplicação. A distribuição pela COVAX envolvia acordos e calendários diferentes por país. A meta global de entregas não é apresentada como realização já concluída.",
+      "data": "2021-02-23",
+      "subtitulo": "Primeiro registro definitivo de vacina",
+      "autor": "Gazeta do Povo",
+      "texto": "Anvisa concede registro definitivo à vacina da Pfizer/BioNTech, primeiro registro desse tipo para vacina contra Covid-19 no país.",
+      "contexto": "O registro regulatório não significou chegada imediata de doses.",
       "fontes": [
         {
-          "nome": "OMS — primeiras doses COVAX chegam a Gana (24/02/2021)",
-          "url": "https://www.who.int/news/item/24-02-2021-covid-19-vaccine-doses-shipped-by-the-covax-facility-head-to-ghana-marking-beginning-of-global-rollout"
+          "nome": "Gazeta do Povo — Anvisa concede registro definitivo à vacina da Pfizer",
+          "url": "https://www.gazetadopovo.com.br/republica/breves/anvisa-concede-registro-definitivo-a-vacina-da-pfizer/"
         }
       ],
-      "acessado_em": "2026-10-10"
+      "acessado_em": "2026-10-09",
+      "acervo": {
+        "manchete": "Anvisa concede registro definitivo à vacina da Pfizer",
+        "veiculo": "Gazeta do Povo",
+        "url": "https://www.gazetadopovo.com.br/republica/breves/anvisa-concede-registro-definitivo-a-vacina-da-pfizer/",
+        "publicado_em": "2021-02-23",
+        "documentos": []
+      }
     },
     {
-      "id": "ghana-costa-marfim-vacinacao-2021-03-01",
+      "id": "acervo-cov-0040",
       "tipo": "noticia",
-      "data": "2021-03-01",
-      "subtitulo": "Gana e Costa do Marfim iniciam campanhas com doses da COVAX",
-      "autor": "Gana / Costa do Marfim",
-      "texto": "Começam as primeiras campanhas africanas com doses fornecidas pela COVAX, inicialmente voltadas a profissionais de saúde. A vacinação avança, mas o acesso global ainda é desigual.",
-      "contexto": "A OMS registra o início das campanhas em 01/03/2021. O marco não afirma que foram os primeiros países africanos a usar qualquer vacina: é o início dessas campanhas com doses COVAX. Diferenciar essa data das entregas de 24 e 26/02 e da ampliação posterior dos públicos.",
+      "data": "2021-02-25",
+      "subtitulo": "Bolsonaro desestimula máscaras para crianças em live",
+      "autor": "Carta Capital / Leonardo Miazzo",
+      "texto": "Jair Bolsonaro voltou a desestimular o uso de máscaras contra a covid-19 em live, alegando que um estudo de uma universidade alemã apontava possíveis prejuízos às crianças.",
+      "contexto": "A transmissão ocorreu no mesmo dia em que o país registrou o recorde de mortes em 24 horas até então.",
       "fontes": [
         {
-          "nome": "OMS — primeiras aplicações COVAX na África (01/03/2021)",
-          "url": "https://www.who.int/news/item/01-03-2021-first-covid-19-covax-vaccine-doses-administered-in-africa"
+          "nome": "Carta Capital / Leonardo Miazzo — Bolsonaro usa live nesta quinta-feira para desinformar sobre o uso de máscaras",
+          "url": "https://www.cartacapital.com.br/cartaexpressa/bolsonaro-usa-live-nesta-quinta-feira-para-desinformar-sobre-o-uso-de-mascaras/"
         }
       ],
-      "acessado_em": "2026-10-10"
+      "acessado_em": "2026-10-09",
+      "acervo": {
+        "manchete": "Bolsonaro usa live nesta quinta-feira para desinformar sobre o uso de máscaras",
+        "veiculo": "Carta Capital / Leonardo Miazzo",
+        "url": "https://www.cartacapital.com.br/cartaexpressa/bolsonaro-usa-live-nesta-quinta-feira-para-desinformar-sobre-o-uso-de-mascaras/",
+        "publicado_em": "2021-02-25",
+        "documentos": []
+      }
+    },
+    {
+      "id": "acervo-cov-0041",
+      "tipo": "noticia",
+      "data": "2021-02-25",
+      "subtitulo": "Consórcio de imprensa registra 1.582 mortes em 24 horas",
+      "autor": "UOL",
+      "texto": "O consórcio de veículos de imprensa registrou 1.582 mortes pela Covid-19 nas últimas 24 horas, a maior marca anotada até o momento. A matéria traz outros dados do levantamento.",
+      "contexto": "No mesmo dia, Jair Bolsonaro fez uma transmissão questionando a eficácia das máscaras.",
+      "fontes": [
+        {
+          "nome": "UOL — Com 1.582 mortes em 24 h, Brasil registra o dia mais letal na pandemia",
+          "url": "https://noticias.uol.com.br/saude/ultimas-noticias/redacao/2021/02/25/covid-19-coronavirus-mortes-casos-25-de-fevereiro.htm"
+        }
+      ],
+      "acessado_em": "2026-10-09",
+      "acervo": {
+        "manchete": "Com 1.582 mortes em 24 h, Brasil registra o dia mais letal na pandemia",
+        "veiculo": "UOL",
+        "url": "https://noticias.uol.com.br/saude/ultimas-noticias/redacao/2021/02/25/covid-19-coronavirus-mortes-casos-25-de-fevereiro.htm",
+        "publicado_em": "2021-02-25",
+        "documentos": [
+          {
+            "arquivo": "acervo-covid/2021/02_2021/25022021_record_mortes.png",
+            "legenda": "Com 1.582 mortes em 24 h, Brasil registra o dia mais letal na pandemia",
+            "largura": 734,
+            "altura": 640,
+            "sha256": "bf84626e669ddce44b08050eb893b4d7079212a3f3058c6490520077e7cca593"
+          }
+        ]
+      }
+    },
+    {
+      "id": "acervo-cov-0042",
+      "tipo": "noticia",
+      "data": "2021-02-26",
+      "subtitulo": "Fiocruz alerta para a pior ocupação de UTIs desde o início da pandemia",
+      "autor": "Agência Brasil",
+      "texto": "O boletim destaca que o país está em um patamar de intensa transmissão da covid-19, sem que nenhum estado apresente tendência de queda nas incidências de casos e óbitos",
+      "fontes": [
+        {
+          "nome": "Agência Brasil — Ocupação de UTIs chega ao pior nível da pandemia, diz Fiocruz",
+          "url": "https://agenciabrasil.ebc.com.br/saude/noticia/2021-02/ocupacao-de-utis-chega-ao-pior-nivel-da-pandemia-diz-fiocruz"
+        },
+        {
+          "nome": "Fiocruz — Boletim do Observatório Covid-19: retrospectiva 2021",
+          "url": "https://fiocruz.br/documento/2021/12/boletim-do-observatorio-covid-19-retrospectiva-2021"
+        }
+      ],
+      "acessado_em": "2026-10-09",
+      "acervo": {
+        "manchete": "Ocupação de UTIs chega ao pior nível da pandemia, diz Fiocruz",
+        "veiculo": "Agência Brasil",
+        "url": "https://agenciabrasil.ebc.com.br/saude/noticia/2021-02/ocupacao-de-utis-chega-ao-pior-nivel-da-pandemia-diz-fiocruz",
+        "publicado_em": "2021-02-26",
+        "documentos": [
+          {
+            "arquivo": "acervo-covid/2021/02_2021/26022021_utis.png",
+            "legenda": "Ocupação de UTIs chega ao pior nível da pandemia, diz Fiocruz",
+            "largura": 744,
+            "altura": 748,
+            "sha256": "49792b6b198359a740ab05c3c895096840f520bf9bbb8ab4b3ff1e96dece87db"
+          }
+        ]
+      }
     },
     {
       "id": "mimimi-2021-03-04",
@@ -594,7 +1583,23 @@
           "url": "https://www.cnnbrasil.com.br/politica/covid-19-bolsonaro-volta-a-criticar-medidas-restritivas-no-brasil/"
         }
       ],
-      "acessado_em": "2026-10-09"
+      "acessado_em": "2026-10-09",
+      "acervo": {
+        "manchete": "Bolsonaro: “Chega de frescura, de mimimi. Vão ficar chorando até quando?”",
+        "veiculo": "Gazeta do Povo",
+        "url": "https://www.gazetadopovo.com.br/republica/breves/bolsonaro-chega-de-frescura-de-mimimi-vao-ficar-chorando-ate-quando/",
+        "publicado_em": "2021-03-04",
+        "fonte_primaria": "https://www.youtube.com/watch?v=emzGs0ir7Ig",
+        "documentos": [
+          {
+            "arquivo": "acervo-covid/2021/03_2021/04032021_frescura.png",
+            "legenda": "Bolsonaro: “Chega de frescura, de mimimi. Vão ficar chorando até quando?”",
+            "largura": 708,
+            "altura": 452,
+            "sha256": "beb2f9db1d09ac81fd51ad30393dd52c477d86235763c7c4da6e9b4f21471ac0"
+          }
+        ]
+      }
     },
     {
       "id": "eduardo-mascaras-2021-03-10",
@@ -610,6 +1615,61 @@
         }
       ],
       "acessado_em": "2026-10-09"
+    },
+    {
+      "id": "acervo-cov-0044",
+      "tipo": "noticia",
+      "data": "2021-03-12",
+      "subtitulo": "Registro da vacina Fiocruz/AstraZeneca",
+      "autor": "Anvisa",
+      "texto": "Anvisa aprova o registro da vacina Fiocruz/AstraZeneca e do antiviral remdesivir.",
+      "contexto": "O registro não equivale à produção integralmente nacional do insumo, aprovada em 2022.",
+      "fontes": [
+        {
+          "nome": "Anvisa — Anvisa aprova registro da vacina da Fiocruz/AstraZeneca e de medicamento contra o coronavírus",
+          "url": "https://www.gov.br/anvisa/pt-br/assuntos/noticias-anvisa/2021/anvisa-aprova-registro-da-vacina-da-fiocruz-astrazeneca-e-de-medicamento-contra-o-coronavirus"
+        }
+      ],
+      "acessado_em": "2026-10-09",
+      "acervo": {
+        "manchete": "Anvisa aprova registro da vacina da Fiocruz/AstraZeneca e de medicamento contra o coronavírus",
+        "veiculo": "Anvisa",
+        "url": "https://www.gov.br/anvisa/pt-br/assuntos/noticias-anvisa/2021/anvisa-aprova-registro-da-vacina-da-fiocruz-astrazeneca-e-de-medicamento-contra-o-coronavirus",
+        "publicado_em": "2021-03-12",
+        "fonte_primaria": "https://www.gov.br/anvisa/pt-br/assuntos/noticias-anvisa/2021/anvisa-aprova-registro-da-vacina-da-fiocruz-astrazeneca-e-de-medicamento-contra-o-coronavirus",
+        "documentos": []
+      }
+    },
+    {
+      "id": "acervo-cov-0045",
+      "tipo": "noticia",
+      "data": "2021-03-15",
+      "subtitulo": "Bolsonaro escolhe Queiroga para substituir Pazuello na Saúde",
+      "autor": "Metrópoles / Mayara da Paz",
+      "texto": "Marcelo Queiroga substitui Pazuello no pior momento da pandemia até então: quase 280 mil mortes e doença em expansão no Brasil",
+      "contexto": "Queiroga foi o quarto ministro da Saúde durante a pandemia. Segundo a reportagem, Pazuello deu uma entrevista coletiva em tom de despedida e afirmou que Bolsonaro estava reorganizando a pasta.",
+      "fontes": [
+        {
+          "nome": "Metrópoles / Mayara da Paz — Bolsonaro escolhe Marcelo Queiroga para substituir Pazuello na Saúde",
+          "url": "https://www.metropoles.com/brasil/politica-brasil/bolsonaro-escolhe-marcelo-queiroga-para-substituir-pazuello-na-saude"
+        }
+      ],
+      "acessado_em": "2026-10-09",
+      "acervo": {
+        "manchete": "Bolsonaro escolhe Marcelo Queiroga para substituir Pazuello na Saúde",
+        "veiculo": "Metrópoles / Mayara da Paz",
+        "url": "https://www.metropoles.com/brasil/politica-brasil/bolsonaro-escolhe-marcelo-queiroga-para-substituir-pazuello-na-saude",
+        "publicado_em": "2021-03-15",
+        "documentos": [
+          {
+            "arquivo": "acervo-covid/2021/03_2021/15032021_queiroga.png",
+            "legenda": "Bolsonaro escolhe Marcelo Queiroga para substituir Pazuello na Saúde",
+            "largura": 726,
+            "altura": 304,
+            "sha256": "d24e034e0c65c34e73a7aa66f6222fd9ef71032cefbcbdbb2c192819d332e8e6"
+          }
+        ]
+      }
     },
     {
       "id": "colapso-utis-2021-03-16",
@@ -641,7 +1701,46 @@
           "url": "https://www12.senado.leg.br/noticias/materias/2021/05/13/representante-da-pfizer-confirma-governo-nao-respondeu-ofertas-feitas-em-agosto-de-2020"
         }
       ],
-      "acessado_em": "2026-10-10"
+      "acessado_em": "2026-10-10",
+      "acervo": {
+        "manchete": "Ministério da Saúde assina contratos para obter 138 milhões de doses de vacinas da Pfizer e Janssen",
+        "veiculo": "Folha de S.Paulo",
+        "url": "https://www1.folha.uol.com.br/amp/equilibrioesaude/2021/03/ministerio-da-saude-assina-contratos-para-obter-138-milhoes-de-doses-de-vacinas-da-pfizer-e-janssen.shtml",
+        "publicado_em": "2021-03-19",
+        "documentos": []
+      }
+    },
+    {
+      "id": "acervo-cov-0047",
+      "tipo": "noticia",
+      "data": "2021-03-23",
+      "subtitulo": "Bolsonaro compara as mortes no Brasil às do restante do mundo",
+      "autor": "Gazeta do Povo",
+      "texto": "Em cerimônia no Palácio do Planalto, Jair Bolsonaro diz ter a impressão de que só no Brasil estava falecendo pessoas por covid-19 e afirmou que era preciso se preocupar com as vidas e também com os empregos. Isso porque, segundo ele, a pessoa desempregada poderia ter \"problemas\" que levem a \"óbito, depressão e suicídio\".",
+      "contexto": "Na época, o Brasil havia vacinado 5,5% da população. No mesmo mês, Bolsonaro pediu ao STF a derrubada de decretos com medidas de proteção em alguns estados. Na véspera da reportagem, mais de 500 economistas e empresários divulgaram um manifesto pedindo vacinação em massa e distanciamento social.",
+      "fontes": [
+        {
+          "nome": "Gazeta do Povo — Bolsonaro: “Parece que, no mundo todo, só no Brasil está morrendo gente”",
+          "url": "https://www.gazetadopovo.com.br/republica/breves/bolsonaro-parece-que-no-mundo-todo-so-no-brasil-esta-morrendo-gente/"
+        }
+      ],
+      "acessado_em": "2026-10-09",
+      "acervo": {
+        "manchete": "Bolsonaro: “Parece que, no mundo todo, só no Brasil está morrendo gente”",
+        "veiculo": "Gazeta do Povo",
+        "url": "https://www.gazetadopovo.com.br/republica/breves/bolsonaro-parece-que-no-mundo-todo-so-no-brasil-esta-morrendo-gente/",
+        "publicado_em": "2021-03-23",
+        "fonte_primaria": "https://g1.globo.com/politica/video/bolsonaro-parece-que-so-no-brasil-esta-morrendo-gente-9372632.ghtml",
+        "documentos": [
+          {
+            "arquivo": "acervo-covid/2021/03_2021/23032021_lamento.png",
+            "legenda": "Bolsonaro: “Parece que, no mundo todo, só no Brasil está morrendo gente”",
+            "largura": 726,
+            "altura": 474,
+            "sha256": "0fee95fdf4e981d0371bd1013a6b77d2092fd94a0dc50243d83223a4bd9aae5c"
+          }
+        ]
+      }
     },
     {
       "id": "recorde-notificacoes-2021-04-08",
@@ -660,6 +1759,60 @@
       "acessado_em": "2026-10-10"
     },
     {
+      "id": "acervo-cov-0048",
+      "tipo": "noticia",
+      "data": "2021-04-13",
+      "subtitulo": "Senado formaliza a criação da CPI da Covid",
+      "autor": "BBC / Mariana Schreiber",
+      "texto": "Cração da Comissão Parlamentar de Inquérito (CPI) da Covid-19, que investigou a atuação do governo de Jair Bolsonaro no enfrentamento da pandemia de coronavírus, assim como o uso de recursos federais por Estados e municípios na contenção da crise sanitária.",
+      "contexto": "A criação ocorreu após o atraso na compra de vacinas, a falta de oxigênio no Amazonas, o uso de dinheiro público em medicamentos sem comprovação científica, como a hidroxicloroquina, e o aumento das mortes, que levaram a pressão para que o Senado investigasse possíveis desvios e mau uso de verbas da União.",
+      "fontes": [
+        {
+          "nome": "BBC / Mariana Schreiber — Pacheco oficializa CPI da Covid no Senado: o que acontece agora?",
+          "url": "https://www.bbc.com/portuguese/brasil-56740620"
+        }
+      ],
+      "acessado_em": "2026-10-09",
+      "acervo": {
+        "manchete": "Pacheco oficializa CPI da Covid no Senado: o que acontece agora?",
+        "veiculo": "BBC / Mariana Schreiber",
+        "url": "https://www.bbc.com/portuguese/brasil-56740620",
+        "publicado_em": "2021-04-13",
+        "documentos": [
+          {
+            "arquivo": "acervo-covid/2021/04_2021/13042021_cpi.png",
+            "legenda": "Pacheco oficializa CPI da Covid no Senado: o que acontece agora?",
+            "largura": 738,
+            "altura": 1012,
+            "sha256": "5c87925990e22e250153494b7ec6b7af372b4d2d2a6577e2bec2c59d54c66a97"
+          }
+        ]
+      }
+    },
+    {
+      "id": "acervo-cov-0049",
+      "tipo": "noticia",
+      "data": "2021-04-27",
+      "subtitulo": "CPI da Covid é instalada no Senado",
+      "autor": "CNN / Gregory Prudenciano",
+      "texto": "CPI da Covid/Pandemia é instalada com Omar Aziz (PSD-AM) como presidente derrotando Eduardo Girão (PODEMOS-CE). O vice presidente foi Randolfo Rodrigues (Rede - AP), autor do requerimento original que levou à CPI.",
+      "contexto": "Após a abertura, parlamentares governistas tentaram impedir a instalação. O senador Ciro Nogueira (PP-PI), aliado de Bolsonaro na época, pediu a Otto Alencar a suspensão da sessão. No mesmo dia, Renan Calheiros apresentou 11 requerimentos de convocação de depoentes.",
+      "fontes": [
+        {
+          "nome": "CNN / Gregory Prudenciano — Primeiro dia da CPI da Pandemia tem Renan relator e depoimentos no radar",
+          "url": "https://www.cnnbrasil.com.br/politica/em-primeiro-dia-cpi-confirma-renan-como-relator-e-planeja-depoimentos/"
+        }
+      ],
+      "acessado_em": "2026-10-09",
+      "acervo": {
+        "manchete": "Primeiro dia da CPI da Pandemia tem Renan relator e depoimentos no radar",
+        "veiculo": "CNN / Gregory Prudenciano",
+        "url": "https://www.cnnbrasil.com.br/politica/em-primeiro-dia-cpi-confirma-renan-como-relator-e-planeja-depoimentos/",
+        "publicado_em": "2021-04-27",
+        "documentos": []
+      }
+    },
+    {
       "id": "pfizer-primeiro-lote-2021-04-29",
       "tipo": "noticia",
       "data": "2021-04-29",
@@ -673,7 +1826,45 @@
           "url": "https://www.seti.pr.gov.br/Noticia/Vacinas-da-Pfizer-e-da-AstraZenecaFiocruz-chegam-ao-Estado-nesta-segunda"
         }
       ],
-      "acessado_em": "2026-10-10"
+      "acessado_em": "2026-10-10",
+      "acervo": {
+        "manchete": "Chega ao Brasil o primeiro lote de vacinas da Pfizer contra a Covid com 1 milhão de doses",
+        "veiculo": "Folha de S.Paulo",
+        "url": "https://www1.folha.uol.com.br/equilibrioesaude/2021/04/chega-ao-brasil-o-primeiro-lote-de-vacinas-da-pfizer-contra-a-covid-com-1-milhao-de-doses.shtml",
+        "publicado_em": "2021-04-29",
+        "documentos": []
+      }
+    },
+    {
+      "id": "acervo-cov-0050",
+      "tipo": "noticia",
+      "data": "2021-04-29",
+      "subtitulo": "Brasil ultrapassa 400 mil mortes registradas",
+      "autor": "Poder 360 / Sophia Lopes",
+      "texto": "Notícia registra 401.186 mortes por covid-19, segundo Ministério da Saúde, e até aquele momento, os 4 primeiro meses de 2021 haviam superado o número de mortes de todo o ano de 2020.",
+      "contexto": "Naquele momento, o Brasil havia ultrapassado o Reino Unido e era o 11º país com mais mortes por Covid-19 por milhão de habitantes.",
+      "fontes": [
+        {
+          "nome": "Poder 360 / Sophia Lopes — Brasil confirma mais 3.001 mortes e chega a 401 mil vítimas da covid-19",
+          "url": "https://www.poder360.com.br/coronavirus/brasil-confirma-mais-3-001-mortes-e-chega-a-401-mil-vitimas-da-covid-19/"
+        }
+      ],
+      "acessado_em": "2026-10-09",
+      "acervo": {
+        "manchete": "Brasil confirma mais 3.001 mortes e chega a 401 mil vítimas da covid-19",
+        "veiculo": "Poder 360 / Sophia Lopes",
+        "url": "https://www.poder360.com.br/coronavirus/brasil-confirma-mais-3-001-mortes-e-chega-a-401-mil-vitimas-da-covid-19/",
+        "publicado_em": "2021-04-29",
+        "documentos": [
+          {
+            "arquivo": "acervo-covid/2021/04_2021/29042021_400mil_mortes.png",
+            "legenda": "Brasil confirma mais 3.001 mortes e chega a 401 mil vítimas da covid-19",
+            "largura": 744,
+            "altura": 888,
+            "sha256": "58d50ef4700d2ef027ae071f07b15d060c4f3bc5d4fadb4ecd88fefc7766f4a8"
+          }
+        ]
+      }
     },
     {
       "id": "jorginho-kit-covid-2021-05-04",
@@ -695,20 +1886,27 @@
       "acessado_em": "2026-10-09"
     },
     {
-      "id": "delta-preocupacao-2021-05-11",
+      "id": "acervo-cov-0052",
       "tipo": "noticia",
-      "data": "2021-05-11",
-      "subtitulo": "Delta é classificada como variante de preocupação",
-      "autor": "Organização Mundial da Saúde",
-      "texto": "A linhagem B.1.617.2, depois chamada Delta, passa da categoria de interesse à de preocupação. A classificação amplia o alerta sobre transmissão e a necessidade de acompanhar a proteção contra novas variantes.",
-      "contexto": "A data é a de classificação VOC pela OMS, não a da descoberta nem da chegada ao Brasil. Há amostras documentadas desde outubro de 2020, na Índia. O nome Delta veio com a nomenclatura grega de maio de 2021. Classificação de preocupação não significa que toda pessoa terá doença grave nem que vacinas deixaram de proteger.",
+      "data": "2021-05-04",
+      "subtitulo": "Mandetta abre os depoimentos da CPI",
+      "autor": "Senado Federal",
+      "texto": "Ex-ministro Luiz Henrique Mandetta presta depoimento à CPI da Pandemia, abrindo a etapa de oitivas.",
       "fontes": [
         {
-          "nome": "OMS — nomenclatura e datas de classificação das variantes (09/06/2021)",
-          "url": "https://www.who.int/docs/default-source/coronaviruse/risk-comms-updates/update60_nomenclature-variants.pdf"
+          "nome": "Senado Federal — Notas Taquigráficas — reunião de 4 de maio de 2021",
+          "url": "https://www25.senado.leg.br/web/atividade/notas-taquigraficas/-/notas/r/9972"
         }
       ],
-      "acessado_em": "2026-10-10"
+      "acessado_em": "2026-10-09",
+      "acervo": {
+        "manchete": "Notas Taquigráficas — reunião de 4 de maio de 2021",
+        "veiculo": "Senado Federal",
+        "url": "https://www25.senado.leg.br/web/atividade/notas-taquigraficas/-/notas/r/9972",
+        "publicado_em": "2021-05-04",
+        "fonte_primaria": "https://www25.senado.leg.br/web/atividade/notas-taquigraficas/-/notas/r/9972",
+        "documentos": []
+      }
     },
     {
       "id": "pfizer-cpi-2021-05-13",
@@ -724,7 +1922,68 @@
           "url": "https://www12.senado.leg.br/noticias/materias/2021/05/13/representante-da-pfizer-confirma-governo-nao-respondeu-ofertas-feitas-em-agosto-de-2020"
         }
       ],
-      "acessado_em": "2026-10-10"
+      "acessado_em": "2026-10-10",
+      "acervo": {
+        "manchete": "Gerente da Pfizer confirma na CPI da Covid que oferta ao Brasil ficou sem resposta",
+        "veiculo": "Gazeta do Povo",
+        "url": "https://www.gazetadopovo.com.br/republica/gerente-da-pfizer-confirma-na-cpi-da-covid-que-oferta-ao-brasil-ficou-sem-resposta/",
+        "publicado_em": "2021-05-13",
+        "documentos": [
+          {
+            "arquivo": "acervo-covid/2021/05_2021/13052021_pfizer.png",
+            "legenda": "Gerente da Pfizer confirma na CPI da Covid que oferta ao Brasil ficou sem resposta",
+            "largura": 734,
+            "altura": 916,
+            "sha256": "a08c45e251d9c4f82cf18f037798b1e3d784edd9b92a9f8a61b84347af6fd568"
+          }
+        ]
+      }
+    },
+    {
+      "id": "acervo-cov-0054",
+      "tipo": "noticia",
+      "data": "2021-05-19",
+      "subtitulo": "Pazuello depõe à CPI",
+      "autor": "Gazeta do Povo",
+      "texto": "Ex-ministro Eduardo Pazuello presta depoimento e nega ter ignorado propostas da Pfizer.",
+      "contexto": "É a posição do depoente, não uma conclusão independente sobre as negociações.",
+      "fontes": [
+        {
+          "nome": "Gazeta do Povo — Na CPI da Covid, Pazuello descarta silêncio e nega ter ignorado propostas da Pfizer",
+          "url": "https://www.gazetadopovo.com.br/republica/na-cpi-da-covid-pazuello-descarta-silencio-e-nega-ter-ignorado-propostas-da-pfizer/"
+        }
+      ],
+      "acessado_em": "2026-10-09",
+      "acervo": {
+        "manchete": "Na CPI da Covid, Pazuello descarta silêncio e nega ter ignorado propostas da Pfizer",
+        "veiculo": "Gazeta do Povo",
+        "url": "https://www.gazetadopovo.com.br/republica/na-cpi-da-covid-pazuello-descarta-silencio-e-nega-ter-ignorado-propostas-da-pfizer/",
+        "publicado_em": "2021-05-19",
+        "documentos": []
+      }
+    },
+    {
+      "id": "acervo-cov-0055",
+      "tipo": "noticia",
+      "data": "2021-05-20",
+      "subtitulo": "Variante identificada em tripulantes no Maranhão",
+      "autor": "Reuters / UOL",
+      "texto": "Secretaria de Saúde do Maranhão confirma variante então chamada indiana em tripulantes de navio ancorado na costa de São Luís.",
+      "contexto": "A denominação é a usada pela reportagem na época. A confirmação em tripulantes não comprova transmissão comunitária.",
+      "fontes": [
+        {
+          "nome": "Reuters / UOL — Tripulantes de navio ancorado no Maranhão tem variante indiana da Covid-19",
+          "url": "https://economia.uol.com.br/noticias/reuters/2021/05/20/tripulantes-de-navio-ancorado-no-maranhao-tem-variante-indiana-da-covid-19.htm"
+        }
+      ],
+      "acessado_em": "2026-10-09",
+      "acervo": {
+        "manchete": "Tripulantes de navio ancorado no Maranhão tem variante indiana da Covid-19",
+        "veiculo": "Reuters / UOL",
+        "url": "https://economia.uol.com.br/noticias/reuters/2021/05/20/tripulantes-de-navio-ancorado-no-maranhao-tem-variante-indiana-da-covid-19.htm",
+        "publicado_em": "2021-05-20",
+        "documentos": []
+      }
     },
     {
       "id": "mascaras-2021-06-10",
@@ -744,6 +2003,30 @@
         }
       ],
       "acessado_em": "2026-10-09"
+    },
+    {
+      "id": "acervo-cov-0056",
+      "tipo": "noticia",
+      "data": "2021-06-11",
+      "subtitulo": "Pfizer autorizada a partir de 12 anos",
+      "autor": "Anvisa",
+      "texto": "Anvisa amplia a indicação da vacina Pfizer para pessoas de 12 anos ou mais.",
+      "contexto": "A autorização regulatória não define o calendário de aplicação.",
+      "fontes": [
+        {
+          "nome": "Anvisa — Anvisa autoriza vacina da Pfizer para crianças com mais de 12 anos",
+          "url": "https://www.gov.br/anvisa/pt-br/assuntos/noticias-anvisa/2021/anvisa-autoriza-vacina-da-pfizer-para-criancas-com-mais-de-12-anos"
+        }
+      ],
+      "acessado_em": "2026-10-09",
+      "acervo": {
+        "manchete": "Anvisa autoriza vacina da Pfizer para crianças com mais de 12 anos",
+        "veiculo": "Anvisa",
+        "url": "https://www.gov.br/anvisa/pt-br/assuntos/noticias-anvisa/2021/anvisa-autoriza-vacina-da-pfizer-para-criancas-com-mais-de-12-anos",
+        "publicado_em": "2021-06-11",
+        "fonte_primaria": "https://www.gov.br/anvisa/pt-br/assuntos/noticias-anvisa/2021/anvisa-autoriza-vacina-da-pfizer-para-criancas-com-mais-de-12-anos",
+        "documentos": []
+      }
     },
     {
       "id": "flavio-vacinacao-2021-06-18",
@@ -782,7 +2065,101 @@
           "url": "https://www12.senado.leg.br/noticias/materias/2021/06/19/senadores-lamentam-500-mil-mortes-por-covid-19-cpi-divulga-nota"
         }
       ],
-      "acessado_em": "2026-10-10"
+      "acessado_em": "2026-10-10",
+      "acervo": {
+        "manchete": "500 mil mortos pela Covid: como o Brasil está nos rankings mundiais",
+        "veiculo": "Gazeta do Povo",
+        "url": "https://www.gazetadopovo.com.br/republica/500-mil-mortos-pela-covid-ranking-brasil-no-mundo/",
+        "publicado_em": "2021-06-19",
+        "fonte_primaria": "https://www.youtube.com/watch?v=QMEj2ysLDhg",
+        "documentos": [
+          {
+            "arquivo": "acervo-covid/2021/06_2021/19062021_500mil_mortes.png",
+            "legenda": "500 mil mortos pela Covid: como o Brasil está nos rankings mundiais",
+            "largura": 728,
+            "altura": 904,
+            "sha256": "36b50325dba5f5eb1400d40846db1a7a106d5d74fd3d6447bb0d25ac6db02436"
+          }
+        ]
+      }
+    },
+    {
+      "id": "acervo-cov-0058",
+      "tipo": "noticia",
+      "data": "2021-06-25",
+      "subtitulo": "Irmãos Miranda depõem sobre Covaxin",
+      "autor": "Gazeta do Povo",
+      "texto": "Luis Miranda e Luis Ricardo Miranda relatam à CPI suspeitas relativas à negociação da Covaxin.",
+      "contexto": "São relatos e suspeitas apresentados à CPI, não condenações judiciais.",
+      "fontes": [
+        {
+          "nome": "Gazeta do Povo — Irmãos Miranda: o que eles disseram à CPI da Covid sobre o caso Covaxin",
+          "url": "https://www.gazetadopovo.com.br/republica/irmaos-miranda-o-que-eles-disseram-a-cpi-da-covid-sobre-caso-covaxin/"
+        }
+      ],
+      "acessado_em": "2026-10-09",
+      "acervo": {
+        "manchete": "Irmãos Miranda: o que eles disseram à CPI da Covid sobre o caso Covaxin",
+        "veiculo": "Gazeta do Povo",
+        "url": "https://www.gazetadopovo.com.br/republica/irmaos-miranda-o-que-eles-disseram-a-cpi-da-covid-sobre-caso-covaxin/",
+        "publicado_em": "2021-06-25",
+        "documentos": []
+      }
+    },
+    {
+      "id": "acervo-cov-0059",
+      "tipo": "noticia",
+      "data": "2021-06-29",
+      "subtitulo": "Saúde suspende compra da Covaxin",
+      "autor": "Gazeta do Povo",
+      "texto": "Ministério da Saúde anuncia suspensão da compra da vacina Covaxin durante apuração do contrato.",
+      "contexto": "A suspensão foi uma medida preventiva e não prova, por si, a ocorrência de corrupção.",
+      "fontes": [
+        {
+          "nome": "Gazeta do Povo — Ministério da Saúde suspende compra da vacina Covaxin",
+          "url": "https://www.gazetadopovo.com.br/republica/breves/ministro-da-saude-diz-que-vai-suspender-compra-da-vacina-covaxin/"
+        }
+      ],
+      "acessado_em": "2026-10-09",
+      "acervo": {
+        "manchete": "Ministério da Saúde suspende compra da vacina Covaxin",
+        "veiculo": "Gazeta do Povo",
+        "url": "https://www.gazetadopovo.com.br/republica/breves/ministro-da-saude-diz-que-vai-suspender-compra-da-vacina-covaxin/",
+        "publicado_em": "2021-06-29",
+        "documentos": []
+      }
+    },
+    {
+      "id": "acervo-cov-0060",
+      "tipo": "noticia",
+      "data": "2021-07-01",
+      "subtitulo": "Dominguetti relata pedido de propina",
+      "autor": "Rádio Senado",
+      "texto": "Luiz Paulo Dominguetti afirma à CPI ter recebido pedido de propina em negociação de vacinas intermediada pela Davati.",
+      "contexto": "É uma alegação do depoente, contestada durante os trabalhos da CPI, não uma condenação.",
+      "fontes": [
+        {
+          "nome": "Rádio Senado — Dominguetti confirmou que recebeu proposta de propina",
+          "url": "https://www12.senado.leg.br/radio/1/noticia/2021/07/01/dominguetti-confirma-proposta-de-propina"
+        }
+      ],
+      "acessado_em": "2026-10-09",
+      "acervo": {
+        "manchete": "Dominguetti confirmou que recebeu proposta de propina",
+        "veiculo": "Rádio Senado",
+        "url": "https://www12.senado.leg.br/radio/1/noticia/2021/07/01/dominguetti-confirma-proposta-de-propina",
+        "publicado_em": "2021-07-01",
+        "fonte_primaria": "https://www12.senado.leg.br/radio/1/noticia/2021/07/01/dominguetti-confirma-proposta-de-propina",
+        "documentos": [
+          {
+            "arquivo": "acervo-covid/2021/07_2021/01072021_propina.png",
+            "legenda": "Dominguetti confirmou que recebeu proposta de propina",
+            "largura": 728,
+            "altura": 1164,
+            "sha256": "412956e09ab5b673c3004a40b3cd38e631bb350c588ead771775c35e513c5699"
+          }
+        ]
+      }
     },
     {
       "id": "orfandade-estudo-2021-07-20",
@@ -801,6 +2178,155 @@
       "acessado_em": "2026-10-10"
     },
     {
+      "id": "acervo-cov-0061",
+      "tipo": "noticia",
+      "data": "2021-07-23",
+      "subtitulo": "Suspensão cautelar do estudo da Covaxin",
+      "autor": "Anvisa",
+      "texto": "Anvisa registra a suspensão cautelar do estudo clínico da Covaxin no Brasil.",
+      "contexto": "A data consta no histórico oficial da Anvisa, uma cronologia atualizada sem data única de publicação.",
+      "fontes": [
+        {
+          "nome": "Anvisa — Covaxin (Precisa) — Estudo cancelado",
+          "url": "https://www.gov.br/anvisa/pt-br/comunicacao/campanhas/coronavirus/vacinas/estudos-clinicos/covaxin"
+        }
+      ],
+      "acessado_em": "2026-10-09",
+      "acervo": {
+        "manchete": "Covaxin (Precisa) — Estudo cancelado",
+        "veiculo": "Anvisa",
+        "url": "https://www.gov.br/anvisa/pt-br/comunicacao/campanhas/coronavirus/vacinas/estudos-clinicos/covaxin",
+        "fonte_primaria": "https://www.gov.br/anvisa/pt-br/comunicacao/campanhas/coronavirus/vacinas/estudos-clinicos/covaxin",
+        "documentos": []
+      }
+    },
+    {
+      "id": "acervo-cov-0062",
+      "tipo": "noticia",
+      "data": "2021-08-25",
+      "subtitulo": "Anúncio de reforço para idosos e imunossuprimidos",
+      "autor": "Casa Civil / Governo Federal",
+      "texto": "Governo anuncia dose de reforço para idosos acima de 70 anos e imunossuprimidos, com início previsto para setembro.",
+      "contexto": "A data é a do anúncio da política, não a do início das aplicações.",
+      "fontes": [
+        {
+          "nome": "Casa Civil / Governo Federal — Comunicado Interministerial — 25.08.2021",
+          "url": "https://www.gov.br/casacivil/pt-br/assuntos/comunicados-interministeriais/boletins/comunicado-interministerial-25-08-2021.pdf"
+        }
+      ],
+      "acessado_em": "2026-10-09",
+      "acervo": {
+        "manchete": "Comunicado Interministerial — 25.08.2021",
+        "veiculo": "Casa Civil / Governo Federal",
+        "url": "https://www.gov.br/casacivil/pt-br/assuntos/comunicados-interministeriais/boletins/comunicado-interministerial-25-08-2021.pdf",
+        "publicado_em": "2021-08-25",
+        "fonte_primaria": "https://www.gov.br/casacivil/pt-br/assuntos/comunicados-interministeriais/boletins/comunicado-interministerial-25-08-2021.pdf",
+        "documentos": []
+      }
+    },
+    {
+      "id": "acervo-cov-0063",
+      "tipo": "noticia",
+      "data": "2021-09-21",
+      "subtitulo": "Bolsonaro discursa na Assembleia Geral da ONU",
+      "autor": "Gazeta do Povo",
+      "texto": "Bolsonaro apresenta na ONU a posição do governo sobre a pandemia e outras políticas brasileiras.",
+      "contexto": "O discurso apresenta a posição política do presidente.",
+      "fontes": [
+        {
+          "nome": "Gazeta do Povo — Bolsonaro na ONU: o que ele disse no discurso de 2021",
+          "url": "https://www.gazetadopovo.com.br/republica/bolsonaro-na-onu-o-que-ele-disse-no-discurso-de-2021/"
+        }
+      ],
+      "acessado_em": "2026-10-09",
+      "acervo": {
+        "manchete": "Bolsonaro na ONU: o que ele disse no discurso de 2021",
+        "veiculo": "Gazeta do Povo",
+        "url": "https://www.gazetadopovo.com.br/republica/bolsonaro-na-onu-o-que-ele-disse-no-discurso-de-2021/",
+        "publicado_em": "2021-09-21",
+        "documentos": []
+      }
+    },
+    {
+      "id": "acervo-cov-0064",
+      "tipo": "noticia",
+      "data": "2021-09-28",
+      "subtitulo": "Bruna Morato depõe sobre Prevent Senior",
+      "autor": "Exame",
+      "texto": "Advogada que representa médicos apresenta à CPI denúncias sobre protocolos e tratamentos da Prevent Senior.",
+      "contexto": "São denúncias relatadas em depoimento, não condenações judiciais. A operadora negou as acusações.",
+      "fontes": [
+        {
+          "nome": "Exame — Governo pediu ajuda da Prevent Senior para evitar lockdown, diz advogada",
+          "url": "https://exame.com/brasil/governo-pediu-ajuda-da-prevent-senior-para-evitar-lockdown-diz-advogada/"
+        }
+      ],
+      "acessado_em": "2026-10-09",
+      "acervo": {
+        "manchete": "Governo pediu ajuda da Prevent Senior para evitar lockdown, diz advogada",
+        "veiculo": "Exame",
+        "url": "https://exame.com/brasil/governo-pediu-ajuda-da-prevent-senior-para-evitar-lockdown-diz-advogada/",
+        "publicado_em": "2021-09-28",
+        "documentos": []
+      }
+    },
+    {
+      "id": "acervo-cov-0065",
+      "tipo": "noticia",
+      "data": "2021-10-08",
+      "subtitulo": "Brasil alcança 600 mil mortes",
+      "autor": "Agência Senado",
+      "texto": "Brasil ultrapassa 600 mil mortes acumuladas por Covid-19; senadores se manifestam sobre a marca.",
+      "contexto": "A marca é a do consórcio de veículos de imprensa, citada pela fonte. São óbitos acumulados registrados.",
+      "fontes": [
+        {
+          "nome": "Agência Senado — Senadores lamentam a marca de 600 mil mortes por covid-19",
+          "url": "https://www12.senado.leg.br/noticias/materias/2021/10/08/senadores-lamentam-a-marca-de-600-mil-mortes-por-covid-19"
+        }
+      ],
+      "acessado_em": "2026-10-09",
+      "acervo": {
+        "manchete": "Senadores lamentam a marca de 600 mil mortes por covid-19",
+        "veiculo": "Agência Senado",
+        "url": "https://www12.senado.leg.br/noticias/materias/2021/10/08/senadores-lamentam-a-marca-de-600-mil-mortes-por-covid-19",
+        "publicado_em": "2021-10-08",
+        "fonte_primaria": "https://www12.senado.leg.br/noticias/materias/2021/10/08/senadores-lamentam-a-marca-de-600-mil-mortes-por-covid-19",
+        "documentos": []
+      }
+    },
+    {
+      "id": "acervo-cov-0066",
+      "tipo": "noticia",
+      "data": "2021-10-21",
+      "subtitulo": "Live faz associação falsa entre vacina e aids",
+      "autor": "El País Brasil",
+      "texto": "Em live de 21/10, Bolsonaro divulga suposta relação entre vacinação contra Covid-19 e aids; plataformas posteriormente removem a transmissão.",
+      "contexto": "A associação divulgada é falsa. A transmissão é de 21/10/2021 e a reportagem, de 25/10/2021; a remoção posterior faz parte do mesmo episódio.",
+      "fontes": [
+        {
+          "nome": "El País Brasil — Facebook e YouTube bloqueiam live semanal de Bolsonaro após presidente vincular aids à vacina contra covid-19",
+          "url": "https://brasil.elpais.com/brasil/2021-10-25/facebook-e-instagram-bloqueiam-live-semanal-de-bolsonaro-apos-presidente-vincular-aids-a-vacina-contra-covid-19.html"
+        }
+      ],
+      "acessado_em": "2026-10-09",
+      "acervo": {
+        "manchete": "Facebook e YouTube bloqueiam live semanal de Bolsonaro após presidente vincular aids à vacina contra covid-19",
+        "veiculo": "El País Brasil",
+        "url": "https://brasil.elpais.com/brasil/2021-10-25/facebook-e-instagram-bloqueiam-live-semanal-de-bolsonaro-apos-presidente-vincular-aids-a-vacina-contra-covid-19.html",
+        "publicado_em": "2021-10-25",
+        "fonte_primaria": "https://www.youtube.com/watch?v=ko6jQM5zqwI",
+        "documentos": [
+          {
+            "arquivo": "acervo-covid/2021/10_2021/25102021_aids.png",
+            "legenda": "Facebook e YouTube bloqueiam live semanal de Bolsonaro após presidente vincular aids à vacina contra covid-19",
+            "largura": 712,
+            "altura": 1176,
+            "sha256": "76cd575532891f92147b30846274504f6da859f3d7d07c87895a827aebc6eee7"
+          }
+        ]
+      }
+    },
+    {
       "id": "cpi-relatorio-2021-10-26",
       "tipo": "noticia",
       "data": "2021-10-26",
@@ -814,27 +2340,38 @@
           "url": "https://www12.senado.leg.br/noticias/materias/2021/10/26/apos-seis-meses-cpi-da-pandemia-e-encerrada-com-80-pedidos-de-indiciamento"
         }
       ],
-      "acessado_em": "2026-10-10"
+      "acessado_em": "2026-10-10",
+      "acervo": {
+        "manchete": "CPI da Covid aprova relatório e pede punição de Bolsonaro e mais 79 por crimes na pandemia",
+        "veiculo": "Folha de S.Paulo",
+        "url": "https://www1.folha.uol.com.br/poder/2021/10/cpi-da-covid-aprova-relatorio-e-pede-punicao-de-bolsonaro-e-mais-79-por-crimes-na-pandemia.shtml",
+        "publicado_em": "2021-10-26",
+        "documentos": []
+      }
     },
     {
-      "id": "omicron-2021-11-26",
+      "id": "acervo-cov-0068",
       "tipo": "noticia",
-      "data": "2021-11-26",
-      "subtitulo": "OMS classifica Ômicron como variante de preocupação",
-      "autor": "Organização Mundial da Saúde",
-      "texto": "A linhagem B.1.1.529 recebe o nome Ômicron e entra na categoria de preocupação. Muitas mutações e sinais preliminares de maior risco de reinfecção levam a um novo alerta internacional.",
-      "contexto": "A data é a classificação de 26/11/2021. Naquele momento, transmissibilidade e gravidade ainda estavam sendo estudadas: não se anuncia como fato que Ômicron era mais letal que Delta. A OMS esclareceu essas incertezas em 28/11. País da identificação não equivale necessariamente ao local de origem.",
+      "data": "2021-11-30",
+      "subtitulo": "Identificação preliminar da Ômicron no Brasil",
+      "autor": "Anvisa",
+      "texto": "Anvisa comunica identificação preliminar de dois casos da variante Ômicron em território nacional.",
+      "contexto": "O anúncio da agência naquele dia era preliminar.",
       "fontes": [
         {
-          "nome": "OMS — classificação de Ômicron (26/11/2021)",
-          "url": "https://www.who.int/news/item/26-11-2021-classification-of-omicron-%28b.1.1.529%29-sars-cov-2-variant-of-concern"
-        },
-        {
-          "nome": "OMS — atualização e incertezas (28/11/2021)",
-          "url": "https://www.who.int/news-room/statements/28-11-2021-update-on-omicron"
+          "nome": "Anvisa — Anvisa informa sobre identificação preliminar de dois casos da variante Ômicron em território nacional",
+          "url": "https://www.gov.br/anvisa/pt-br/assuntos/noticias-anvisa/2021/anvisa-informa-sobre-a-identificacao-preliminar-de-dois-casos-da-variante-omicron-em-territorio-nacional"
         }
       ],
-      "acessado_em": "2026-10-10"
+      "acessado_em": "2026-10-09",
+      "acervo": {
+        "manchete": "Anvisa informa sobre identificação preliminar de dois casos da variante Ômicron em território nacional",
+        "veiculo": "Anvisa",
+        "url": "https://www.gov.br/anvisa/pt-br/assuntos/noticias-anvisa/2021/anvisa-informa-sobre-a-identificacao-preliminar-de-dois-casos-da-variante-omicron-em-territorio-nacional",
+        "publicado_em": "2021-11-30",
+        "fonte_primaria": "https://www.gov.br/anvisa/pt-br/assuntos/noticias-anvisa/2021/anvisa-informa-sobre-a-identificacao-preliminar-de-dois-casos-da-variante-omicron-em-territorio-nacional",
+        "documentos": []
+      }
     },
     {
       "id": "queiroga-liberdade-2021-12-07",
@@ -860,6 +2397,29 @@
       "acessado_em": "2026-10-09"
     },
     {
+      "id": "acervo-cov-0069",
+      "tipo": "noticia",
+      "data": "2021-12-10",
+      "subtitulo": "Ataque cibernético afeta Conecte SUS",
+      "autor": "Agência Brasil / UOL",
+      "texto": "Ataque cibernético deixa sistemas do Ministério da Saúde indisponíveis, incluindo o Conecte SUS e emissão de certificados de vacinação.",
+      "contexto": "A reportagem documenta a indisponibilidade dos sistemas, não a perda definitiva de todos os dados.",
+      "fontes": [
+        {
+          "nome": "Agência Brasil / UOL — Sites e aplicativo do Ministério da Saúde sofrem ataque cibernético",
+          "url": "https://noticias.uol.com.br/ultimas-noticias/agencia-brasil/2021/12/10/sites-e-aplicativo-do-ministerio-da-saude-sofrem-ataque-cibernetico.htm"
+        }
+      ],
+      "acessado_em": "2026-10-09",
+      "acervo": {
+        "manchete": "Sites e aplicativo do Ministério da Saúde sofrem ataque cibernético",
+        "veiculo": "Agência Brasil / UOL",
+        "url": "https://noticias.uol.com.br/ultimas-noticias/agencia-brasil/2021/12/10/sites-e-aplicativo-do-ministerio-da-saude-sofrem-ataque-cibernetico.htm",
+        "publicado_em": "2021-12-10",
+        "documentos": []
+      }
+    },
+    {
       "id": "anvisa-pfizer-infantil-2021-12-16",
       "tipo": "noticia",
       "data": "2021-12-16",
@@ -874,6 +2434,101 @@
         }
       ],
       "acessado_em": "2026-10-10"
+    },
+    {
+      "id": "acervo-cov-0070",
+      "tipo": "noticia",
+      "data": "2022-01-06",
+      "subtitulo": "Bolsonaro questiona vacinação infantil e Anvisa",
+      "autor": "Reuters / UOL",
+      "texto": "Bolsonaro levanta suspeitas sobre interesses da Anvisa e critica vacinação de crianças, após inclusão da faixa de 5 a 11 anos na campanha.",
+      "contexto": "As suspeitas são falas do presidente, que a reportagem caracteriza como infundadas. Não são evidência de irregularidade na agência.",
+      "fontes": [
+        {
+          "nome": "Reuters / UOL — Bolsonaro faz pregação contra vacina infantil da Covid-19 e ataca Anvisa",
+          "url": "https://noticias.uol.com.br/ultimas-noticias/reuters/2022/01/06/bolsonaro-faz-pregacao-contra-vacinacao-de-criancas-para-covid-19-e-ataca-anvisa.amp.htm"
+        }
+      ],
+      "acessado_em": "2026-10-09",
+      "acervo": {
+        "manchete": "Bolsonaro faz pregação contra vacina infantil da Covid-19 e ataca Anvisa",
+        "veiculo": "Reuters / UOL",
+        "url": "https://noticias.uol.com.br/ultimas-noticias/reuters/2022/01/06/bolsonaro-faz-pregacao-contra-vacinacao-de-criancas-para-covid-19-e-ataca-anvisa.amp.htm",
+        "publicado_em": "2022-01-06",
+        "documentos": [
+          {
+            "arquivo": "acervo-covid/2022/01_2022/06012022_vacina_crianca.png",
+            "legenda": "Bolsonaro faz pregação contra vacina infantil da Covid-19 e ataca Anvisa",
+            "largura": 746,
+            "altura": 936,
+            "sha256": "c6551f78d45f86aaed3f20d187e8914e760c9d64bae5f099c6bdb124c6131ee0"
+          }
+        ]
+      }
+    },
+    {
+      "id": "acervo-cov-0071",
+      "tipo": "noticia",
+      "data": "2022-01-10",
+      "subtitulo": "Bolsonaro reafirma que não vacinará a filha",
+      "autor": "Correio Braziliense / Ingrid Soares",
+      "texto": "Em entrevista à Rádio Sarandi, reafirma oposição à vacinação da filha de 11 anos e diz que divergência sobre imunização não deveria afastá-lo da população.",
+      "contexto": "O episódio é posterior ao de 06/01/2022. A reportagem informa que a Anvisa avaliou os benefícios da vacinação infantil como superiores aos riscos.",
+      "fontes": [
+        {
+          "nome": "Correio Braziliense / Ingrid Soares — Bolsonaro diz que vacina não é um \"ponto de intriga\" e de afastamento entre ele e a população",
+          "url": "https://www.correiobraziliense.com.br/politica/2022/01/4976423-bolsonaro-diz-que-vacina-nao-e-um-ponto-de-intriga-e-de-afastamento-entre-ele-e-a-populacao.html"
+        }
+      ],
+      "acessado_em": "2026-10-09",
+      "acervo": {
+        "manchete": "Bolsonaro diz que vacina não é um \"ponto de intriga\" e de afastamento entre ele e a população",
+        "veiculo": "Correio Braziliense / Ingrid Soares",
+        "url": "https://www.correiobraziliense.com.br/politica/2022/01/4976423-bolsonaro-diz-que-vacina-nao-e-um-ponto-de-intriga-e-de-afastamento-entre-ele-e-a-populacao.html",
+        "publicado_em": "2022-01-10",
+        "fonte_primaria": "https://www.youtube.com/watch?v=UsX2agtYfz8",
+        "documentos": [
+          {
+            "arquivo": "acervo-covid/2022/01_2022/10012022_vacina_filha.png",
+            "legenda": "Bolsonaro diz que vacina não é um \"ponto de intriga\" e de afastamento entre ele e a população",
+            "largura": 736,
+            "altura": 800,
+            "sha256": "943e77888513e09f3c1c64b061192492a644926b5c0b8d10abec2161a545bf3c"
+          }
+        ]
+      }
+    },
+    {
+      "id": "acervo-cov-0072",
+      "tipo": "noticia",
+      "data": "2022-01-12",
+      "subtitulo": "Bolsonaro minimiza Ômicron",
+      "autor": "Folha de S.Paulo",
+      "texto": "Em entrevista à Gazeta Brasil, atribui a terceiros a ideia de que a Ômicron poderia ser bem-vinda e sinalizar o fim da pandemia; também minimiza mortes infantis.",
+      "contexto": "A reportagem contrapõe os riscos de sobrecarga hospitalar e a existência de mortes infantis.",
+      "fontes": [
+        {
+          "nome": "Folha de S.Paulo — Bolsonaro minimiza ômicron e sugere que variante é 'bem-vinda'",
+          "url": "https://www1.folha.uol.com.br/equilibrioesaude/2022/01/bolsonaro-minimiza-omicron-e-sugere-que-variante-e-bem-vinda.shtml"
+        }
+      ],
+      "acessado_em": "2026-10-09",
+      "acervo": {
+        "manchete": "Bolsonaro minimiza ômicron e sugere que variante é 'bem-vinda'",
+        "veiculo": "Folha de S.Paulo",
+        "url": "https://www1.folha.uol.com.br/equilibrioesaude/2022/01/bolsonaro-minimiza-omicron-e-sugere-que-variante-e-bem-vinda.shtml",
+        "publicado_em": "2022-01-12",
+        "fonte_primaria": "https://www.youtube.com/watch?v=KhfgHcdK2mE",
+        "documentos": [
+          {
+            "arquivo": "acervo-covid/2022/01_2022/12012022_omicron.png",
+            "legenda": "Bolsonaro minimiza ômicron e sugere que variante é 'bem-vinda'",
+            "largura": 732,
+            "altura": 1006,
+            "sha256": "8e7e10e3e42a82eb6f8cd1744eccf30ea58ae2cb9f6e9a737ec39ab7f41ac694"
+          }
+        ]
+      }
     },
     {
       "id": "vacinacao-infantil-2022-01-14",
@@ -907,6 +2562,69 @@
       "acessado_em": "2026-10-09"
     },
     {
+      "id": "acervo-cov-0073",
+      "tipo": "noticia",
+      "data": "2022-02-03",
+      "subtitulo": "Recorde de registros diários durante onda Ômicron",
+      "autor": "Exame",
+      "texto": "Balanço registra 298.408 casos e 1.041 óbitos em 24 horas, em meio à onda de transmissão da Ômicron.",
+      "contexto": "São registros do balanço, não infecções e mortes ocorridas todas naquele dia.",
+      "fontes": [
+        {
+          "nome": "Exame — Brasil bate recorde e fica perto de 300 mil casos de covid-19 em 24h",
+          "url": "https://exame.com/brasil/casos-de-coronavirus-numero-de-mortes-03-de-fevereiro-de-2022/"
+        }
+      ],
+      "acessado_em": "2026-10-09",
+      "acervo": {
+        "manchete": "Brasil bate recorde e fica perto de 300 mil casos de covid-19 em 24h",
+        "veiculo": "Exame",
+        "url": "https://exame.com/brasil/casos-de-coronavirus-numero-de-mortes-03-de-fevereiro-de-2022/",
+        "publicado_em": "2022-02-03",
+        "documentos": [
+          {
+            "arquivo": "acervo-covid/2022/02_2022/03022022_omicron.png",
+            "legenda": "Brasil bate recorde e fica perto de 300 mil casos de covid-19 em 24h",
+            "largura": 732,
+            "altura": 602,
+            "sha256": "58202276e645624e3ca11c65a7c116688750652e7a9178982493f0da1e7a53c8"
+          }
+        ]
+      }
+    },
+    {
+      "id": "acervo-cov-0074",
+      "tipo": "noticia",
+      "data": "2022-03-16",
+      "subtitulo": "Bolsonaro prevê fim da pandemia por portaria",
+      "autor": "UOL",
+      "texto": "Em entrevista à TV Ponta Negra, afirma que Queiroga deverá anunciar em abril o fim da pandemia por portaria.",
+      "contexto": "Um ato posterior encerrou a emergência nacional, não a circulação do vírus nem a emergência internacional da OMS.",
+      "fontes": [
+        {
+          "nome": "UOL — Bolsonaro diz que Queiroga anunciará fim da pandemia em abril",
+          "url": "https://noticias.uol.com.br/politica/ultimas-noticias/2022/03/16/bolsonaro-diz-que-queiroga-anunciara-fim-da-pandemia-em-abril.htm"
+        }
+      ],
+      "acessado_em": "2026-10-09",
+      "acervo": {
+        "manchete": "Bolsonaro diz que Queiroga anunciará fim da pandemia em abril",
+        "veiculo": "UOL",
+        "url": "https://noticias.uol.com.br/politica/ultimas-noticias/2022/03/16/bolsonaro-diz-que-queiroga-anunciara-fim-da-pandemia-em-abril.htm",
+        "publicado_em": "2022-03-16",
+        "fonte_primaria": "https://www.youtube.com/watch?v=JdPmh4_NpWY",
+        "documentos": [
+          {
+            "arquivo": "acervo-covid/2022/03_2022/13032022_fim_pandemia.png",
+            "legenda": "Bolsonaro diz que Queiroga anunciará fim da pandemia em abril",
+            "largura": 734,
+            "altura": 1288,
+            "sha256": "e2ba1384807ceaafebe850e1c2be31e83162468b4e09953c342af987e2579c27"
+          }
+        ]
+      }
+    },
+    {
       "id": "fim-emergencia-nacional-2022-04-22",
       "tipo": "noticia",
       "data": "2022-04-22",
@@ -921,6 +2639,142 @@
         }
       ],
       "acessado_em": "2026-10-10"
+    },
+    {
+      "id": "acervo-cov-0075",
+      "tipo": "noticia",
+      "data": "2022-06-30",
+      "subtitulo": "Críticas às vacinas em entrevista à Fox News",
+      "autor": "Folha de S.Paulo / Rafael Balago",
+      "texto": "Em entrevista exibida pela Fox News, afirma que vacina não ajudaria quem já teve Covid, declara não ter se vacinado e volta a defender cloroquina e ivermectina.",
+      "contexto": "A data é a da exibição. A reportagem contesta a alegação sobre vacinação após a infecção e informa que os medicamentos não têm eficácia contra a Covid. O status vacinal é declarado pelo próprio presidente.",
+      "fontes": [
+        {
+          "nome": "Folha de S.Paulo / Rafael Balago — Bolsonaro critica vacina contra Covid e minimiza racismo no Brasil em TV americana",
+          "url": "https://www1.folha.uol.com.br/poder/2022/06/bolsonaro-critica-vacina-contra-covid-em-tv-americana.shtml"
+        }
+      ],
+      "acessado_em": "2026-10-09",
+      "acervo": {
+        "manchete": "Bolsonaro critica vacina contra Covid e minimiza racismo no Brasil em TV americana",
+        "veiculo": "Folha de S.Paulo / Rafael Balago",
+        "url": "https://www1.folha.uol.com.br/poder/2022/06/bolsonaro-critica-vacina-contra-covid-em-tv-americana.shtml",
+        "publicado_em": "2022-06-30",
+        "documentos": [
+          {
+            "arquivo": "acervo-covid/2022/06_2022/20062022_minimiza.png",
+            "legenda": "Bolsonaro critica vacina contra Covid e minimiza racismo no Brasil em TV americana",
+            "largura": 736,
+            "altura": 1132,
+            "sha256": "164ec6d9a4352dc9fc1205ef736fbe8c94e496a3b52fdba8722a0f7b371a4ef5"
+          }
+        ]
+      }
+    },
+    {
+      "id": "acervo-cov-0076",
+      "tipo": "noticia",
+      "data": "2022-08-22",
+      "subtitulo": "Defesa do tratamento precoce no Jornal Nacional",
+      "autor": "UOL",
+      "texto": "Durante entrevista ao Jornal Nacional, critica a imprensa por desestimular o chamado tratamento precoce e invoca autonomia médica.",
+      "contexto": "A fonte é a transcrição da entrevista. A posição do candidato não demonstra a eficácia dos medicamentos.",
+      "fontes": [
+        {
+          "nome": "UOL — Bolsonaro na Globo: Veja íntegra da entrevista ao Jornal Nacional",
+          "url": "https://noticias.uol.com.br/eleicoes/2022/08/22/integra-jornal-nacional-entrevista-bolsonaro.amp.htm"
+        }
+      ],
+      "acessado_em": "2026-10-09",
+      "acervo": {
+        "manchete": "Bolsonaro na Globo: Veja íntegra da entrevista ao Jornal Nacional",
+        "veiculo": "UOL",
+        "url": "https://noticias.uol.com.br/eleicoes/2022/08/22/integra-jornal-nacional-entrevista-bolsonaro.amp.htm",
+        "publicado_em": "2022-08-22",
+        "fonte_primaria": "https://www.youtube.com/watch?v=m6DLtXbn4Ss",
+        "documentos": [
+          {
+            "arquivo": "acervo-covid/2022/08_2022/22082022_jornal_nacional.png",
+            "legenda": "Bolsonaro na Globo: Veja íntegra da entrevista ao Jornal Nacional",
+            "largura": 738,
+            "altura": 1288,
+            "sha256": "7b105b70b89ebe9f38beda5ad45af5b5bea98fd0d8f222a9ea8b119d85b6cab1"
+          }
+        ]
+      }
+    },
+    {
+      "id": "acervo-cov-0077",
+      "tipo": "noticia",
+      "data": "2022-09-20",
+      "subtitulo": "Bolsonaro apresenta balanço da pandemia na ONU",
+      "autor": "UOL",
+      "texto": "Na Assembleia Geral da ONU, afirma que governo não poupou esforços para salvar vidas e preservar empregos durante a pandemia.",
+      "contexto": "É o balanço político do presidente, não uma conclusão independente.",
+      "fontes": [
+        {
+          "nome": "UOL — Leia a íntegra do discurso de Bolsonaro na ONU",
+          "url": "https://noticias.uol.com.br/politica/ultimas-noticias/2022/09/20/leia-a-integra-do-discurso-de-bolsonaro-na-onu.amp.htm"
+        },
+        {
+          "nome": "UOL Confere — checagem do discurso de Bolsonaro na ONU",
+          "url": "https://noticias.uol.com.br/confere/ultimas-noticias/2022/09/20/bolsonaro-mentiras-onu-assembleia-geral-2022.htm"
+        }
+      ],
+      "acessado_em": "2026-10-09",
+      "acervo": {
+        "manchete": "Leia a íntegra do discurso de Bolsonaro na ONU",
+        "veiculo": "UOL",
+        "url": "https://noticias.uol.com.br/politica/ultimas-noticias/2022/09/20/leia-a-integra-do-discurso-de-bolsonaro-na-onu.amp.htm",
+        "publicado_em": "2022-09-20",
+        "documentos": []
+      }
+    },
+    {
+      "id": "acervo-cov-0078",
+      "tipo": "noticia",
+      "data": "2022-09-26",
+      "subtitulo": "Bolsonaro nega atraso na vacinação",
+      "autor": "Agência Brasil / Vladimir Platonow",
+      "texto": "Em sabatina na Record, nega atraso na vacinação e atribui demora do contrato com a Pfizer a condicionantes sobre responsabilidade por efeitos adversos.",
+      "contexto": "É a justificativa do presidente e não comprova que não houve atraso. As ofertas e os contratos de vacinas estão em outros marcos do memorial.",
+      "fontes": [
+        {
+          "nome": "Agência Brasil / Vladimir Platonow — Bolsonaro diz que não houve atraso na vacinação contra covid-19",
+          "url": "https://agenciabrasil.ebc.com.br/politica/noticia/2022-09/bolsonaro-diz-que-nao-houve-atraso-na-vacinacao-contra-covid-19"
+        }
+      ],
+      "acessado_em": "2026-10-09",
+      "acervo": {
+        "manchete": "Bolsonaro diz que não houve atraso na vacinação contra covid-19",
+        "veiculo": "Agência Brasil / Vladimir Platonow",
+        "url": "https://agenciabrasil.ebc.com.br/politica/noticia/2022-09/bolsonaro-diz-que-nao-houve-atraso-na-vacinacao-contra-covid-19",
+        "publicado_em": "2022-09-26",
+        "documentos": []
+      }
+    },
+    {
+      "id": "acervo-cov-0079",
+      "tipo": "noticia",
+      "data": "2022-10-16",
+      "subtitulo": "Debate: atraso de vacinas e vacinação após infecção",
+      "autor": "UOL Confere / Letícia Mutchnik e Gustavo Brito",
+      "texto": "No debate do segundo turno, nega disponibilidade de vacinas em 2020 e afirma que vacinação seria para quem ainda não havia sido infectado.",
+      "contexto": "O UOL classificou as duas alegações sobre vacinas como falsas, citando ofertas de 2020 e a importância da vacinação mesmo após a infecção.",
+      "fontes": [
+        {
+          "nome": "UOL Confere / Letícia Mutchnik e Gustavo Brito — Bolsonaro erra sobre vacina e auxílio e acerta sobre indicação do PT ao STF",
+          "url": "https://noticias.uol.com.br/confere/ultimas-noticias/2022/10/16/bolsonaro-debate-band-uol-checagem.htm"
+        }
+      ],
+      "acessado_em": "2026-10-09",
+      "acervo": {
+        "manchete": "Bolsonaro erra sobre vacina e auxílio e acerta sobre indicação do PT ao STF",
+        "veiculo": "UOL Confere / Letícia Mutchnik e Gustavo Brito",
+        "url": "https://noticias.uol.com.br/confere/ultimas-noticias/2022/10/16/bolsonaro-debate-band-uol-checagem.htm",
+        "publicado_em": "2022-10-16",
+        "documentos": []
+      }
     },
     {
       "id": "reforco-bivalente-2023-02-27",
@@ -950,38 +2804,6 @@
         {
           "nome": "OMS — pronunciamento de 05/05/2023",
           "url": "https://www.who.int/news-room/speeches/item/who-director-general-s-opening-remarks-at-the-media-briefing---5-may-2023"
-        }
-      ],
-      "acessado_em": "2026-10-10"
-    },
-    {
-      "id": "jn1-2023-12-19",
-      "tipo": "noticia",
-      "data": "2023-12-19",
-      "subtitulo": "JN.1 cresce e passa a ser acompanhada como variante de interesse",
-      "autor": "Organização Mundial da Saúde",
-      "texto": "A OMS classifica JN.1 separadamente como variante de interesse, diante de sua rápida expansão. A avaliação inicial considera baixo o risco adicional global; variante nova não é sinônimo de maior letalidade.",
-      "contexto": "A data é a classificação e avaliação de risco em 19/12/2023. A OMS destaca dados ainda limitados e ausência de evidência de maior gravidade frente às variantes então circulantes. Baixo risco adicional não significa risco zero de Covid-19 para cada pessoa, sobretudo nos grupos vulneráveis.",
-      "fontes": [
-        {
-          "nome": "OMS — avaliação inicial de JN.1 (19/12/2023)",
-          "url": "https://www.who.int/docs/default-source/coronaviruse/18122023_jn.1_ire_clean.pdf"
-        }
-      ],
-      "acessado_em": "2026-10-10"
-    },
-    {
-      "id": "nb181-2025-05-23",
-      "tipo": "noticia",
-      "data": "2025-05-23",
-      "subtitulo": "NB.1.8.1 entra no monitoramento; OMS não vê maior gravidade",
-      "autor": "Organização Mundial da Saúde",
-      "texto": "A OMS passa a monitorar NB.1.8.1, que ganha espaço entre as variantes circulantes. A avaliação inicial aponta baixo risco adicional global e não identifica doença mais grave que a causada por outras variantes.",
-      "contexto": "A data é a classificação como variante sob monitoramento em 23/05/2025, não seu surgimento: há amostras desde janeiro. A avaliação depende dos dados disponíveis e pode mudar. A circulação persistente exige vigilância; não se rotula toda variante nova como muito perigosa ou mais letal.",
-      "fontes": [
-        {
-          "nome": "OMS — avaliação inicial de NB.1.8.1 (23/05/2025)",
-          "url": "https://cdn.who.int/media/docs/default-source/documents/epp/tracking-sars-cov-2/23052025_nb.1.8.1_ire.pdf?sfvrsn=7b14df58_5"
         }
       ],
       "acessado_em": "2026-10-10"

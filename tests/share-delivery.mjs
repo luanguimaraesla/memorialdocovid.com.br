@@ -22,12 +22,13 @@ function meta(html, name) {
 }
 
 test('all preview PNGs match their sources and have the required 1200×630 size', async () => {
-  const manifest = JSON.parse(await read('public/previas/manifest.json'));
+  const manifest = JSON.parse(await read('scripts/previas-manifest.json'));
+  await assert.rejects(read('dist/previas/manifest.json'));
   assert.equal(manifest.declaracoesSha256, hash(dataBytes));
   const css = (await read('src/styles/global.css')).toString();
-  const hero = (await read('src/components/Hero.astro')).toString();
+  const narrative = (await read('src/components/Narrative.astro')).toString();
   assert.equal(manifest.paletteSha256, hash(css.match(/:root\s*\{[^}]+\}/)[0]));
-  assert.equal(manifest.subtitleSha256, hash(hero.match(/<p class="hero__subtitle">([^<]+)<\/p>/)[1]));
+  assert.equal(manifest.subtitleSha256, hash(narrative.match(/<p class="hero__subtitle">([^<]+)<\/p>/)[1]));
   assert.deepEqual(manifest.images.map(({ id }) => id), ['memorial', ...declaracoes.map(({ id }) => id)]);
   assert.equal(new Set(manifest.images.map(({ sha256 }) => sha256)).size, declaracoes.length + 1);
   for (const image of manifest.images) {
