@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
-import { readFile } from 'node:fs/promises';
+import { readFile, readdir } from 'node:fs/promises';
 import test from 'node:test';
 
 const root = new URL('../', import.meta.url);
@@ -30,6 +30,10 @@ test('all preview PNGs match their sources and have the required 1200×630 size'
   assert.equal(manifest.paletteSha256, hash(css.match(/:root\s*\{[^}]+\}/)[0]));
   assert.equal(manifest.subtitleSha256, hash(narrative.match(/<p class="hero__subtitle">([^<]+)<\/p>/)[1]));
   assert.deepEqual(manifest.images.map(({ id }) => id), ['memorial', ...declaracoes.map(({ id }) => id)]);
+  // Every published preview belongs to a current milestone; removed milestones leave none behind.
+  const files = manifest.images.map(({ file }) => file).sort();
+  assert.deepEqual((await readdir(new URL('public/previas/', root))).sort(), files);
+  assert.deepEqual((await readdir(new URL('dist/previas/', root))).sort(), files);
   assert.equal(new Set(manifest.images.map(({ sha256 }) => sha256)).size, declaracoes.length + 1);
   for (const image of manifest.images) {
     const bytes = await read(`public/previas/${image.file}`);
