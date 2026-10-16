@@ -150,7 +150,7 @@ da data visível na captura, vale a data da captura.
 Os cards mostram recortes das manchetes e subtítulos; o clique abre a captura completa.
 Os originais e seus hashes não mudam. O modo guiado para em cada marco até o visitante
 continuar. No modo contínuo, só o cabeçalho flutua. Os detalhes ficam em Leia mais.
-Cada card fica na linha de pontos da sua data, sem espaços extras. O percurso leva
+Cada card termina onde a coluna alcança o total do fim do seu dia, sem espaços extras. O percurso leva
 exatamente 1,6 s entre marcos; a velocidade varia porque a distância entre eles acompanha
 as vidas perdidas no intervalo.
 

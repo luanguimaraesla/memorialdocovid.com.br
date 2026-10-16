@@ -2,7 +2,7 @@ import {
   ANNOUNCE_INTERVAL_MS, SHARE_STATUS_DURATION_MS, DOT_GAP_PX, DOTS_PER_ROW, LIVES_PER_SEPARATOR,
 } from '../config';
 import {
-  anchorY, columnHeight, dateAtIndex, dayIndexOf, dayNumber, dotPosition, firstIndexOfDay,
+  columnHeight, dateAtIndex, dayIndexOf, dayNumber, dotPosition, lastIndexOfDay,
   livesAtDepth, rowPitch, separatorHeight, weekMarkers, thousandMarkers,
 } from './layout';
 import { continuousPath, guidedPath } from './journey';
@@ -63,10 +63,12 @@ interface Elements {
 
 interface StatementCard {
   index: number;
+  // Top of the card, set by placeCards so the card ends just above its marker.
   y: number;
+  // Height with Leia mais closed, so an open card grows down instead of moving up.
+  restHeight: number;
   element: HTMLElement;
   marker: HTMLElement;
-  markerCount: HTMLElement;
   record: Declaracao;
 }
 
@@ -188,10 +190,14 @@ function livesLabel(lives: number, caption: string, className: string): HTMLElem
   return label;
 }
 
+// A news card ends where the column reaches the official total at the end of its day, the
+// balance reported that day, and its lives marker shows that total right there.
 function statementCard(record: Declaracao): StatementCard {
-  const index = firstIndexOfDay(data.obitos.dias, dayIndexOf(data.obitos.dias, record.data));
-  const marker = livesLabel(0, 'vidas', 'memorial__separator memorial__separator--noticia');
-  const markerCount = marker.querySelector<HTMLElement>('strong')!;
+  const day = dayIndexOf(data.obitos.dias, record.data);
+  const total = data.obitos.dias[day].acumulado;
+  const index = lastIndexOfDay(data.obitos.dias, day);
+  const caption = `${total === 1 ? 'vida' : 'vidas'} até ${fmtDate(record.data)}`;
+  const marker = livesLabel(total, caption, 'memorial__separator memorial__separator--noticia');
   const element = create('article', 'declaracao');
   element.id = statementAnchor(record.id);
   element.setAttribute('tabindex', '-1');
@@ -212,7 +218,7 @@ function statementCard(record: Declaracao): StatementCard {
   references.href = `${import.meta.env.BASE_URL}referencias#${encodeURIComponent(statementAnchor(record.id))}`;
   more.append(references);
   element.append(more);
-  return { index, y: anchorY(index, data.total), element, marker, markerCount, record };
+  return { index, y: 0, restHeight: 0, element, marker, record };
 }
 
 function dotBlock(first: number, rows: number, perRow: number): HTMLElement {
@@ -249,7 +255,6 @@ function buildMarks(): void {
   ui.track.style.height = `${height}px`;
   buildDots();
   statementCards = data.declaracoes.declaracoes.map(statementCard).sort((a, b) => a.index - b.index);
-  for (const card of statementCards) card.element.style.top = `${card.y}px`;
   ui.marks.replaceChildren(...statementCards.map(card => card.element));
   ui.newsMarkers.replaceChildren(...statementCards.map(card => card.marker));
   stops = [
@@ -292,63 +297,76 @@ interface MarkerPlacement {
   replaces?: ColumnLabel;
 }
 
-// Puts the lives marker MARKER_GAP_PX below the card, in the gap between two dot rows, so it
-// covers whole rows. A nearby thousand separator gives its reserved slot to the marker, so
-// the slot never shows as an empty band: the marker takes the slot, starts inside it and
-// grows to the next row gap, or starts right after it when the slot ends close to the card.
+// The column reaches a card's day total at the end of that life's row; the marker starts in
+// the gap after it. A thousand separator just below gives its slot to the marker, so the slot
+// never shows as an empty band next to it.
 function placeMarker(card: StatementCard): MarkerPlacement {
-  const pitch = rowPitch();
-  const band = separatorHeight();
-  const cardBottom = card.y + card.element.offsetHeight;
-  const minimum = cardBottom + MARKER_GAP_PX;
-  const aligned = Math.ceil(minimum / pitch) * pitch - 1;
-  const slot = thousandLabels.find(label => (
-    label.y + band > cardBottom - CARD_EDGE_PX && label.y < aligned + NEAR_SEPARATOR_PX
-  ));
-  if (!slot) return { top: aligned, height: band };
-  const slotEnd = slot.y + band;
-  if (slot.y >= minimum) return { top: slot.y, height: band, replaces: slot };
-  if (slotEnd > minimum) {
-    const rowsAfter = Math.ceil((minimum - slot.y + 1) / pitch);
-    return { top: minimum, height: slotEnd + rowsAfter * pitch - 1 - minimum, replaces: slot };
-  }
-  const top = slotEnd - cardBottom >= MARKER_GAP_PX / 2 ? slotEnd - 1 : aligned;
-  return { top, height: band, replaces: slot };
+  const rowEnd = dotPosition(card.index).y + rowPitch() - 1;
+  const slot = thousandLabels.find(label => label.y >= rowEnd && label.y < rowEnd + NEAR_SEPARATOR_PX);
+  return { top: slot?.y ?? rowEnd, height: separatorHeight(), replaces: slot };
 }
 
-// Cards keep their own dot rows. When neighbors would overlap the current card and its
-// lives marker, only the current one shows; the others appear once they no longer collide.
+// Every card ends at least MARKER_GAP_PX above its marker. Cards sharing a marker share their
+// top as well, sized by the tallest, so Continuar swaps them in place. A taller card further
+// down may start higher than the ones before it; those start no lower than it, so the journey
+// never scrolls back. The first cards end on the first rows, so the column leaves room above
+// itself for them.
+function placeCards(): void {
+  const groups = new Map<number, StatementCard[]>();
+  for (const card of statementCards) {
+    const height = card.element.offsetHeight;
+    if (height > 0 && !card.element.querySelector<HTMLDetailsElement>('details')?.open) card.restHeight = height;
+    const top = placeMarker(card).top;
+    groups.set(top, [...(groups.get(top) ?? []), card]);
+  }
+  let below = Infinity;
+  for (const top of [...groups.keys()].sort((a, b) => b - a)) {
+    const cards = groups.get(top)!;
+    const y = Math.min(top - MARKER_GAP_PX - Math.max(...cards.map(card => card.restHeight)), below);
+    below = y;
+    for (const card of cards) {
+      card.y = y;
+      card.element.style.top = `${y}px`;
+    }
+  }
+  const overhang = Math.max(0, ...statementCards.map(card => -card.y));
+  ui.track.style.marginTop = `${overhang > 0 ? overhang + CARD_GAP_PX : 0}px`;
+}
+
+function cardBottom(card: StatementCard): number {
+  return Math.max(placeMarker(card).top + separatorHeight(), card.y + card.element.offsetHeight);
+}
+
+// When neighbors would overlap the current card and its lives marker, only the current one
+// shows; the others appear once they no longer collide with it.
 function visibleCards(): Set<StatementCard> {
   const shown = new Set<StatementCard>();
-  const bottom = (card: StatementCard) => {
-    const marker = placeMarker(card);
-    return marker.top + marker.height;
-  };
   const current = stops[active]?.card;
   const pivot = current ? statementCards.indexOf(current) : 0;
   let floor = -Infinity;
   for (const card of statementCards.slice(pivot)) {
     if (card !== current && card.y < floor) continue;
     shown.add(card);
-    floor = bottom(card) + CARD_GAP_PX;
+    floor = cardBottom(card) + CARD_GAP_PX;
   }
   let ceiling = current ? current.y - CARD_GAP_PX : Infinity;
   for (const card of statementCards.slice(0, pivot).reverse()) {
-    if (bottom(card) > ceiling) continue;
+    if (cardBottom(card) > ceiling) continue;
     shown.add(card);
     ceiling = card.y - CARD_GAP_PX;
   }
   return shown;
 }
 
-// Places a lives marker under each visible card, skips the thousand separator it replaces
-// and hides weekly dates the card would cover. Continuous mode shows neither cards nor
-// markers, so every label returns.
+// Places the cards and a lives marker under each visible one, hides the thousand separators
+// they replace or cover and the weekly dates they would hide. Continuous mode shows neither
+// cards nor markers, so every label returns.
 function layoutCards(): void {
+  placeCards();
   ui.newsMarkers.hidden = continuous;
   const shown = continuous ? new Set<StatementCard>() : visibleCards();
   const replaced = new Set<ColumnLabel>();
-  const covered: [number, number][] = [];
+  const cards: [number, number][] = [];
   for (const card of statementCards) {
     const visible = shown.has(card);
     if (!continuous) card.element.classList.toggle('declaracao--oculta', !visible);
@@ -357,15 +375,17 @@ function layoutCards(): void {
     const marker = placeMarker(card);
     card.marker.style.top = `${marker.top}px`;
     card.marker.style.height = `${marker.height}px`;
-    // Like a thousand separator, the marker counts the lives above it, so it always follows
-    // the column order; in a separator slot that is exactly the separator's own total.
-    card.markerCount.textContent = fmtInt(livesAtDepth(marker.top, data.total));
     if (marker.replaces) replaced.add(marker.replaces);
-    covered.push([card.y - CARD_GAP_PX / 2, marker.top + marker.height + CARD_GAP_PX / 2]);
+    cards.push([card.y, card.y + card.element.offsetHeight]);
   }
+  const band = separatorHeight();
+  // A card's cut edge could let a separator behind it peek through, so those hide too.
+  const behind = (y: number) => cards.some(([top, bottom]) => y >= top - CARD_EDGE_PX && y + band <= bottom + CARD_EDGE_PX);
   for (const label of thousandLabels) {
-    label.element.classList.toggle('memorial__separator--oculto', replaced.has(label));
+    label.element.classList.toggle('memorial__separator--oculto', replaced.has(label) || behind(label.y));
   }
+  const covered = statementCards.filter(card => shown.has(card))
+    .map(card => [card.y - CARD_GAP_PX / 2, cardBottom(card) + CARD_GAP_PX / 2]);
   for (const label of weekLabels) {
     const bottom = label.y + label.element.offsetHeight;
     label.element.classList.toggle('marco-semana--oculto', covered.some(([top, end]) => label.y < end && bottom > top));

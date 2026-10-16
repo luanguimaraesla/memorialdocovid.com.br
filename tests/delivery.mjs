@@ -19,7 +19,7 @@ function moduleUrl(source) {
 
 const configUrl = moduleUrl(await read('src/config.ts'));
 const { MAX_COLUMN_HEIGHT_PX } = await import(configUrl);
-const { columnHeight, dayIndexOf, firstIndexOfDay, thousandMarkers, dotPosition, livesAtDepth } = await import(moduleUrl(
+const { columnHeight, dayIndexOf, lastIndexOfDay, thousandMarkers, dotPosition, livesAtDepth } = await import(moduleUrl(
   (await read('src/lib/layout.ts')).replaceAll("'../config'", JSON.stringify(configUrl)),
 ));
 const { loadPageData, SYNTHETIC_PREFIX } = await import(moduleUrl(
@@ -219,7 +219,7 @@ test('the vaccine milestone summarizes the conditional jacaré remark without as
 
 test('every shipped statement has a distinct reachable row in chronological order', () => {
   const rows = quotations.map(({ data }) => (
-    Math.floor(firstIndexOfDay(obitos.dias, dayIndexOf(obitos.dias, data)) / 10)
+    Math.floor(lastIndexOfDay(obitos.dias, dayIndexOf(obitos.dias, data)) / 10)
   ));
   for (let index = 1; index < rows.length; index++) {
     assert.ok(rows[index] > rows[index - 1], quotations[index].id);

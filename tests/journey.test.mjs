@@ -13,7 +13,7 @@ function moduleUrl(source) {
 const configUrl = moduleUrl(await read('src/config.ts'));
 const { SECONDS_BETWEEN_MILESTONES } = await import(configUrl);
 const layoutUrl = moduleUrl((await read('src/lib/layout.ts')).replaceAll("'../config'", JSON.stringify(configUrl)));
-const { anchorY, columnHeight, dayIndexOf, firstIndexOfDay } = await import(layoutUrl);
+const { anchorY, columnHeight, dayIndexOf, lastIndexOfDay } = await import(layoutUrl);
 const { RAMP_SHARE, continuousPath, guidedPath, milestoneSpeeds, pathDuration } = await import(moduleUrl(
   (await read('src/lib/journey.ts')).replaceAll("'../config'", JSON.stringify(configUrl)),
 ));
@@ -84,7 +84,7 @@ test('the published milestones form a monotonic 1.6-second journey through the r
   const records = JSON.parse(await read('public/data/declaracoes.json')).declaracoes;
   const days = JSON.parse(await read('public/data/obitos.json')).dias;
   const total = days.at(-1).acumulado;
-  const positions = records.map(record => anchorY(firstIndexOfDay(days, dayIndexOf(days, record.data)), total))
+  const positions = records.map(record => anchorY(lastIndexOfDay(days, dayIndexOf(days, record.data)), total))
     .sort((a, b) => a - b);
   const all = [...positions, columnHeight(total)];
   const path = continuousPath(all);

@@ -54,8 +54,9 @@ const quotations = statements.declaracoes.filter((entry) => entry.tipo !== 'noti
         Os marcos semanais mostram as segundas-feiras a partir de 30/03/2020, na posição do
         primeiro óbito de cada semana. Semanas sem novos óbitos, ou próximas demais da anterior,
         não recebem marco. Os óbitos anteriores continuam representados na coluna. Cada notícia
-        fica na linha de pontos da sua data, com um marcador das vidas contadas até aquele ponto;
-        quando um separador de milhar está muito próximo, o marcador ocupa o lugar dele.
+        termina onde a coluna alcança o total oficial do fim do seu dia, indicado por um marcador
+        com esse total e a data; quando um separador de milhar está muito próximo, o marcador
+        ocupa o lugar dele.
         A rolagem automática leva 1,6 s entre marcos, então a velocidade acompanha as vidas
         perdidas em cada intervalo.
       </p>

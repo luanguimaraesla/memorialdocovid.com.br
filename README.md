@@ -60,13 +60,13 @@ passar na validação, a página mostra um erro e não desenha nada.
 espaço, em linhas de 10 (`src/config.ts`). A coluna centralizada tem 258 px de largura,
 deixando 31 px de margem em cada lado numa tela de 320 px, sem mudar o tamanho dos pontos
 entre telas. As linhas alternam branco e cinza claro, mantendo suas cores durante a rolagem.
-A cada 1.000 vidas, um separador ocupa três linhas (78 px), sem acrescentar vidas.
-A coluna mede 1.919.086 px, abaixo do limite de 16.000.000 px dos navegadores, sem
-espaços extras: cada card fica na linha de pontos da sua data. Os pontos fazem parte da
-página: cada bloco de mil vidas é um elemento pintado por um padrão CSS de círculos. Assim o
-navegador rola pontos, datas, contadores e notícias na mesma camada, sem que um se atrase em
-relação ao outro no celular. Os marcos semanais continuam nas segundas-feiras a partir de
-30/03/2020, na posição do primeiro óbito da semana.
+A cada 1.000 vidas, um separador ocupa três linhas (78 px), sem acrescentar vidas. A coluna
+mede 1.919.086 px, abaixo do limite de 16.000.000 px dos navegadores, sem espaços extras: cada
+card termina onde a coluna alcança o total do fim do seu dia. Os pontos fazem parte da página:
+cada bloco de mil vidas é um elemento pintado por um padrão CSS de círculos. Assim o navegador
+rola pontos, datas, contadores e notícias na mesma camada, sem que um se atrase em relação ao
+outro no celular. Os marcos semanais continuam nas segundas-feiras a partir de 30/03/2020, na
+posição do primeiro óbito da semana.
 
 A linha onde cada marco para fica fixa, a 90 px do topo. Ela não depende da altura da tela,
 que muda no celular quando a barra de endereço aparece ou some; essa mudança também não
@@ -87,14 +87,19 @@ A rolagem para em cada marco e espera pelo botão **Continuar**, sem prazo de le
 Gestos manuais e cliques também pausam. Não há scroll interno: a imagem aparece diretamente
 ou, quando ela não existe, aparece a descrição. Contexto, resumo e fontes ficam em **Leia mais**.
 Quando dois cards cairiam um sobre o outro, só o marco atual aparece; marcos na mesma
-linha de pontos trocam no lugar ao tocar em **Continuar**. Embaixo de cada notícia, um
-marcador no estilo dos separadores mostra quantas vidas a coluna já contou naquele ponto, ao
-menos uma linha de pontos abaixo do card e alinhado às linhas. Como nos separadores, o número
-conta os pontos acima dele, então os números sempre crescem de cima para baixo. Se um separador de milhar estiver
-a até 160 px desse marcador, o marcador ocupa o espaço reservado ao separador, que é omitido;
-assim nenhum espaço de separador fica vazio. As datas semanais que ficariam atrás de um card
-ou do seu marcador também são omitidas, assim como as que ficariam a menos de quatro linhas
-da data anterior, comuns nas semanas com poucas mortes.
+linha de pontos trocam no lugar ao tocar em **Continuar**.
+
+Cada notícia fica onde a coluna alcança o total oficial do fim do seu dia, o balanço daquela
+data. Assim "Brasil ultrapassa 90 mil mortes registradas", de 29/07/2020, termina logo acima do
+marcador "90.134 vidas até 29/07/2020". O marcador, no estilo dos separadores, começa no vão
+depois da linha do último ponto do dia; os pontos acima dele são esse total, completado até o
+fim da linha. Se um separador de milhar estiver a até 160 px abaixo, o marcador ocupa o espaço
+reservado a ele, que é omitido, para nenhum espaço de separador ficar vazio. Notícias com o
+mesmo marcador dividem o topo, alinhadas pela mais alta. Quando uma notícia mais alta começaria
+acima das anteriores, as anteriores sobem com ela, para o percurso nunca voltar. Separadores
+escondidos atrás de um card também são omitidos. As datas semanais que ficariam atrás de um
+card ou do seu marcador também são omitidas, assim como as que ficariam a menos de quatro
+linhas da data anterior, comuns nas semanas com poucas mortes.
 
 O percurso termina no encerramento, depois da coluna: o total oficial de vidas perdidas, a
 mensagem "Nunca esqueceremos. Essa família não pode voltar ao poder! A ignorância não pode
@@ -108,19 +113,18 @@ O botão **Sem pausas** ativa o modo contínuo. Nesse modo, apenas o cabeçalho 
 flutua até o próximo marco. **Leia mais** volta ao card fixo, abre o conteúdo e pausa
 para leitura. O visitante pode alternar entre os dois modos a qualquer momento.
 
-Cada marco chega exatamente 1,6 s depois do anterior (`SECONDS_BETWEEN_MILESTONES`),
-incluindo a abertura, as duas introduções e o encerramento. A distância entre publicações é a da coluna:
-as vidas perdidas entre as duas datas. Por isso a velocidade é calculada trecho a trecho:
-distância dividida por 1,6 s. No modo guiado, cada trecho acelera em 0,24 s, segue na
-velocidade máxima e freia em 0,24 s até parar no marco, sem se arrastar até o lugar.
-No modo contínuo, a velocidade em cada marco é a média harmônica dos trechos vizinhos, o que
-mantém a rolagem sempre para a frente e sem ultrapassar marcos. `src/lib/journey.ts` faz
-esses cálculos.
+Cada marco chega exatamente 1,6 s depois do anterior (`SECONDS_BETWEEN_MILESTONES`), incluindo
+a abertura, as duas introduções e o encerramento. A distância entre publicações é a da coluna:
+as vidas perdidas entre os totais do fim de cada dia. Por isso a velocidade é calculada trecho
+a trecho: distância dividida por 1,6 s. No modo guiado, cada trecho acelera em 0,24 s, segue na
+velocidade máxima e freia em 0,24 s até parar no marco, sem se arrastar até o lugar. No modo
+contínuo, a velocidade em cada marco é a média harmônica dos trechos vizinhos, o que mantém a
+rolagem sempre para a frente e sem ultrapassar marcos. `src/lib/journey.ts` faz esses cálculos.
 
-Nas 106 publicações, a distância vai de 0 px (7 trechos na mesma linha de pontos) a
-121.420 px, com mediana de 7.748 px. A velocidade média vai de 0 a 75.888 px/s, com
-mediana de 4.843 px/s. O trecho mais longo, de 23/03/2021 a 08/04/2021, atravessa cerca
-de 47 mil vidas e chega a 89.279 px/s. Como os trechos seguem a série, 51 deles são mais
+Nas 106 publicações, a distância vai de 0 px (6 trechos na mesma linha de pontos) a
+124.176 px, com mediana de 8.242 px. A velocidade média vai de 0 a 77.610 px/s, com
+mediana de 5.151 px/s. O trecho mais longo, de 23/03/2021 a 08/04/2021, atravessa cerca
+de 46 mil vidas e chega a 91.306 px/s. Como os trechos seguem a série, 53 deles são mais
 curtos que o anterior: a velocidade sobe nos períodos com mais mortes, não de forma constante.
 Para reproduzir a tabela completa, com distância, velocidade e aceleração por trecho:
 

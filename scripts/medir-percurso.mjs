@@ -13,7 +13,7 @@ function moduleUrl(source) {
 const configUrl = moduleUrl(await read('src/config.ts'));
 const { SECONDS_BETWEEN_MILESTONES: seconds } = await import(configUrl);
 const layoutUrl = moduleUrl((await read('src/lib/layout.ts')).replaceAll("'../config'", JSON.stringify(configUrl)));
-const { anchorY, columnHeight, dayIndexOf, firstIndexOfDay } = await import(layoutUrl);
+const { anchorY, columnHeight, dayIndexOf, lastIndexOfDay } = await import(layoutUrl);
 const { RAMP_SHARE, milestoneSpeeds } = await import(moduleUrl(
   (await read('src/lib/journey.ts')).replaceAll("'../config'", JSON.stringify(configUrl)),
 ));
@@ -22,7 +22,7 @@ const days = JSON.parse(await read('public/data/obitos.json')).dias;
 const records = JSON.parse(await read('public/data/declaracoes.json')).declaracoes;
 const total = days.at(-1).acumulado;
 const milestones = records
-  .map(record => ({ data: record.data, y: anchorY(firstIndexOfDay(days, dayIndexOf(days, record.data)), total) }))
+  .map(record => ({ data: record.data, y: anchorY(lastIndexOfDay(days, dayIndexOf(days, record.data)), total) }))
   .sort((a, b) => a.y - b.y);
 const round = value => Math.round(value);
 

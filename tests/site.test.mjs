@@ -199,6 +199,7 @@ test('days map to dot indices across mid-row boundaries and zero-increment days'
     { data: '2020-06-02', acumulado: 21 },
   ];
   assert.deepEqual([0, 1, 2, 3].map((k) => layout.firstIndexOfDay(dias, k)), [0, 4, 12, 12]);
+  assert.deepEqual([0, 1, 2, 3].map((k) => layout.lastIndexOfDay(dias, k)), [3, 11, 11, 14]);
   assert.deepEqual(
     [0, 3, 4, 9, 10, 11, 12, 14, 15, 20].map((index) => layout.dateAtIndex(dias, index)),
     ['2020-03-30', '2020-03-30', '2020-03-31', '2020-03-31', '2020-03-31', '2020-03-31',
@@ -900,7 +901,8 @@ test('each leg reaches the next milestone exactly 1.6 seconds after it starts', 
   for(const selector of ['#btn-start','#btn-play','#btn-share','#btn-mode']) assert.equal($(selector).disabled,false);
   assert.equal(frames.size,0);
   $('#btn-start').listeners.click();
-  for(const milestone of [1010,2110,3210]) {
+  // The two introductions, then the card: 400 px tall, it ends on row 0, so it starts at -399.
+  for(const milestone of [1010,2110,2811]) {
     for(let index=0;index<15;index++) frame();
     assert.equal($('#btn-play').getAttribute('aria-pressed'),'true');
     assert.ok(window.scrollY<milestone);
@@ -1111,7 +1113,7 @@ test('pending copy requests cannot leave an older timeout hiding a newer confirm
 
 test('shared anchors open at the correct dot row after separators and support hash changes', async (context) => {
   const obitos = obitosFixture();
-  obitos.dias.forEach((dia, index) => { dia.acumulado = [990, 1000, 1000, 1010][index]; });
+  obitos.dias.forEach((dia, index) => { dia.acumulado = [10, 1000, 1000, 1010][index]; });
   mockData(context, obitos);
   const { $, listeners, scrolls } = installPage(context);
   const absoluteTop = 1000;
@@ -1124,13 +1126,14 @@ test('shared anchors open at the correct dot row after separators and support ha
   window.location.hash = '#declaracao-teste-2';
   const { boot } = await freshRender();
   await boot();
-  assert.deepEqual(scrolls, [{ top: 3588, behavior: 'instant' }]);
-  assert.equal($('[data-counter-lives]').textContent, '1.010');
+  // teste-2 ends on row 100, after the 1.000 separator: its marker starts at 2703, the card at 2279.
+  assert.deepEqual(scrolls, [{ top: 3189, behavior: 'instant' }]);
+  assert.equal($('[data-counter-lives]').textContent, '1.000');
   assert.deepEqual($('[data-marks]').children.map((card) => card.hidden), [false, false]);
   window.location.hash = '#declaracao-teste-1';
   listeners.hashchange();
-  assert.equal(scrolls.at(-1).top, 910);
-  assert.equal($('[data-counter-lives]').textContent, '140');
+  assert.equal(scrolls.at(-1).top, 511);
+  assert.equal($('[data-counter-lives]').textContent, '0');
   assert.deepEqual($('[data-marks]').children.map((card) => card.hidden), [false, false]);
   for (const hash of ['#unknown', '#%bad%escape']) {
     window.location.hash = hash;
@@ -1151,7 +1154,7 @@ test('a static milestone route opens at its marker even when the fragment is omi
   document.querySelector = (selector) => selector === '[data-initial-statement]' ? marker : query(selector);
   const { boot } = await freshRender();
   await boot();
-  assert.deepEqual(scrolls, [{ top: 3588, behavior: 'instant' }]);
+  assert.deepEqual(scrolls, [{ top: 3189, behavior: 'instant' }]);
 });
 
 test('viewport adjustments and resize events do not stop automatic playback', async (context) => {
@@ -1259,27 +1262,64 @@ test('separator labels and counter dates preserve the empty three-row space', as
   }
 });
 
-test('a lives marker sits one row below its card and takes a nearby thousand separator slot', async context => {
-  // Fake cards are 400 px tall. At row 50 no separator is nearby, so the marker starts in the
-  // first row gap at least 24 px below the card. At row 80 the 1.000 slot (y 2600) lies just
-  // past that gap. At row 86 the slot starts under the card, so the marker grows to a row gap.
-  // At row 87 the slot ends 16 px below the card, so the marker starts right after it.
-  // The marker counts the dots above it, so a marker in the 1.000 slot reads 1.000.
-  for (const [first,cardTop,top,height,skipped,count] of [
-    [500,'1300px','1741px','78px',false,'670'],
-    [800,'2080px','2600px','78px',true,'1.000'],
-    [860,'2236px','2660px','95px',true,'1.000'],
-    [870,'2262px','2677px','78px',true,'1.000'],
+test('each card ends where the column reaches its day\'s official total, shown by its marker', async context => {
+  // Day totals 1, 3, 3 and 7: both days end on row 0, so both markers start in the gap after
+  // it. The 400 px cards end one gap above, and the column leaves room above itself for them.
+  mockData(context);
+  const {$}=installPage(context);
+  await (await freshRender()).boot();
+  assert.deepEqual($('[data-marks]').children.map(card=>card.style.top),['-399px','-399px']);
+  const markers=$('[data-news-markers]').children;
+  // Sharing a position, only the first card and its marker show until Continuar.
+  assert.equal(markers[0].style.top,'25px');
+  assert.deepEqual(markers.map(marker=>marker.classes.has('memorial__separator--oculto')),[false,true]);
+  assert.deepEqual(markers.map(marker=>marker.text),['1vida até 17/03/2020','7vidas até 20/03/2020']);
+  assert.equal($('[data-track]').style.marginTop,'423px');
+});
+
+test('a taller card further down never makes the journey scroll back', async context => {
+  // 17/03 ends on row 0 and 20/03 on row 2. The second card is 600 px tall, so it would start
+  // above the first; the first starts with it instead, and both stops share one position.
+  const obitos=obitosFixture();
+  obitos.dias.at(-1).acumulado=30;
+  const entries=sourcedFixture();
+  entries.declaracoes=[{...entries.declaracoes[0],id:'first',data:'2020-03-17'},{...entries.declaracoes[0],id:'second',data:'2020-03-20'}];
+  mockData(context,obitos,entries);
+  const {$,listeners,scrolls}=installPage(context);
+  $('[data-track]').top=1000;
+  await (await freshRender()).boot();
+  const [first,second]=$('[data-marks]').children;
+  second.offsetHeight=600;
+  window.innerWidth=390;
+  listeners.resize();
+  assert.deepEqual([first.style.top,second.style.top],['-547px','-547px']);
+  assert.deepEqual($('[data-news-markers]').children[0].style.top,'25px');
+  for (const id of ['first','second']) {
+    window.location.hash=`#declaracao-${id}`;
+    listeners.hashchange();
+  }
+  assert.deepEqual(scrolls.slice(-2).map(({top})=>top),[363,363]);
+});
+
+test('a lives marker shows the day total where the column reaches it, taking a nearby separator slot', async context => {
+  // The marker starts in the gap after the row of the day's last life, and the 400 px card
+  // ends 24 px above it. At row 50 nothing is near. At rows 98 and 99 the 1.000 slot (y 2600)
+  // lies just below, so the marker takes it. At row 100 the slot sits behind the card instead.
+  for (const [dayTotal,cardTop,top,skipped] of [
+    [510,'901px','1325px',false],
+    [990,'2176px','2600px',true],
+    [1000,'2176px','2600px',true],
+    [1003,'2279px','2703px',true],
   ]) {
     const obitos=obitosFixture();
-    obitos.dias.forEach((dia,index)=>{dia.acumulado=[first,1000,1000,2010][index];});
+    obitos.dias.forEach((dia,index)=>{dia.acumulado=[10,dayTotal,dayTotal,2010][index];});
     mockData(context,obitos,sourcedFixture());
     const {$}=installPage(context);
     await (await freshRender()).boot();
     const [marker]=$('[data-news-markers]').children;
-    assert.equal(marker.text,`${count}vidas`);
+    assert.equal(marker.text,`${dayTotal.toLocaleString('pt-BR')}vidas até 18/03/2020`);
     assert.equal($('[data-marks]').children[0].style.top,cardTop);
-    assert.deepEqual([marker.style.top,marker.style.height],[top,height]);
+    assert.deepEqual([marker.style.top,marker.style.height],[top,'78px']);
     assert.equal(marker.classes.has('memorial__separator--oculto'),false);
     const separators=$('[data-separators]').children;
     assert.deepEqual(separators.map(label=>label.attributes['data-lives']),['1000','2000']);
@@ -1289,7 +1329,7 @@ test('a lives marker sits one row below its card and takes a nearby thousand sep
 
 test('continuous mode hides the lives markers and restores every thousand separator', async context => {
   const obitos=obitosFixture();
-  obitos.dias.forEach((dia,index)=>{dia.acumulado=[860,1000,1000,2010][index];});
+  obitos.dias.forEach((dia,index)=>{dia.acumulado=[10,990,990,2010][index];});
   mockData(context,obitos,sourcedFixture());
   const {$}=installPage(context);
   await (await freshRender()).boot();
@@ -1353,7 +1393,10 @@ test('weekly dates hidden behind a news card or its lives marker return in conti
     { data: '2020-04-13', acumulado: 250 },
     { data: '2020-04-20', acumulado: 400 },
   );
-  mockData(context, obitos, sourcedFixture());
+  // The card of 06/04 ends on row 14 and starts at -35; with its marker it spans up to 467.
+  const entries = sourcedFixture();
+  entries.declaracoes[0].data = '2020-04-06';
+  mockData(context, obitos, entries);
   const { $, listeners } = installPage(context);
   await (await freshRender()).boot();
   const labels = $('[data-weeks]').children;
@@ -1411,7 +1454,7 @@ test('sourced statements link to their references without the synthetic label', 
   assert.equal(header.children[1].tagName, 'h3');
   assert.equal(header.children[1].textContent, 'Resumo editorial de teste');
   assert.equal(card.children.find((node) => node.tagName === 'blockquote').textContent, 'Texto de teste com fonte.');
-  assert.equal(card.style.top, '0px');
+  assert.equal(card.style.top, '-399px');
   const links = [...card.descendants()].filter((node) => node.tagName === 'a');
   assert.deepEqual(links.map((link) => link.href), ['/referencias#declaracao-real-1']);
 });
@@ -1528,7 +1571,7 @@ test('the journey ends on the closing message, which hides the controls and shar
   await (await freshRender()).boot();
   $('#btn-start').listeners.click();
   for(let index=0;index<16;index++) frame();
-  assert.equal(window.scrollY,910);
+  assert.equal(window.scrollY,511);
   assert.equal($('[data-playback]').hidden,false);
   $('#btn-play').listeners.click();
   for(let index=0;index<16;index++) frame();
@@ -1585,14 +1628,14 @@ test('same-row markers keep their dot row and Continuar steps through them in pl
   await (await freshRender()).boot();
   const cards=$('[data-marks]').children;
   const shown=()=>cards.map(card=>!card.classes.has('declaracao--oculta'));
-  assert.deepEqual(cards.map(card=>card.style.top),['0px','0px','0px']);
+  assert.deepEqual(cards.map(card=>card.style.top),['-399px','-399px','-399px']);
   assert.deepEqual(shown(),[true,false,false]);
   window.location.hash='#declaracao-second';
   listeners.hashchange();
-  assert.equal(window.scrollY,910);
+  assert.equal(window.scrollY,511);
   assert.deepEqual(shown(),[false,true,false]);
   $('#btn-play').listeners.click();
-  assert.equal(window.scrollY,910);
+  assert.equal(window.scrollY,511);
   assert.equal($('#btn-play').getAttribute('aria-pressed'),'false');
   assert.deepEqual(shown(),[false,false,true]);
   $('#btn-share').listeners.click();
@@ -1625,17 +1668,21 @@ test('continuous mode floats only the latest header and supports backwards scrol
   obitos.dias.forEach((dia,index)=>{dia.acumulado=[10,20,20,30][index];});
   mockData(context,obitos,entries);
   const {$,listeners}=installPage(context);
-  $('[data-track]').top=90;
+  $('[data-track]').top=1000;
   await (await freshRender()).boot();
   $('#btn-mode').listeners.click();
   const floatingDate=()=>[...$('[data-floating]').descendants()].find(node=>node.tagName==='time')?.dateTime;
+  // Brings a card to the reading line, 90 px from the top.
+  const readAt=card=>{
+    $('[data-track]').top=90-parseInt(card.style.top);
+    listeners.scroll();
+  };
+  const [first,second]=$('[data-marks]').children;
+  readAt(first);
   assert.equal(floatingDate(),'2020-03-17');
-  const second=parseInt($('[data-marks]').children[1].style.top);
-  $('[data-track]').top=90-second;
-  listeners.scroll();
+  readAt(second);
   assert.equal(floatingDate(),'2020-03-20');
-  $('[data-track]').top=90;
-  listeners.scroll();
+  readAt(first);
   assert.equal(floatingDate(),'2020-03-17');
   $('[data-track]').top=1000;
   listeners.scroll();

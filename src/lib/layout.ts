@@ -88,6 +88,11 @@ export function firstIndexOfDay(dias: Dia[], k: number): number {
   return k > 0 ? dias[k - 1].acumulado : 0;
 }
 
+// The day's last dot, where the column reaches that day's official total.
+export function lastIndexOfDay(dias: Dia[], k: number): number {
+  return Math.max(0, dias[k].acumulado - 1);
+}
+
 // First day whose date is on or after `data`.
 export function dayIndexOf(dias: Dia[], data: string): number {
   let low = 0;
