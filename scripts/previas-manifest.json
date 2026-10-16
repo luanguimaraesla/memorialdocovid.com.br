@@ -1,12 +1,12 @@
 {
   "declaracoesSha256": "6511afb32cd6b3a8dcdcc99958eb479cbd35fbfecc2566d9719d4bbe3feda539",
   "paletteSha256": "c5a60b689f868bc235712b8d23f573221a3f373bc347ac7fc4ab1ef7b9873cfd",
-  "subtitleSha256": "d70b86c5b6014d522305519d6cc1fe26ad20bfa2ed1886c25be34f91b49999a1",
+  "subtitleSha256": "56bb68088a819cbc3a385196ab170b64b47a3693fc88183281c5f0cfe9314e6f",
   "images": [
     {
       "id": "memorial",
       "file": "memorial.png",
-      "sha256": "bfe1a84bfd667cb10d02ae4027ec6dc1590e0952b76cb26e77b20d7399e79fdb",
+      "sha256": "f0796aab10ff945035118f5037b31477bf3ad62f7a59af787bfd0ee22e78d28d",
       "fontSize": 34
     },
     {

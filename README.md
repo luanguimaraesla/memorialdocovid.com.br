@@ -5,7 +5,7 @@ morreram de Covid-19 no Brasil. Cada vida é um ponto. Os pontos descem a págin
 dez, na ordem da série oficial, e um contador mostra quantas vidas já ficaram para trás e
 quantos dias correspondem à notificação alcançada. O site está em pt-BR.
 
-> Não esqueceremos o papel da família bolsonaro e a negligência negacionista que ampliou
+> Não esqueceremos o papel da família Bolsonaro e a negligência negacionista que ampliou
 > inúmeras vezes a magnitude dessa catástrofe no Brasil
 
 ## Dados

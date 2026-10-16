@@ -47,7 +47,7 @@ let renderInstances = 0;
 const freshRender = () => import(moduleUrl(`${renderSource}\n// instance ${renderInstances++}`));
 
 const SUBTITLE =
-  'Não esqueceremos o papel da família bolsonaro e a negligência negacionista que ampliou inúmeras vezes a magnitude dessa catástrofe no Brasil';
+  'Não esqueceremos o papel da família Bolsonaro e a negligência negacionista que ampliou inúmeras vezes a magnitude dessa catástrofe no Brasil';
 
 // Test-only fixtures. They are not official counts and never ship.
 const obitosFixture = () => ({
