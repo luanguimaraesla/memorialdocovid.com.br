@@ -997,7 +997,7 @@ test('the share button beside Continuar shares the memorial or the current miles
   const share = async () => { $('#btn-share').listeners.click(); await new Promise(setImmediate); return shared.at(-1); };
   assert.deepEqual(await share(), {
     title: 'Memorial do Covid',
-    text: 'Nunca esqueceremos nossas perdas, nem os responsáveis! Você se lembra lembra? Memorial do Covid',
+    text: 'Nunca esqueceremos nossas perdas, nem os responsáveis! Você se lembra? Memorial do Covid',
     url: 'https://memorial.test/',
   });
 
@@ -1017,7 +1017,7 @@ test('the share button beside Continuar shares the memorial or the current miles
   assert.equal($('#btn-share').attributes['aria-label'], 'Compartilhar: Resumo editorial de teste');
   assert.deepEqual(await share(), {
     title: 'Resumo editorial de teste',
-    text: 'Nunca esqueceremos nossas perdas, nem os responsáveis! Você se lembra lembra? Resumo editorial de teste',
+    text: 'Nunca esqueceremos nossas perdas, nem os responsáveis! Você se lembra? Resumo editorial de teste',
     url: 'https://memorial.test/marcos/real-1/#declaracao-real-1',
   });
 });
@@ -1032,7 +1032,7 @@ test('clipboard fallback reports success and manual fallback shows a selectable 
   await boot();
   $('#btn-share').listeners.click();
   await new Promise(setImmediate);
-  assert.match(copied, /Você se lembra lembra\? Memorial do Covid\nhttps:\/\/memorial.test\/marcos\/teste-1\/#declaracao-teste-1$/);
+  assert.match(copied, /Você se lembra\? Memorial do Covid\nhttps:\/\/memorial.test\/marcos\/teste-1\/#declaracao-teste-1$/);
   assert.equal($('[data-share-status]').hidden, false);
   assert.equal($('[data-share-status]').textContent, 'Mensagem e link copiados.');
   browser.clipboard.writeText = async () => { throw new Error('denied'); };
@@ -1553,7 +1553,7 @@ test('each card has its own small share button, also on the floating header', as
   await new Promise(setImmediate);
   assert.deepEqual(shared[0],{
     title:'Segundo',
-    text:'Nunca esqueceremos nossas perdas, nem os responsáveis! Você se lembra lembra? Segundo',
+    text:'Nunca esqueceremos nossas perdas, nem os responsáveis! Você se lembra? Segundo',
     url:'https://memorial.test/marcos/second/#declaracao-second',
   });
   page.$('#btn-mode').listeners.click();
@@ -1586,7 +1586,7 @@ test('the journey ends on the closing message, which hides the controls and shar
   await new Promise(setImmediate);
   assert.deepEqual(shared.at(-1),{
     title:'Memorial do Covid',
-    text:'Nunca esqueceremos nossas perdas, nem os responsáveis! Você se lembra lembra? Memorial do Covid',
+    text:'Nunca esqueceremos nossas perdas, nem os responsáveis! Você se lembra? Memorial do Covid',
     url:'https://memorial.test/',
   });
 });

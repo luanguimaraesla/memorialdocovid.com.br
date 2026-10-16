@@ -5,7 +5,7 @@ export interface SharedLink {
 }
 
 export function shareDescription(title: string): string {
-  return `Nunca esqueceremos nossas perdas, nem os responsáveis! Você se lembra lembra? ${title}`;
+  return `Nunca esqueceremos nossas perdas, nem os responsáveis! Você se lembra? ${title}`;
 }
 
 export function statementAnchor(id: string): string {

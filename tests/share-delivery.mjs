@@ -49,7 +49,7 @@ test('all preview PNGs match their sources and have the required 1200×630 size'
 for (const statement of declaracoes) {
   test(`static preview for ${statement.id} has its own message, image and anchored entry point`, async () => {
     const html = (await read(`dist/marcos/${statement.id}/index.html`)).toString();
-    const expectedDescription = `Nunca esqueceremos nossas perdas, nem os responsáveis! Você se lembra lembra? ${statement.subtitulo}`;
+    const expectedDescription = `Nunca esqueceremos nossas perdas, nem os responsáveis! Você se lembra? ${statement.subtitulo}`;
     assert.equal(meta(html, 'og:title'), statement.subtitulo);
     assert.equal(meta(html, 'og:description'), expectedDescription);
     assert.equal(meta(html, 'description'), expectedDescription);

@@ -178,7 +178,7 @@ Os links dos marcos usam `/marcos/<id>/#declaracao-<id>` e abrem a coluna na lin
 declaração, sem iniciar a rolagem. Cada rota é gerada como HTML estático, com metadados Open
 Graph próprios. Só o fragmento `#` não permite uma prévia diferente para o WhatsApp.
 A descrição preserva a frase fornecida:
-“Nunca esqueceremos nossas perdas, nem os responsáveis! Você se lembra lembra? <título do card>”.
+“Nunca esqueceremos nossas perdas, nem os responsáveis! Você se lembra? <título do card>”.
 
 As imagens em `public/previas/` mostram a data, o título editorial, a pessoa ou instituição
 e o texto completo. Notícias são identificadas como marcos históricos. Cada imagem é em PNG de 1200×630, sem fotografias externas. As prévias são arquivos estáticos:

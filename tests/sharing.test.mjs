@@ -26,7 +26,7 @@ function browser(context, value) {
 }
 
 test('share text preserves the requested phrase and URLs encode marker IDs safely', () => {
-  assert.equal(link.text, 'Nunca esqueceremos nossas perdas, nem os responsáveis! Você se lembra lembra? Título do marco');
+  assert.equal(link.text, 'Nunca esqueceremos nossas perdas, nem os responsáveis! Você se lembra? Título do marco');
   assert.equal(link.url, 'https://memorial.test/marcos/um-marco/#declaracao-um-marco');
   const id = 'um / <marco> á';
   const url = new URL(statementUrl(id, new URL('https://memorial.test/sub/')));
