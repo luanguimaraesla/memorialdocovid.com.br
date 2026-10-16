@@ -56,6 +56,9 @@ O site é estático, feito com Astro, sem backend. No navegador, `src/lib/state.
 valida `public/data/obitos.json` e `public/data/declaracoes.json`. Se algo faltar ou não
 passar na validação, a página mostra um erro e não desenha nada.
 
+Todas as páginas carregam a tag do Google Analytics `G-4SW9W1M6L0`, em `src/layouts/Base.astro`.
+É a única ferramenta de medição do site; os testes recusam outras tags.
+
 `src/lib/layout.ts` concentra a geometria: cada ponto tem raio fixo de 12 px, com 2 px de
 espaço, em linhas de 10 (`src/config.ts`). A coluna centralizada tem 258 px de largura,
 deixando 31 px de margem em cada lado numa tela de 320 px, sem mudar o tamanho dos pontos

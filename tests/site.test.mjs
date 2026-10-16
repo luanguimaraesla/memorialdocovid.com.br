@@ -591,7 +591,7 @@ test('the counter shows only days, with the singular on the first day', async (c
   assert.equal($('[data-counter-days]').textContent, '4 dias');
 });
 
-test('the page is accessible in pt-BR and carries no analytics', async () => {
+test('the page is accessible in pt-BR and loads only the approved GA tag', async () => {
   const base = await read('src/layouts/Base.astro');
   const memorial = await read('src/components/Memorial.astro');
   const counter = await read('src/components/Counter.astro');
@@ -615,8 +615,11 @@ test('the page is accessible in pt-BR and carries no analytics', async () => {
   assert.match(renderSource, /ANNOUNCE_INTERVAL_MS/);
   assert.match(renderSource, /setAttribute\('tabindex', '-1'\)/);
   assert.match(css, /@media \(prefers-reduced-motion: reduce\)/);
-  for (const source of [base, memorial, counter, hero, renderSource]) {
-    assert.doesNotMatch(source, /G-6MF2B6H28V|gtag|googletagmanager/);
+  assert.equal(base.match(/googletagmanager\.com\/gtag\/js\?id=G-4SW9W1M6L0/g)?.length, 1);
+  assert.match(base, /gtag\('config', 'G-4SW9W1M6L0'\)/);
+  assert.doesNotMatch(base, /G-6MF2B6H28V/);
+  for (const source of [memorial, counter, hero, renderSource]) {
+    assert.doesNotMatch(source, /gtag|googletagmanager/);
   }
 });
 
