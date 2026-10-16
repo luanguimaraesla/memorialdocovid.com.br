@@ -92,7 +92,6 @@ test('the shipped series has 716 three-row separators without adding or losing a
 
 // Dates and excerpts were checked in the linked reporting, not inferred from the JSON.
 const VERIFIED_STATEMENTS = [
-  ['2020-03-18', 'Silas Malafaia', 'Justiça pegar uma liminar'],
   ['2020-03-24', 'Jair Bolsonaro', 'gripezinha'],
   ['2020-04-28', 'Jair Bolsonaro', 'E daí?'],
   ['2020-05-05', 'Valdemiro Santiago', 'Quanto mais se planta, mais se colhe'],
@@ -159,17 +158,17 @@ const VERIFIED_NEWS = [
   ['oms-fim-emergencia-2023-05-05', '2023-05-05'],
 ];
 
-test('the fifteen original quotation records remain intact', () => {
+test('the fourteen original quotation records remain intact', () => {
   const originals = quotations.map(({ acervo, ...record }) => record);
   const digest = createHash('sha256').update(JSON.stringify(originals)).digest('hex');
-  assert.equal(digest, 'f41882c6aadc546e19c5d8e2fdaae12c93d576b9989596b8d380d5be5ca89e1c');
+  assert.equal(digest, '471041f36534ed889293c091f6b3dc5b4c24fc278b779c03051db0206f83d585');
 });
 
 test('the historical panorama retains independently checked event dates and editorial context', () => {
   const news = declaracoes.declaracoes.filter(({ tipo, id }) => tipo === 'noticia' && !id.startsWith('acervo-'));
   assert.deepEqual(news.map(({ id, data }) => [id, data]), VERIFIED_NEWS);
-  assert.equal(declaracoes.declaracoes.length, 107);
-  assert.equal(new Set(declaracoes.declaracoes.map(({ id }) => id)).size, 107);
+  assert.equal(declaracoes.declaracoes.length, 106);
+  assert.equal(new Set(declaracoes.declaracoes.map(({ id }) => id)).size, 106);
   for (const entry of news) {
     assert.equal(entry.acessado_em, '2026-10-10');
     for (const key of ['subtitulo', 'autor', 'texto', 'contexto']) assert.ok(entry[key].trim(), entry.id);
@@ -236,7 +235,6 @@ test('the expanded contexts retain historical roles and documented qualification
   assert.match(contextOf('eduardo-mascaras-2021-03-10'), /deputado federal pelo PSL-SP/);
   assert.match(contextOf('flavio-vacinacao-2021-06-18'), /senador pelo Patriota-RJ/);
   assert.match(contextOf('flavio-vacinacao-2021-06-18'), /recebeu a primeira dose e incentivou a vacinação/);
-  assert.match(contextOf('malafaia-igrejas-2020-03-18'), /20 de março.*suspensão dos cultos/);
   assert.match(contextOf('valdemiro-sementes-2020-05-05'), /Ministério da Saúde desmentiu/);
   assert.match(contextOf('pazuello-obedece-2020-10-22'), /não um contrato definitivo/);
   assert.match(contextOf('pazuello-obedece-2020-10-22'), /negou ter recebido ordem/);

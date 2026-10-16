@@ -17,8 +17,8 @@ morreu. Quando o painel revisa o acumulado para baixo, cada acumulado anterior r
 valor entre ele e os seguintes. Isso preserva o total oficial e desloca algumas posições
 diárias. A página `/referencias` reúne essa metodologia, a cobertura e as fontes.
 
-Os marcos trazem **107 episódios documentados**, de 17/03/2020 a 05/05/2023: **92 notícias
-históricas e 15 episódios com citações**. O foco é a resposta brasileira à pandemia:
+Os marcos trazem **106 episódios documentados**, de 17/03/2020 a 05/05/2023: **92 notícias
+históricas e 14 episódios com citações**. O foco é a resposta brasileira à pandemia:
 prevenção, vacinação, compras de doses, crise do oxigênio, colapso hospitalar e CPI.
 As campanhas país a país e boa parte dos marcos internacionais saíram da seleção.
 O encerramento da emergência da OMS permanece como contexto. Notícias são resumos editoriais,
@@ -36,8 +36,8 @@ de checagem, e não entra no repositório nem em `public/`. O contexto exibido n
 escrito para o público em `PUBLIC_CONTEXT`, no importador.
 
 As falas preservadas são de Jair Bolsonaro,
-Eduardo Pazuello, Marcelo Queiroga, Jorginho Mello, Magno Malta, Flávio e Eduardo Bolsonaro,
-Silas Malafaia e Valdemiro Santiago. Os cargos e partidos são os da época da fala.
+Eduardo Pazuello, Marcelo Queiroga, Jorginho Mello, Magno Malta, Flávio e Eduardo Bolsonaro
+e Valdemiro Santiago. Os cargos e partidos são os da época da fala.
 Cada marco destaca a data e um subtítulo editorial antes da citação literal. Esse cabeçalho
 continua visível ao rolar uma citação longa. Trechos do mesmo pronunciamento ficam juntos.
 As fontes, o contexto, as checagens e os
@@ -117,9 +117,9 @@ No modo contínuo, a velocidade em cada marco é a média harmônica dos trechos
 mantém a rolagem sempre para a frente e sem ultrapassar marcos. `src/lib/journey.ts` faz
 esses cálculos.
 
-Nas 107 publicações, a distância vai de 0 px (8 trechos na mesma linha de pontos) a
-121.420 px, com mediana de 7.735 px. A velocidade média vai de 0 a 75.888 px/s, com
-mediana de 4.835 px/s. O trecho mais longo, de 23/03/2021 a 08/04/2021, atravessa cerca
+Nas 106 publicações, a distância vai de 0 px (7 trechos na mesma linha de pontos) a
+121.420 px, com mediana de 7.748 px. A velocidade média vai de 0 a 75.888 px/s, com
+mediana de 4.843 px/s. O trecho mais longo, de 23/03/2021 a 08/04/2021, atravessa cerca
 de 47 mil vidas e chega a 89.279 px/s. Como os trechos seguem a série, 51 deles são mais
 curtos que o anterior: a velocidade sobe nos períodos com mais mortes, não de forma constante.
 Para reproduzir a tabela completa, com distância, velocidade e aceleração por trecho:

@@ -1,5 +1,5 @@
 {
-  "declaracoesSha256": "6511afb32cd6b3a8dcdcc99958eb479cbd35fbfecc2566d9719d4bbe3feda539",
+  "declaracoesSha256": "9f0af3db496032121e579a02bea100ce8ee8828bad371426fd03f049130f1ec6",
   "paletteSha256": "c5a60b689f868bc235712b8d23f573221a3f373bc347ac7fc4ab1ef7b9873cfd",
   "subtitleSha256": "56bb68088a819cbc3a385196ab170b64b47a3693fc88183281c5f0cfe9314e6f",
   "images": [
@@ -13,12 +13,6 @@
       "id": "primeiro-obito-divulgado-2020-03-17",
       "file": "primeiro-obito-divulgado-2020-03-17.png",
       "sha256": "b41348315949fc2eb4f3ea1ef6547982120821ff663ba4631ed6092c715d90fa",
-      "fontSize": 34
-    },
-    {
-      "id": "malafaia-igrejas-2020-03-18",
-      "file": "malafaia-igrejas-2020-03-18.png",
-      "sha256": "dbe762c8df7a71a742034d867f086ef39bfbef3a17d697bd1c5994615b9f7caf",
       "fontSize": 34
     },
     {

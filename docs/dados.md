@@ -97,7 +97,7 @@ O nome do arquivo é preservado para manter os links e o contrato de carregament
   fica em destaque, seguida do subtítulo e do autor; a citação aparece abaixo. O contexto
   completo fica em `/referencias` junto das fontes.
 
-O arquivo reúne 107 marcos de 17/03/2020 a 05/05/2023: 92 notícias históricas e os 15 episódios
+O arquivo reúne 106 marcos de 17/03/2020 a 05/05/2023: 92 notícias históricas e os 14 episódios
 com citações já documentados. Notícias usam parágrafos, nunca elementos de citação; fontes e
 qualificações ficam em `/referencias`. As fontes anteriores de notícias mantêm o acesso de
 10/10/2026; as notícias do acervo, de 09/10/2026.
@@ -105,7 +105,7 @@ A seleção se concentra no Brasil: vacinação, compras, crises assistenciais, 
 CPI. Foram retirados 18 marcos de pesquisas, campanhas e variantes internacionais. Não é
 exaustiva. Preserva os sete
 marcos de Jair Bolsonaro e acrescenta falas de Eduardo Pazuello, Marcelo Queiroga, Jorginho
-Mello, Magno Malta, Flávio e Eduardo Bolsonaro, Silas Malafaia e Valdemiro Santiago.
+Mello, Magno Malta, Flávio e Eduardo Bolsonaro e Valdemiro Santiago.
 Os episódios com citações identificam as fontes do trecho, do contexto e de eventuais
 contrapontos, acessadas em 09/10/2026. Citações de um mesmo pronunciamento ficam no mesmo
 marco. Marcos na mesma linha de pontos aparecem um de cada vez; os links selecionam a entrada
@@ -115,8 +115,8 @@ O contexto registra os cargos e partidos da época: Jorginho Mello era senador p
 Magno Malta era ex-senador pelo PL-ES; Eduardo Bolsonaro era deputado pelo PSL-SP; e Flávio
 Bolsonaro era senador pelo Patriota-RJ na sessão citada. A proximidade dos líderes religiosos
 com Bolsonaro também tem fontes. O registro não generaliza sua atuação às pessoas evangélicas.
-Mudanças posteriores relevantes ficam explícitas, como a suspensão dos cultos de Malafaia,
-a vacinação de Flávio e as explicações de Pazuello e da assessoria de Mello.
+Mudanças posteriores relevantes ficam explícitas, como a vacinação de Flávio e as explicações
+de Pazuello e da assessoria de Mello.
 
 `data` é a data da declaração ou do acontecimento, não necessariamente a da reportagem.
 Para notícias, pode indicar a classificação de uma variante, a divulgação de um estudo ou
