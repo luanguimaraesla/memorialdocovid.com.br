@@ -1,8 +1,14 @@
 ---
-import { columnWidth, separatorHeight } from '../lib/layout';
+import { DOT_RADIUS_PX } from '../config';
+import { columnWidth, rowPitch, separatorHeight } from '../lib/layout';
+
+const geometry = [
+  `--coluna: ${columnWidth()}px`, `--passo: ${rowPitch()}px`, `--raio: ${DOT_RADIUS_PX}px`,
+  `--separador-altura: ${separatorHeight()}px`,
+].join('; ');
 ---
 
-<section class="section memorial" aria-label="Uma vida, um ponto" style={`--coluna: ${columnWidth()}px; --separador-altura: ${separatorHeight()}px`}>
+<section class="section memorial" aria-label="Uma vida, um ponto" style={geometry}>
   <div class="wrap">
     <p class="aviso-sintetico" data-aviso-sintetico hidden>
       <strong>Declarações sintéticas de exemplo.</strong>
@@ -10,7 +16,7 @@ import { columnWidth, separatorHeight } from '../lib/layout';
   </div>
 
   <div class="memorial__track" data-track>
-    <canvas class="memorial__canvas" data-canvas aria-hidden="true"></canvas>
+    <div class="memorial__dots" data-dots aria-hidden="true"></div>
     <div class="memorial__separators" data-separators aria-hidden="true"></div>
     <div class="memorial__news-markers" data-news-markers aria-hidden="true"></div>
     <div class="memorial__weeks" data-weeks></div>

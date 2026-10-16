@@ -15,11 +15,6 @@ export interface DotPosition {
   y: number;
 }
 
-export interface IndexRange {
-  start: number;
-  end: number;
-}
-
 export interface WeekMarker {
   data: string;
   index: number;
@@ -83,18 +78,6 @@ export function livesAtDepth(depth: number, total: number): number {
   if (depth < 0) return 0;
   const reachedSlots = Math.floor(depth / rowPitch()) + 1;
   return clamp(dotRowsBeforeSlot(reachedSlots) * DOTS_PER_ROW, 0, total);
-}
-
-// Dots whose rows intersect [top, top + height). The end index is exclusive.
-export function visibleIndexRange(top: number, height: number, total: number): IndexRange {
-  const bottom = top + height;
-  if (height <= 0 || bottom <= 0) return { start: 0, end: 0 };
-  const firstSlot = Math.max(0, Math.floor(top / rowPitch()));
-  const endSlot = Math.ceil(bottom / rowPitch());
-  return {
-    start: clamp(dotRowsBeforeSlot(firstSlot) * DOTS_PER_ROW, 0, total),
-    end: clamp(dotRowsBeforeSlot(endSlot) * DOTS_PER_ROW, 0, total),
-  };
 }
 
 export function dayNumber(start: string, date: string): number {

@@ -1,11 +1,11 @@
 import { SECONDS_BETWEEN_MILESTONES } from '../config';
-import { pathDuration, positionAt } from './journey';
-import type { Waypoint } from './journey';
+import { pathDuration } from './journey';
+import type { Path } from './journey';
 
 interface AutoscrollOptions {
   // Plans the motion from the current position. Nothing to plan leaves the page still.
-  plan: (from: number) => Waypoint[] | undefined;
-  // Reports each waypoint reached after the starting one.
+  plan: (from: number) => Path | undefined;
+  // Reports each milestone reached after the starting one.
   onWaypoint: (index: number) => void;
   onStateChange: (playing: boolean) => void;
 }
@@ -24,14 +24,14 @@ export function createAutoscroll(options: AutoscrollOptions): Autoscroll {
   let playing = false;
   let rafId = 0;
   let lastTime = 0;
-  let path: Waypoint[] = [];
+  let path: Path | undefined;
   let elapsed = 0;
   let reached = 0;
   let expectedY = 0;
 
   function plan(): boolean {
     const planned = options.plan(window.scrollY);
-    if (!planned || planned.length < 2) return false;
+    if (!planned || planned.legs < 1) return false;
     path = planned;
     elapsed = 0;
     reached = 0;
@@ -47,7 +47,7 @@ export function createAutoscroll(options: AutoscrollOptions): Autoscroll {
   }
 
   function frame(now: number): void {
-    if (!playing) return;
+    if (!playing || !path) return;
     const seconds = Math.min((now - lastTime) / 1000, MAX_FRAME_SECONDS);
     lastTime = now;
     // Someone else moved the page: follow a new plan from where it is now.
@@ -56,9 +56,9 @@ export function createAutoscroll(options: AutoscrollOptions): Autoscroll {
       return;
     }
     elapsed += seconds;
-    window.scrollTo({ top: positionAt(path, elapsed), behavior: 'instant' });
+    window.scrollTo({ top: path.positionAt(elapsed), behavior: 'instant' });
     expectedY = window.scrollY;
-    const passed = Math.min(path.length - 1, Math.floor(elapsed / SECONDS_BETWEEN_MILESTONES + EPSILON));
+    const passed = Math.min(path.legs, Math.floor(elapsed / SECONDS_BETWEEN_MILESTONES + EPSILON));
     while (reached < passed) options.onWaypoint(++reached);
     if (elapsed + EPSILON >= pathDuration(path)) {
       pause();

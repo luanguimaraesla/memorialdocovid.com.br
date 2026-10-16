@@ -134,26 +134,6 @@ test('scroll depth counts whole rows and clamps at both ends', () => {
   assert.equal(layout.livesAtDepth(0, 7), 7);
 });
 
-test('visible ranges stay bounded by the viewport, not the national total', () => {
-  const total = 716_626;
-  assert.deepEqual(layout.visibleIndexRange(0, 800, total), { start: 0, end: 310 });
-  assert.deepEqual(layout.visibleIndexRange(-100, 200, total), { start: 0, end: 40 });
-  assert.deepEqual(layout.visibleIndexRange(-500, 200, total), { start: 0, end: 0 });
-  assert.deepEqual(layout.visibleIndexRange(layout.columnHeight(25) - 26, 800, 25), { start: 20, end: 25 });
-  assert.deepEqual(layout.visibleIndexRange(1e9, 800, 25), { start: 25, end: 25 });
-  assert.deepEqual(layout.visibleIndexRange(0.5, 26, 25), { start: 0, end: 20 });
-  assert.deepEqual(layout.visibleIndexRange(0, 26, 25), { start: 0, end: 10 });
-  assert.deepEqual(layout.visibleIndexRange(0.25, 25.75, 25), { start: 0, end: 10 });
-  assert.deepEqual(layout.visibleIndexRange(25.5, 0.6, 25), { start: 0, end: 20 });
-  assert.deepEqual(layout.visibleIndexRange(-0.5, 26.4, 25), { start: 0, end: 10 });
-  const bound = (Math.ceil(900.5 / layout.rowPitch()) + 1) * config.DOTS_PER_ROW;
-  for (const top of [0, 3, 4_001, 287_777.4, layout.columnHeight(total) - 900.5]) {
-    const { start, end } = layout.visibleIndexRange(top, 900.5, total);
-    assert.ok(end - start <= bound, `range at ${top} has ${end - start} dots`);
-    assert.ok(start >= 0 && end <= total);
-  }
-});
-
 test('each thousand lives gets a separator occupying three row slots', () => {
   assert.equal(config.LIVES_PER_SEPARATOR, 1000);
   assert.equal(config.SEPARATOR_ROWS, 3);
@@ -179,38 +159,6 @@ test('counts freeze inside separators and advance only when a dot row is reached
   assert.equal(layout.livesAtDepth(2678, 1000), 1000);
   assert.equal(layout.livesAtDepth(2678, 1001), 1001);
   assert.equal(layout.livesAtDepth(1_919_060, 716_626), 716_626);
-});
-
-test('visible ranges exclude separators at exact and fractional boundaries', () => {
-  for (const [top, height, start, end] of [
-    [2574, 26, 990, 1000],
-    [2600, 78, 1000, 1000],
-    [2600.1, 77.8, 1000, 1000],
-    [2599.9, 0.2, 990, 1000],
-    [2677.9, 0.2, 1000, 1010],
-    [2678, 26, 1000, 1010],
-    [2574, 130, 990, 1010],
-    [5278, 78, 2000, 2000],
-    [5356, 26, 2000, 2010],
-  ]) assert.deepEqual(layout.visibleIndexRange(top, height, 2500), { start, end });
-});
-
-test('viewport ranges agree with independently positioned rows across thousands', () => {
-  for (const total of [1, 9, 10, 999, 1000, 1001, 1010, 1999, 2000, 2001, 2056]) {
-    const rows = Array.from({ length: Math.ceil(total / 10) }, (_, row) => ({
-      start: row * 10, end: Math.min((row + 1) * 10, total),
-      y: row * 26 + Math.floor(row / 100) * 78,
-    }));
-    for (const top of [-100, -0.5, 0, 0.25, 25.5, 2573.9, 2574, 2599.5, 2600, 2677.9, 2678, 5278, 5356, 6000]) {
-      for (const height of [0.5, 26, 78, 120, 900.5]) {
-        const visible = rows.filter(({ y }) => y < top + height && y + 26 > top);
-        const start = top + height <= 0 ? 0 : rows.find(({ y }) => y + 26 > top)?.start ?? total;
-        const end = visible.at(-1)?.end ?? start;
-        assert.deepEqual(layout.visibleIndexRange(top, height, total), { start, end },
-          `total ${total}, top ${top}, height ${height}`);
-      }
-    }
-  }
 });
 
 test('weekly anchors and day-end anchors include every preceding separator', () => {
@@ -649,7 +597,8 @@ test('the page is accessible in pt-BR and carries no analytics', async () => {
   const hero = await read('src/components/Hero.astro');
   const css = await read('src/styles/global.css');
   assert.match(base, /<html lang="pt-BR">/);
-  assert.match(memorial, /<canvas[^>]*aria-hidden="true"/);
+  assert.match(memorial, /data-dots aria-hidden="true"/);
+  assert.doesNotMatch(memorial, /<canvas/);
   assert.match(counter, /data-announcer aria-live="polite"/);
   assert.match(hero, /id="load-error" role="alert" hidden/);
   assert.match(counter, /id="btn-share" type="button"[^>]*disabled/);
@@ -702,7 +651,10 @@ test('the centered column and sticky markers retain the palette and mobile safe 
   assert.match(memorial, /data-separators aria-hidden="true"/);
   assert.match(css, /\.memorial__separator\s*\{[^}]*height: var\(--separador-altura\)/);
   assert.match(css, /\.memorial__separator-number\s*\{[^}]*font-size: 2rem/);
-  assert.match(css, /\.memorial__canvas\s*\{[^}]*margin-inline: auto/);
+  assert.match(css, /\.memorial__pontos\s*\{[^}]*left: calc\(50% - var\(--coluna\) \/ 2\)/);
+  assert.match(css, /\.memorial__pontos\s*\{[^}]*#e8e4dc[^}]*#cbc7bf[^}]*background-size: var\(--passo\) calc\(2 \* var\(--passo\)\)/);
+  assert.match(css, /\.memorial__pontos--alternada\s*\{\s*background-position: 0 var\(--passo\), 0 0/);
+  assert.doesNotMatch(css, /memorial__canvas/);
   assert.match(css, /\.declaracao\s*\{[^}]*position: absolute/);
   assert.doesNotMatch(css, /overflow-y: auto/);
   assert.match(css, /\.declaracao\[hidden\]\s*\{\s*display: none/);
@@ -789,17 +741,6 @@ class FakeElement {
   }
 }
 
-function fakeCanvas() {
-  const canvas = new FakeElement('canvas');
-  canvas.calls = [];
-  const record = (name) => (...args) => canvas.calls.push([name, ...args]);
-  const context = {};
-  Object.defineProperty(context, 'fillStyle', { set: record('fillStyle') });
-  for (const name of ['setTransform', 'clearRect', 'beginPath', 'moveTo', 'arc', 'fill']) context[name] = record(name);
-  canvas.getContext = () => context;
-  return canvas;
-}
-
 function installPage(context, references = false) {
   const elements = {};
   const selectors = references ? [
@@ -807,7 +748,7 @@ function installPage(context, references = false) {
     '[data-dyn="total"]', '[data-dyn-link="fonte"]', '[data-fontes-obitos]', '[data-fontes-declaracoes]',
   ] : renderSelectors();
   for (const selector of selectors) {
-    elements[selector] = selector === '[data-canvas]' ? fakeCanvas() : new FakeElement();
+    elements[selector] = new FakeElement();
     elements[selector].textContent = '…';
   }
   elements['#load-error'].hidden = true;
@@ -849,7 +790,6 @@ function installPage(context, references = false) {
     const delta = top - window.scrollY;
     window.scrollY = top;
     if(elements['[data-track]']) elements['[data-track]'].top -= delta;
-    if(elements['[data-canvas]']) elements['[data-canvas]'].top = Math.max(0,elements['[data-track]'].top);
   };
   globalThis.window = {
     location: { hash: '', origin: 'https://memorial.test' },
@@ -905,25 +845,16 @@ function installPlaybackFrames(context, page) {
   };
 }
 
-const arcs = (canvas) => canvas.calls.filter(([name]) => name === 'arc');
+const dotBlocks = ($) => $('[data-dots]').children.map((block) => ({
+  top: block.style.top, height: block.style.height, width: block.style.width, shifted: block.className.includes('alternada'),
+}));
 
-function coloredArcs(canvas) {
-  const dots = [];
-  let color;
-  for (const [name, ...args] of canvas.calls) {
-    if (name === 'fillStyle') color = args[0];
-    if (name === 'arc') dots.push({ color, y: args[1] });
-  }
-  return dots;
-}
-
-test('a successful boot draws visible dots and activates the counter at mid-viewport', async (context) => {
+test('a successful boot lays out the dots and activates the counter at mid-viewport', async (context) => {
   context.mock.timers.enable({ apis: ['setTimeout', 'Date'] });
   mockData(context);
   const { $, listeners, scrolls } = installPage(context);
   // The reference line at 450 px touches the first row of the column.
   $('[data-track]').top = 450;
-  $('[data-canvas]').top = 450;
 
   const { boot } = await freshRender();
   await boot();
@@ -931,8 +862,7 @@ test('a successful boot draws visible dots and activates the counter at mid-view
   assert.equal($('#load-error').hidden, true);
   assert.equal($('#btn-mode').disabled, false);
   assert.equal($('[data-track]').style.height, '26px');
-  assert.equal(arcs($('[data-canvas]')).length, 7);
-  assert.ok(arcs($('[data-canvas]')).every((call) => call[3] === 12));
+  assert.deepEqual(dotBlocks($), [{ top: '0px', height: '26px', width: '180px', shifted: false }]);
   assert.equal($('[data-counter-lives]').textContent, '7');
   assert.equal($('[data-counter-days]').textContent, '4 dias');
   assert.equal($('[data-announcer]').textContent, '7 vidas perdidas. 4 dias desde o primeiro registro.');
@@ -943,7 +873,6 @@ test('a successful boot draws visible dots and activates the counter at mid-view
 
   // Scrolling above the column hides the counter; the announcement waits for the interval.
   $('[data-track]').top = 1000;
-  $('[data-canvas]').top = 1000;
   listeners.scroll();
   assert.equal($('[data-counter-lives]').textContent, '0');
   assert.equal($('[data-counter-days]').textContent, '0 dias');
@@ -1167,7 +1096,6 @@ test('shared anchors open at the correct dot row after separators and support ha
     scrolls.push(options);
     window.scrollY = options.top;
     $('[data-track]').top = absoluteTop - options.top;
-    $('[data-canvas]').top = Math.max(0, $('[data-track]').top);
   };
   window.location.hash = '#declaracao-teste-2';
   const { boot } = await freshRender();
@@ -1221,36 +1149,67 @@ test('viewport adjustments and resize events do not stop automatic playback', as
   listeners.resize();
   frame();
   assert.equal($('#btn-play').attributes['aria-pressed'], 'true');
-  assert.equal($('[data-canvas]').style.height, '520px');
   assert.equal($('[data-reference-line]').style.top, '290px');
 });
 
-test('white and light gray rows keep their colors through partial and backwards scrolling', async (context) => {
-  context.mock.timers.enable({ apis: ['setTimeout', 'Date'] });
+test('the mobile address bar resizing the viewport moves neither the reading line nor the stops', async (context) => {
+  mockData(context, obitosFixture(), sourcedFixture());
+  const page = installPage(context);
+  const { $, listeners, scrolls } = page;
+  $('[data-track]').top = 1000;
+  const viewportListeners = {};
+  window.visualViewport = { height: 760, offsetTop: 0, addEventListener: (type, listener) => { viewportListeners[type] = listener; } };
+  await (await freshRender()).boot();
+  const card = $('[data-marks]').children[0];
+  let measured = 0;
+  Object.defineProperty(card, 'offsetHeight', { get: () => { measured++; return 400; } });
+  window.location.hash = '#declaracao-real-1';
+  listeners.hashchange();
+  const stop = scrolls.at(-1).top;
+  assert.equal($('[data-floating]').style.top, '90px');
+  measured = 0;
+  for (const height of [844, 700, 844]) {
+    window.visualViewport.height = height;
+    window.innerHeight = height;
+    viewportListeners.resize();
+    listeners.resize();
+  }
+  assert.equal(measured, 0, 'a height-only resize must not lay the column out again');
+  assert.equal($('[data-floating]').style.top, '90px');
+  listeners.hashchange();
+  assert.equal(scrolls.at(-1).top, stop);
+  window.innerWidth = 390;
+  listeners.resize();
+  assert.ok(measured > 0, 'a width change lays the column out again');
+});
+
+test('dots are page blocks in the column layer, with alternating rows and blank separators', async (context) => {
+  // 2056 lives: two full thousands, then 5 rows and a partial row of 6 dots. Row 205 is odd,
+  // so the partial row starts with the gray color.
   const obitos = obitosFixture();
-  obitos.dias.at(-1).acumulado = 26;
+  obitos.dias.at(-1).acumulado = 2056;
   mockData(context, obitos, { sintetico: false, declaracoes: [] });
   const { $, listeners } = installPage(context);
-  window.innerHeight = 78;
-  const { boot } = await freshRender();
-  await boot();
-  const canvas = $('[data-canvas]');
-
-  for (const [top, rows] of [
-    [0, [[12, '#e8e4dc', 10], [38, '#cbc7bf', 10], [64, '#e8e4dc', 6]]],
-    [-26, [[12, '#cbc7bf', 10], [38, '#e8e4dc', 6]]],
-    [-26.5, [[11.5, '#cbc7bf', 10], [37.5, '#e8e4dc', 6]]],
-    [0, [[12, '#e8e4dc', 10], [38, '#cbc7bf', 10], [64, '#e8e4dc', 6]]],
-  ]) {
-    canvas.calls = [];
+  await (await freshRender()).boot();
+  const blocks = [
+    { top: '0px', height: '2600px', width: undefined, shifted: false },
+    { top: '2678px', height: '2600px', width: undefined, shifted: false },
+    { top: '5356px', height: '130px', width: undefined, shifted: false },
+    { top: '5486px', height: '26px', width: '154px', shifted: true },
+  ];
+  assert.deepEqual(dotBlocks($), blocks);
+  const separators = $('[data-separators]').children.map((label) => parseFloat(label.style.top));
+  assert.deepEqual(separators, [2600, 5278]);
+  for (const block of dotBlocks($)) {
+    const top = parseFloat(block.top);
+    const bottom = top + parseFloat(block.height);
+    assert.ok(separators.every((slot) => bottom <= slot || top >= slot + layout.separatorHeight()), block.top);
+  }
+  // Scrolling moves the page, not the dots: nothing is redrawn or repositioned.
+  for (const top of [-26, -2600.5, 0]) {
     $('[data-track]').top = top;
     listeners.scroll();
-    const dots = coloredArcs(canvas);
-    assert.equal(dots.length, rows.reduce((total, [, , count]) => total + count, 0));
-    for (const [y, color, count] of rows) {
-      assert.deepEqual(dots.filter((dot) => dot.y === y).map((dot) => dot.color), Array(count).fill(color));
-    }
-    assert.ok(arcs(canvas).every((call) => call[3] === 12));
+    assert.deepEqual(dotBlocks($), blocks);
   }
 });
 
@@ -1318,35 +1277,6 @@ test('continuous mode hides the lives markers and restores every thousand separa
   $('#btn-mode').listeners.click();
   assert.equal($('[data-news-markers]').hidden,false);
   assert.deepEqual(separators.map(label=>label.classes.has('memorial__separator--oculto')),[true,false]);
-});
-
-test('the canvas leaves separators blank and preserves the colors of surrounding rows', async (context) => {
-  context.mock.timers.enable({ apis: ['setTimeout', 'Date'] });
-  const obitos = obitosFixture();
-  obitos.dias.at(-1).acumulado = 1010;
-  mockData(context, obitos, { sintetico: false, declaracoes: [] });
-  const { $, listeners } = installPage(context);
-  window.innerHeight = 78;
-  const { boot } = await freshRender();
-  await boot();
-  const canvas = $('[data-canvas]');
-  for (const [offset, rows] of [
-    [2574, [[12, '#cbc7bf', 10]]],
-    [2600, []],
-    [2600.1, [[89.9, '#e8e4dc', 10]]],
-    [2678, [[12, '#e8e4dc', 10]]],
-    [2600, []],
-    [2574, [[12, '#cbc7bf', 10]]],
-  ]) {
-    canvas.calls = [];
-    $('[data-track]').top = -offset;
-    listeners.scroll();
-    const dots = coloredArcs(canvas);
-    assert.equal(dots.length, rows.reduce((total, [, , count]) => total + count, 0));
-    for (const [y, color, count] of rows) {
-      assert.equal(dots.filter((dot) => Math.abs(dot.y - y) < 0.001 && dot.color === color).length, count);
-    }
-  }
 });
 
 test('mobile cards use the page scroll, share from the controls and collapse supplementary text', async context => {
@@ -1688,7 +1618,7 @@ test('continuous mode floats only the latest header and supports backwards scrol
   assert.equal($('[data-floating]').hidden,true);
 });
 
-test('mobile viewport resizing keeps the canvas and counter on the visible midpoint', async (context) => {
+test('mobile viewport resizing keeps the counter on the visible midpoint', async (context) => {
   const obitos = obitosFixture();
   obitos.dias.forEach((dia, index) => { dia.acumulado = [10, 20, 20, 300][index]; });
   mockData(context, obitos, { sintetico: false, declaracoes: [] });
@@ -1703,11 +1633,6 @@ test('mobile viewport resizing keeps the canvas and counter on the visible midpo
   const { boot } = await freshRender();
   await boot();
 
-  assert.equal($('[data-canvas]').style.height, '600px');
-  assert.equal($('[data-canvas]').height, 1200);
-  assert.equal($('[data-canvas]').style.width, '258px');
-  assert.ok(arcs($('[data-canvas]')).every((call) => call[3] === 12));
-  assert.equal($('[data-canvas]').style.top, '20px');
   assert.equal($('[data-reference-line]').style.top, '320px');
   assert.equal($('[data-counter-lives]').textContent, '20');
   assert.equal($('[data-counter]').attributes['data-idle'], undefined);
@@ -1715,7 +1640,6 @@ test('mobile viewport resizing keeps the canvas and counter on the visible midpo
   window.visualViewport.height = 500;
   window.visualViewport.offsetTop = 30;
   viewportListeners.resize();
-  assert.equal($('[data-canvas]').style.height, '500px');
   assert.equal($('[data-reference-line]').style.top, '280px');
   assert.equal($('[data-counter-lives]').textContent, '0');
   assert.equal($('[data-counter]').attributes['data-idle'], '');
@@ -1727,7 +1651,7 @@ test('mobile viewport resizing keeps the canvas and counter on the visible midpo
   assert.deepEqual(scrolls, []);
 });
 
-test('references load coverage and sources without a canvas or counter', async (context) => {
+test('references load coverage and sources without the column or counter', async (context) => {
   mockData(context);
   const { $ } = installPage(context, true);
   await bootReferencias();
@@ -1828,7 +1752,7 @@ test('missing, invalid, or oversized data shows the error and draws nothing', as
         assert.equal($(selector).disabled, true, selector);
       }
       assert.equal(listeners.wheel, undefined);
-      assert.equal($('[data-canvas]').calls.length, 0);
+      assert.deepEqual($('[data-dots]').children, []);
       assert.equal($('[data-track]').style.height, undefined);
       assert.deepEqual($('[data-marks]').children, []);
       for (const selector of ['[data-counter-lives]', '[data-counter-days]']) {

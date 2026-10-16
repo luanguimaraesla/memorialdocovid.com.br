@@ -62,13 +62,19 @@ deixando 31 px de margem em cada lado numa tela de 320 px, sem mudar o tamanho d
 entre telas. As linhas alternam branco e cinza claro, mantendo suas cores durante a rolagem.
 A cada 1.000 vidas, um separador ocupa três linhas (78 px), sem acrescentar vidas.
 A coluna mede 1.919.086 px, abaixo do limite de 16.000.000 px dos navegadores, sem
-espaços extras: cada card fica na linha de pontos da sua data. O canvas desenha apenas
-as linhas visíveis. Os marcos semanais continuam nas segundas-feiras
-a partir de 30/03/2020, na posição do primeiro óbito da semana.
+espaços extras: cada card fica na linha de pontos da sua data. Os pontos fazem parte da
+página: cada bloco de mil vidas é um elemento pintado por um padrão CSS de círculos. Assim o
+navegador rola pontos, datas, contadores e notícias na mesma camada, sem que um se atrase em
+relação ao outro no celular. Os marcos semanais continuam nas segundas-feiras a partir de
+30/03/2020, na posição do primeiro óbito da semana.
+
+A linha onde cada marco para fica fixa, a 90 px do topo. Ela não depende da altura da tela,
+que muda no celular quando a barra de endereço aparece ou some; essa mudança também não
+refaz a disposição da coluna, que só é recalculada quando a largura muda.
 
 A barra inferior mostra duas informações separadas: vidas perdidas e tempo de pandemia.
 Os dias são contados desde 17/03/2020 (dia 1), pela data de notificação da última vida
-alcançada no meio do viewport. O canvas fica oculto para leitores de tela; o contador
+alcançada no meio do viewport. Os pontos ficam ocultos para leitores de tela; o contador
 tem anúncios educados, limitados a uma atualização a cada dois segundos.
 As fontes e o contexto completos continuam disponíveis em `/referencias`.
 
@@ -105,15 +111,16 @@ para leitura. O visitante pode alternar entre os dois modos a qualquer momento.
 Cada marco chega exatamente 1,6 s depois do anterior (`SECONDS_BETWEEN_MILESTONES`),
 incluindo a abertura, as duas introduções e o encerramento. A distância entre publicações é a da coluna:
 as vidas perdidas entre as duas datas. Por isso a velocidade é calculada trecho a trecho:
-distância dividida por 1,6 s. No modo guiado, cada trecho parte na velocidade média,
-chega a 4/3 dela em um terço do caminho e desacelera até parar no marco. No modo contínuo,
-a velocidade em cada marco é a média harmônica dos trechos vizinhos, o que mantém a rolagem
-sempre para a frente e sem ultrapassar marcos. `src/lib/journey.ts` faz esses cálculos.
+distância dividida por 1,6 s. No modo guiado, cada trecho acelera em 0,24 s, segue na
+velocidade máxima e freia em 0,24 s até parar no marco, sem se arrastar até o lugar.
+No modo contínuo, a velocidade em cada marco é a média harmônica dos trechos vizinhos, o que
+mantém a rolagem sempre para a frente e sem ultrapassar marcos. `src/lib/journey.ts` faz
+esses cálculos.
 
 Nas 107 publicações, a distância vai de 0 px (8 trechos na mesma linha de pontos) a
 121.420 px, com mediana de 7.735 px. A velocidade média vai de 0 a 75.888 px/s, com
 mediana de 4.835 px/s. O trecho mais longo, de 23/03/2021 a 08/04/2021, atravessa cerca
-de 47 mil vidas e chega a 101.183 px/s. Como os trechos seguem a série, 51 deles são mais
+de 47 mil vidas e chega a 89.279 px/s. Como os trechos seguem a série, 51 deles são mais
 curtos que o anterior: a velocidade sobe nos períodos com mais mortes, não de forma constante.
 Para reproduzir a tabela completa, com distância, velocidade e aceleração por trecho:
 

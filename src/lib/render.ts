@@ -1,10 +1,12 @@
-import { ANNOUNCE_INTERVAL_MS, SHARE_STATUS_DURATION_MS, DOT_RADIUS_PX } from '../config';
 import {
-  anchorY, columnHeight, columnWidth, dateAtIndex, dayIndexOf, dayNumber, dotPosition, firstIndexOfDay,
-  livesAtDepth, rowPitch, separatorHeight, weekMarkers, thousandMarkers, visibleIndexRange,
+  ANNOUNCE_INTERVAL_MS, SHARE_STATUS_DURATION_MS, DOT_GAP_PX, DOTS_PER_ROW, LIVES_PER_SEPARATOR,
+} from '../config';
+import {
+  anchorY, columnHeight, dateAtIndex, dayIndexOf, dayNumber, dotPosition, firstIndexOfDay,
+  livesAtDepth, rowPitch, separatorHeight, weekMarkers, thousandMarkers,
 } from './layout';
 import { continuousPath, guidedPath } from './journey';
-import type { Waypoint } from './journey';
+import type { Path } from './journey';
 import { loadPageData } from './state';
 import type { Declaracao, PageData } from './state';
 import { createAutoscroll } from './autoscroll';
@@ -14,7 +16,11 @@ import { shareDescription, shareLink, statementAnchor, statementUrl } from './sh
 import type { SharedLink } from './sharing';
 import { archiveHeadlines, archiveSources } from './archive';
 
-const DOT_ROW_COLORS = ['#e8e4dc', '#cbc7bf'];
+// Distance from the top of the screen where milestones come to rest. It is fixed, not a share
+// of the viewport, so the mobile browser bar growing or shrinking never moves the target.
+const READING_TOP_PX = 90;
+// A milestone counts as reached within half a dot row of its position.
+const REACHED_PX = 12;
 const CARD_GAP_PX = 24;
 const MARKER_GAP_PX = 24;
 // The rotated, scissor-cut card edge can reveal a few pixels below its layout box.
@@ -27,7 +33,7 @@ const MEMORIAL_TITLE = 'Memorial do Covid';
 
 interface Elements {
   track: HTMLElement;
-  canvas: HTMLCanvasElement;
+  dots: HTMLElement;
   marks: HTMLElement;
   floating: HTMLElement;
   weeks: HTMLElement;
@@ -80,8 +86,8 @@ interface Stop {
 
 let data: PageData;
 let ui: Elements;
-let ctx: CanvasRenderingContext2D;
 let height = 0;
+let layoutWidth = 0;
 let ticking = false;
 let lastAnnounceAt = -Infinity;
 let pendingAnnounce: ReturnType<typeof setTimeout> | undefined;
@@ -137,8 +143,7 @@ function referenceDepth(): number {
 }
 
 function readingTop(): number {
-  const visible = viewport();
-  return visible.top + Math.max(72, Math.min(96, visible.height * 0.1));
+  return READING_TOP_PX;
 }
 
 function maxScroll(): number {
@@ -210,6 +215,30 @@ function statementCard(record: Declaracao): StatementCard {
   return { index, y: anchorY(index, data.total), element, marker, markerCount, record };
 }
 
+function dotBlock(first: number, rows: number, perRow: number): HTMLElement {
+  const shifted = dotPosition(first).row % 2 === 1;
+  const block = create('div', shifted ? 'memorial__pontos memorial__pontos--alternada' : 'memorial__pontos');
+  block.style.top = `${dotPosition(first).y}px`;
+  block.style.height = `${rows * rowPitch()}px`;
+  if (perRow < DOTS_PER_ROW) block.style.width = `${perRow * rowPitch() - DOT_GAP_PX}px`;
+  return block;
+}
+
+// The dots are page content, so they scroll in the same layer as the dates, counters and
+// news. Each thousand lives is one block painted by a repeating CSS pattern of two rows; a
+// partial last row becomes its own narrower block.
+function buildDots(): void {
+  const blocks: HTMLElement[] = [];
+  for (let first = 0; first < data.total; first += LIVES_PER_SEPARATOR) {
+    const lives = Math.min(LIVES_PER_SEPARATOR, data.total - first);
+    const rows = Math.floor(lives / DOTS_PER_ROW);
+    const rest = lives % DOTS_PER_ROW;
+    if (rows > 0) blocks.push(dotBlock(first, rows, DOTS_PER_ROW));
+    if (rest > 0) blocks.push(dotBlock(first + rows * DOTS_PER_ROW, 1, rest));
+  }
+  ui.dots.replaceChildren(...blocks);
+}
+
 function introStop(element: HTMLElement): Stop {
   const title = element.querySelector('h2')?.textContent ?? MEMORIAL_TITLE;
   return { element, title, url: `${siteBase().href}#${element.id}` };
@@ -218,6 +247,7 @@ function introStop(element: HTMLElement): Stop {
 function buildMarks(): void {
   height = columnHeight(data.total);
   ui.track.style.height = `${height}px`;
+  buildDots();
   statementCards = data.declaracoes.declaracoes.map(statementCard).sort((a, b) => a.index - b.index);
   for (const card of statementCards) card.element.style.top = `${card.y}px`;
   ui.marks.replaceChildren(...statementCards.map(card => card.element));
@@ -355,7 +385,7 @@ function setActive(index: number): void {
 function syncActive(): void {
   const positions = stopPositions();
   let reached = -1;
-  positions.forEach((y, index) => { if (y <= window.scrollY + SAME_POSITION_PX) reached = index; });
+  positions.forEach((y, index) => { if (y <= window.scrollY + REACHED_PX) reached = index; });
   if (reached < 0) return setActive(-1);
   const samePosition = (index: number) => Math.abs(positions[index] - positions[reached]) <= SAME_POSITION_PX;
   if (active >= 0 && samePosition(active)) return;
@@ -387,38 +417,9 @@ function updateFloating(trackTop: number): void {
   ui.floating.replaceChildren(...(current ? [compactCard(current)] : []));
 }
 
-function resizeCanvas(): void {
-  const ratio = window.devicePixelRatio || 1;
-  const width = columnWidth();
-  const visible = viewport();
-  ui.canvas.style.top = `${visible.top}px`;
-  ui.canvas.style.width = `${width}px`;
-  ui.canvas.style.height = `${visible.height}px`;
-  ui.canvas.width = Math.round(width * ratio);
-  ui.canvas.height = Math.round(visible.height * ratio);
+function positionOverlays(): void {
   ui.referenceLine.style.top = `${referenceDepth()}px`;
   ui.floating.style.top = `${readingTop()}px`;
-  ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
-}
-
-// Draws only the dots behind the sticky canvas. `offset` is the canvas top inside the track.
-function draw(offset: number): void {
-  const visibleHeight = viewport().height;
-  const { start, end } = visibleIndexRange(offset, visibleHeight, data.total);
-  ctx.clearRect(0, 0, columnWidth(), visibleHeight);
-  DOT_ROW_COLORS.forEach((color, colorIndex) => {
-    ctx.fillStyle = color;
-    ctx.beginPath();
-    for (let index = start; index < end; index++) {
-      const { row, x, y } = dotPosition(index);
-      if (row % DOT_ROW_COLORS.length !== colorIndex) continue;
-      const cx = x + DOT_RADIUS_PX;
-      const cy = y + DOT_RADIUS_PX - offset;
-      ctx.moveTo(cx + DOT_RADIUS_PX, cy);
-      ctx.arc(cx, cy, DOT_RADIUS_PX, 0, 2 * Math.PI);
-    }
-    ctx.fill();
-  });
 }
 
 function flushAnnouncement(): void {
@@ -451,7 +452,6 @@ function updateCounter(trackTop: number): void {
 
 function update(): void {
   const trackTop = ui.track.getBoundingClientRect().top;
-  draw(ui.canvas.getBoundingClientRect().top - trackTop);
   updateCounter(trackTop);
   updateFloating(trackTop);
   const closingReached = ui.closing.getBoundingClientRect().top <= viewport().height / 2;
@@ -523,7 +523,7 @@ function updatePlayback(playing: boolean): void {
 // Every milestone is exactly one interval after the previous one. Guided mode travels to
 // the next milestone and rests there; continuous mode passes all of them and rests on the
 // closing message.
-function plan(from: number): Waypoint[] | undefined {
+function plan(from: number): Path | undefined {
   syncActive();
   const positions = stopPositions();
   const bottom = maxScroll();
@@ -598,10 +598,19 @@ function wire(): void {
       ticking = false;
     });
   }, { passive: true });
-  const resize = () => { resizeCanvas(); layoutCards(); update(); };
-  window.addEventListener('resize', resize);
-  window.visualViewport?.addEventListener('resize', resize);
-  window.visualViewport?.addEventListener('scroll', resize);
+  // Mobile browsers resize the viewport whenever their address bar slides in or out. Only a
+  // width change alters card heights, so only then is the column laid out again.
+  const refresh = () => {
+    positionOverlays();
+    if (window.innerWidth !== layoutWidth) {
+      layoutWidth = window.innerWidth;
+      layoutCards();
+    }
+    update();
+  };
+  window.addEventListener('resize', refresh);
+  window.visualViewport?.addEventListener('resize', refresh);
+  window.visualViewport?.addEventListener('scroll', refresh);
   window.addEventListener('hashchange', followAnchor);
   // Opening Leia mais or loading a capture changes card heights.
   ui.marks.addEventListener('toggle', layoutCards, true);
@@ -614,7 +623,7 @@ function wire(): void {
 
 function elements(): Elements {
   return {
-    track: must('[data-track]'), canvas: must('[data-canvas]'), marks: must('[data-marks]'),
+    track: must('[data-track]'), dots: must('[data-dots]'), marks: must('[data-marks]'),
     floating: must('[data-floating]'), weeks: must('[data-weeks]'), separators: must('[data-separators]'),
     newsMarkers: must('[data-news-markers]'),
     counter: must('[data-counter]'), referenceLine: must('[data-reference-line]'),
@@ -634,12 +643,10 @@ export async function boot(): Promise<void> {
   try {
     ui = elements();
     data = await loadPageData();
-    const context = ui.canvas.getContext('2d');
-    if (!context) throw new Error('Canvas 2D indisponível');
-    ctx = context;
     ui.syntheticNotice.hidden = !data.declaracoes.sintetico;
     buildMarks();
-    resizeCanvas();
+    positionOverlays();
+    layoutWidth = window.innerWidth;
     autoscroll = createAutoscroll({ plan, onWaypoint: reachWaypoint, onStateChange: updatePlayback });
     wirePlayback();
     wire();

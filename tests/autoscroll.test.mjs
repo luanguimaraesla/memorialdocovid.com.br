@@ -99,7 +99,7 @@ test('a delayed animation frame is capped at 100 milliseconds', (context) => {
   const { scroller, frame } = installScroller(context);
   scroller.play();
   frame(10_000);
-  assert.equal(window.scrollY, journey.positionAt(nextMilestone(0), 0.1));
+  assert.equal(window.scrollY, nextMilestone(0).positionAt(0.1));
 });
 
 test('pausing freezes the page and resuming plans again from where it stopped', (context) => {
