@@ -586,8 +586,10 @@ function wire(): void {
     if ((event.target as Element | null)?.closest?.('[data-scroll-control]')) return;
     autoscroll.pause();
   });
-  for (const type of ['wheel', 'touchmove']) window.addEventListener(type, () => {
-    if (!continuous) autoscroll.pause();
+  // Moving the page by hand takes over from the journey, in both modes.
+  for (const type of ['wheel', 'touchmove']) window.addEventListener(type, event => {
+    if ((event.target as Element | null)?.closest?.('[data-scroll-control]')) return;
+    autoscroll.pause();
   }, { passive: true });
   window.addEventListener('scroll', () => {
     if (ticking) return;
@@ -605,6 +607,11 @@ function wire(): void {
     if (window.innerWidth !== layoutWidth) {
       layoutWidth = window.innerWidth;
       layoutCards();
+      // Card positions moved: plan the rest of the leg again from here.
+      if (autoscroll.isPlaying()) {
+        autoscroll.pause();
+        autoscroll.play();
+      }
     }
     update();
   };

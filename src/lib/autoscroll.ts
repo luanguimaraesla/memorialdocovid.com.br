@@ -17,7 +17,6 @@ export interface Autoscroll {
 }
 
 const MAX_FRAME_SECONDS = 0.1;
-const DRIFT_TOLERANCE_PX = 2;
 const EPSILON = 1e-9;
 
 export function createAutoscroll(options: AutoscrollOptions): Autoscroll {
@@ -27,7 +26,6 @@ export function createAutoscroll(options: AutoscrollOptions): Autoscroll {
   let path: Path | undefined;
   let elapsed = 0;
   let reached = 0;
-  let expectedY = 0;
 
   function plan(): boolean {
     const planned = options.plan(window.scrollY);
@@ -35,7 +33,6 @@ export function createAutoscroll(options: AutoscrollOptions): Autoscroll {
     path = planned;
     elapsed = 0;
     reached = 0;
-    expectedY = window.scrollY;
     return true;
   }
 
@@ -46,18 +43,15 @@ export function createAutoscroll(options: AutoscrollOptions): Autoscroll {
     options.onStateChange(false);
   }
 
+  // The leg follows its own plan and never reads the page position back: phones apply
+  // programmatic scrolls asynchronously, so window.scrollY lags behind the last request.
+  // Whole pixels keep text and dots from shimmering between device pixels.
   function frame(now: number): void {
     if (!playing || !path) return;
     const seconds = Math.min((now - lastTime) / 1000, MAX_FRAME_SECONDS);
     lastTime = now;
-    // Someone else moved the page: follow a new plan from where it is now.
-    if (Math.abs(window.scrollY - expectedY) > DRIFT_TOLERANCE_PX && !plan()) {
-      pause();
-      return;
-    }
     elapsed += seconds;
-    window.scrollTo({ top: path.positionAt(elapsed), behavior: 'instant' });
-    expectedY = window.scrollY;
+    window.scrollTo({ top: Math.round(path.positionAt(elapsed)), behavior: 'instant' });
     const passed = Math.min(path.legs, Math.floor(elapsed / SECONDS_BETWEEN_MILESTONES + EPSILON));
     while (reached < passed) options.onWaypoint(++reached);
     if (elapsed + EPSILON >= pathDuration(path)) {

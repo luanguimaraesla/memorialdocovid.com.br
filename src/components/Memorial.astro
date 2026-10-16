@@ -2,9 +2,16 @@
 import { DOT_RADIUS_PX } from '../config';
 import { columnWidth, rowPitch, separatorHeight } from '../lib/layout';
 
+// One light row over one gray row, tiled down each block of dots. A small image is
+// rasterized once and repeated, which keeps fast scrolling cheap on phones.
+const pitch = rowPitch();
+const radius = DOT_RADIUS_PX;
+const tile = `<svg xmlns='http://www.w3.org/2000/svg' width='${pitch}' height='${2 * pitch}'>`
+  + `<circle cx='${radius}' cy='${radius}' r='${radius}' fill='#e8e4dc'/>`
+  + `<circle cx='${radius}' cy='${pitch + radius}' r='${radius}' fill='#cbc7bf'/></svg>`;
 const geometry = [
-  `--coluna: ${columnWidth()}px`, `--passo: ${rowPitch()}px`, `--raio: ${DOT_RADIUS_PX}px`,
-  `--separador-altura: ${separatorHeight()}px`,
+  `--coluna: ${columnWidth()}px`, `--passo: ${pitch}px`, `--separador-altura: ${separatorHeight()}px`,
+  `--pontos: url("data:image/svg+xml,${encodeURIComponent(tile)}")`,
 ].join('; ');
 ---
 

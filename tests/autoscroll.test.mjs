@@ -99,7 +99,7 @@ test('a delayed animation frame is capped at 100 milliseconds', (context) => {
   const { scroller, frame } = installScroller(context);
   scroller.play();
   frame(10_000);
-  assert.equal(window.scrollY, nextMilestone(0).positionAt(0.1));
+  assert.equal(window.scrollY, Math.round(nextMilestone(0).positionAt(0.1)));
 });
 
 test('pausing freezes the page and resuming plans again from where it stopped', (context) => {
@@ -120,18 +120,20 @@ test('pausing freezes the page and resuming plans again from where it stopped', 
   assert.deepEqual(states, [true, false, true, false]);
 });
 
-test('manual scrolling during playback continues from the new position without pausing', (context) => {
-  const { scroller, frame, plans, states } = installScroller(context, { top: 3000 });
+test('a page that applies scrolls a frame late never restarts or slows the leg', (context) => {
+  const { scroller, frame, plans, waypoints, states } = installScroller(context, { top: 400 });
+  // Like a phone, the page still reports the previous request until the next frame.
+  const requests = [];
+  let pending = 400;
+  window.scrollTo = ({ top }) => { requests.push(top); window.scrollY = pending; pending = top; };
   scroller.play();
-  frame();
-  for (const jump of [-400, 900]) {
-    window.scrollY += jump;
-    const moved = window.scrollY;
-    frame();
-    assert.equal(plans.at(-1), moved);
-    assert.equal(scroller.isPlaying(), true);
-  }
-  assert.deepEqual(states, [true]);
+  for (let index = 0; index < 16; index++) frame();
+  assert.deepEqual(plans, [400]);
+  const leg = nextMilestone(400);
+  assert.deepEqual(requests, Array.from({ length: 16 }, (_, index) => Math.round(leg.positionAt((index + 1) / 10))));
+  assert.equal(requests.at(-1), 2000);
+  assert.deepEqual(waypoints.map(([index, , time]) => [index, time]), [[1, 1600]]);
+  assert.deepEqual(states, [true, false]);
 });
 
 test('manual input does not install any automatic pause handlers', (context) => {

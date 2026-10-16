@@ -652,8 +652,11 @@ test('the centered column and sticky markers retain the palette and mobile safe 
   assert.match(css, /\.memorial__separator\s*\{[^}]*height: var\(--separador-altura\)/);
   assert.match(css, /\.memorial__separator-number\s*\{[^}]*font-size: 2rem/);
   assert.match(css, /\.memorial__pontos\s*\{[^}]*left: calc\(50% - var\(--coluna\) \/ 2\)/);
-  assert.match(css, /\.memorial__pontos\s*\{[^}]*#e8e4dc[^}]*#cbc7bf[^}]*background-size: var\(--passo\) calc\(2 \* var\(--passo\)\)/);
-  assert.match(css, /\.memorial__pontos--alternada\s*\{\s*background-position: 0 var\(--passo\), 0 0/);
+  assert.match(css, /\.memorial__pontos\s*\{[^}]*background: var\(--pontos\) 0 0 \/ var\(--passo\) calc\(2 \* var\(--passo\)\)/);
+  assert.match(css, /\.memorial__pontos--alternada\s*\{\s*background-position: 0 var\(--passo\)/);
+  assert.doesNotMatch(css, /radial-gradient/);
+  assert.match(memorial, /fill='#e8e4dc'[\s\S]*fill='#cbc7bf'/);
+  assert.match(memorial, /--pontos: url\("data:image\/svg\+xml,\$\{encodeURIComponent\(tile\)\}"\)/);
   assert.doesNotMatch(css, /memorial__canvas/);
   assert.match(css, /\.declaracao\s*\{[^}]*position: absolute/);
   assert.doesNotMatch(css, /overflow-y: auto/);
@@ -929,6 +932,27 @@ test('keyboard activation toggles playback once without a global keydown pause',
   assert.equal(frames.size, 0);
   play.listeners.click();
   assert.equal(play.attributes['aria-pressed'], 'true');
+});
+
+test('dragging the page takes over from the journey in both modes, but not on the controls', async (context) => {
+  mockData(context);
+  const page = installPage(context);
+  const { $, listeners } = page;
+  $('[data-track]').top = 3300;
+  installPlaybackFrames(context, page);
+  await (await freshRender()).boot();
+  const onPage = { target: { closest: () => null } };
+  const control = { target: { closest: () => ({}) } };
+  for (const mode of ['guided', 'continuous']) {
+    if (mode === 'continuous') $('#btn-mode').listeners.click();
+    for (const type of ['touchmove', 'wheel']) {
+      $('#btn-play').listeners.click();
+      listeners[type](control);
+      assert.equal($('#btn-play').getAttribute('aria-pressed'), 'true', `${mode} ${type} on a control`);
+      listeners[type](onPage);
+      assert.equal($('#btn-play').getAttribute('aria-pressed'), 'false', `${mode} ${type}`);
+    }
+  }
 });
 
 test('touch activation of a transport control is exempt from the page-click pause', async (context) => {

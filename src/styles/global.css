@@ -290,19 +290,15 @@ audio:not([controls]) { display: none; }
   pointer-events: none;
 }
 
-/* Each block paints whole dot rows: a two-row pattern, one light and one gray row. */
+/* Each block paints whole dot rows by repeating the two-row tile from Memorial.astro. */
 .memorial__pontos {
   position: absolute;
   left: calc(50% - var(--coluna) / 2);
   width: var(--coluna);
-  background-image:
-    radial-gradient(circle at var(--raio) var(--raio), #e8e4dc calc(var(--raio) - 0.5px), transparent var(--raio)),
-    radial-gradient(circle at var(--raio) var(--raio), #cbc7bf calc(var(--raio) - 0.5px), transparent var(--raio));
-  background-size: var(--passo) calc(2 * var(--passo));
-  background-position: 0 0, 0 var(--passo);
+  background: var(--pontos) 0 0 / var(--passo) calc(2 * var(--passo));
 }
 
-.memorial__pontos--alternada { background-position: 0 var(--passo), 0 0; }
+.memorial__pontos--alternada { background-position: 0 var(--passo); }
 
 .memorial__news-markers { z-index: 5; }
 .memorial__marks { z-index: 6; }
