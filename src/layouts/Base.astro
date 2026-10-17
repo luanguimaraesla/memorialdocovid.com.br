@@ -31,6 +31,25 @@ const imageUrl = new URL(image, Astro.site).href;
       gtag('js', new Date());
 
       gtag('config', 'G-4SW9W1M6L0');
+
+      // Button clicks. The capture phase reads each toggle's state before its own handler flips it.
+      document.addEventListener('click', function (event) {
+        var button = event.target.closest && event.target.closest('button');
+        if (!button) return;
+        var pressed = button.getAttribute('aria-pressed') === 'true';
+        var statement = button.closest('[id^="declaracao-"]');
+        var item = statement ? { item_id: statement.id.slice('declaracao-'.length) } : {};
+        if (button.id === 'btn-start') gtag('event', 'start_journey');
+        else if (button.id === 'btn-play') gtag('event', 'toggle_play', { action: pressed ? 'pause' : 'play' });
+        else if (button.id === 'btn-mode') gtag('event', 'toggle_mode', { mode: pressed ? 'guided' : 'continuous' });
+        else if (button.id === 'btn-share') gtag('event', 'share', { location: 'controls' });
+        else if (button.hasAttribute('data-share-closing')) gtag('event', 'share', { location: 'closing' });
+        else if (button.classList.contains('declaracao__compartilhar')) gtag('event', 'share', Object.assign({ location: 'statement' }, item));
+        else if (button.classList.contains('declaracao__read')) gtag('event', 'read_more', item);
+        else if (button.hasAttribute('data-audio-toggle')) {
+          gtag('event', 'toggle_audio', { action: pressed ? 'unmute' : button.hasAttribute('data-silent') ? 'play' : 'mute' });
+        }
+      }, true);
     </script>
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta name="theme-color" content="#0b0b0c" />
