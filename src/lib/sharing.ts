@@ -18,8 +18,16 @@ export function statementUrl(id: string, base: URL): string {
   return url.href;
 }
 
+// Phones and tablets, whose main input is touch, open the system share sheet. Computers copy
+// the message and link instead, even when their browser offers a share sheet.
+function opensShareSheet(): boolean {
+  return typeof navigator.share === 'function'
+    && typeof window.matchMedia === 'function'
+    && window.matchMedia('(hover: none) and (pointer: coarse)').matches;
+}
+
 export async function shareLink(link: SharedLink): Promise<'shared' | 'copied' | 'cancelled' | 'manual'> {
-  if (typeof navigator.share === 'function') {
+  if (opensShareSheet()) {
     try {
       await navigator.share(link);
       return 'shared';

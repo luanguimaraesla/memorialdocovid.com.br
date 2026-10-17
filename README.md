@@ -174,10 +174,11 @@ falham se a planilha ou algum campo interno chegar ao site.
 
 O botão Compartilhar, ao lado de Continuar, envia o marco atual: uma das mensagens de
 abertura ou a notícia em destaque. Antes do primeiro marco, envia o memorial. O ícone ao lado
-da data de cada notícia envia aquela notícia. O navegador abre
-o compartilhamento nativo quando disponível. Caso contrário, copia a mensagem e o link;
-se a cópia estiver bloqueada, mostra um diálogo com o texto selecionável. O aviso de cópia
-some após três segundos e renova o prazo a cada confirmação.
+da data de cada notícia envia aquela notícia. No celular e no tablet, cuja entrada principal é o
+toque, abrem-se as opções de compartilhamento do sistema. No computador, a mensagem e o link são
+copiados, mesmo que o navegador tenha um menu de compartilhamento; se a cópia estiver bloqueada,
+aparece um diálogo com o texto selecionável. O aviso de cópia some após três segundos e renova o
+prazo a cada confirmação.
 
 Os links dos marcos usam `/marcos/<id>/#declaracao-<id>` e abrem a coluna na linha daquela
 declaração, sem iniciar a rolagem. Cada rota é gerada como HTML estático, com metadados Open

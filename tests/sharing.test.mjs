@@ -16,12 +16,17 @@ const link = {
   url: statementUrl('um-marco', new URL('https://memorial.test/')),
 };
 
-function browser(context, value) {
+// A phone has touch as its main input; a computer has a mouse or trackpad that hovers.
+function browser(context, value, { phone = true } = {}) {
   const descriptor = Object.getOwnPropertyDescriptor(globalThis, 'navigator');
   Object.defineProperty(globalThis, 'navigator', { value, configurable: true });
+  globalThis.window = {
+    matchMedia: (query) => ({ matches: phone && query === '(hover: none) and (pointer: coarse)' }),
+  };
   context.after(() => {
     if (descriptor) Object.defineProperty(globalThis, 'navigator', descriptor);
     else delete globalThis.navigator;
+    delete globalThis.window;
   });
 }
 
@@ -34,7 +39,17 @@ test('share text preserves the requested phrase and URLs encode marker IDs safel
   assert.equal(decodeURIComponent(url.hash.slice(1)), statementAnchor(id));
 });
 
-test('native sharing receives the text and anchored URL without copying anything', async (context) => {
+test('on a computer the message and link are copied even when a share sheet exists', async (context) => {
+  let copied;
+  browser(context, {
+    share: () => assert.fail('a computer must not open the share sheet'),
+    clipboard: { writeText: async (text) => { copied = text; } },
+  }, { phone: false });
+  assert.equal(await shareLink(link), 'copied');
+  assert.equal(copied, `${link.text}\n${link.url}`);
+});
+
+test('on a phone native sharing receives the text and anchored URL without copying anything', async (context) => {
   const shared = [];
   browser(context, {
     share: async (data) => { shared.push(data); },
