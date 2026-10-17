@@ -48,6 +48,11 @@ export function bootAudio(): void {
     toggle.disabled = false;
   }
   for (const event of ['play', 'pause', 'ended', 'volumechange']) audio.addEventListener(event, sync);
+  // Clicking into an embedded video moves focus to its frame and blurs the page. The music
+  // pauses then, so the two never play over each other.
+  window.addEventListener('blur', () => {
+    if (document.activeElement?.tagName === 'IFRAME') audio.pause();
+  });
   audio.addEventListener('error', () => { reportError(); sync(); });
   audio.controls = false;
   sync();

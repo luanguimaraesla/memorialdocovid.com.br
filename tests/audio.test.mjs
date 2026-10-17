@@ -27,10 +27,12 @@ function installAudio(context) {
   const status = { hidden:true };
   const elements = {'#memorial-audio':audio,'[data-audio-status]':status};
   globalThis.document = {
+    activeElement: { tagName: 'BODY' },
     querySelector: selector => elements[selector] ?? null,
     querySelectorAll: () => [toggle],
   };
-  context.after(() => { delete globalThis.document; });
+  globalThis.window = new EventTarget();
+  context.after(() => { delete globalThis.document; delete globalThis.window; });
   bootAudio();
   return {audio,toggle,status};
 }
@@ -49,6 +51,17 @@ test('boot never plays music; starting the journey can play within its user gest
   await startAudio();
   assert.equal(audio.plays,1);
   assert.equal(toggle.attributes['aria-label'],'Silenciar música');
+});
+
+test('clicking into an embedded video pauses the music, other window blurs do not', async context => {
+  const {audio,toggle} = installAudio(context);
+  await startAudio();
+  window.dispatchEvent(new Event('blur'));
+  assert.equal(audio.paused,false);
+  document.activeElement = { tagName: 'IFRAME' };
+  window.dispatchEvent(new Event('blur'));
+  assert.equal(audio.paused,true);
+  assert.equal(toggle.attributes['aria-label'],'Ouvir música');
 });
 
 test('the floating button mutes and unmutes without pausing or resetting the track', async context => {

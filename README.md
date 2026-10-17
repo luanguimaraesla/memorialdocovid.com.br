@@ -112,6 +112,11 @@ O percurso termina no encerramento, depois da coluna: o total oficial de vidas p
 mensagem "Nunca esqueceremos. Essa família não pode voltar ao poder! A ignorância não pode
 vencer." e um botão para compartilhar o memorial. Ali a barra de controles some.
 
+Depois do encerramento, a pergunta "Quer saber quem são os verdadeiros responsáveis?" abre o
+documentário "Anatomia do Caos", do Instituto Conhecimento Liberta, num player do YouTube. O
+player usa `youtube-nocookie.com` e só carrega quando a pessoa chega perto dele. Tocar no vídeo
+pausa a música do memorial, para os dois áudios não tocarem juntos.
+
 A barra flutuante divide a largura entre **Continuar**, **Compartilhar** e **Sem pausas**.
 Compartilhar envia o marco atual ou, antes do primeiro marco, o memorial. Cada notícia também
 tem um botão pequeno de compartilhar ao lado da data, inclusive no cabeçalho flutuante.

@@ -545,6 +545,16 @@ test('the closing carries the exact message and the official total', async () =>
   assert.ok(page.indexOf('<Memorial />') < page.indexOf('<Closing />') && page.indexOf('<Closing />') < page.indexOf('<Fontes />'));
 });
 
+test('the documentary closes the page with its question and a lazy, cookie-free player', async () => {
+  const documentary = await read('src/components/Documentary.astro');
+  assert.match(documentary, /<h2 class="documentario__titulo" id="documentario-titulo">Quer saber quem são os verdadeiros responsáveis\?<\/h2>/);
+  assert.match(documentary, /const video = 'iTDeUmQ3LTI';/);
+  assert.match(documentary, /src=\{`https:\/\/www\.youtube-nocookie\.com\/embed\/\$\{video\}`\}/);
+  assert.match(documentary, /<iframe[^>]*title="Anatomia do Caos \| Documentário completo"[^>]*loading="lazy"[^>]*allowfullscreen/);
+  const page = await read('src/components/MemorialPage.astro');
+  assert.ok(page.indexOf('<Closing />') < page.indexOf('<Documentary />') && page.indexOf('<Documentary />') < page.indexOf('<Fontes />'));
+});
+
 test('the hero shows the exact title and subtitle', async () => {
   const hero = await read('src/components/Hero.astro');
   assert.match(hero, /<h1 class="hero__title">Memorial <span>do Covid<\/span><\/h1>/);
